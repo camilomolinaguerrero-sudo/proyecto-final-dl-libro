@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tabla de síntesis y equivalencia con los modelos clásicos &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'estado_arte/sintesis_y_equivalencia';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Decisiones del proyecto" href="../diseno/decisiones.html" />
+    <link rel="prev" title="Modelos seleccionados" href="modelos_seleccionados.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/estado_arte/sintesis_y_equivalencia.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tabla de síntesis y equivalencia con los modelos clásicos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-sintesis">1. Tabla de síntesis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-muestra-la-tabla">Lo que muestra la tabla</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equivalencia-con-la-svr-lineal-y-el-modelo-logistico">2. Equivalencia con la SVR lineal y el modelo logístico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-punto-de-partida-la-svr-lineal">2.1 El punto de partida: la SVR lineal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp-la-svr-lineal-mas-capas-ocultas">2.2 MLP: la SVR lineal más capas ocultas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnn-1d-un-modelo-lineal-con-pesos-compartidos-en-el-tiempo">2.3 CNN 1D: un modelo lineal con pesos compartidos en el tiempo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm-una-recurrencia-con-memoria-controlada-por-compuertas">2.4 LSTM: una recurrencia con memoria controlada por compuertas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-modelo-logistico-y-la-metrica-de-interrupciones">2.5 El modelo logístico y la métrica de interrupciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">2.6 Resumen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-para-lina">3. Propuesta para Lina</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tabla-de-sintesis-y-equivalencia-con-los-modelos-clasicos">
+<h1>Tabla de síntesis y equivalencia con los modelos clásicos<a class="headerlink" href="#tabla-de-sintesis-y-equivalencia-con-los-modelos-clasicos" title="Link to this heading">#</a></h1>
+<p>Borrador de Camilo, 2026-11-11, para revisar con Lina. Cubre dos productos del enunciado:</p>
+<ul class="simple">
+<li><p>la tabla de síntesis, con referencia, problema, <em>dataset</em>, modelos de Deep Learning usados como
+referencia, métricas y valores obtenidos;</p></li>
+<li><p>la justificación de la equivalencia entre los tres modelos base y la SVR lineal (y el modelo
+logístico).</p></li>
+</ul>
+<p>Los datos de la tabla están en <code class="docutils literal notranslate"><span class="pre">tabla_sintesis_camilo.csv</span></code>, transcritos del texto completo de cada
+estudio. La columna <code class="docutils literal notranslate"><span class="pre">fuente_valores</span></code> dice de qué tabla o sección sale cada cifra. Los números de
+parámetros salen de <code class="docutils literal notranslate"><span class="pre">parametros_modelos.json</span></code>.</p>
+<section id="tabla-de-sintesis">
+<h2>1. Tabla de síntesis<a class="headerlink" href="#tabla-de-sintesis" title="Link to this heading">#</a></h2>
+<p>Cubre los diez estudios con texto completo que la sección 2 de <code class="docutils literal notranslate"><span class="pre">modelos_seleccionados.md</span></code> citaba
+como respaldo. Para cada uno se leyó qué redes entrena de verdad como referencia, no solo cuáles
+nombra.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Referencia</p></th>
+<th class="head"><p>Problema</p></th>
+<th class="head"><p>Datos</p></th>
+<th class="head"><p>Redes de referencia</p></th>
+<th class="head"><p>Métricas</p></th>
+<th class="head"><p>Valores obtenidos</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>S1-0101 (doi:10.1038/s41598-026-34993-w)</p></td>
+<td><p>Inflación de alimentos en Bangladés</p></td>
+<td><p>Mensual, 2010-2025, BBS, clima y energía</p></td>
+<td><p>ANN (cuatro arquitecturas), LSTM</p></td>
+<td><p>RMSE, MAE, R²</p></td>
+<td><p>Mejor ANN: RMSE 4,17, MAE 3,4. LSTM: 4,23 y 3,47</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0610 (doi:10.1145/3729706.3729746)</p></td>
+<td><p>Precio del aguacate Hass</p></td>
+<td><p>Diario, 2015-2023</p></td>
+<td><p>LSTM, CNN</p></td>
+<td><p>MSE, RMSE, MAE, R²</p></td>
+<td><p>LSTM: RMSE 0,1272, MAE 0,0971. CNN: 0,0810 y 0,0644</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0718 (doi:10.1016/j.asoc.2025.114049)</p></td>
+<td><p>Futuros de soya y maíz</p></td>
+<td><p>Diario, tres series</p></td>
+<td><p>BPNN, LSTM, CNN, GRU, RNN, Transformer e híbridos</p></td>
+<td><p>MAPE, MAE, RMSE</p></td>
+<td><p>Soya: BPNN 4,84 %, LSTM 4,79 %, CNN 4,88 % (MAPE)</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0863 (doi:10.1590/0103-8478cr20240444)</p></td>
+<td><p>Hortalizas en Turquía</p></td>
+<td><p>Diario, 2018-2022</p></td>
+<td><p>CNN, LSTM</p></td>
+<td><p>MAE, RMSE</p></td>
+<td><p>A 10 días: CNN MAE 0,107; LSTM 10,109</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0885 (doi:10.1371/journal.pone.0337103)</p></td>
+<td><p>Futuros de maíz y trigo</p></td>
+<td><p>Diario, 1970-2021</p></td>
+<td><p>BPNN, LSTM, BiLSTM</p></td>
+<td><p>RMSE, MAPE, MAE, Dstat</p></td>
+<td><p>Maíz, con SVMD: BPNN 1,9051 %, LSTM 1,1969 % (MAPE)</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1151 (doi:10.1016/j.compag.2024.108933)</p></td>
+<td><p>Producción de leche en tres países</p></td>
+<td><p>Mensual, Eurostat y clima</p></td>
+<td><p>FCNN, LSTM, CNN1D y otras seis</p></td>
+<td><p>R², RMSE, MAPE, MAE</p></td>
+<td><p>Italia: FCNN MAE 32,064; LSTM 33,206; CNN1D 25,179</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-1162 (doi:10.1371/journal.pone.0304881)</p></td>
+<td><p>Hortalizas en Beijing</p></td>
+<td><p>Diario, 2009-2023</p></td>
+<td><p>LSTM, CNN</p></td>
+<td><p>R², MAE</p></td>
+<td><p>LSTM: R² 0,958, MAE 0,143</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1181 (doi:10.1007/s44230-023-00046-y)</p></td>
+<td><p>Producción de alimentos en Irán</p></td>
+<td><p>Anual, FAOSTAT, 1961-2017</p></td>
+<td><p>MLP, AE, DBN, CNN, RNN, LSTM</p></td>
+<td><p>Exactitud, F1</p></td>
+<td><p>MLP 80,54; CNN 97,29; LSTM 92,69 (exactitud)</p></td>
+</tr>
+<tr class="row-even"><td><p>A1-01 (arXiv:2501.16697)</p></td>
+<td><p>Futuros de maní</p></td>
+<td><p>Diario, desde 2021</p></td>
+<td><p>MLP, CNN, LSTM</p></td>
+<td><p>MSE, MAE por paso</p></td>
+<td><p>Paso 1: MLP MAE 270,25; CNN 235,77; LSTM 132,76</p></td>
+</tr>
+<tr class="row-odd"><td><p>A1-14 (arXiv:2606.08314)</p></td>
+<td><p>Demanda de café</p></td>
+<td><p>1.062 registros, 70/15/15</p></td>
+<td><p>ANN (MLP), LSTM, CNN</p></td>
+<td><p>MAE, RMSE, MAPE, sMAPE, MASE, R²</p></td>
+<td><p>MASE: MLP 0,67; LSTM 0,62; CNN 0,61; ingenuo 1,00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="lo-que-muestra-la-tabla">
+<h3>Lo que muestra la tabla<a class="headerlink" href="#lo-que-muestra-la-tabla" title="Link to this heading">#</a></h3>
+<p><strong>Solo cinco de los diez estudios entrenan las tres redes por separado</strong>: S1-0718, S1-1151, S1-1181,
+A1-01 y A1-14. La LSTM aparece sola en los diez, la CNN en ocho y el MLP en siete. Los otros cinco
+nombran la tercera red, pero no la entrenan como referencia:</p>
+<ul class="simple">
+<li><p>S1-0101 solo cita una CNN en la discusión.</p></li>
+<li><p>S1-0610 usa el MLP como componente del modelo propuesto.</p></li>
+<li><p>S1-0863 y S1-1162 no entrenan un MLP.</p></li>
+<li><p>S1-0885 usa la CNN solo dentro de un híbrido.</p></li>
+</ul>
+<p>Esto corrige la sección 2 de <code class="docutils literal notranslate"><span class="pre">modelos_seleccionados.md</span></code>, que decía que los diez «mencionan las tres
+en sus resultados». La selección no cambia, porque viene del conteo del conjunto de 491 estudios.
+Lo que cambia es el respaldo directo: son cinco estudios con las tres redes, y diez con al menos
+dos.</p>
+<p><strong>No hay un ganador estable.</strong> La red con menor error cambia entre estudios, entre conjuntos de
+datos del mismo estudio y hasta entre métricas:</p>
+<ul class="simple">
+<li><p>La CNN gana en S1-0610, S1-0863 y A1-14.</p></li>
+<li><p>La LSTM gana en S1-1162 y en la mayoría de los cortes de A1-01, pero en la Tabla 4 de A1-01 gana
+el MLP.</p></li>
+<li><p>En S1-1151 gana la CNN1D en Italia y Alemania, y la FCNN en Francia.</p></li>
+<li><p>En la soya de S1-0718, la LSTM tiene el menor MAPE y la BPNN el menor MAE.</p></li>
+</ul>
+<p>Esa variación respalda comparar las tres con el mismo protocolo, en vez de suponer que una domina.</p>
+<p><strong>Las cifras no se comparan entre estudios.</strong> Cada estudio usa otra escala (precios, litros,
+índices), otra frecuencia y otra partición. Solo A1-14 informa el MASE frente a un pronóstico
+ingenuo, que es la medida que nosotros usamos. La mayoría trabaja con series diarias; ninguno es
+semanal.</p>
+<p><strong>Calidad.</strong> S1-1181 informa métricas de clasificación (exactitud, F1) para un problema de
+pronóstico, y su texto conserva frases de otro trabajo. Lo mantenemos en la tabla porque está
+incluido en el conjunto, pero no lo usamos para justificar ninguna decisión.</p>
+<p><strong>Valores que faltan.</strong> S1-0885 y S1-1162 publican sus tablas comparativas como imagen. Para ellos
+la tabla solo trae las cifras que aparecen en el texto.</p>
+</section>
+</section>
+<section id="equivalencia-con-la-svr-lineal-y-el-modelo-logistico">
+<h2>2. Equivalencia con la SVR lineal y el modelo logístico<a class="headerlink" href="#equivalencia-con-la-svr-lineal-y-el-modelo-logistico" title="Link to this heading">#</a></h2>
+<p>El enunciado pide que los tres modelos base cumplan el papel que tienen la SVR lineal en regresión y
+el modelo logístico en clasificación. Ese papel es fijar un nivel mínimo de desempeño. Nuestra tarea
+principal es una regresión: el objetivo <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> es continuo. La referencia clásica que corresponde
+es entonces la SVR lineal. La sección 2.5 trata el modelo logístico, que corresponde a la métrica
+secundaria de interrupciones.</p>
+<section id="el-punto-de-partida-la-svr-lineal">
+<h3>2.1 El punto de partida: la SVR lineal<a class="headerlink" href="#el-punto-de-partida-la-svr-lineal" title="Link to this heading">#</a></h3>
+<p>Con las mismas entradas que nuestras redes, la SVR lineal sería <em>f</em>(<strong>x</strong>) = <strong>w</strong>ᵀ<strong>x</strong> + <em>b</em>:</p>
+<ul class="simple">
+<li><p><strong>x</strong> junta la ventana aplanada (156 valores), las 33 covariables y las cuatro categóricas en
+codificación <em>one-hot</em>;</p></li>
+<li><p><em>f</em> se ajusta minimizando ½‖<strong>w</strong>‖² + <em>C</em> Σ max(0, |<em>y</em> − <em>f</em>(<strong>x</strong>)| − ε).</p></li>
+</ul>
+<p>Tiene 156 + 33 + 986 + 1 = 1.176 parámetros. La parte <em>one-hot</em> suma las cardinalidades de las
+cuatro categóricas: 33, 31, 913 y 9.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspecto</p></th>
+<th class="head"><p>SVR lineal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Capacidad de representación</p></td>
+<td><p>Una función lineal de las entradas</p></td>
+</tr>
+<tr class="row-odd"><td><p>Supuestos</p></td>
+<td><p>Cada semana de la ventana y cada covariable aportan con un peso fijo, sin interacciones</p></td>
+</tr>
+<tr class="row-even"><td><p>Pérdida</p></td>
+<td><p>Insensible a ε: no penaliza errores menores que ε y crece de forma lineal después</p></td>
+</tr>
+<tr class="row-odd"><td><p>Regularización</p></td>
+<td><p>Penalización ‖<strong>w</strong>‖²</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mlp-la-svr-lineal-mas-capas-ocultas">
+<h3>2.2 MLP: la SVR lineal más capas ocultas<a class="headerlink" href="#mlp-la-svr-lineal-mas-capas-ocultas" title="Link to this heading">#</a></h3>
+<p><strong>Capacidad de representación.</strong> Si al MLP se le quitan las capas ocultas, queda la SVR lineal.
+Sobre la misma entrada aplanada, una sola capa densa a una salida calcula exactamente <strong>w</strong>ᵀ<strong>x</strong> +
+<em>b</em>. Un <em>embedding</em> seguido de esa capa da un peso por categoría, igual que la codificación <em>one-hot</em>.
+Con una sola salida no se pierde nada: cualquier vector de pesos <em>one-hot</em> se puede escribir así. Las capas ocultas con ReLU convierten el modelo en una función lineal a
+trozos de las mismas entradas. Esa función puede aproximar interacciones entre semanas y
+covariables.</p>
+<p><strong>Supuestos.</strong> El MLP comparte el supuesto central de la SVR lineal: la ventana es un vector de 156
+variables sin orden. Si se permutan las semanas y se permutan igual los pesos, el modelo es el
+mismo. No supone nada sobre el tiempo.</p>
+<p><strong>Pérdida y regularización.</strong> Nuestra pérdida MAE es la pérdida insensible a ε con ε = 0. La
+diferencia está en la regularización. La SVR usa ‖<strong>w</strong>‖²; nosotros no usamos decaimiento de pesos
+y regularizamos con <em>dropout</em> y parada temprana. La declaramos como diferencia.</p>
+<p><strong>Propósito comparativo.</strong> El MLP es la referencia más cercana a la clásica. Lo que el MLP gane
+sobre una SVR lineal mide cuánto aporta la no linealidad, sin ninguna estructura temporal.</p>
+</section>
+<section id="cnn-1d-un-modelo-lineal-con-pesos-compartidos-en-el-tiempo">
+<h3>2.3 CNN 1D: un modelo lineal con pesos compartidos en el tiempo<a class="headerlink" href="#cnn-1d-un-modelo-lineal-con-pesos-compartidos-en-el-tiempo" title="Link to this heading">#</a></h3>
+<p><strong>Capacidad de representación.</strong> Una capa convolucional sin activación es un filtro lineal de 3
+semanas que se aplica igual en toda la ventana. Leer la última semana de ese filtro equivale a una
+autorregresión lineal de orden 3 sobre los tres canales. El promedio global de la salida es otra
+combinación lineal de la ventana. Por tanto, sin activaciones, la CNN es un caso restringido de la
+SVR lineal: los pesos de semanas distintas no son libres, porque salen del mismo filtro. Las
+activaciones y los bloques apilados le permiten detectar patrones locales no lineales. Con relleno
+causal, la última semana ve 5 o 7 semanas.</p>
+<p><strong>Supuestos.</strong> Los patrones relevantes son locales, de pocas semanas, y significan lo mismo en
+cualquier parte del año. Es el supuesto de equivariancia a traslaciones.</p>
+<p><strong>Propósito comparativo.</strong> Mide si una estructura local y con pocos parámetros basta, o si hace falta
+la memoria larga de la LSTM.</p>
+</section>
+<section id="lstm-una-recurrencia-con-memoria-controlada-por-compuertas">
+<h3>2.4 LSTM: una recurrencia con memoria controlada por compuertas<a class="headerlink" href="#lstm-una-recurrencia-con-memoria-controlada-por-compuertas" title="Link to this heading">#</a></h3>
+<p><strong>Capacidad de representación.</strong> Sin compuertas ni activaciones, una red recurrente es un modelo
+lineal de espacio de estados: <strong>h</strong>ₜ = <em>A</em><strong>h</strong>ₜ₋₁ + <em>B</em><strong>x</strong>ₜ, con la salida tomada del último
+estado. La predicción sigue siendo una combinación lineal de la ventana, y el peso de la semana
+<em>t</em> − <em>k</em> depende de <em>A</em>ᵏ. Las compuertas de la LSTM hacen que el olvido y la escritura en la celda dependan de
+los datos. Así puede retener una semana lejana, como la del año anterior, cuando importa, y
+olvidarla cuando no.</p>
+<p><strong>Supuestos.</strong> El pasado relevante se puede resumir en un estado de tamaño fijo que se actualiza en
+orden. Es la única de las tres que procesa la ventana como una secuencia.</p>
+<p><strong>Propósito comparativo.</strong> Mide si la memoria de largo plazo aporta sobre las otras dos.</p>
+</section>
+<section id="el-modelo-logistico-y-la-metrica-de-interrupciones">
+<h3>2.5 El modelo logístico y la métrica de interrupciones<a class="headerlink" href="#el-modelo-logistico-y-la-metrica-de-interrupciones" title="Link to this heading">#</a></h3>
+<p>DECISIONES.md también evalúa la detección de interrupciones: hay interrupción cuando
+<code class="docutils literal notranslate"><span class="pre">y_reg</span></code> &lt; ln(1,5), y la métrica secundaria es el AUC de interrupción. Para esa tarea, el modelo
+logístico es la referencia clásica: σ(<strong>w</strong>ᵀ<strong>x</strong> + <em>b</em>) sobre las mismas entradas. Nuestras redes no
+se entrenan para clasificar. Su pronóstico ŷ se usa como puntaje: cuanto menor es ŷ, más probable es la interrupción. Para el
+AUC solo importa el orden de ese puntaje. En el caso lineal, ordenar por <strong>w</strong>ᵀ<strong>x</strong> + <em>b</em> da el
+mismo AUC que el modelo logístico con los mismos pesos, porque σ es creciente. La equivalencia, por tanto, se mantiene en la
+parte lineal. Lo que cambia es la pérdida con que se ajustan los pesos: MAE sobre <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> en lugar de
+entropía cruzada sobre la etiqueta.</p>
+</section>
+<section id="resumen">
+<h3>2.6 Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Sin no linealidades equivale a</p></th>
+<th class="head"><p>Qué añade</p></th>
+<th class="head"><p>Sesgo inductivo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MLP</p></td>
+<td><p>SVR lineal sobre la ventana aplanada</p></td>
+<td><p>Interacciones no lineales</p></td>
+<td><p>Ninguno temporal: la ventana es un vector</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN 1D</p></td>
+<td><p>Autorregresión lineal de orden 3 con pesos compartidos</p></td>
+<td><p>Patrones locales no lineales</p></td>
+<td><p>Localidad y equivariancia a traslaciones</p></td>
+</tr>
+<tr class="row-even"><td><p>LSTM</p></td>
+<td><p>Modelo lineal de espacio de estados</p></td>
+<td><p>Memoria controlada por los datos</p></td>
+<td><p>Secuencia resumida en un estado</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Las tres parten del modelo lineal y le añaden una forma distinta de leer la ventana. Por eso
+cumplen el requisito de no ser redundantes.</p>
+</section>
+</section>
+<section id="propuesta-para-lina">
+<h2>3. Propuesta para Lina<a class="headerlink" href="#propuesta-para-lina" title="Link to this heading">#</a></h2>
+<p>Una referencia lineal de contexto saldría casi gratis con el pipeline actual: un MLP con cero capas
+ocultas, entrenado con la misma pérdida MAE, las mismas entradas y la misma parada temprana. Sería
+la versión lineal de los tres modelos base, con pérdida insensible a ε = 0 y sin el término ‖<strong>w</strong>‖².
+El enunciado acepta los modelos clásicos solo como contexto, y esta referencia permitiría decir
+cuánto aporta cada red sobre el modelo lineal. Hoy <code class="docutils literal notranslate"><span class="pre">src/referencias.py</span></code> tiene la persistencia, el
+ingenuo estacional y la mediana, pero ningún modelo lineal.</p>
+<p>Pendiente: ampliar la tabla de síntesis a los 96 estudios con texto completo, si el informe lo
+necesita.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./estado_arte"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modelos_seleccionados.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Modelos seleccionados</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../diseno/decisiones.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Decisiones del proyecto</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-sintesis">1. Tabla de síntesis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-muestra-la-tabla">Lo que muestra la tabla</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equivalencia-con-la-svr-lineal-y-el-modelo-logistico">2. Equivalencia con la SVR lineal y el modelo logístico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-punto-de-partida-la-svr-lineal">2.1 El punto de partida: la SVR lineal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp-la-svr-lineal-mas-capas-ocultas">2.2 MLP: la SVR lineal más capas ocultas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnn-1d-un-modelo-lineal-con-pesos-compartidos-en-el-tiempo">2.3 CNN 1D: un modelo lineal con pesos compartidos en el tiempo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm-una-recurrencia-con-memoria-controlada-por-compuertas">2.4 LSTM: una recurrencia con memoria controlada por compuertas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-modelo-logistico-y-la-metrica-de-interrupciones">2.5 El modelo logístico y la métrica de interrupciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">2.6 Resumen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-para-lina">3. Propuesta para Lina</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

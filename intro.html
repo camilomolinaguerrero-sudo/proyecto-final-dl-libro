@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Entregable 1: estado del arte, EDA y tres modelos base &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="1. Definición del problema y del dataset" href="eda/01_problema_dataset.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Entregable 1: estado del arte, EDA y tres modelos base</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-problema">El problema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estado-del-informe">Estado del informe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-inteligencia-artificial">Uso de inteligencia artificial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedencia-de-esta-version">Procedencia de esta versión</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="entregable-1-estado-del-arte-eda-y-tres-modelos-base">
+<h1>Entregable 1: estado del arte, EDA y tres modelos base<a class="headerlink" href="#entregable-1-estado-del-arte-eda-y-tres-modelos-base" title="Link to this heading">#</a></h1>
+<p>Lina Margarita Buelvas y Camilo Molina Guerrero. Proyecto final de Deep Learning, doctorado en
+ingeniería.</p>
+<section id="el-problema">
+<h2>El problema<a class="headerlink" href="#el-problema" title="Link to this heading">#</a></h2>
+<p>Pronosticamos el abastecimiento semanal de los corredores de alimentos de Colombia: cada corredor
+une un municipio de origen con una central mayorista. Los datos son los microdatos SIPSA-A del DANE
+de 2018 a 2025. El objetivo es <code class="docutils literal notranslate"><span class="pre">y_reg</span> <span class="pre">=</span> <span class="pre">log1p(tasa_t1</span> <span class="pre">/</span> <span class="pre">base8)</span></code>: el abastecimiento de la semana
+siguiente frente a su nivel de las últimas ocho semanas. Una interrupción es <code class="docutils literal notranslate"><span class="pre">y_reg</span> <span class="pre">&lt;</span> <span class="pre">ln(1,5)</span></code>.</p>
+<p>El Entregable 1 fija el nivel mínimo de desempeño (el <em>baseline</em>) que cualquier modelo más complejo
+deberá superar. Para eso, el libro:</p>
+<ol class="arabic simple">
+<li><p>define el problema y analiza los datos (capítulos 1 y 2);</p></li>
+<li><p>revisa la literatura y extrae de ella los tres modelos de Deep Learning más usados como
+referencia: LSTM, MLP y CNN 1D (capítulo 3);</p></li>
+<li><p>fija el diseño experimental antes de entrenar: partición, métrica primaria, margen δ y unidad de
+independencia (capítulo 4);</p></li>
+<li><p>compara los tres modelos con inferencia estadística (capítulo 5).</p></li>
+</ol>
+</section>
+<section id="estado-del-informe">
+<h2>Estado del informe<a class="headerlink" href="#estado-del-informe" title="Link to this heading">#</a></h2>
+<p>Este libro se publica mientras el trabajo avanza. Cada capítulo dice qué está cerrado y qué falta.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sección del enunciado</p></th>
+<th class="head"><p>Estado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1-2. Problema, datos y EDA</p></td>
+<td><p>Cerrada</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.1 Estrategia de búsqueda</p></td>
+<td><p>Cerrada: 491 estudios incluidos y diagrama de flujo</p></td>
+</tr>
+<tr class="row-even"><td><p>3.2 Selección de los tres modelos</p></td>
+<td><p>Acordada (LSTM, MLP, CNN 1D)</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.3 Análisis por modelo</p></td>
+<td><p>Pendiente (Lina); las fórmulas de parámetros ya están en el capítulo 3</p></td>
+</tr>
+<tr class="row-even"><td><p>3.4 Tabla de síntesis y equivalencia</p></td>
+<td><p>Borrador para revisión</p></td>
+</tr>
+<tr class="row-odd"><td><p>4. Diseño experimental</p></td>
+<td><p>Decisiones cerradas; el preregistro sigue en borrador hasta el piloto</p></td>
+</tr>
+<tr class="row-even"><td><p>5. Resultados e inferencia</p></td>
+<td><p>Referencias ingenuas calculadas; los tres modelos aún no se entrenan</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ninguna cifra del libro se escribe a mano: cada una sale de un archivo de resultados del
+repositorio, y el texto dice cuál.</p>
+</section>
+<section id="uso-de-inteligencia-artificial">
+<h2>Uso de inteligencia artificial<a class="headerlink" href="#uso-de-inteligencia-artificial" title="Link to this heading">#</a></h2>
+<p>Los dos autores usamos Claude (Anthropic), a través de Claude Code, como herramienta de apoyo en el
+tamizaje de la literatura, el análisis y la redacción. Los protocolos de tamizaje (anexos) detallan
+qué hizo la herramienta, qué revisó cada autor y qué se decidió de común acuerdo.</p>
+</section>
+<section id="procedencia-de-esta-version">
+<h2>Procedencia de esta versión<a class="headerlink" href="#procedencia-de-esta-version" title="Link to this heading">#</a></h2>
+<p>Construida desde la rama <code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> &#64; 9d45b50.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Archivo</p></th>
+<th class="head"><p>Tomado de</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eda/01_problema_dataset.ipynb</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">eda/02_eda_general.ipynb</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eda/03_eda_series.ipynb</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">eda/decisiones_para_modelos.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">literatura/modelos_seleccionados.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">literatura/sintesis_y_equivalencia_camilo.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DECISIONES.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lina/pipeline</span></code> &#64; f6e260c</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">preregistro/borrador_preregistro.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lina/pipeline</span></code> &#64; f6e260c</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">estadistica/README.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">literatura/protocolo_tamizaje_camilo.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">literatura/protocolo_tamizaje_lina.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lina/pipeline</span></code> &#64; f6e260c</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">literatura/diagrama_prisma.png</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camilo/libro</span></code> (árbol de trabajo)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resultados/referencias_validacion.csv</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lina/pipeline</span></code> &#64; f6e260c</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="eda/01_problema_dataset.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1. Definición del problema y del dataset</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-problema">El problema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estado-del-informe">Estado del informe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-inteligencia-artificial">Uso de inteligencia artificial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedencia-de-esta-version">Procedencia de esta versión</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

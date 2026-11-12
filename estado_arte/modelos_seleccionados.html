@@ -1,0 +1,1003 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelos seleccionados &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'estado_arte/modelos_seleccionados';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Tabla de síntesis y equivalencia con los modelos clásicos" href="sintesis_y_equivalencia.html" />
+    <link rel="prev" title="3.1 Estrategia de búsqueda" href="busqueda.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/estado_arte/modelos_seleccionados.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelos seleccionados</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion">1. Selección</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orden-por-complejidad">Orden por complejidad</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estudios-que-los-respaldan">2. Estudios que los respaldan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-hacen-los-estudios">3. Lo que hacen los estudios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-para-nuestro-pipeline">4. Configuración para nuestro pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrada">Entrada</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuerpo-de-cada-red">Cuerpo de cada red</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cabeza-comun">Cabeza común</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-comun-a-los-tres">Entrenamiento, común a los tres</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-de-hiperparametros">Búsqueda de hiperparámetros</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-de-parametros">5. Número de parámetros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendiente">6. Pendiente</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelos-seleccionados">
+<h1>Modelos seleccionados<a class="headerlink" href="#modelos-seleccionados" title="Link to this heading">#</a></h1>
+<p>Acordado por Camilo y Lina el 2026-11-11. Parte del borrador de Camilo (versión 1 del 2026-11-08 y
+versión 2 en el commit 621dec5), con los ajustes de Lina del 10 de noviembre y sus dos precisiones
+del 11: los tamaños de los <em>embeddings</em> son fijos en todos los pliegues y la CNN usa relleno causal.
+Es el archivo que lee <code class="docutils literal notranslate"><span class="pre">src/</span></code>. Las cifras salen de estos archivos:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conteo_modelos_conjunto.json</span></code> (rama <code class="docutils literal notranslate"><span class="pre">lina/pipeline</span></code>, commit 80a3914): conteos de la sección 1.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">configuraciones_texto_completo.json</span></code> y <code class="docutils literal notranslate"><span class="pre">extraccion_texto_completo.csv</span></code>: lo que hacen los
+estudios (sección 3).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parametros_modelos.json</span></code>, que escribe <code class="docutils literal notranslate"><span class="pre">scripts_camilo/parametros_modelos.py</span></code>: cardinalidades,
+tamaños de los <em>embeddings</em> y número de parámetros (secciones 1, 4 y 5).</p></li>
+</ul>
+<section id="seleccion">
+<h2>1. Selección<a class="headerlink" href="#seleccion" title="Link to this heading">#</a></h2>
+<p>Las tres familias de redes más mencionadas en el conjunto acordado de 491 estudios son <strong>LSTM, MLP y
+CNN</strong>. Encabezan los tres cortes que fijamos antes de leer los textos completos, y también el conteo
+sin el filtro de años:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Corte</p></th>
+<th class="head"><p>LSTM</p></th>
+<th class="head"><p>MLP/ANN</p></th>
+<th class="head"><p>CNN</p></th>
+<th class="head"><p>4.º</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Todos los estudios (491)</p></td>
+<td><p>272</p></td>
+<td><p>142</p></td>
+<td><p>74</p></td>
+<td><p>Transformer (62)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nivel A (172)</p></td>
+<td><p>131</p></td>
+<td><p>59</p></td>
+<td><p>66</p></td>
+<td><p>GRU (55)</p></td>
+</tr>
+<tr class="row-even"><td><p>Solo texto completo (96)</p></td>
+<td><p>65</p></td>
+<td><p>40</p></td>
+<td><p>33</p></td>
+<td><p>Transformer (27)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sin filtro de años (543)</p></td>
+<td><p>274</p></td>
+<td><p>182</p></td>
+<td><p>76</p></td>
+<td><p>Transformer y GRU (62)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En el nivel A la CNN supera al MLP, pero el grupo de tres no cambia.</p>
+<p><strong>Qué se cuenta.</strong> El enunciado pide contar los modelos que los estudios usan como referencia. Nuestro
+conteo es de menciones: una familia cuenta si el estudio la nombra en el título, el resumen o las
+palabras clave, o en el texto completo cuando lo leímos. Así, un estudio que propone una LSTM y la
+compara con un MLP suma a las dos familias. No separamos el modelo propuesto de los de comparación
+porque los resúmenes casi nunca permiten hacerlo. Lo declaramos como una desviación del criterio del
+enunciado.</p>
+<section id="orden-por-complejidad">
+<h3>Orden por complejidad<a class="headerlink" href="#orden-por-complejidad" title="Link to this heading">#</a></h3>
+<p>Las tres seleccionadas leen la ventana de 52 semanas de tres formas distintas. De menor a mayor
+complejidad de cálculo:</p>
+<ol class="arabic simple">
+<li><p><strong>MLP:</strong> sin estructura temporal. Aplana la ventana en un vector de 156 valores y aplica productos
+matriciales; cada semana tiene su propio peso.</p></li>
+<li><p><strong>CNN 1D:</strong> filtros locales de 3 semanas que comparten pesos a lo largo de la ventana. Captan
+patrones cortos con pocos parámetros, y todas las posiciones se calculan en paralelo.</p></li>
+<li><p><strong>LSTM:</strong> recurrencia de 52 pasos con cuatro bloques de compuerta y una celda de memoria. Es la
+única de las tres que debe recorrer la ventana en orden, y por eso es la más lenta por época.</p></li>
+</ol>
+<p>En número de parámetros, el MLP y la CNN quedan parecidos y la LSTM se separa. Con 64 unidades y 2
+capas, el cuerpo de cada red tiene 14.208 parámetros (MLP), 12.992 (CNN) y 50.944 (LSTM). La sección
+5 da los rangos completos.</p>
+<p><strong>Por qué no entran las tres siguientes.</strong> La regla fijada de antemano era quedarnos con las tres
+familias más mencionadas. La complejidad muestra, además, que las siguientes no añaden una forma
+nueva de leer la ventana:</p>
+<ul class="simple">
+<li><p><strong>GRU y RNN simple</strong> usan la misma recurrencia que la LSTM, con tres bloques de compuerta y con uno.
+Agregar cualquiera de las dos pondría una segunda red recurrente junto a la LSTM, y la comparación
+tendría dos variantes de la misma idea.</p></li>
+<li><p><strong>Transformer</strong> es la más compleja de todas. Su atención compara cada par de semanas (52 × 52), cada
+capa suma las matrices de atención y una red densa interna, y necesita codificación posicional. En
+nuestro conteo queda cuarta en tres de los cuatro cortes (en uno, empatada con la GRU), con 62
+menciones frente a 74 de la CNN en todos los estudios. Incluirla habría exigido sacar una de las
+tres primeras.</p></li>
+</ul>
+</section>
+</section>
+<section id="estudios-que-los-respaldan">
+<h2>2. Estudios que los respaldan<a class="headerlink" href="#estudios-que-los-respaldan" title="Link to this heading">#</a></h2>
+<p>Diez estudios con texto completo, sobre series agroalimentarias, nombran las tres arquitecturas en
+sus resultados. Lina comprobó que los diez siguen incluidos en el conjunto acordado. La lectura de
+cada uno para la tabla de síntesis (<code class="docutils literal notranslate"><span class="pre">sintesis_y_equivalencia_camilo.md</span></code>, 2026-11-11) mostró que
+solo cinco entrenan las tres por separado: S1-0718, S1-1151, S1-1181, A1-01 y A1-14. Los otros cinco
+entrenan dos y nombran la tercera, o la usan dentro de un híbrido. La selección no depende de estos
+diez: sale del conteo de la sección 1.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Id</p></th>
+<th class="head"><p>Año</p></th>
+<th class="head"><p>Tema</p></th>
+<th class="head"><p>Identificador</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>S1-0101</p></td>
+<td><p>2026</p></td>
+<td><p>Inflación de alimentos</p></td>
+<td><p>doi:10.1038/s41598-026-34993-w</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0610</p></td>
+<td><p>2025</p></td>
+<td><p>Ventas</p></td>
+<td><p>doi:10.1145/3729706.3729746</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0718</p></td>
+<td><p>2025</p></td>
+<td><p>Futuros agrícolas</p></td>
+<td><p>doi:10.1016/j.asoc.2025.114049</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0863</p></td>
+<td><p>2025</p></td>
+<td><p>Precios de hortalizas para ensalada</p></td>
+<td><p>doi:10.1590/0103-8478cr20240444</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0885</p></td>
+<td><p>2025</p></td>
+<td><p>Precios de productos agrícolas</p></td>
+<td><p>doi:10.1371/journal.pone.0337103</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1151</p></td>
+<td><p>2024</p></td>
+<td><p>Producción de leche nacional</p></td>
+<td><p>doi:10.1016/j.compag.2024.108933</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-1162</p></td>
+<td><p>2024</p></td>
+<td><p>Precios de hortalizas en Beijing</p></td>
+<td><p>doi:10.1371/journal.pone.0304881</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1181</p></td>
+<td><p>2023</p></td>
+<td><p>Producción de alimentos</p></td>
+<td><p>doi:10.1007/s44230-023-00046-y</p></td>
+</tr>
+<tr class="row-even"><td><p>A1-01</p></td>
+<td><p>2025</p></td>
+<td><p>Futuros de maní</p></td>
+<td><p>arXiv:2501.16697</p></td>
+</tr>
+<tr class="row-odd"><td><p>A1-14</p></td>
+<td><p>2026</p></td>
+<td><p>Demanda en la cadena del café</p></td>
+<td><p>arXiv:2606.08314</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El detector las encontró nombradas en la sección de resultados, pero nombrar no es entrenar: en
+S1-0101, por ejemplo, la CNN solo aparece al citar otro estudio. Los demás estudios que usan cada familia están en <code class="docutils literal notranslate"><span class="pre">extraccion_texto_completo.csv</span></code>
+(columna <code class="docutils literal notranslate"><span class="pre">familias</span></code>).</p>
+</section>
+<section id="lo-que-hacen-los-estudios">
+<h2>3. Lo que hacen los estudios<a class="headerlink" href="#lo-que-hacen-los-estudios" title="Link to this heading">#</a></h2>
+<p>Extraído por <code class="docutils literal notranslate"><span class="pre">scripts_camilo/configuraciones.py</span></code> de los 90 textos completos de mi extracción. Los 6
+textos que añadí el 9 de noviembre solo se clasificaron por familia y no entran en esta tabla. Los
+conteos son estudios que mencionan cada opción. Los valores numéricos son menciones dentro de esos
+estudios, así que un mismo estudio puede aportar varias.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>LSTM (63 estudios)</p></th>
+<th class="head"><p>MLP (38)</p></th>
+<th class="head"><p>CNN (31)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Optimizador</p></td>
+<td><p>Adam 47, SGD 7</p></td>
+<td><p>Adam 19, SGD 6</p></td>
+<td><p>Adam 25</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pérdida declarada</p></td>
+<td><p>MSE 17, MAE 5, Huber 5</p></td>
+<td><p>MSE 8, MAE 3</p></td>
+<td><p>MSE 11, MAE 4, Huber 4</p></td>
+</tr>
+<tr class="row-even"><td><p>Tasa de aprendizaje (mediana)</p></td>
+<td><p>0,001</p></td>
+<td><p>0,001</p></td>
+<td><p>0,001</p></td>
+</tr>
+<tr class="row-odd"><td><p>Épocas (mediana; moda)</p></td>
+<td><p>100; 50</p></td>
+<td><p>50; 50</p></td>
+<td><p>50; 50</p></td>
+</tr>
+<tr class="row-even"><td><p>Tamaño de lote (moda)</p></td>
+<td><p>32</p></td>
+<td><p>32</p></td>
+<td><p>32</p></td>
+</tr>
+<tr class="row-odd"><td><p>Unidades o filtros (moda; máximo)</p></td>
+<td><p>64; 512</p></td>
+<td><p>10; 128</p></td>
+<td><p>64; 512</p></td>
+</tr>
+<tr class="row-even"><td><p>Capas (moda; menciones)</p></td>
+<td><p>2; 8</p></td>
+<td><p>3; 11</p></td>
+<td><p>2; 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dropout / parada temprana</p></td>
+<td><p>25 / 27</p></td>
+<td><p>14 / 10</p></td>
+<td><p>11 / 12</p></td>
+</tr>
+<tr class="row-even"><td><p>Búsqueda de hiperparámetros</p></td>
+<td><p>metaheurística 24, grid 16, bayesiana 16</p></td>
+<td><p>metaheurística 18, grid 9</p></td>
+<td><p>metaheurística 9, grid 7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Límites de esta extracción:</p>
+<ul class="simple">
+<li><p><strong>Los valores se asignan por estudio, no por modelo.</strong> Si un estudio usa una LSTM y un MLP y declara
+Adam, el Adam cuenta para las dos familias, aunque solo lo haya usado en una.</p></li>
+<li><p><strong>«Capas» sale de muy pocas menciones</strong>: 8 en la LSTM, 11 en el MLP y 3 en la CNN. La moda orienta,
+pero no es una estimación.</p></li>
+<li><p>Los conteos de <code class="docutils literal notranslate"><span class="pre">tanh</span></code> y <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code> reflejan en gran parte la descripción de las compuertas de la
+LSTM, no la activación elegida.</p></li>
+<li><p>La ventana de entrada solo se detectó en 25, 13 y 13 menciones, con medianas de 7, 5 y 4 pasos.
+Casi todos esos estudios usan series diarias o mensuales, así que el dato no se traslada a nuestro
+caso. Nuestra ventana de 52 semanas viene del EDA.</p></li>
+</ul>
+</section>
+<section id="configuracion-para-nuestro-pipeline">
+<h2>4. Configuración para nuestro pipeline<a class="headerlink" href="#configuracion-para-nuestro-pipeline" title="Link to this heading">#</a></h2>
+<section id="entrada">
+<h3>Entrada<a class="headerlink" href="#entrada" title="Link to this heading">#</a></h3>
+<p>Las tres redes reciben el mismo <code class="docutils literal notranslate"><span class="pre">Lote</span></code> de <code class="docutils literal notranslate"><span class="pre">src/entrenamiento.py</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>, con forma (lote, 52, 3): los canales <code class="docutils literal notranslate"><span class="pre">nivel</span></code>, <code class="docutils literal notranslate"><span class="pre">observado</span></code> e <code class="docutils literal notranslate"><span class="pre">iniciado</span></code>;</p></li>
+<li><p>33 covariables: 29 escaladas y 4 indicadores de ausencia;</p></li>
+<li><p>4 categóricas: <code class="docutils literal notranslate"><span class="pre">mercado</span></code>, <code class="docutils literal notranslate"><span class="pre">depto_origen</span></code>, <code class="docutils literal notranslate"><span class="pre">cod_mpio</span></code> y <code class="docutils literal notranslate"><span class="pre">grupo_dom</span></code>.</p></li>
+</ul>
+<p><strong>Regla de los <em>embeddings</em>.</strong> La dimensión de cada categórica es la mitad de su cardinalidad,
+redondeada hacia arriba, con un tope de 16. La cardinalidad incluye el 0 que <code class="docutils literal notranslate"><span class="pre">src/</span></code> reserva para las
+categorías nuevas. Con las 622.244 filas de entrenamiento (semana objetivo hasta el 21 de octubre de
+2024), queda así:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Categórica</p></th>
+<th class="head"><p>Cardinalidad</p></th>
+<th class="head"><p>Dimensión</p></th>
+<th class="head"><p>Parámetros</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mercado</span></code></p></td>
+<td><p>33</p></td>
+<td><p>16</p></td>
+<td><p>528</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">depto_origen</span></code></p></td>
+<td><p>31</p></td>
+<td><p>16</p></td>
+<td><p>496</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cod_mpio</span></code></p></td>
+<td><p>913</p></td>
+<td><p>16</p></td>
+<td><p>14.608</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">grupo_dom</span></code></p></td>
+<td><p>9</p></td>
+<td><p>5</p></td>
+<td><p>45</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En total son 53 dimensiones y 15.677 parámetros, iguales para las tres redes. La regla es nuestra; el
+tope evita que <code class="docutils literal notranslate"><span class="pre">cod_mpio</span></code> domine la entrada de la cabeza.</p>
+<p><strong>Los tamaños son fijos en todos los pliegues.</strong> Se calculan una vez con todo el entrenamiento y no
+con el vocabulario de cada pliegue. Si se recalcularan, la red cambiaría de un pliegue a otro: en k1 a
+k3, <code class="docutils literal notranslate"><span class="pre">mercado</span></code> tiene 30 categorías (contando el 0) y la regla le daría 15 dimensiones en vez de 16. Lo
+que sí cambia por pliegue es el número de filas de cada tabla, que sigue el vocabulario del pliegue;
+las categorías que el pliegue no vio en entrenamiento van al 0. Por eso los 15.677 parámetros de los
+<em>embeddings</em> son los del entrenamiento completo, y en k1 a k4 son algo menos.</p>
+</section>
+<section id="cuerpo-de-cada-red">
+<h3>Cuerpo de cada red<a class="headerlink" href="#cuerpo-de-cada-red" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>MLP:</strong> aplana la ventana (52 × 3 = 156 valores) y aplica 2 o 3 capas densas con ReLU y <em>dropout</em>.
+Su representación es la salida de la última capa.</p></li>
+<li><p><strong>LSTM:</strong> 1 o 2 capas sobre la secuencia, con <em>dropout</em> entre capas cuando hay dos. Su
+representación es el último estado oculto de la última capa.</p></li>
+<li><p><strong>CNN 1D:</strong> 2 o 3 bloques de convolución con <em>kernel</em> 3, <strong>relleno causal</strong> (2 ceros solo hacia el
+pasado), ReLU y <em>dropout</em>. Su representación concatena dos vectores: el promedio global sobre las
+52 semanas, que resume el año, y la salida en la última semana, que con 2 o 3 bloques ve las últimas
+5 o 7 semanas. El promedio global por sí solo perdería la posición, y en un pronóstico a una semana
+la más reciente es la que más pesa. Con relleno simétrico, la última semana vería solo 3 o 4
+semanas, porque la mitad de cada filtro caería sobre ceros del futuro; ambos lo comprobamos en
+PyTorch.</p></li>
+</ul>
+</section>
+<section id="cabeza-comun">
+<h3>Cabeza común<a class="headerlink" href="#cabeza-comun" title="Link to this heading">#</a></h3>
+<p>Las tres terminan en la misma cabeza. Concatenan su representación con las 33 covariables y los 53
+valores de los <em>embeddings</em>, y aplican una capa oculta de 64 unidades con ReLU y <em>dropout</em>, seguida
+de una capa densa a una salida. El <em>dropout</em> de la cabeza es el mismo que el del cuerpo en cada
+configuración. Con una sola capa densa, las covariables y los <em>embeddings</em> entrarían
+solo de forma lineal, y parte de la diferencia entre modelos vendría de cuánto compensa cada cuerpo
+esa limitación y no de cómo lee la ventana. La capa oculta es fija y no entra en la búsqueda.</p>
+</section>
+<section id="entrenamiento-comun-a-los-tres">
+<h3>Entrenamiento, común a los tres<a class="headerlink" href="#entrenamiento-comun-a-los-tres" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Adam, con tasa inicial en {1e-4, 3e-4, 1e-3}: la moda de la literatura y sus vecinos.</p></li>
+<li><p><strong>Pérdida MAE</strong>, porque es la métrica primaria de DECISIONES.md. La literatura usa más la MSE; lo
+declaramos como decisión propia.</p></li>
+<li><p><strong>Sin planificador de la tasa, sin decaimiento de pesos y sin recorte de gradiente.</strong> Son los
+valores por defecto de <code class="docutils literal notranslate"><span class="pre">ConfigEntrenamiento</span></code>, y así cualquier diferencia entre modelos viene de la
+arquitectura. La regularización queda a cargo del <em>dropout</em> y la parada temprana.</p></li>
+<li><p>Parada temprana con un máximo de 100 épocas y paciencia 10.</p></li>
+<li><p><strong>Tamaño de lote 512</strong>, fijo para los tres. La literatura usa 32 con series de cientos de puntos;
+con 622.244 filas de entrenamiento, una época con lote 32 sería impráctica. Los datos caben
+completos en la GPU, así que la razón es el tiempo por época y no la memoria.</p></li>
+<li><p>Inicialización por defecto de PyTorch y una semilla fija.</p></li>
+</ul>
+</section>
+<section id="busqueda-de-hiperparametros">
+<h3>Búsqueda de hiperparámetros<a class="headerlink" href="#busqueda-de-hiperparametros" title="Link to this heading">#</a></h3>
+<p>Búsqueda aleatoria con el mismo presupuesto para las tres: 20 configuraciones por modelo y una
+semilla. Cada configuración se elige con el bloque interno de parada temprana del pliegue k4. Ese
+pliegue ya se usó para elegir la ventana, así que el bloque externo queda limpio para el piloto. El
+número 20 queda pendiente hasta que Lina mida el tiempo por época de la LSTM en la GPU.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hiperparámetro</p></th>
+<th class="head"><p>MLP</p></th>
+<th class="head"><p>LSTM</p></th>
+<th class="head"><p>CNN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Unidades o filtros</p></td>
+<td><p>{32, 64, 128}</p></td>
+<td><p>{32, 64, 128}</p></td>
+<td><p>{32, 64, 128}</p></td>
+</tr>
+<tr class="row-odd"><td><p>Capas o bloques</p></td>
+<td><p>{2, 3}</p></td>
+<td><p>{1, 2}</p></td>
+<td><p>{2, 3}</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Kernel</em></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>3 (fijo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Dropout</em></p></td>
+<td><p>{0, 0,1, 0,3}</p></td>
+<td><p>{0, 0,1, 0,3}</p></td>
+<td><p>{0, 0,1, 0,3}</p></td>
+</tr>
+<tr class="row-even"><td><p>Tasa de aprendizaje</p></td>
+<td><p>{1e-4, 3e-4, 1e-3}</p></td>
+<td><p>{1e-4, 3e-4, 1e-3}</p></td>
+<td><p>{1e-4, 3e-4, 1e-3}</p></td>
+</tr>
+<tr class="row-odd"><td><p>Combinaciones</p></td>
+<td><p>54</p></td>
+<td><p>54</p></td>
+<td><p>54</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Las tres tienen el mismo número de combinaciones. Por eso el <em>kernel</em> de la CNN queda fijo en 3: con
+{3, 5} habría 108, y las 20 configuraciones cubrirían la mitad del espacio que cubren en las otras.</p>
+<p>Los rangos se centran en la moda de la literatura (64 unidades, 2 capas, tasa 0,001) y se amplían un
+paso hacia cada lado. En el MLP, la literatura tiene moda de 10 unidades y máximo de 128. Usamos el
+mismo espacio de los otros dos porque nuestra entrada tiene 156 valores, mientras que esos estudios
+usan ventanas de unos 5 pasos. La literatura recurre con frecuencia a metaheurísticas (PSO,
+algoritmos genéticos). Preferimos la búsqueda aleatoria porque es reproducible, se fija con la
+semilla y no añade otra fuente de variación entre modelos.</p>
+</section>
+</section>
+<section id="numero-de-parametros">
+<h2>5. Número de parámetros<a class="headerlink" href="#numero-de-parametros" title="Link to this heading">#</a></h2>
+<p>Fórmulas de PyTorch, con <em>u</em> unidades o filtros, <em>d</em> entradas por paso y <em>k</em> = 3:</p>
+<ul class="simple">
+<li><p>Capa densa: (entradas + 1) · salidas.</p></li>
+<li><p>Capa LSTM: 4<em>u</em>(<em>d</em> + <em>u</em>) + 8<em>u</em>. Son cuatro bloques de compuerta, y PyTorch usa dos sesgos por
+bloque.</p></li>
+<li><p>Capa convolucional: <em>d</em> · <em>u</em> · <em>k</em> + <em>u</em>.</p></li>
+<li><p>Cabeza: (<em>r</em> + 33 + 53 + 1) · 64 + 65, donde <em>r</em> es la representación del cuerpo: <em>u</em> en el MLP y
+la LSTM, y 2<em>u</em> en la CNN.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">parametros_modelos.py</span></code> comprueba estas fórmulas contra los módulos de PyTorch en las 18
+combinaciones de unidades y capas. Parámetros sin contar los 15.677 de los <em>embeddings</em>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Mínimo</p></th>
+<th class="head"><p>64 unidades, 2 capas</p></th>
+<th class="head"><p>Máximo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MLP</p></td>
+<td><p>13.761 (32, 2)</p></td>
+<td><p>23.937</p></td>
+<td><p>66.945 (128, 3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN</p></td>
+<td><p>13.153 (32, 2)</p></td>
+<td><p>26.817</p></td>
+<td><p>121.857 (128, 3)</p></td>
+</tr>
+<tr class="row-even"><td><p>LSTM</p></td>
+<td><p>12.417 (32, 1)</p></td>
+<td><p>60.673</p></td>
+<td><p>214.017 (128, 2)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Con las configuraciones pequeñas, las tres redes tienen un tamaño parecido. Con las grandes, la LSTM
+pasa de tres veces los parámetros del MLP. Por eso conviene reportar el número de parámetros de la
+configuración ganadora de cada modelo junto a su error: si la LSTM gana con 200.000 parámetros, parte
+de la ventaja puede venir del tamaño.</p>
+</section>
+<section id="pendiente">
+<h2>6. Pendiente<a class="headerlink" href="#pendiente" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Lina confirma las 20 configuraciones por modelo cuando mida el tiempo por época de la LSTM en la
+GPU.</p></li>
+<li><p>Secciones del enunciado que faltan:</p>
+<ul class="simple">
+<li><p>Camilo: la tabla de síntesis con métricas y la equivalencia con el modelo logístico o la SVR
+lineal.</p></li>
+<li><p>Lina: el análisis por modelo. La sección 5 ya da las fórmulas de los parámetros.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./estado_arte"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="busqueda.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">3.1 Estrategia de búsqueda</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sintesis_y_equivalencia.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Tabla de síntesis y equivalencia con los modelos clásicos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion">1. Selección</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orden-por-complejidad">Orden por complejidad</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estudios-que-los-respaldan">2. Estudios que los respaldan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-hacen-los-estudios">3. Lo que hacen los estudios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-para-nuestro-pipeline">4. Configuración para nuestro pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrada">Entrada</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuerpo-de-cada-red">Cuerpo de cada red</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cabeza-comun">Cabeza común</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-comun-a-los-tres">Entrenamiento, común a los tres</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-de-hiperparametros">Búsqueda de hiperparámetros</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-de-parametros">5. Número de parámetros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendiente">6. Pendiente</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

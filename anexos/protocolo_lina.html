@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Protocolo de tamizaje (búsquedas W1 e I1) &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'anexos/protocolo_lina';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Protocolo de tamizaje (búsquedas S1 y A1)" href="protocolo_camilo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/anexos/protocolo_lina.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Protocolo de tamizaje (búsquedas W1 e I1)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-sobre-como-se-tomaron-las-decisiones">Declaración sobre cómo se tomaron las decisiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios">Criterios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultado">Resultado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-por-muestreo">Revisión por muestreo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-con-el-tamizaje-de-camilo">Comparación con el tamizaje de Camilo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acuerdos-con-camilo">Acuerdos con Camilo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-de-los-desacuerdos">Resolución de los desacuerdos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-final-de-las-cuatro-bases">Conjunto final de las cuatro bases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-y-conteo-de-modelos">Extracción y conteo de modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-falta">Lo que falta</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="protocolo-de-tamizaje-busquedas-w1-e-i1">
+<h1>Protocolo de tamizaje (búsquedas W1 e I1)<a class="headerlink" href="#protocolo-de-tamizaje-busquedas-w1-e-i1" title="Link to this heading">#</a></h1>
+<p>Aplica a <code class="docutils literal notranslate"><span class="pre">registros/wos_2026-11-07_W1.txt</span></code> y <code class="docutils literal notranslate"><span class="pre">registros/ieee_2026-11-07_I1.csv</span></code>. Las decisiones quedan en <code class="docutils literal notranslate"><span class="pre">tamizaje_lina.csv</span></code> y las cifras para el diagrama PRISMA en <code class="docutils literal notranslate"><span class="pre">tamizaje_lina_conteos.json</span></code>.</p>
+<section id="declaracion-sobre-como-se-tomaron-las-decisiones">
+<h2>Declaración sobre cómo se tomaron las decisiones<a class="headerlink" href="#declaracion-sobre-como-se-tomaron-las-decisiones" title="Link to this heading">#</a></h2>
+<p><strong>Nadie leyó cada registro.</strong> El tamizaje de título y resumen de estas dos búsquedas se hizo con reglas automáticas:</p>
+<ol class="arabic simple">
+<li><p>Claude escribió las reglas de <code class="docutils literal notranslate"><span class="pre">sugerir_tamizaje.py</span></code>, que buscan palabras en el título y el resumen y usan el tipo de documento y el idioma que da cada base.</p></li>
+<li><p>Lina decidió el 2026-11-08 adoptar en bloque el resultado de esas reglas como decisión de tamizaje, sin leer ni revisar los registros uno por uno.</p></li>
+<li><p>Cada decisión lleva en <code class="docutils literal notranslate"><span class="pre">nota</span></code> el motivo que dio la regla. Las columnas <code class="docutils literal notranslate"><span class="pre">sugerencia_claude</span></code>, <code class="docutils literal notranslate"><span class="pre">criterio_sugerido</span></code> y <code class="docutils literal notranslate"><span class="pre">motivo_sugerencia</span></code> conservan la salida original.</p></li>
+<li><p>Los 194 registros que las reglas dejaron como dudosos los falló Claude el 2026-11-08, por encargo de Lina. Leyó el título y extractos del resumen (el inicio y las frases sobre pronóstico o modelos, hasta 620 caracteres), y el final del resumen en 16 casos. Cada fallo y su razón están en <code class="docutils literal notranslate"><span class="pre">fallos_dudosos_lina.csv</span></code>.</p></li>
+</ol>
+<p><strong>El tamizaje de Scopus y arXiv tampoco es lectura humana registro por registro.</strong> Camilo informó por correo el 2026-11-09 que su tamizaje, el fallo de sus dudosos y su extracción los hizo una herramienta de IA a pedido suyo, con criterios escritos antes y auditoría por muestra. <code class="docutils literal notranslate"><span class="pre">protocolo_tamizaje_camilo.md</span></code> lo declara desde ese día, en su sección «Uso de inteligencia artificial»: la herramienta es Claude (Anthropic), usada en Claude Code, la misma de este lado. Los dos tamizajes no son independientes ni siquiera en la herramienta.</p>
+<p>Hasta el 2026-11-09, este protocolo y <code class="docutils literal notranslate"><span class="pre">consolidar_tamizaje.py</span></code> decían que el criterio de Camilo venía de «lectura humana». Era una suposición de Claude, no un dato, y se corrigió ese día.</p>
+<p>Texto propuesto para el informe:</p>
+<blockquote>
+<div><p>El tamizaje de título y resumen de los registros de Web of Science e IEEE Xplore se realizó con reglas automáticas basadas en palabras clave, escritas con asistencia de una herramienta de inteligencia artificial (Claude) y aplicadas sobre los criterios I1 a I4 y E1 a E6. Lina Buelvas adoptó en bloque sus resultados, sin lectura individual de los registros. Los 194 casos dudosos los resolvió la misma herramienta a partir del título y de extractos del resumen, por encargo de la autora. Una revisión por muestreo de títulos estimó que cerca del 5 % de las exclusiones por variable no agroalimentaria podría ser incorrecta (2 de 40; intervalo de Wilson al 95 %: 1 % a 17 %). En los 879 estudios de 2018 a 2026 presentes también en las búsquedas de Scopus y arXiv, el acuerdo con el tamizaje de esas bases, a cargo de Camilo Molina y hecho con la misma herramienta, fue de 96,1 % (κ de Cohen = 0,91; IC 95 % aproximado: 0,88 a 0,94). Ese valor compara dos procedimientos hechos con la misma herramienta de inteligencia artificial y con los mismos criterios, no dos revisores humanos independientes. Los 34 desacuerdos los resolvió la herramienta del lado de Lina Buelvas a partir del resumen completo y de las reglas de fallo del protocolo de Scopus y arXiv. Lina Buelvas confirmó esos fallos tras revisar el título y la razón de cada uno. Una segunda revisión, hecha por la herramienta a pedido de Camilo Molina, coincidió en la decisión de 33 de los 34; los dos autores leyeron el título y el resumen de los 7 casos que esa revisión marcó, y con su acuerdo un estudio pasó de excluido a incluido y otro cambió de criterio de exclusión.</p>
+</div></blockquote>
+<p>La frase sobre Scopus y arXiv sigue la declaración de <code class="docutils literal notranslate"><span class="pre">protocolo_tamizaje_camilo.md</span></code>. Camilo debe confirmar el modelo exacto de Claude antes del informe.</p>
+</section>
+<section id="criterios">
+<h2>Criterios<a class="headerlink" href="#criterios" title="Link to this heading">#</a></h2>
+<p>Son los de <code class="docutils literal notranslate"><span class="pre">protocolo_tamizaje_camilo.md</span></code>, con sus códigos y su orden: inclusión I1 a I4 y exclusión E1 a E6. Para escribir las reglas, Claude leyó solo las secciones de pregunta y criterios de ese protocolo. No abrió sus resultados, sus fallos sobre casos dudosos ni <code class="docutils literal notranslate"><span class="pre">tamizaje_camilo.csv</span></code>, de modo que las reglas no dependen de las decisiones de Camilo.</p>
+<p>Las reglas no verifican todo lo que piden los criterios:</p>
+<ul class="simple">
+<li><p><strong>I4:</strong> solo se comprueba el idioma y el tipo de documento que da la base.</p></li>
+<li><p><strong>E6:</strong> los duplicados se quitaron antes, por DOI y por título normalizado.</p></li>
+<li><p><strong>Comparación contra otro modelo:</strong> igual que en el protocolo de Camilo, se verifica en el texto completo.</p></li>
+<li><p><strong>Red neuronal:</strong> un resumen que dice «machine learning» sin nombrar una red queda como <code class="docutils literal notranslate"><span class="pre">dudoso</span></code>.</p></li>
+</ul>
+</section>
+<section id="resultado">
+<h2>Resultado<a class="headerlink" href="#resultado" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Etapa</p></th>
+<th class="head"><p>Incluir</p></th>
+<th class="head"><p>Dudoso</p></th>
+<th class="head"><p>Excluir</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Reglas</p></td>
+<td><p>273</p></td>
+<td><p>194</p></td>
+<td><p>903</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fallo de los dudosos</p></td>
+<td><p>+105</p></td>
+<td><p>-194</p></td>
+<td><p>+89</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Final</strong></p></td>
+<td><p><strong>378</strong></p></td>
+<td><p><strong>0</strong></p></td>
+<td><p><strong>992</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Final, solo 2018-2026</p></td>
+<td><p>351</p></td>
+<td><p>0</p></td>
+<td><p>945</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Exclusiones finales por criterio: E1, 75; E2, 8; E3, 729; E4, 135; E5, 45.</p>
+<p>Para los dudosos se usó esta regla: si pronosticar una variable de mercado de alimentos es el objetivo y no se puede descartar una red, el registro pasa a texto completo; si el resumen nombra sus modelos y ninguno es una red, sale por E5. De los incluidos, 18 llevan en <code class="docutils literal notranslate"><span class="pre">nota</span></code> que falta verificar en el texto completo.</p>
+</section>
+<section id="revision-por-muestreo">
+<h2>Revisión por muestreo<a class="headerlink" href="#revision-por-muestreo" title="Link to this heading">#</a></h2>
+<p>Claude leyó solo los títulos de muestras al azar. No se revisaron resúmenes, así que el juicio también es aproximado.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ronda</p></th>
+<th class="head"><p>Reglas</p></th>
+<th class="head"><p>Grupo</p></th>
+<th class="head"><p>Muestra</p></th>
+<th class="head"><p>Posibles errores</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Primera versión; sirvió para ajustarlas</p></td>
+<td><p>Seis grupos</p></td>
+<td><p>212</p></td>
+<td><p>Se usó para corregir las reglas</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Tras la primera corrección</p></td>
+<td><p>Incluir</p></td>
+<td><p>45</p></td>
+<td><p>1 (L0326)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p></p></td>
+<td><p>Excluir E3</p></td>
+<td><p>45</p></td>
+<td><p>Hasta 3 (L0733, L0619, L0278)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p></p></td>
+<td><p>Excluir E4</p></td>
+<td><p>15</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p></p></td>
+<td><p>Excluir E5</p></td>
+<td><p>12</p></td>
+<td><p>Al menos 1 (L0851)</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Versión final</p></td>
+<td><p>Excluir E3</p></td>
+<td><p>40</p></td>
+<td><p>2 (L0746, L0109)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Después de la ronda 2 se agregaron «inflation» a las variables de mercado y más nombres de redes; L0733 y L0851 pasaron a incluir y L0619 a dudoso. Solo E3 se volvió a medir con la versión final. El grupo <code class="docutils literal notranslate"><span class="pre">dudoso</span></code> no se evaluó, porque es justo el que falta leer.</p>
+<p>Con 2 errores en 40, la tasa de exclusión errónea en E3 sería cercana al 5 %, con intervalo de Wilson al 95 % de 1 % a 17 %. Sobre 681 registros eso significa entre unos 9 y 112. Es una estimación por títulos con una muestra pequeña.</p>
+<p>L0326, L0746 y L0109 llevan la marca <code class="docutils literal notranslate"><span class="pre">SEÑALADO</span></code> en <code class="docutils literal notranslate"><span class="pre">nota</span></code>. Se dejó la decisión de la regla, para no mezclar criterios a mano.</p>
+</section>
+<section id="comparacion-con-el-tamizaje-de-camilo">
+<h2>Comparación con el tamizaje de Camilo<a class="headerlink" href="#comparacion-con-el-tamizaje-de-camilo" title="Link to this heading">#</a></h2>
+<p>Se hizo el 2026-11-08, después de cerrar estas decisiones. El SHA-256 del archivo antes de comparar está en <code class="docutils literal notranslate"><span class="pre">tamizaje_lina_conteos.json</span></code>. Las cifras salen de <code class="docutils literal notranslate"><span class="pre">comparacion_tamizaje.json</span></code> y el detalle por estudio de <code class="docutils literal notranslate"><span class="pre">comparacion_tamizaje.csv</span></code>, generados con <code class="docutils literal notranslate"><span class="pre">comparar_tamizajes.py</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Medida</p></th>
+<th class="head"><p>Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Estudios en común</p></td>
+<td><p>928, de 1.370 de Lina y 2.219 de Camilo</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ambos incluyen</p></td>
+<td><p>297</p></td>
+</tr>
+<tr class="row-even"><td><p>Ambos excluyen</p></td>
+<td><p>592</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solo Lina incluye</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-even"><td><p>Solo Camilo incluye</p></td>
+<td><p>19</p></td>
+</tr>
+<tr class="row-odd"><td><p>Acuerdo observado</p></td>
+<td><p>95,8 %</p></td>
+</tr>
+<tr class="row-even"><td><p>κ de Cohen</p></td>
+<td><p>0,91 (IC 95 % aproximado: 0,88 a 0,94)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Un registro <code class="docutils literal notranslate"><span class="pre">dudoso</span></code> de Camilo cuenta como incluido, porque su protocolo lo pasa a texto completo.</p>
+<p>Cómo leer este resultado:</p>
+<ul class="simple">
+<li><p><strong>No es el acuerdo entre dos personas.</strong> Ninguno de los dos tamizajes es lectura humana registro por registro: del lado de Lina decidieron reglas y Claude, y del lado de Camilo, también Claude, a pedido suyo. Además, las reglas se escribieron con los criterios de Camilo, así que ambos tamizajes comparten su base y su herramienta, y sus errores pueden ir en la misma dirección. El κ mide la coincidencia entre dos procedimientos asistidos por IA y puede sobrestimar el acuerdo entre revisores independientes.</p></li>
+<li><p><strong>Sirve para estimar el error de las reglas, con una reserva.</strong> De los 564 registros comunes que las reglas excluyeron y el tamizaje de Camilo también evaluó, este incluyó 18 (3,2 %), un valor compatible con la estimación por muestreo. La referencia es otro tamizaje asistido por IA, no un patrón leído por personas. Algunos sí son errores claros de las reglas; por ejemplo, L0764 pronostica el precio del cardamomo y salió por contener «weather» en el título.</p></li>
+<li><p><strong>Parte de los desacuerdos viene de reglas distintas.</strong> El protocolo de Camilo excluye el algodón, la resina y la demanda de restaurantes, y solo admite plataformas si el resumen dice que usan una red. Estas decisiones se tomaron sin conocer esas reglas.</p></li>
+</ul>
+</section>
+<section id="acuerdos-con-camilo">
+<h2>Acuerdos con Camilo<a class="headerlink" href="#acuerdos-con-camilo" title="Link to this heading">#</a></h2>
+<p>El 2026-11-08 Camilo respondió que sí a los tres puntos que Lina le planteó por correo: el filtro de años, δ = 0,0032 y los estudios de congresos. Lina lo informó en el chat; la respuesta no está en el hilo de correo. Los acuerdos están en <code class="docutils literal notranslate"><span class="pre">DECISIONES.md</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Filtro 2018-2026.</strong> Se aplicó después de los dos tamizajes, en las cuatro bases. Deja 351 de los 378 incluidos de Lina y 431 de los 480 de Camilo. En los estudios de Camilo no cambia las tres familias más nombradas en los resúmenes: LSTM, MLP/ANN y CNN. Se aplicó al pie de la letra, así que quedan fuera 14 registros con año 2027, de los cuales Camilo había incluido 3. En 13 estudios comunes las bases dan años distintos, pero ninguno cambia de lado del filtro.</p></li>
+<li><p><strong>Justificación del filtro.</strong> El 2026-11-09 Camilo recordó por correo que su propuesta escrita era no limitar los años y pidió justificar el corte. Lina decidió mantenerlo. Sin el filtro entrarían 52 estudios más, de los cuales 40 nombran MLP/ANN, y las tres familias más usadas serían las mismas y en el mismo orden: LSTM (274), MLP/ANN (182) y CNN (76) en 543 estudios. Otros 5 estudios fuera del período los incluye solo un tamizaje y no tienen fallo; con ellos tampoco cambia. Las cifras están en <code class="docutils literal notranslate"><span class="pre">conteo_modelos_conjunto.json</span></code>, clave <code class="docutils literal notranslate"><span class="pre">sensibilidad_sin_filtro_de_años</span></code>.</p></li>
+<li><p><strong>Congresos.</strong> Se admiten, y eso no cambió ninguna decisión. Los registros de congreso de IEEE Xplore que salieron por E1 son revisiones o retractaciones, salvo L1289, que salió por contener «Survey» en el título y que por su tema (avance de cultivos) saldría por E3. El E1 de Camilo excluye las actas completas, no las ponencias.</p></li>
+</ul>
+</section>
+<section id="resolucion-de-los-desacuerdos">
+<h2>Resolución de los desacuerdos<a class="headerlink" href="#resolucion-de-los-desacuerdos" title="Link to this heading">#</a></h2>
+<p>De los 39 desacuerdos, 5 quedaron fuera por el filtro. Los otros 34 los resolvió Claude el 2026-11-08, después de leer el resumen completo, con los criterios I1 a I4 y E1 a E5 y las reglas de fallo de <code class="docutils literal notranslate"><span class="pre">protocolo_tamizaje_camilo.md</span></code>. Cada fallo y su razón están en <code class="docutils literal notranslate"><span class="pre">resolucion_desacuerdos.csv</span></code>, y no se modificó <code class="docutils literal notranslate"><span class="pre">tamizaje_lina.csv</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Base del fallo.</strong> 20 con los criterios y 14 con las reglas de Camilo: productos no alimentarios 2, servicios de comida 4, producción 6 y plataformas 2. El correo a Camilo proponía usar las reglas de algodón, restaurantes y plataformas; la de producción se añadió aquí.</p></li>
+<li><p><strong>Quién decide en cada lado.</strong> En las razones de <code class="docutils literal notranslate"><span class="pre">resolucion_desacuerdos.csv</span></code>, «Camilo» y «Lina» nombran el tamizaje de cada lado, no una lectura personal. Los 34 fallos son de Claude. El 2026-11-09 Lina revisó la lista con el título y la razón de cada uno, sin leer los resúmenes, y los confirmó sin cambios. El 2026-11-10 aceptó el cambio de L0853 que propuso Camilo (ver «Segunda revisión»).</p></li>
+<li><p><strong>Segunda revisión.</strong> El 2026-11-09 la herramienta de Camilo revisó los 34 con el resumen completo (<code class="docutils literal notranslate"><span class="pre">revision_fallos_desacuerdos.csv</span></code>, en <code class="docutils literal notranslate"><span class="pre">camilo/eda</span></code>). Coincidió en la decisión de 33, 5 de ellos con reserva. Camilo leyó título y resumen de los 7 casos marcados y los decidió. Cambió uno: L0853 pasa de excluir por E5 a incluir, porque su red de grafos pronostica la producción de 31 distritos, que la regla 3 admite; el precio lo pronostica gradient boosting. Falta confirmar en el texto completo que ese pronóstico es temporal. En L0869 propuso E4 en lugar de E3, sin cambiar la decisión: la regla 3 manda a E4 la producción estimada con insumos del mismo período, y E3 se reserva para una sola finca o el rendimiento por hectárea. El 2026-11-10 Lina leyó título y resumen de los 7 casos marcados, confirmó las decisiones y pasó L0869 a E4.</p></li>
+<li><p><strong>Resultado.</strong> 21 pasan a incluir y 13 a excluir. Prevaleció la decisión del lado de Camilo en 29 y la del lado de Lina en 5.</p></li>
+<li><p><strong>Errores del lado de Lina.</strong> De los 541 estudios comunes dentro del período que las reglas excluyeron, 17 debían incluirse según estos fallos (3,1 %; intervalo de Wilson al 95 %: 2,0 % a 5,0 %). De esos 17, 12 salieron por una palabra del título, como «healthcare», «auction», «power», «weather» o «yield». En L0948 el fallo de Claude dijo que no había redes y el resumen nombra LSTM: el extracto leído no lo mostraba. Sale igual, por la regla de servicios de comida.</p></li>
+<li><p><strong>Errores del lado de Camilo.</strong> Su tamizaje sacó L0188 y L0295 por el título, sin pasar al resumen, y uno pronostica producción nacional y el otro futuros agrícolas. Y su fallo de dudosos sacó L0853 por E5, que volvió con la segunda revisión.</p></li>
+<li><p><strong>Metadatos en conflicto.</strong> L0012 tiene idioma coreano en Scopus e inglés en WoS; la página de la revista muestra el texto en coreano, así que sale por E2. L0286 es carta en Scopus y artículo en WoS; se incluye porque el resumen describe un estudio empírico.</p></li>
+</ul>
+</section>
+<section id="conjunto-final-de-las-cuatro-bases">
+<h2>Conjunto final de las cuatro bases<a class="headerlink" href="#conjunto-final-de-las-cuatro-bases" title="Link to this heading">#</a></h2>
+<p>Las cifras salen de <code class="docutils literal notranslate"><span class="pre">tamizaje_conjunto_conteos.json</span></code> y el detalle por estudio de <code class="docutils literal notranslate"><span class="pre">tamizaje_conjunto.csv</span></code>, generados con <code class="docutils literal notranslate"><span class="pre">consolidar_tamizaje.py</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Etapa</p></th>
+<th class="head"><p>Registros</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Identificados: Scopus 2.196, arXiv 29, WoS 672, IEEE Xplore 730</p></td>
+<td><p>3.627</p></td>
+</tr>
+<tr class="row-odd"><td><p>Duplicados: 32 dentro de WoS e IEEE Xplore, 6 dentro de Scopus y arXiv, 928 entre ambos pares</p></td>
+<td><p>-966</p></td>
+</tr>
+<tr class="row-even"><td><p>Únicos</p></td>
+<td><p>2.661</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fuera de 2018-2026</p></td>
+<td><p>-195</p></td>
+</tr>
+<tr class="row-even"><td><p>Evaluados dentro del período</p></td>
+<td><p>2.466</p></td>
+</tr>
+<tr class="row-odd"><td><p>Excluidos: E1 179, E2 102, E3 1.555, E4 89, E5 50</p></td>
+<td><p>-1.975</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Incluidos</strong></p></td>
+<td><p><strong>491</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>De los 491, 278 los incluyeron ambos tamizajes, 135 solo aparecen en Scopus o arXiv, 57 solo en WoS o IEEE Xplore y 21 salen de resolver desacuerdos. Por tipo: 281 de revistas y otros, 203 de congresos y 7 preprints de arXiv. Si ambos excluyen con criterios distintos, se conserva el de Camilo por convención. Eso solo cambia el reparto de las exclusiones por criterio, no qué estudios quedan incluidos. Ninguno de los dos criterios viene de lectura humana.</p>
+</section>
+<section id="extraccion-y-conteo-de-modelos">
+<h2>Extracción y conteo de modelos<a class="headerlink" href="#extraccion-y-conteo-de-modelos" title="Link to this heading">#</a></h2>
+<p>Se hizo el 2026-11-08 con <code class="docutils literal notranslate"><span class="pre">contar_modelos_conjunto.py</span></code>, siguiendo el método de <code class="docutils literal notranslate"><span class="pre">protocolo_tamizaje_camilo.md</span></code>. Las cifras están en <code class="docutils literal notranslate"><span class="pre">conteo_modelos_conjunto.json</span></code>. De los 491 incluidos, 430 ya estaban en la extracción de Camilo y se conservan tal cual; los otros 61 se extrajeron aquí y están en <code class="docutils literal notranslate"><span class="pre">extraccion_lina.csv</span></code>.</p>
+<p><strong>Textos completos adicionales.</strong> El 2026-11-10 se sumaron al conteo 6 textos completos que la herramienta de Camilo obtuvo y extrajo con su detector (<code class="docutils literal notranslate"><span class="pre">texto_completo_adicional_camilo.csv</span></code>, en <code class="docutils literal notranslate"><span class="pre">camilo/eda</span></code>): L0065, L0085, L0109, L0511, L0328 y L0286. En el conteo reemplazan la extracción desde el resumen; los archivos de extracción no cambian. Corrigen dos extracciones de aquí: L0286 no usa una MLP, que solo aparece en la introducción, y L0511 no usa una RNN simple.</p>
+<p><strong>Detector.</strong> El 2026-11-08 el de Camilo no estaba publicado, así que Claude lo reescribió y lo comparó con las extracciones de Camilo hechas desde el resumen. Esas extracciones también las produjo una herramienta de IA, de modo que la calibración mide la coincidencia entre dos detectores automáticos, no frente a una lectura humana. Camilo publicó el suyo el 2026-11-09 en <code class="docutils literal notranslate"><span class="pre">scripts_camilo/extraer_texto_completo.py</span></code>, y ese día comparó los dos sobre el título, el resumen y las palabras clave de sus 480 estudios (<code class="docutils literal notranslate"><span class="pre">comparacion_detectores.json</span></code>, en <code class="docutils literal notranslate"><span class="pre">camilo/eda</span></code>). Dan las mismas tres familias en el mismo orden y el mismo nivel en el 94,6 %. Según esa comparación, este detector cuenta de más RNN simple (50 frente a 32), porque «recurrent neural» también describe una LSTM o una GRU, y MLP/ANN (154 frente a 145), porque «deep neural network» suele ser un término genérico. También cuenta DLinear como N-BEATS y BERT como Transformer. En 384 estudios coinciden en 489 familias, con 15 que solo halla el detector y 14 que solo halló Camilo (precisión y exhaustividad de 97 %), y asignan el mismo nivel en el 95 %. En los 60 estudios extraídos el 2026-11-08, las palabras clave de IEEE y WoS solo añaden 4 menciones de LSTM.</p>
+<p><strong>Acceso a los textos.</strong> De los 61, 29 son de nivel B y se extraen del resumen, como en el protocolo. Los 32 de niveles A y C debían leerse en texto completo:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resultado</p></th>
+<th class="head"><p>Estudios</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Leídos (L0724 en arXiv, L0440 en MDPI)</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>IEEE Xplore respondió con un control antibots en la primera prueba; no se reintentó ni se probaron los demás</p></td>
+<td><p>26</p></td>
+</tr>
+<tr class="row-even"><td><p>Oxford respondió con una verificación de seguridad (L0511)</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>El proxy no abrió Emerald (L0328)</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>El DOI no resuelve (L0029)</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solo hay PDF y no se descargó (L0286)</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los 30 no leídos se extrajeron desde el resumen y así constan en <code class="docutils literal notranslate"><span class="pre">fuente_extraccion</span></code> y <code class="docutils literal notranslate"><span class="pre">acceso</span></code>. De ellos, la herramienta de Camilo obtuvo después L0511, L0328 y L0286; siguen sin texto los 26 de IEEE Xplore y L0029. Los textos no se guardaron: en los dos leídos solo se registraron los campos extraídos.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Corte</p></th>
+<th class="head"><p>Estudios</p></th>
+<th class="head"><p>1.º</p></th>
+<th class="head"><p>2.º</p></th>
+<th class="head"><p>3.º</p></th>
+<th class="head"><p>4.º</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Todos</p></td>
+<td><p>491</p></td>
+<td><p>LSTM (272)</p></td>
+<td><p>MLP/ANN (142)</p></td>
+<td><p>CNN (74)</p></td>
+<td><p>Transformer (62)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nivel A</p></td>
+<td><p>172</p></td>
+<td><p>LSTM (131)</p></td>
+<td><p>CNN (66)</p></td>
+<td><p>MLP/ANN (59)</p></td>
+<td><p>GRU (55)</p></td>
+</tr>
+<tr class="row-even"><td><p>Texto completo</p></td>
+<td><p>96</p></td>
+<td><p>LSTM (65)</p></td>
+<td><p>MLP/ANN (40)</p></td>
+<td><p>CNN (33)</p></td>
+<td><p>Transformer (27)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Las tres familias son las mismas en los tres cortes, que es el criterio de robustez fijado en el protocolo. El orden sí cambia: en el nivel A, CNN pasa a MLP/ANN, y MLP/ANN supera a GRU por solo 4 estudios.</p>
+<p>Cómo leer este resultado:</p>
+<ul class="simple">
+<li><p>395 de los 491 estudios se extrajeron desde el resumen, y 40 no nombran ninguna familia concreta.</p></li>
+<li><p>El detector no distingue el modelo propuesto de las referencias: cuenta las familias que el estudio usa o compara.</p></li>
+<li><p>Los 96 textos completos son 88 de la extracción de Camilo, 6 que su herramienta obtuvo después y 2 de aquí. Ninguno consta como lectura humana: en los 94 de Camilo contó un script, según su protocolo, y los 2 de aquí los leyó Claude en la página del artículo. Entre ellos, las referencias no neuronales más usadas son ARIMA/SARIMA (47) y SVR/SVM (25), 14 incluyen una referencia ingenua y 24 aplican la prueba de Diebold-Mariano.</p></li>
+</ul>
+</section>
+<section id="lo-que-falta">
+<h2>Lo que falta<a class="headerlink" href="#lo-que-falta" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Confirmar los 34 fallos.</strong> Lina los confirmó el 2026-11-09 a partir del título y la razón de cada uno, y el 2026-11-10 aceptó el cambio de L0853. Los dos leyeron título y resumen de los 7 casos que marcó la revisión de Camilo y coinciden en todos; L0869 pasó a E4 el 2026-11-10. Los otros 27 los confirmó Lina con el título y la razón, y Camilo informa que también los revisó, sin decisión caso por caso.</p></li>
+<li><p><strong>Exclusiones que nadie leyó.</strong> 321 registros solo están en WoS o IEEE Xplore y los excluyeron las reglas. Con la tasa medida, se habrían perdido entre 6 y 16 estudios.</p></li>
+<li><p><strong>Textos sin leer.</strong> Quedan 27 de niveles A y C extraídos solo desde el resumen: los 26 de IEEE Xplore y L0029. L0853 entró sin confirmar en el texto completo que su pronóstico sea temporal, y también es de IEEE Xplore.</p></li>
+<li><p><strong>Selección.</strong> Con este conteo, <code class="docutils literal notranslate"><span class="pre">modelos_seleccionados.md</span></code> debe fijar las tres familias y justificar sus sesgos inductivos, de común acuerdo.</p></li>
+<li><p><strong>Declaración del lado de Camilo.</strong> Está en <code class="docutils literal notranslate"><span class="pre">protocolo_tamizaje_camilo.md</span></code> desde el 2026-11-09. Falta que Camilo confirme el modelo exacto de Claude antes del informe.</p></li>
+<li><p><strong>Expresiones del detector.</strong> Camilo propone para el informe una sola expresión por familia, que corrige los errores de los dos detectores. No cambia las tres familias.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./anexos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="protocolo_camilo.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Protocolo de tamizaje (búsquedas S1 y A1)</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-sobre-como-se-tomaron-las-decisiones">Declaración sobre cómo se tomaron las decisiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios">Criterios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultado">Resultado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-por-muestreo">Revisión por muestreo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-con-el-tamizaje-de-camilo">Comparación con el tamizaje de Camilo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acuerdos-con-camilo">Acuerdos con Camilo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-de-los-desacuerdos">Resolución de los desacuerdos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-final-de-las-cuatro-bases">Conjunto final de las cuatro bases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-y-conteo-de-modelos">Extracción y conteo de modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-falta">Lo que falta</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

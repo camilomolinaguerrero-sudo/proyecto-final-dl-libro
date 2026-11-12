@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Preregistro del Entregable 1: BORRADOR &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'diseno/preregistro';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Estadística (Camilo)" href="estadistica.html" />
+    <link rel="prev" title="Decisiones del proyecto" href="decisiones.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/diseno/preregistro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preregistro del Entregable 1: BORRADOR</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema">1. Problema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-y-particion">2. Datos y partición</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entradas">3. Entradas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-y-margen">4. Métricas y margen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-base">5. Modelos base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#piloto">6. Piloto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultado-del-piloto">7. Resultado del piloto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-confirmatorio">8. Análisis confirmatorio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-se-declara-desde-ya">9. Lo que se declara desde ya</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preregistro-del-entregable-1-borrador">
+<h1>Preregistro del Entregable 1: BORRADOR<a class="headerlink" href="#preregistro-del-entregable-1-borrador" title="Link to this heading">#</a></h1>
+<p><strong>Estado:</strong> borrador. No tiene validez hasta que Lina y Camilo llenen lo marcado como PENDIENTE y lo fechen, antes de la corrida definitiva. No contiene ningún resultado del piloto ni de la prueba.</p>
+<p><strong>Fecha de cierre:</strong> PENDIENTE
+<strong>Commit del código:</strong> PENDIENTE</p>
+<section id="problema">
+<h2>1. Problema<a class="headerlink" href="#problema" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Tipo:</strong> series de tiempo, modelo global con covariables, horizonte de 1 semana.</p></li>
+<li><p><strong>Objetivo:</strong> <code class="docutils literal notranslate"><span class="pre">y_reg</span> <span class="pre">=</span> <span class="pre">log1p(tasa_t1</span> <span class="pre">/</span> <span class="pre">base8)</span></code>. Una interrupción es <code class="docutils literal notranslate"><span class="pre">y_reg</span> <span class="pre">&lt;</span> <span class="pre">ln(1,5)</span></code>.</p></li>
+<li><p><strong>Unidad de independencia:</strong> el corredor (<code class="docutils literal notranslate"><span class="pre">mercado</span></code> + <code class="docutils literal notranslate"><span class="pre">cod_mpio</span></code>); en la inferencia, la semana como bloque.</p></li>
+</ul>
+</section>
+<section id="datos-y-particion">
+<h2>2. Datos y partición<a class="headerlink" href="#datos-y-particion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Panel:</strong> <code class="docutils literal notranslate"><span class="pre">panel_corredores.parquet</span></code>, SHA-256 <code class="docutils literal notranslate"><span class="pre">30ead68472fc5718bf4c2a308db8e854a3f1329923c6f55adb6194da6b54b93d</span></code>.</p></li>
+<li><p><strong>Origen:</strong> microdatos públicos de SIPSA-A 2018-2025, del catálogo de microdatos del DANE. Fuente: Departamento Administrativo Nacional de Estadística: www.dane.gov.co.</p></li>
+<li><p><strong>Entrenamiento:</strong> semanas objetivo hasta 2024-10-21.</p></li>
+<li><p><strong>Validación:</strong> origen móvil, cuatro bloques de 52 semanas con hueco de 8.</p></li>
+<li><p><strong>Parada temprana:</strong> último bloque interno de cada entrenamiento, con hueco de 8.</p></li>
+<li><p><strong>Prueba:</strong> de 2025-01-06 a 2025-12-29, congelada en <code class="docutils literal notranslate"><span class="pre">preregistro/hash_prueba.json</span></code>. Se evalúa una vez por corrida, con el modelo y los hiperparámetros ya fijados.</p></li>
+</ul>
+</section>
+<section id="entradas">
+<h2>3. Entradas<a class="headerlink" href="#entradas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Ventana:</strong> 52 semanas, con los canales <code class="docutils literal notranslate"><span class="pre">nivel</span></code>, <code class="docutils literal notranslate"><span class="pre">observado</span></code> e <code class="docutils literal notranslate"><span class="pre">iniciado</span></code>.</p></li>
+<li><p><strong>Covariables:</strong> lista cerrada de <code class="docutils literal notranslate"><span class="pre">src/config.py</span></code>, sin <code class="docutils literal notranslate"><span class="pre">antig_sem</span></code>. Imputación con mediana de entrenamiento e indicadores de ausencia.</p></li>
+<li><p><strong>Ajuste:</strong> escalado y vocabularios solo con las filas que entrenan los pesos de cada corrida.</p></li>
+</ul>
+</section>
+<section id="metricas-y-margen">
+<h2>4. Métricas y margen<a class="headerlink" href="#metricas-y-margen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Primaria:</strong> MAE. <strong>Secundarias:</strong> RMSE, MASE y AUC de interrupción.</p></li>
+<li><p><strong>Referencias ingenuas:</strong> persistencia e ingenuo estacional, más la mediana del entrenamiento como contexto (<code class="docutils literal notranslate"><span class="pre">resultados/referencias_validacion.csv</span></code>).</p></li>
+<li><p><strong>Margen δ:</strong> δ = 0,0032, el 1 % del MAE de la mejor referencia ingenua en validación, que es la mediana del entrenamiento (0,3188). Acordado por Lina y Camilo el 2026-11-08 y registrado en <code class="docutils literal notranslate"><span class="pre">DECISIONES.md</span></code>.</p></li>
+<li><p><strong>Lo que el diseño detecta frente a δ:</strong> en validación, la diferencia semanal de MAE entre la persistencia y la mediana tiene una desviación de 0,0165 (<code class="docutils literal notranslate"><span class="pre">resultados/referencias_variabilidad_semanal.csv</span></code>). Con las 52 semanas de la prueba, una comparación pareada por semanas detectaría diferencias desde 0,0064, el doble de δ; con las 208 de validación, desde 0,0032. El cálculo supone semanas independientes y la autocorrelación de orden 1 es 0,33, así que la cifra real es mayor. Es un cálculo entre referencias ingenuas, que Camilo planteó el 2026-11-09: la variabilidad entre los tres modelos la mide el piloto. δ no se cambia por esto. Si el diseño definitivo no alcanza a detectarlo, se declara como limitación (sección 6).</p></li>
+</ul>
+</section>
+<section id="modelos-base">
+<h2>5. Modelos base<a class="headerlink" href="#modelos-base" title="Link to this heading">#</a></h2>
+<p>PENDIENTE: los tres modelos de <code class="docutils literal notranslate"><span class="pre">literatura/modelos_seleccionados.md</span></code>, con su configuración y las referencias que la respaldan.</p>
+<ul class="simple">
+<li><p><strong>Espacio de búsqueda y presupuesto:</strong> PENDIENTE; el mismo método y presupuesto para los tres.</p></li>
+<li><p><strong>Pérdida, optimizador, tamaño de lote, épocas y paciencia:</strong> PENDIENTE; deben venir de la literatura o de una configuración mínima justificada.</p></li>
+</ul>
+</section>
+<section id="piloto">
+<h2>6. Piloto<a class="headerlink" href="#piloto" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Diseño:</strong> al menos 5 semillas por modelo, las mismas para todos, en el bloque de validación PENDIENTE.</p></li>
+<li><p><strong>Semillas:</strong> PENDIENTE; se declaran antes de correr.</p></li>
+<li><p><strong>Reporte:</strong> media, desviación estándar y coeficiente de variación del MAE; <code class="docutils literal notranslate"><span class="pre">σ_d</span></code> de cada par y <code class="docutils literal notranslate"><span class="pre">δ/σ_d</span></code>.</p></li>
+<li><p><strong>Número de ejecuciones:</strong> <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">≈</span> <span class="pre">(z_{1-α/2}</span> <span class="pre">+</span> <span class="pre">z_{1-β})²</span> <span class="pre">σ_d²</span> <span class="pre">/</span> <span class="pre">δ²</span></code>, con <code class="docutils literal notranslate"><span class="pre">α</span> <span class="pre">=</span> <span class="pre">0,05</span></code> y potencia 0,80. Nunca menos de 6, para que el Wilcoxon bilateral pueda llegar a <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&lt;</span> <span class="pre">0,05</span></code>.</p></li>
+<li><p><strong>Supuesto:</strong> normalidad de las diferencias pareadas, verificada con Shapiro-Wilk. Si no se cumple, se usa la alternativa no paramétrica.</p></li>
+<li><p><strong>Si la diferencia mínima detectable supera δ:</strong> se amplía el diseño o se declara como limitación.</p></li>
+</ul>
+</section>
+<section id="resultado-del-piloto">
+<h2>7. Resultado del piloto<a class="headerlink" href="#resultado-del-piloto" title="Link to this heading">#</a></h2>
+<p>PENDIENTE: se llena desde <code class="docutils literal notranslate"><span class="pre">resultados/piloto_por_modelo.csv</span></code> y <code class="docutils literal notranslate"><span class="pre">resultados/piloto_por_par.csv</span></code>. Número de ejecuciones definitivas: PENDIENTE.</p>
+</section>
+<section id="analisis-confirmatorio">
+<h2>8. Análisis confirmatorio<a class="headerlink" href="#analisis-confirmatorio" title="Link to this heading">#</a></h2>
+<p>Según <code class="docutils literal notranslate"><span class="pre">estadistica/README.md</span></code>: comparaciones pareadas por semilla con corrección de Holm, Friedman con Nemenyi, Diebold-Mariano con la corrección HLN sobre la pérdida semanal, Ljung-Box y BDS sobre los residuos, intervalos por bootstrap de bloques, y TOST o ROPE con δ si se quiere afirmar equivalencia.</p>
+</section>
+<section id="lo-que-se-declara-desde-ya">
+<h2>9. Lo que se declara desde ya<a class="headerlink" href="#lo-que-se-declara-desde-ya" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>2025 ya se usó como prueba en el curso de Machine Learning, así que no es una prueba ciega para los autores.</p></li>
+<li><p>El EDA comparó las covariables de 2025 con el entrenamiento, como pide el enunciado.</p></li>
+<li><p>El EDA también comparó el objetivo de 2025 con el del entrenamiento (PSI de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>, media, ceros y prueba KS). Camilo lo declaró en <code class="docutils literal notranslate"><span class="pre">eda/decisiones_para_modelos.md</span></code>, sección «Uso de 2025 en el EDA»: ninguna decisión usa esas cifras, pero los autores las conocen.</p></li>
+<li><p>La ventana de 52 semanas se eligió midiendo en las últimas 52 semanas del entrenamiento, el mismo bloque k4 de validación.</p></li>
+<li><p>La definición de persistencia se fijó después de comparar variantes en validación; todas están en <code class="docutils literal notranslate"><span class="pre">resultados/referencias_validacion.csv</span></code>.</p></li>
+<li><p>El tamizaje de título y resumen se hizo con asistencia de IA en las cuatro bases, sin lectura humana registro por registro. En Web of Science e IEEE Xplore, a cargo de Lina, fueron reglas automáticas escritas con asistencia de IA y adoptadas en bloque, y esa herramienta falló los casos dudosos. En Scopus y arXiv, a cargo de Camilo, la misma herramienta, Claude (Anthropic), hizo el tamizaje, el fallo de dudosos y la extracción a pedido suyo, con criterios escritos antes y auditoría por muestra.</p></li>
+<li><p>La herramienta del lado de Lina también propuso cómo resolver los 34 desacuerdos dentro del período y extrajo los modelos de los 61 estudios que faltaban. Lina confirmó esos 34 fallos el 2026-11-09 a partir del título y la razón de cada uno. Una segunda revisión con la herramienta de Camilo marcó 7 casos, que los dos autores leyeron con título y resumen; con su acuerdo, L0853 pasó a incluido y L0869 sigue excluido, pero por E4 en lugar de E3 (2026-11-10). El acuerdo entre los dos tamizajes (κ = 0,91) compara dos procedimientos hechos con la misma herramienta de IA, no dos revisores humanos. El detalle está en <code class="docutils literal notranslate"><span class="pre">literatura/protocolo_tamizaje_lina.md</span></code> y en <code class="docutils literal notranslate"><span class="pre">literatura/protocolo_tamizaje_camilo.md</span></code>.</p></li>
+<li><p>El filtro 2018-2026 se acordó después de los dos tamizajes y de ver que no cambiaba las tres familias más nombradas en los resúmenes de los estudios de Camilo, cuya propuesta escrita inicial era no limitar los años. Se mantiene por dos razones. El período compara las familias en años en que todas se usaban: los 52 estudios que el filtro deja fuera nombran sobre todo MLP/ANN (40), y LSTM, CNN y GRU casi no aparecen (2, 2 y 1). Y no altera la selección: sin el filtro, las tres familias más usadas son las mismas y en el mismo orden, LSTM (274), MLP/ANN (182) y CNN (76) en 543 estudios (<code class="docutils literal notranslate"><span class="pre">literatura/conteo_modelos_conjunto.json</span></code>). Otros 5 estudios fuera del período los incluye solo uno de los dos tamizajes y no tienen fallo; con ellos el resultado tampoco cambia.</p></li>
+<li><p>El 2026-11-09, antes de correr cualquier modelo, se vio que las 52 semanas de la prueba no alcanzan para detectar δ en una comparación por semanas entre referencias ingenuas (sección 4). δ se mantuvo en el 1 %.</p></li>
+<li><p>El margen δ se ancló primero a la persistencia y se cambió a la mediana del entrenamiento después de ver los MAE de las referencias en validación, antes de correr cualquiera de los tres modelos.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./diseno"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="decisiones.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Decisiones del proyecto</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="estadistica.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Estadística (Camilo)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema">1. Problema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-y-particion">2. Datos y partición</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entradas">3. Entradas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-y-margen">4. Métricas y margen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-base">5. Modelos base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#piloto">6. Piloto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultado-del-piloto">7. Resultado del piloto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-confirmatorio">8. Análisis confirmatorio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-se-declara-desde-ya">9. Lo que se declara desde ya</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

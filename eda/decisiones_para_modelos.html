@@ -1,0 +1,797 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Decisiones del EDA para los modelos &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'eda/decisiones_para_modelos';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="3.1 Estrategia de búsqueda" href="../estado_arte/busqueda.html" />
+    <link rel="prev" title="2.2-B. EDA específico de series de tiempo" href="03_eda_series.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/eda/decisiones_para_modelos.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Decisiones del EDA para los modelos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longitud-de-la-ventana-l-52-semanas">1. Longitud de la ventana: L = 52 semanas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#politica-de-faltantes-de-la-ventana">2. Política de faltantes de la ventana</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruccion-solo-con-el-panel">Reconstrucción solo con el panel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canales-propuestos-por-paso-de-la-ventana">Canales propuestos por paso τ de la ventana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-no-hacer">Qué no hacer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipo-de-modelo-y-objetivo">3. Tipo de modelo y objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riesgos-de-fuga-que-conviene-probar-en-src">4. Riesgos de fuga que conviene probar en <code class="docutils literal notranslate"><span class="pre">src/</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariables-tabulares">5. Covariables tabulares</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#faltantes-en-columnas">Faltantes en columnas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#columnas-que-no-pueden-ser-entradas">Columnas que no pueden ser entradas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#antig-sem"><code class="docutils literal notranslate"><span class="pre">antig_sem</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corredores-nuevos">Corredores nuevos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hash-de-la-prueba">Hash de la prueba</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-2025-en-el-eda">Uso de 2025 en el EDA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-de-origen-movil">Validación de origen móvil</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="decisiones-del-eda-para-los-modelos">
+<h1>Decisiones del EDA para los modelos<a class="headerlink" href="#decisiones-del-eda-para-los-modelos" title="Link to this heading">#</a></h1>
+<p>Responsable: Camilo. Destinataria: Lina (<code class="docutils literal notranslate"><span class="pre">src/</span></code>). Estado: 2026-11-07.</p>
+<p>Las cifras salen de <code class="docutils literal notranslate"><span class="pre">eda/resultados/series_resultados.json</span></code> (cuaderno <code class="docutils literal notranslate"><span class="pre">eda/03_eda_series.ipynb</span></code>) y de
+<code class="docutils literal notranslate"><span class="pre">eda/resultados/aux_cobertura_envios.json</span></code> (script <code class="docutils literal notranslate"><span class="pre">eda/fuentes/aux_cobertura_envios.py</span></code>). Todo se
+calculó solo con el entrenamiento (semanas objetivo hasta el 2024-10-21).</p>
+<p>Este archivo propone. Si algo cambia una decisión de <code class="docutils literal notranslate"><span class="pre">DECISIONES.md</span></code>, se acuerda entre los dos antes
+de editar ese archivo.</p>
+<section id="longitud-de-la-ventana-l-52-semanas">
+<h2>1. Longitud de la ventana: L = 52 semanas<a class="headerlink" href="#longitud-de-la-ventana-l-52-semanas" title="Link to this heading">#</a></h2>
+<p>La ventana de la fila (corredor c, semana t) cubre las semanas t−51 a t. Nunca incluye t+1.</p>
+<p>Evidencia (<code class="docutils literal notranslate"><span class="pre">series_resultados.json</span></code>, claves <code class="docutils literal notranslate"><span class="pre">ventana</span></code> y <code class="docutils literal notranslate"><span class="pre">dependencia</span></code>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>L</p></th>
+<th class="head"><p>MAE en las últimas 52 semanas de entrenamiento</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0,3059</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>0,2946</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>0,2933</p></td>
+</tr>
+<tr class="row-odd"><td><p>52</p></td>
+<td><p>0,2916</p></td>
+</tr>
+<tr class="row-even"><td><p>104</p></td>
+<td><p>0,2912</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Regresión ridge sobre la ventana normalizada más la máscara. Se ajustó con semanas objetivo hasta
+60 semanas antes del final del entrenamiento y se evaluó en las últimas 52, con un hueco de 8.</p></li>
+<li><p>Pasar de 52 a 104 semanas mejora el MAE solo en 0,0004 y reduce del 85,7 % al 81,7 % la fracción de
+semanas con dato en la ventana.</p></li>
+<li><p>La ACF agrupada de los corredores vuelve a subir entre los rezagos 40 y 53 (0,091 en el 52). Por eso
+una ventana de 26 deja por fuera el ciclo anual.</p></li>
+<li><p>Referencias en el mismo bloque de evaluación: persistencia MAE 0,3457 y mediana constante MAE 0,3103.
+La persistencia pierde frente a la constante. Esto importa para fijar δ, que según <code class="docutils literal notranslate"><span class="pre">DECISIONES.md</span></code> se
+define con el MAE de persistencia en validación.</p></li>
+</ul>
+<p>Consecuencias para cada arquitectura:</p>
+<ul class="simple">
+<li><p><strong>LSTM o GRU:</strong> 52 pasos.</p></li>
+<li><p><strong>CNN-1D:</strong> campo receptivo de al menos 52, con dilataciones o <em>pooling</em>.</p></li>
+<li><p><strong>MLP:</strong> recibe la ventana aplanada.</p></li>
+</ul>
+</section>
+<section id="politica-de-faltantes-de-la-ventana">
+<h2>2. Política de faltantes de la ventana<a class="headerlink" href="#politica-de-faltantes-de-la-ventana" title="Link to this heading">#</a></h2>
+<p>El panel no es rectangular. Desde la primera aparición de cada corredor, el 46,8 % de sus semanas no
+tiene fila en el panel, por dos causas:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Causa</p></th>
+<th class="head"><p>Fracción de las semanas de una ventana de 52</p></th>
+<th class="head"><p>Tratamiento</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Hay dato en el panel</p></td>
+<td><p>79,4 %</p></td>
+<td><p>valor observado</p></td>
+</tr>
+<tr class="row-odd"><td><p>Corredor fuera de la población en riesgo</p></td>
+<td><p>10,3 %</p></td>
+<td><p>nivel 0, <code class="docutils literal notranslate"><span class="pre">observado</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Semana anterior a la primera aparición del corredor (o antes de 2018)</p></td>
+<td><p>10,3 %</p></td>
+<td><p>nivel 0, <code class="docutils literal notranslate"><span class="pre">observado</span> <span class="pre">=</span> <span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">iniciado</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Mercado sin encuesta</p></td>
+<td><p>0,03 %</p></td>
+<td><p>nivel 0, <code class="docutils literal notranslate"><span class="pre">observado</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Estas ausencias no son aleatorias. El corredor sale del panel porque su propio abastecimiento cae
+(MNAR por construcción): las filas cuya semana siguiente ya no aparece tienen un 99,2 % de <code class="docutils literal notranslate"><span class="pre">y_reg</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p>
+<p>Los envíos de DANE muestran qué hay en esas semanas. Dentro de una ventana de 52, el 72,3 % son ceros
+y el resto son envíos positivos que el panel no registra. Por eso no basta con rellenar con cero: el
+modelo necesita la máscara para distinguir un cero observado (17 % de las semanas con dato) de una
+semana sin dato.</p>
+<section id="reconstruccion-solo-con-el-panel">
+<h3>Reconstrucción solo con el panel<a class="headerlink" href="#reconstruccion-solo-con-el-panel" title="Link to this heading">#</a></h3>
+<p>Una corredor-semana τ tiene dato si existe la fila (c, τ), que aporta <code class="docutils literal notranslate"><span class="pre">tasa_t</span></code>, o la fila (c, τ−1),
+que aporta <code class="docutils literal notranslate"><span class="pre">tasa_t1</span></code>.</p>
+<p>Este método reproduce exactamente la tasa de los envíos donde ambos tienen dato (diferencia relativa
+máxima de 0) y recupera el 86,0 % de lo que los envíos tienen dentro de una ventana de 52. No hace
+falta el archivo de envíos: alcanza con <code class="docutils literal notranslate"><span class="pre">datos/panel_corredores.parquet</span></code>. La función <code class="docutils literal notranslate"><span class="pre">matriz_tasa</span></code> de
+<code class="docutils literal notranslate"><span class="pre">eda/comun.py</span></code> lo implementa y la puedes copiar a <code class="docutils literal notranslate"><span class="pre">src/</span></code>.</p>
+</section>
+<section id="canales-propuestos-por-paso-de-la-ventana">
+<h3>Canales propuestos por paso τ de la ventana<a class="headerlink" href="#canales-propuestos-por-paso-de-la-ventana" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">nivel</span></code>:</strong> <code class="docutils literal notranslate"><span class="pre">log1p(tasa_τ</span> <span class="pre">/</span> <span class="pre">base8_t)</span></code> si hay dato y 0 si no. La normalización usa la <code class="docutils literal notranslate"><span class="pre">base8</span></code> de la
+fila, que solo depende del pasado. Así no hace falta ningún escalador ajustado con datos.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">observado</span></code>:</strong> 1 si hay dato en el panel.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">iniciado</span></code>:</strong> 1 si τ es igual o posterior a la primera aparición del corredor y τ ≥ 0.</p></li>
+</ol>
+<p>Opcionales, si quieres contexto agregado:</p>
+<ol class="arabic simple" start="4">
+<li><p><strong>Fracción de caída del mercado en τ:</strong> <code class="docutils literal notranslate"><span class="pre">frac_caida_mercado_t</span></code> de cualquier fila del mercado en τ.</p></li>
+<li><p><strong>Fracción de caída nacional en τ:</strong> <code class="docutils literal notranslate"><span class="pre">frac_caida_nacional_t</span></code>.</p></li>
+</ol>
+</section>
+<section id="que-no-hacer">
+<h3>Qué no hacer<a class="headerlink" href="#que-no-hacer" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>No interpolar ni rellenar hacia adelante. El relleno hacia adelante usa solo el pasado, pero
+convierte una semana sin envíos en una semana normal.</p></li>
+<li><p>No descartar filas con la ventana incompleta. El 53,2 % de las filas tiene la ventana completa y el
+19,3 % tiene menos de 26 semanas con dato. Esas filas se pronostican igual en la prueba.</p></li>
+<li><p>No imputar con estadísticos que incluyan semanas futuras.</p></li>
+</ul>
+</section>
+</section>
+<section id="tipo-de-modelo-y-objetivo">
+<h2>3. Tipo de modelo y objetivo<a class="headerlink" href="#tipo-de-modelo-y-objetivo" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Modelo global</strong> para los 4.305 corredores del entrenamiento. El 41,6 % tiene menos de 52 semanas
+en riesgo, así que un modelo local no es viable para ellos, aunque solo aportan el 4,8 % de las filas.</p></li>
+<li><p>La media de cada corredor explica apenas el 6,0 % de la varianza de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>. Los <em>embeddings</em> de
+mercado y municipio de origen son opcionales; la información principal está en la ventana.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y_reg</span></code> se modela sin diferenciar. El 94,7 % de los corredores es estacionario según ADF y KPSS, y la
+serie nacional no tiene quiebres en la media.</p></li>
+<li><p><strong>Pérdida sugerida: L1 o Huber.</strong> La métrica primaria es el MAE. La varianza condicional cambia en el
+tiempo (ARCH significativo en el 22,0 % de los corredores tras Holm), y el 1 % de filas con mayor
+error aporta el 13,0 % del MSE pero solo el 4,6 % del MAE.</p></li>
+<li><p><strong>Atípicos:</strong> no se recortan. Se concentran en bases pequeñas (7,1 % del decil con menor <code class="docutils literal notranslate"><span class="pre">base8</span></code>), así
+que conviene mantener <code class="docutils literal notranslate"><span class="pre">log_base8</span></code> como covariable.</p></li>
+</ul>
+</section>
+<section id="riesgos-de-fuga-que-conviene-probar-en-src">
+<h2>4. Riesgos de fuga que conviene probar en <code class="docutils literal notranslate"><span class="pre">src/</span></code><a class="headerlink" href="#riesgos-de-fuga-que-conviene-probar-en-src" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>El último paso de la ventana es t: <code class="docutils literal notranslate"><span class="pre">nivel[-1]</span> <span class="pre">==</span> <span class="pre">log1p(ratio_t)</span></code>. El cuaderno 03 lo verifica con
+una aserción.</p></li>
+<li><p>La matriz corredor × semana contiene <code class="docutils literal notranslate"><span class="pre">tasa_t1</span></code>, que es el objetivo de la fila. La ventana debe
+cortarse en la columna t.</p></li>
+<li><p>Entre el ajuste y la evaluación de cada origen debe haber un hueco de 8 semanas. <code class="docutils literal notranslate"><span class="pre">base8</span></code> y las
+variables de 26 semanas comparten semanas entre filas vecinas.</p></li>
+<li><p>Cualquier escalador de covariables se ajusta solo con las filas de ajuste de cada origen.</p></li>
+<li><p>La parada temprana usa un bloque posterior al ajuste y anterior a la evaluación. Nunca la prueba.</p></li>
+</ol>
+</section>
+<section id="covariables-tabulares">
+<h2>5. Covariables tabulares<a class="headerlink" href="#covariables-tabulares" title="Link to this heading">#</a></h2>
+<p>Fuente: <code class="docutils literal notranslate"><span class="pre">eda/resultados/general_resultados.json</span></code> (cuaderno <code class="docutils literal notranslate"><span class="pre">eda/02_eda_general.ipynb</span></code>).</p>
+<section id="faltantes-en-columnas">
+<h3>Faltantes en columnas<a class="headerlink" href="#faltantes-en-columnas" title="Link to this heading">#</a></h3>
+<p>Todos tienen una causa estructural y son informativos. Cada columna con faltantes se imputa con la
+mediana de las filas de ajuste de cada origen y lleva un indicador de ausencia.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Columna</p></th>
+<th class="head"><p>Faltante en el entrenamiento</p></th>
+<th class="head"><p>Causa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frac_caida_mpio_t</span></code></p></td>
+<td><p>15,7 %</p></td>
+<td><p>el municipio tiene un solo corredor esa semana</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">frac_caida_vec_t</span></code></p></td>
+<td><p>1,0 %</p></td>
+<td><p>los 8 municipios vecinos no tienen corredores activos</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tasa_int_vec26</span></code></p></td>
+<td><p>0,35 %</p></td>
+<td><p>ídem, en las 26 semanas</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ratio_t_1</span></code></p></td>
+<td><p>0,03 %</p></td>
+<td><p>la semana anterior del corredor no está en el panel</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="columnas-que-no-pueden-ser-entradas">
+<h3>Columnas que no pueden ser entradas<a class="headerlink" href="#columnas-que-no-pueden-ser-entradas" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Funciones del objetivo: <code class="docutils literal notranslate"><span class="pre">tasa_t1</span></code>, <code class="docutils literal notranslate"><span class="pre">ratio_t1</span></code>, <code class="docutils literal notranslate"><span class="pre">interrupcion_t1</span></code> y <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fila</span></code>: está ordenada por semana objetivo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anio_t1</span></code> y <code class="docutils literal notranslate"><span class="pre">mes_t1</span></code>: codifican el tiempo absoluto. La estacionalidad ya entra con <code class="docutils literal notranslate"><span class="pre">sem_sin</span></code> y
+<code class="docutils literal notranslate"><span class="pre">sem_cos</span></code>.</p></li>
+</ul>
+</section>
+<section id="antig-sem">
+<h3><code class="docutils literal notranslate"><span class="pre">antig_sem</span></code><a class="headerlink" href="#antig-sem" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Crece con el calendario: tiene un PSI de 4,1 entre el entrenamiento y la prueba, y en 2025 toma
+valores que el ajuste nunca vio.</p></li>
+<li><p>Tiene información mutua de 0,000 con <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>.</p></li>
+<li><p>Recomendación: excluirla o recortarla al rango del ajuste de cada origen.</p></li>
+</ul>
+</section>
+<section id="corredores-nuevos">
+<h3>Corredores nuevos<a class="headerlink" href="#corredores-nuevos" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>El 6,4 % de los corredores de la prueba (1,6 % de sus filas) no aparece en el entrenamiento.</p></li>
+<li><p>Los <em>embeddings</em> de mercado y municipio necesitan un índice reservado para valores desconocidos.</p></li>
+</ul>
+</section>
+<section id="hash-de-la-prueba">
+<h3>Hash de la prueba<a class="headerlink" href="#hash-de-la-prueba" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>El oficial es el de <code class="docutils literal notranslate"><span class="pre">preregistro/hash_prueba.json</span></code> (<code class="docutils literal notranslate"><span class="pre">988ab7ac…2c78753</span></code>), calculado por
+<code class="docutils literal notranslate"><span class="pre">src/congelar_prueba.py</span></code> sobre todas las columnas crudas de las filas de 2025.</p></li>
+<li><p>El cuaderno 02 lo recalcula con <code class="docutils literal notranslate"><span class="pre">comun.hash_prueba_oficial</span></code> y verifica que coincide.</p></li>
+<li><p>La huella que el EDA usaba antes queda en <code class="docutils literal notranslate"><span class="pre">eda/resultados/huellas.json</span></code> como auxiliar. No
+reemplaza al hash oficial.</p></li>
+</ul>
+</section>
+<section id="uso-de-2025-en-el-eda">
+<h3>Uso de 2025 en el EDA<a class="headerlink" href="#uso-de-2025-en-el-eda" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>La comparación entre particiones miró el objetivo de la prueba: PSI de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> (0,004), media,
+mediana, ceros, interrupción y KS.</p></li>
+<li><p>Ninguna decisión de esta lista usa esas cifras, pero los autores las conocen. Se declaran en el
+preregistro.</p></li>
+</ul>
+</section>
+<section id="validacion-de-origen-movil">
+<h3>Validación de origen móvil<a class="headerlink" href="#validacion-de-origen-movil" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Con solo las variables propias del corredor, el desplazamiento adversarial es 0,727 entre el
+comienzo y las últimas 52 semanas del entrenamiento, y 0,717 entre el entrenamiento y la prueba.</p></li>
+<li><p>Un origen interno se parece a la prueba, así que la validación de origen móvil es representativa.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./eda"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_eda_series.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.2-B. EDA específico de series de tiempo</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../estado_arte/busqueda.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">3.1 Estrategia de búsqueda</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longitud-de-la-ventana-l-52-semanas">1. Longitud de la ventana: L = 52 semanas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#politica-de-faltantes-de-la-ventana">2. Política de faltantes de la ventana</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruccion-solo-con-el-panel">Reconstrucción solo con el panel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canales-propuestos-por-paso-de-la-ventana">Canales propuestos por paso τ de la ventana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-no-hacer">Qué no hacer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipo-de-modelo-y-objetivo">3. Tipo de modelo y objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riesgos-de-fuga-que-conviene-probar-en-src">4. Riesgos de fuga que conviene probar en <code class="docutils literal notranslate"><span class="pre">src/</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariables-tabulares">5. Covariables tabulares</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#faltantes-en-columnas">Faltantes en columnas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#columnas-que-no-pueden-ser-entradas">Columnas que no pueden ser entradas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#antig-sem"><code class="docutils literal notranslate"><span class="pre">antig_sem</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corredores-nuevos">Corredores nuevos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hash-de-la-prueba">Hash de la prueba</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-2025-en-el-eda">Uso de 2025 en el EDA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-de-origen-movil">Validación de origen móvil</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

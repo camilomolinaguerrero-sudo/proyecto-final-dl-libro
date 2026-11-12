@@ -1,0 +1,812 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Definición del problema y del dataset &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'eda/01_problema_dataset';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="2.1. EDA general" href="02_eda_general.html" />
+    <link rel="prev" title="Entregable 1: estado del arte, EDA y tres modelos base" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/eda/01_problema_dataset.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. Definición del problema y del dataset</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal">1.1 Definición formal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipo-de-problema-pregunta-e-hipotesis">1.2 Tipo de problema, pregunta e hipótesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-margen-y-unidad-de-independencia-decisiones-md">1.3 Métricas, margen δ y unidad de independencia (DECISIONES.md)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-del-dataset">1.4 Justificación del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-tecnica">1.5 Descripción técnica</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="definicion-del-problema-y-del-dataset">
+<h1>1. Definición del problema y del dataset<a class="headerlink" href="#definicion-del-problema-y-del-dataset" title="Link to this heading">#</a></h1>
+<p>Este cuaderno responde la sección 1 del enunciado. Las decisiones de problema, métrica y partición
+vienen de DECISIONES.md (registradas el 2026-11-06). Las cifras de la descripción técnica se
+calculan aquí o se leen de los resultados de los cuadernos 02 y 03 (<code class="docutils literal notranslate"><span class="pre">eda/resultados/</span></code>). El texto
+marca como <strong>propuesta</strong> lo que todavía no está acordado entre Lina y Camilo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()))</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">comun</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">C</span>  <span class="c1"># noqa: E402</span>
+
+<span class="n">bruto</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">PANEL</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">cargar</span><span class="p">()</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s2">"particion"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"entrenamiento"</span><span class="p">]</span>
+<span class="n">serie</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">C</span><span class="o">.</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">"series_resultados.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+<span class="n">general</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">C</span><span class="o">.</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">"general_resultados.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+<span class="n">huellas</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">C</span><span class="o">.</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">"huellas.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="definicion-formal">
+<h2>1.1 Definición formal<a class="headerlink" href="#definicion-formal" title="Link to this heading">#</a></h2>
+<p>Sea <span class="math notranslate nohighlight">\(i \in \{1, \dots, N\}\)</span> un corredor de abastecimiento: un par (central mayorista, municipio de
+origen). Sea <span class="math notranslate nohighlight">\(t\)</span> una semana (lunes a domingo). La tasa de abastecimiento <span class="math notranslate nohighlight">\(a_{i,t}\)</span> es el total de kg
+que llegan del municipio de origen a la central en la semana <span class="math notranslate nohighlight">\(t\)</span>, dividido por los días que se
+encuestó la central esa semana. La base del corredor es el promedio de las 8 semanas previas:</p>
+<div class="math notranslate nohighlight">
+\[b_{i,t} = \frac{1}{|\mathcal{O}_{i,t}|} \sum_{\tau \in \mathcal{O}_{i,t}} a_{i,\tau}, \qquad
+  \mathcal{O}_{i,t} \subseteq \{t-7, \dots, t\}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathcal{O}_{i,t}\)</span> son las semanas con dato. La fila <span class="math notranslate nohighlight">\((i,t)\)</span> pertenece a la población en
+riesgo si el corredor tuvo envíos en al menos 4 de esas 8 semanas, <span class="math notranslate nohighlight">\(b_{i,t} &gt; 0\)</span> y la central se
+encuestó en <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
+<p><strong>Salida.</strong> <span class="math notranslate nohighlight">\(\mathcal{Y} = [0, \infty)\)</span>, con</p>
+<div class="math notranslate nohighlight">
+\[y_{i,t+1} = \log\left(1 + \frac{a_{i,t+1}}{b_{i,t}}\right).\]</div>
+<p><strong>Entrada.</strong> <span class="math notranslate nohighlight">\(\mathcal{X} = \mathbb{R}^{L \times c} \times \mathbb{R}^{d} \times \mathcal{C}\)</span>, con
+tres componentes:</p>
+<ul class="simple">
+<li><p>la ventana <span class="math notranslate nohighlight">\(W_{i,t}\)</span> de las semanas <span class="math notranslate nohighlight">\(t-L+1, \dots, t\)</span> (L = 52, propuesta del cuaderno 03). Cada
+paso tiene el nivel <span class="math notranslate nohighlight">\(\log(1 + a_{i,\tau} / b_{i,t})\)</span> y las máscaras de dato observado y de corredor
+iniciado;</p></li>
+<li><p>las covariables numéricas <span class="math notranslate nohighlight">\(z_{i,t} \in \mathbb{R}^d\)</span>, todas calculadas con información disponible al
+cierre de <span class="math notranslate nohighlight">\(t\)</span>;</p></li>
+<li><p>las categóricas <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>: central mayorista, municipio y departamento de origen, y grupo
+dominante de alimentos.</p></li>
+</ul>
+<p><strong>Modelo.</strong> Un modelo global <span class="math notranslate nohighlight">\(f_\theta : \mathcal{X} \to \mathcal{Y}\)</span>, con los mismos parámetros para
+todos los corredores, que pronostica a un paso: <span class="math notranslate nohighlight">\(\hat{y}_{i,t+1} = f_\theta(W_{i,t}, z_{i,t}, c_i)\)</span>.</p>
+<p><strong>Pérdida.</strong> La métrica primaria es el MAE, así que la pérdida natural es la L1 sobre las filas de
+ajuste <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\theta) = \frac{1}{|\mathcal{D}|} \sum_{(i,t) \in \mathcal{D}} \left| y_{i,t+1} -
+  f_\theta(W_{i,t}, z_{i,t}, c_i) \right|.\]</div>
+<p>Huber con un umbral pequeño es una alternativa admisible (cuaderno 02, sección 2.1.1).</p>
+<p><strong>Interrupción.</strong> Es la versión binaria del objetivo: <span class="math notranslate nohighlight">\(\mathbb{1}[y_{i,t+1} &lt; \ln 1{,}5]\)</span>, es decir,
+la semana t+1 cae por debajo del 50 % de la base. No se entrena con ella; solo se evalúa con el AUC
+de <span class="math notranslate nohighlight">\(-\hat{y}\)</span>.</p>
+</section>
+<section id="tipo-de-problema-pregunta-e-hipotesis">
+<h2>1.2 Tipo de problema, pregunta e hipótesis<a class="headerlink" href="#tipo-de-problema-pregunta-e-hipotesis" title="Link to this heading">#</a></h2>
+<p><strong>Tipo de problema: 3, series de tiempo.</strong> Es un pronóstico global de muchas series con
+covariables y horizonte de una semana. No es una regresión temporal (tipo 4), porque la entrada
+usa la historia del propio objetivo: la ventana contiene el abastecimiento pasado del corredor.
+Según el enunciado, cuando el proyecto usa rezagos del objetivo como entrada, es series de tiempo.</p>
+<p><strong>Pregunta de investigación (propuesta).</strong> ¿Cuál de los tres modelos base de <em>deep learning</em> más
+usados como referencia en la literatura de pronóstico de abastecimiento alimentario pronostica con
+menor MAE el abastecimiento semanal relativo de los corredores SIPSA, y cuánto mejora frente a las
+referencias ingenuas?</p>
+<p><strong>Hipótesis operativa (propuesta).</strong> Para cada par de modelos (A, B), con la diferencia de pérdidas
+por semana <span class="math notranslate nohighlight">\(d_t = \text{MAE}_{A,t} - \text{MAE}_{B,t}\)</span> en la prueba de 2025:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0: \mathbb{E}[d_t] = 0\)</span> frente a <span class="math notranslate nohighlight">\(H_1: \mathbb{E}[d_t] \neq 0\)</span>, con la prueba de Diebold–Mariano
+con la corrección de Harvey, Leybourne y Newbold y el ajuste de Holm sobre los pares;</p></li>
+<li><p>una diferencia significativa solo se considera relevante si <span class="math notranslate nohighlight">\(|\bar{d}| &gt; \delta\)</span>;</p></li>
+<li><p>el mismo contraste, unilateral, compara cada red con la mejor referencia ingenua.</p></li>
+</ul>
+</section>
+<section id="metricas-margen-y-unidad-de-independencia-decisiones-md">
+<h2>1.3 Métricas, margen δ y unidad de independencia (DECISIONES.md)<a class="headerlink" href="#metricas-margen-y-unidad-de-independencia-decisiones-md" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Métrica primaria:</strong> MAE de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>.</p></li>
+<li><p><strong>Métricas secundarias:</strong> RMSE, MASE y AUC de la interrupción.</p></li>
+<li><p><strong>Margen δ:</strong> pendiente. DECISIONES.md lo fija antes del piloto a partir del MAE de persistencia en
+la validación. La celda siguiente da la información disponible del EDA, que no reemplaza ese
+cálculo.</p></li>
+<li><p><strong>Unidad de independencia:</strong> el corredor (<code class="docutils literal notranslate"><span class="pre">mercado</span></code> + <code class="docutils literal notranslate"><span class="pre">cod_mpio</span></code>). En la inferencia, la semana se
+trata como bloque, porque las filas de una misma semana comparten choques nacionales y de mercado.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ref</span> <span class="o">=</span> <span class="n">serie</span><span class="p">[</span><span class="s2">"ventana"</span><span class="p">][</span><span class="s2">"referencias_mae"</span><span class="p">]</span>
+<span class="n">tab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">serie</span><span class="p">[</span><span class="s2">"ventana"</span><span class="p">][</span><span class="s2">"tabla"</span><span class="p">])</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"L"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"MAE en las últimas 52 semanas del entrenamiento (validación interna del cuaderno 03):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  persistencia </span><span class="si">{</span><span class="n">ref</span><span class="p">[</span><span class="s1">'persistencia'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | mediana constante </span><span class="si">{</span><span class="n">ref</span><span class="p">[</span><span class="s1">'mediana_del_ajuste'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | "</span>
+      <span class="sa">f</span><span class="s2">"ridge con L = 52 </span><span class="si">{</span><span class="n">tab</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="s1">'mae_eval'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  distancia entre la mejor referencia ingenua y la ridge: </span><span class="si">{</span><span class="n">ref</span><span class="p">[</span><span class="s1">'mediana_del_ajuste'</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tab</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="s1">'mae_eval'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">frac</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">frac</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2"> del MAE de persistencia = </span><span class="si">{</span><span class="n">frac</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ref</span><span class="p">[</span><span class="s1">'persistencia'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAE en las últimas 52 semanas del entrenamiento (validación interna del cuaderno 03):
+  persistencia 0.3457 | mediana constante 0.3103 | ridge con L = 52 0.2916
+  distancia entre la mejor referencia ingenua y la ridge: 0.0187
+  1% del MAE de persistencia = 0.0035
+  2% del MAE de persistencia = 0.0069
+  5% del MAE de persistencia = 0.0173
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la validación interna del cuaderno 03, la persistencia tiene MAE de 0,3457, peor que la mediana
+constante (0,3103). Una ridge sobre la ventana de 52 semanas llega a 0,2916. El margen que un modelo
+lineal ya le saca a la mejor referencia ingenua es de 0,0187, y define el orden de magnitud de las
+diferencias que se pueden esperar entre las redes. Si δ se fija como fracción del MAE de
+persistencia, el 1 % es 0,0035, el 2 % es 0,0069 y el 5 % es 0,0173. Un 5 % sería casi toda la
+ganancia disponible sobre la referencia ingenua.</p>
+<p><strong>Observación para Lina.</strong> DECISIONES.md ancla δ a la persistencia, pero aquí la persistencia no es
+la mejor referencia ingenua. Conviene acordar si δ se calcula sobre la persistencia, como está
+escrito, o sobre la mejor referencia ingenua en validación. El cambio requiere acuerdo de los dos.</p>
+</section>
+<section id="justificacion-del-dataset">
+<h2>1.4 Justificación del dataset<a class="headerlink" href="#justificacion-del-dataset" title="Link to this heading">#</a></h2>
+<p><strong>Relevancia.</strong> Las centrales mayoristas concentran la distribución de alimentos frescos en las
+ciudades de Colombia. Una caída en el abastecimiento de un corredor (un municipio que deja de
+enviar a una central) anticipa escasez y alzas de precios en ese mercado. Un pronóstico semanal por
+corredor permite vigilar la oferta antes de que la caída se observe en los precios.</p>
+<p><strong>Disponibilidad, licencia y procedencia.</strong></p>
+<ul class="simple">
+<li><p>Los datos vienen del componente de Abastecimiento de Alimentos (SIPSA-A) del Sistema de
+Información de Precios y Abastecimiento del Sector Agropecuario, que opera el DANE. Los
+encuestadores registran, en la entrada de cada central mayorista, las cargas que ingresan: fecha,
+municipio de origen, producto y kilogramos.</p></li>
+<li><p>Los microdatos de uso público del DANE son de acceso gratuito, y sus condiciones generales de uso
+exigen citar al DANE como fuente
+(<a class="reference external" href="https://www.dane.gov.co/index.php/terminos-y-condiciones">términos y condiciones del DANE</a>).</p></li>
+<li><p>La ficha de SIPSA-A 2018-2025 en el catálogo ANDA
+(<a class="reference external" href="https://microdatos.dane.gov.co/index.php/catalog/697">DANE-DIMPE-SIPSA-A-2018-2025</a>, consultada
+el 2026-11-08) fija tres condiciones. El acceso a los microdatos anonimizados es gratuito. Todo
+uso debe citar «Fuente: Departamento Administrativo Nacional de Estadística: www.dane.gov.co». Y
+la copia o reproducción de los datos en medios electrónicos que los pongan a disposición de
+múltiples usuarios requiere el visto bueno escrito del DANE.</p></li>
+<li><p>El panel de corredores se construyó en el curso de Machine Learning a partir de los registros
+consolidados de 2018 a 2025, y lo descarga <code class="docutils literal notranslate"><span class="pre">src/descargar_datos.py</span></code> desde el repositorio público
+de ese curso. La DIVIPOLA (municipios y coordenadas) viene de datos.gov.co.</p></li>
+<li><p><strong>Riesgo por resolver.</strong> Publicar el panel en un repositorio abierto puede caer en la restricción
+de reproducción. El panel agrega los registros por corredor y semana, pero sigue siendo una
+reproducción derivada de los microdatos. Hay dos salidas: pedir al DANE el visto bueno escrito, o
+dejar de publicar el panel y distribuir solo el código que lo construye a partir de los
+microdatos que cada usuario descarga del catálogo. La decisión es de Lina y Camilo.</p></li>
+</ul>
+<p><strong>Uso previo en la literatura.</strong> Ninguno de los 480 estudios que pasaron el tamizaje de Scopus y
+arXiv (<code class="docutils literal notranslate"><span class="pre">literatura/tamizaje_camilo.csv</span></code>) menciona Colombia, SIPSA ni el DANE en el título, el
+resumen o las palabras clave, y ninguno de los 90 textos completos leídos menciona SIPSA. Las
+búsquedas específicas del 2026-11-08 (<code class="docutils literal notranslate"><span class="pre">literatura/registros/busquedas.csv</span></code>, S2, S3, C1 a C4, R1 y
+R2) confirman el vacío:</p>
+<ul class="simple">
+<li><p>En Scopus, «SIPSA» devuelve 9 documentos y ninguno trata del sistema del DANE: la sigla coincide
+con adhesivos de silicona y con una sociedad italiana de psicología. La búsqueda de mercados
+mayoristas colombianos devuelve 11, todos descriptivos o de otros temas.</p></li>
+<li><p>En SciELO, SIPSA no aparece en ningún registro.</p></li>
+<li><p>En Redalyc, el nombre completo del sistema aparece en el texto de 8 artículos. Cuatro analizan
+precios o abastecimiento mayorista con econometría (integración espacial, eficiencia débil,
+desempeño de las organizaciones que abastecen a Bogotá y mercado del aguacate). Ninguno usa
+aprendizaje profundo ni pronostica el abastecimiento por corredor.</p></li>
+</ul>
+<p>Por eso, hasta donde muestran estas búsquedas, este trabajo sería el primero en pronosticar el
+abastecimiento de SIPSA-A con redes neuronales. Esto es ausencia de evidencia en los campos
+buscados, no prueba de que no exista. La comparabilidad con la literatura se apoya en el tipo de
+problema: series agroalimentarias semanales evaluadas con MAE, RMSE y MASE frente a referencias
+ingenuas.</p>
+</section>
+<section id="descripcion-tecnica">
+<h2>1.5 Descripción técnica<a class="headerlink" href="#descripcion-tecnica" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tipos</span> <span class="o">=</span> <span class="n">bruto</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"mercado"</span><span class="p">,</span> <span class="s2">"cod_mpio"</span><span class="p">,</span> <span class="s2">"depto_origen"</span><span class="p">,</span> <span class="s2">"grupo_dom"</span><span class="p">]</span>
+<span class="n">desc</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"filas"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">bruto</span><span class="p">),</span> <span class="s2">"columnas_panel"</span><span class="p">:</span> <span class="n">bruto</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"columnas_tras_datos_ml"</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"formato"</span><span class="p">:</span> <span class="s2">"Apache Parquet"</span><span class="p">,</span> <span class="s2">"tamano_MB"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">PANEL</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">"tipos"</span><span class="p">:</span> <span class="n">tipos</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">"corredores"</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)</span><span class="o">.</span><span class="n">ngroups</span><span class="p">,</span> <span class="s2">"mercados"</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">"mercado"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+    <span class="s2">"municipios_origen"</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">"cod_mpio"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span> <span class="s2">"departamentos_origen"</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">"depto_origen"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+    <span class="s2">"semanas_objetivo"</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">"semana_t1"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+    <span class="s2">"primera_semana_objetivo"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"semana_t1"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()),</span> <span class="s2">"ultima_semana_objetivo"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"semana_t1"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()),</span>
+    <span class="s2">"cardinalidad"</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cat</span><span class="p">},</span>
+    <span class="s2">"filas_por_corredor_mediana"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">median</span><span class="p">()),</span>
+    <span class="s2">"panel_sha256"</span><span class="p">:</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">PANEL</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">desc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">desc</span><span class="p">[</span><span class="s2">"panel_sha256"</span><span class="p">]</span> <span class="o">==</span> <span class="n">huellas</span><span class="p">[</span><span class="s2">"panel_sha256"</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">guardar</span><span class="p">(</span><span class="s2">"problema_descripcion"</span><span class="p">,</span> <span class="n">desc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>filas: 744921
+columnas_panel: 44
+columnas_tras_datos_ml: 53
+formato: Apache Parquet
+tamano_MB: 48.2
+tipos: {'float64': 29, 'str': 7, 'int64': 6, 'datetime64[us]': 2}
+corredores: 4512
+mercados: 32
+municipios_origen: 925
+departamentos_origen: 30
+semanas_objetivo: 414
+primera_semana_objetivo: 2018-01-29
+ultima_semana_objetivo: 2025-12-29
+cardinalidad: {'mercado': 32, 'cod_mpio': 925, 'depto_origen': 30, 'grupo_dom': 8}
+filas_por_corredor_mediana: 93.0
+panel_sha256: 30ead68472fc5718bf4c2a308db8e854a3f1329923c6f55adb6194da6b54b93d
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cifras de los cuadernos 02 y 03 que resume esta sección</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">general</span><span class="p">[</span><span class="s2">"objetivo"</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"y_reg en entrenamiento: media </span><span class="si">{</span><span class="n">obj</span><span class="p">[</span><span class="s1">'media'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, mediana </span><span class="si">{</span><span class="n">obj</span><span class="p">[</span><span class="s1">'mediana'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, ceros </span><span class="si">{</span><span class="n">obj</span><span class="p">[</span><span class="s1">'frac_cero'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, "</span>
+      <span class="sa">f</span><span class="s2">"interrupción </span><span class="si">{</span><span class="n">obj</span><span class="p">[</span><span class="s1">'prevalencia_interrupcion'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"filas con &lt;= 3 días encuestados en t+1: </span><span class="si">{</span><span class="n">general</span><span class="p">[</span><span class="s1">'ruido'</span><span class="p">][</span><span class="s1">'frac_filas_3_dias_o_menos'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ACF agrupada: rezago 1 = </span><span class="si">{</span><span class="n">serie</span><span class="p">[</span><span class="s1">'dependencia'</span><span class="p">][</span><span class="s1">'acf_corredores'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, rezago 52 = </span><span class="si">{</span><span class="n">serie</span><span class="p">[</span><span class="s1">'dependencia'</span><span class="p">][</span><span class="s1">'acf_corredores'</span><span class="p">][</span><span class="mi">52</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"I de Moran de la media por municipio: </span><span class="si">{</span><span class="n">general</span><span class="p">[</span><span class="s1">'espacial'</span><span class="p">][</span><span class="s1">'moran_I'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (p = </span><span class="si">{</span><span class="n">general</span><span class="p">[</span><span class="s1">'espacial'</span><span class="p">][</span><span class="s1">'p_perm'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"varianza de y_reg entre corredores: </span><span class="si">{</span><span class="n">serie</span><span class="p">[</span><span class="s1">'heterogeneidad'</span><span class="p">][</span><span class="s1">'frac_varianza_entre_corredores'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"huella de la prueba:"</span><span class="p">,</span> <span class="n">huellas</span><span class="p">[</span><span class="s2">"prueba_sha256"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y_reg en entrenamiento: media 0.611, mediana 0.640, ceros 0.176, interrupción 0.282
+filas con &lt;= 3 días encuestados en t+1: 0.0128
+ACF agrupada: rezago 1 = 0.307, rezago 52 = 0.091
+I de Moran de la media por municipio: 0.185 (p = 0.001)
+varianza de y_reg entre corredores: 0.060
+huella de la prueba: 988ab7ac22cbfc0e4bac4b0c600959a860e640029748014048abe9a852c78753
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Tamaño y estructura.</strong></p>
+<ul class="simple">
+<li><p>744.921 filas y 44 columnas en un archivo Parquet de 48,2 MB. <code class="docutils literal notranslate"><span class="pre">datos_ml.cargar_panel</span></code> agrega 9
+columnas, hasta llegar a 53: <code class="docutils literal notranslate"><span class="pre">fila</span></code>, <code class="docutils literal notranslate"><span class="pre">ratio_t1</span></code>, <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>, las cuatro variables espaciales, el año y
+el mes objetivo.</p></li>
+<li><p>Tipos: 29 columnas reales, 6 enteras, 7 de texto y 2 de fecha.</p></li>
+<li><p>Categóricas: 32 mercados, 925 municipios de origen, 30 departamentos y 8 grupos dominantes.</p></li>
+</ul>
+<p><strong>Unidad de observación.</strong> La corredor-semana: 4.512 corredores observados durante 414 semanas
+objetivo, del 2018-01-29 al 2025-12-29. El panel no es rectangular: la mediana es de 93 filas por
+corredor, porque cada corredor solo aparece en las semanas en que pertenece a la población en
+riesgo.</p>
+<p><strong>Variable objetivo y proceso de etiquetado.</strong> <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> no la etiqueta un anotador: sale de una
+medición administrativa (los registros de carga de SIPSA-A) y se calcula de forma automática. En el
+entrenamiento tiene media de 0,611, mediana de 0,640 y un 17,6 % de ceros; la interrupción tiene
+prevalencia de 28,2 %. El ruido esperado viene de la cobertura de la encuesta: el 1,28 % de las
+filas tuvo 3 días encuestados o menos en t+1, y en esas filas los ceros son mucho más frecuentes
+(cuaderno 02, sección 2.1.2 d).</p>
+<p><strong>Estructura de dependencia.</strong> Las observaciones no son independientes, en tres sentidos:</p>
+<ul class="simple">
+<li><p><strong>Temporal:</strong> la ACF agrupada vale 0,307 en el rezago 1 y 0,091 en el 52.</p></li>
+<li><p><strong>Espacial:</strong> el I de Moran de la media por municipio de origen es 0,185 (p = 0,001).</p></li>
+<li><p><strong>Por semana:</strong> las filas de una misma semana comparten choques nacionales.</p></li>
+</ul>
+<p>Por estas tres razones la partición es cronológica con hueco, la validación es de origen móvil y la
+inferencia trata la semana como bloque. Como la media de cada corredor explica solo el 6,0 % de la
+varianza, la dependencia dentro de cada corredor pesa más que su nivel propio.</p>
+<p><strong>Versión y trazabilidad.</strong> El panel tiene SHA-256 <code class="docutils literal notranslate"><span class="pre">30ead684…b54b93d</span></code>, el mismo que verifica
+<code class="docutils literal notranslate"><span class="pre">src/descargar_datos.py</span></code>. La prueba de 2025 queda congelada con el hash oficial <code class="docutils literal notranslate"><span class="pre">988ab7ac…2c78753</span></code>
+(<code class="docutils literal notranslate"><span class="pre">preregistro/hash_prueba.json</span></code>), que el cuaderno 02 recalcula y verifica
+(<code class="docutils literal notranslate"><span class="pre">eda/resultados/huellas.json</span></code>).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "dl-sipsa"
+        },
+        kernelOptions: {
+            name: "dl-sipsa",
+            path: "./eda"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'dl-sipsa'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Entregable 1: estado del arte, EDA y tres modelos base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_eda_general.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">2.1. EDA general</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal">1.1 Definición formal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipo-de-problema-pregunta-e-hipotesis">1.2 Tipo de problema, pregunta e hipótesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-margen-y-unidad-de-independencia-decisiones-md">1.3 Métricas, margen δ y unidad de independencia (DECISIONES.md)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-del-dataset">1.4 Justificación del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-tecnica">1.5 Descripción técnica</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

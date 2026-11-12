@@ -1,0 +1,1326 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.2-B. EDA específico de series de tiempo &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'eda/03_eda_series';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Decisiones del EDA para los modelos" href="decisiones_para_modelos.html" />
+    <link rel="prev" title="2.1. EDA general" href="02_eda_general.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/eda/03_eda_series.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.2-B. EDA específico de series de tiempo</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-visualizacion-y-descomposicion">B.1 Visualización y descomposición</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-estacionariedad-adf-y-kpss-conjuntas">B.2 Estacionariedad: ADF y KPSS conjuntas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-dependencia-temporal-y-longitud-de-la-ventana">B.3 Dependencia temporal y longitud de la ventana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-4-no-linealidad-y-heterocedasticidad">B.4 No linealidad y heterocedasticidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-5-frecuencia-granularidad-y-datos-faltantes">B.5 Frecuencia, granularidad y datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-6-outliers-y-anomalias">B.6 Outliers y anomalías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-7-implicaciones-para-el-diseno">B.7 Implicaciones para el diseño</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="b-eda-especifico-de-series-de-tiempo">
+<h1>2.2-B. EDA específico de series de tiempo<a class="headerlink" href="#b-eda-especifico-de-series-de-tiempo" title="Link to this heading">#</a></h1>
+<p>El problema es de series de tiempo (DECISIONES.md): un modelo global pronostica, con horizonte de
+una semana, <code class="docutils literal notranslate"><span class="pre">y_reg</span> <span class="pre">=</span> <span class="pre">log1p(tasa_t1</span> <span class="pre">/</span> <span class="pre">base8)</span></code> de cada corredor (mercado + municipio de origen) a
+partir de la historia del propio corredor y de covariables. Este cuaderno cubre los cinco ítems
+del bloque B del enunciado y termina con las implicaciones para el diseño. Cada análisis cierra
+con tres puntos: decisión de preprocesamiento, impacto en la arquitectura y riesgo de fuga.</p>
+<p><strong>Datos usados.</strong> Solo el entrenamiento: semanas objetivo hasta el 2024-10-21. La prueba de 2025
+no se lee en este cuaderno. Las cifras que se citan en el texto se guardan en
+<code class="docutils literal notranslate"><span class="pre">eda/resultados/series_*.json</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()))</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">comun</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">C</span>  <span class="c1"># noqa: E402</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+<span class="n">C</span><span class="o">.</span><span class="n">estilo</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="s2">"display.precision"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">cargar</span><span class="p">()</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s2">"particion"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"entrenamiento"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">del</span> <span class="n">p</span>  <span class="c1"># el resto del cuaderno solo ve el entrenamiento</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"filas de entrenamiento: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> | corredores: </span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)</span><span class="o">.</span><span class="n">ngroups</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> | "</span>
+      <span class="sa">f</span><span class="s2">"semanas objetivo: </span><span class="si">{</span><span class="n">tr</span><span class="p">[</span><span class="s1">'semana_t1'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">tr</span><span class="p">[</span><span class="s1">'semana_t1'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> "</span>
+      <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">tr</span><span class="p">[</span><span class="s1">'semana_t1'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+
+<span class="c1"># Serie de cada corredor con lo que el panel deja conocer (semana t de cada fila y semana t+1)</span>
+<span class="n">T</span><span class="p">,</span> <span class="n">corredores</span><span class="p">,</span> <span class="n">semanas</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">matriz_tasa</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">hasta</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">FIN_TRAIN</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"matriz corredor x semana: </span><span class="si">{</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> | celdas con dato: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">T</span><span class="p">))</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>filas de entrenamiento: 622,244 | corredores: 4,305 | semanas objetivo: 2018-01-29 a 2024-10-21 (352)
+matriz corredor x semana: 4,305 x 353 | celdas con dato: 0.424
+</pre></div>
+</div>
+</div>
+</div>
+<section id="b-1-visualizacion-y-descomposicion">
+<h2>B.1 Visualización y descomposición<a class="headerlink" href="#b-1-visualizacion-y-descomposicion" title="Link to this heading">#</a></h2>
+<p>Con 4.305 series no se puede mirar cada una, así que se trabaja en dos niveles: la serie nacional
+(media semanal de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> en todas las filas) y seis corredores con al menos 300 semanas en
+riesgo, elegidos al azar con la semilla 42. La descomposición STL (periodo 52, versión robusta) se
+aplica a la serie nacional. Los quiebres en la media se buscan por segmentación binaria con
+penalización BIC, con segmentos de al menos 26 semanas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.tsa.seasonal</span><span class="w"> </span><span class="kn">import</span> <span class="n">STL</span>
+
+<span class="n">nac</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"semana_t1"</span><span class="p">)[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">nac</span> <span class="o">=</span> <span class="n">nac</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">nac</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"W-MON"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"semanas objetivo sin ninguna fila:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="n">nac</span> <span class="o">=</span> <span class="n">nac</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>  <span class="c1"># solo para STL y el periodograma de la serie agregada</span>
+<span class="n">stl</span> <span class="o">=</span> <span class="n">STL</span><span class="p">(</span><span class="n">nac</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">52</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">f_est</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">stl</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">stl</span><span class="o">.</span><span class="n">seasonal</span> <span class="o">+</span> <span class="n">stl</span><span class="o">.</span><span class="n">resid</span><span class="p">))</span>
+<span class="n">f_ten</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">stl</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">stl</span><span class="o">.</span><span class="n">trend</span> <span class="o">+</span> <span class="n">stl</span><span class="o">.</span><span class="n">resid</span><span class="p">))</span>
+<span class="n">cortes</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">segmentacion_binaria</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">min_tam</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
+<span class="n">fechas_corte</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">date</span><span class="p">())</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cortes</span><span class="p">]</span>
+<span class="n">medias_seg</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">cortes</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"fuerza de la estacionalidad </span><span class="si">{</span><span class="n">f_est</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | fuerza de la tendencia </span><span class="si">{</span><span class="n">f_ten</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"quiebres en la media de la serie nacional:"</span><span class="p">,</span> <span class="n">fechas_corte</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"media de y_reg por segmento:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">medias_seg</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"descomposicion"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"fuerza_estacionalidad"</span><span class="p">:</span> <span class="n">f_est</span><span class="p">,</span> <span class="s2">"fuerza_tendencia"</span><span class="p">:</span> <span class="n">f_ten</span><span class="p">,</span>
+                       <span class="s2">"quiebres"</span><span class="p">:</span> <span class="n">fechas_corte</span><span class="p">,</span> <span class="s2">"medias_segmentos"</span><span class="p">:</span> <span class="n">medias_seg</span><span class="p">,</span>
+                       <span class="s2">"semanas_sin_filas"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"semana_t1"</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a_</span><span class="p">,</span> <span class="n">serie</span><span class="p">,</span> <span class="n">tit</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="p">[</span><span class="n">nac</span><span class="p">,</span> <span class="n">stl</span><span class="o">.</span><span class="n">trend</span><span class="p">,</span> <span class="n">stl</span><span class="o">.</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">stl</span><span class="o">.</span><span class="n">resid</span><span class="p">],</span>
+                          <span class="p">[</span><span class="s2">"y_reg medio nacional"</span><span class="p">,</span> <span class="s2">"tendencia"</span><span class="p">,</span> <span class="s2">"estacionalidad (52)"</span><span class="p">,</span> <span class="s2">"residuo"</span><span class="p">]):</span>
+    <span class="n">a_</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">serie</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">serie</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">AZUL</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">a_</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">tit</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cortes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">figura</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"series_stl_nacional"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>semanas objetivo sin ninguna fila: 0
+fuerza de la estacionalidad 0.435 | fuerza de la tendencia 0.043
+quiebres en la media de la serie nacional: []
+media de y_reg por segmento: [0.611]
+</pre></div>
+</div>
+<img alt="../_images/93e3bb023783f22d5e85977b80cac4d97d8452708728d653d44ab1f678df6320.png" src="../_images/93e3bb023783f22d5e85977b80cac4d97d8452708728d653d44ab1f678df6320.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filas_c</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SEMILLA</span><span class="p">)</span>
+<span class="n">ejemplo</span> <span class="o">=</span> <span class="n">filas_c</span><span class="p">[</span><span class="n">filas_c</span> <span class="o">&gt;=</span> <span class="mi">300</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">ejemplo</span> <span class="o">=</span> <span class="n">ejemplo</span><span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ejemplo</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a_</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">mp</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">ejemplo</span><span class="p">):</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"mercado"</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"cod_mpio"</span><span class="p">]</span> <span class="o">==</span> <span class="n">mp</span><span class="p">)]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"semana_t1"</span><span class="p">)</span>
+    <span class="n">serie</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">semanas</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span>
+    <span class="n">a_</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">serie</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">serie</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">AZUL</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">a_</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.5</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">a_</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> ← </span><span class="si">{</span><span class="n">g</span><span class="p">[</span><span class="s1">'mpio_origen'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="si">}</span><span class="s2"> semanas)"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"y_reg de seis corredores (huecos = semanas fuera de la población en riesgo); línea roja: umbral de interrupción"</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">figura</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"series_corredores_ejemplo"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/17caaa80f90129498bf7cf26f28bcd53b77a9fdee1a5cb9e3a148073127a5c27.png" src="../_images/17caaa80f90129498bf7cf26f28bcd53b77a9fdee1a5cb9e3a148073127a5c27.png" />
+</div>
+</div>
+<p>La segmentación binaria no encuentra quiebres en la media de la serie nacional: ningún corte
+supera la penalización BIC, y la media de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> se mantiene en 0,611 durante todo el
+entrenamiento. La STL asigna una fuerza de 0,435 a la estacionalidad anual y de 0,043 a la
+tendencia. Es lo esperable, porque <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> ya divide cada semana por la base de 8 semanas de su
+corredor, lo que elimina el nivel y casi toda la tendencia.</p>
+<p>Los seis corredores muestran lo que el agregado esconde: semanas con <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> = 0 (el corredor no
+envió nada en t+1), picos aislados muy por encima de la base y tramos vacíos cuando el corredor sale
+de la población en riesgo. Esos tramos son el problema central de faltantes, que se trata en B.5.</p>
+<ul class="simple">
+<li><p><strong>Preprocesamiento.</strong> No se diferencia ni se quita tendencia, porque la normalización por <code class="docutils literal notranslate"><span class="pre">base8</span></code>
+ya cumple esa función. La posición en el año (<code class="docutils literal notranslate"><span class="pre">sem_sin</span></code>, <code class="docutils literal notranslate"><span class="pre">sem_cos</span></code>) se mantiene como covariable.</p></li>
+<li><p><strong>Arquitectura.</strong> Para que el ciclo anual cuente, la ventana debe llegar al rezago 52 o el modelo
+debe recibir la estacionalidad como covariable.</p></li>
+<li><p><strong>Fuga.</strong> La STL se ajusta con toda la serie de entrenamiento, así que cada componente usa semanas
+futuras. Solo sirve para describir: ninguna componente de la STL entra como variable al modelo.</p></li>
+</ul>
+</section>
+<section id="b-2-estacionariedad-adf-y-kpss-conjuntas">
+<h2>B.2 Estacionariedad: ADF y KPSS conjuntas<a class="headerlink" href="#b-2-estacionariedad-adf-y-kpss-conjuntas" title="Link to this heading">#</a></h2>
+<p>ADF (H0: raíz unitaria, rezagos por AIC) y KPSS (H0: estacionariedad alrededor de una media,
+rezagos automáticos) se aplican a la serie nacional y a 300 corredores escogidos al azar entre los
+que tienen al menos 150 semanas con <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> en el entrenamiento. En cada corredor se usan sus
+semanas en riesgo consecutivas en el orden del tiempo. La lectura conjunta separa cuatro
+escenarios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.tsa.stattools</span><span class="w"> </span><span class="kn">import</span> <span class="n">adfuller</span><span class="p">,</span> <span class="n">kpss</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">adf_kpss</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># KPSS avisa cuando el estadístico queda fuera de su tabla: el p real es mayor que 0,10</span>
+    <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">autolag</span><span class="o">=</span><span class="s2">"AIC"</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">kpss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="s2">"c"</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="n">pa_n</span><span class="p">,</span> <span class="n">pk_n</span> <span class="o">=</span> <span class="n">adf_kpss</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"serie nacional: p ADF = </span><span class="si">{</span><span class="n">pa_n</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> | p KPSS = </span><span class="si">{</span><span class="n">pk_n</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">escenario_adf_kpss</span><span class="p">(</span><span class="n">pa_n</span><span class="p">,</span><span class="w"> </span><span class="n">pk_n</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">largos</span> <span class="o">=</span> <span class="n">filas_c</span><span class="p">[</span><span class="n">filas_c</span> <span class="o">&gt;=</span> <span class="mi">150</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">muestra</span> <span class="o">=</span> <span class="n">largos</span><span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">largos</span><span class="p">),</span> <span class="mi">300</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span>
+<span class="n">grupos</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"semana_t1"</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span>
+<span class="n">esc</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">clave</span> <span class="ow">in</span> <span class="n">muestra</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">grupos</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">clave</span><span class="p">))</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">esc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">escenario_adf_kpss</span><span class="p">(</span><span class="o">*</span><span class="n">adf_kpss</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<span class="n">esc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">esc</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"corredores con &gt;= 150 semanas en riesgo: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">largos</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">; muestra evaluada: 300"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">esc</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"estacionariedad"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"nacional"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"p_adf"</span><span class="p">:</span> <span class="n">pa_n</span><span class="p">,</span> <span class="s2">"p_kpss"</span><span class="p">:</span> <span class="n">pk_n</span><span class="p">,</span> <span class="s2">"escenario"</span><span class="p">:</span> <span class="n">C</span><span class="o">.</span><span class="n">escenario_adf_kpss</span><span class="p">(</span><span class="n">pa_n</span><span class="p">,</span> <span class="n">pk_n</span><span class="p">)},</span>
+                        <span class="s2">"corredores_elegibles"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">largos</span><span class="p">)),</span> <span class="s2">"muestra"</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+                        <span class="s2">"escenarios_corredores"</span><span class="p">:</span> <span class="n">esc</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>serie nacional: p ADF = 7.74e-06 | p KPSS = 0.100 → estacionaria (coinciden)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>corredores con &gt;= 150 semanas en riesgo: 1,726; muestra evaluada: 300
+estacionaria (coinciden)       0.947
+conflicto: ambas rechazan      0.050
+no estacionaria (coinciden)    0.003
+</pre></div>
+</div>
+</div>
+</div>
+<p>La serie nacional es estacionaria según ambas pruebas: ADF rechaza la raíz unitaria
+(p = 7,7 × 10⁻⁶) y KPSS no rechaza la estacionariedad (p ≥ 0,10; el estadístico queda fuera de la
+tabla de statsmodels, así que el p real es mayor). En los 300 corredores con al menos 150 semanas
+en riesgo, el 94,7 % es estacionario según ambas pruebas, el 5,0 % cae en el conflicto en que ambas
+rechazan (lo típico de un quiebre de nivel o de una estacionalidad no modelada) y el 0,3 % no es
+estacionario según ambas. En la escala de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>, la no estacionariedad es la excepción.</p>
+<ul class="simple">
+<li><p><strong>Preprocesamiento.</strong> Se modela <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> sin diferenciar. La escala de cada ventana sale de la base
+de 8 semanas de la propia fila, que solo usa el pasado.</p></li>
+<li><p><strong>Arquitectura.</strong> Como casi todas las series son estacionarias en esta escala, un modelo global
+puede compartir parámetros entre corredores sin un tratamiento por serie.</p></li>
+<li><p><strong>Fuga.</strong> Ninguna: las pruebas solo describen el entrenamiento y no fijan ningún parámetro del
+modelo.</p></li>
+</ul>
+</section>
+<section id="b-3-dependencia-temporal-y-longitud-de-la-ventana">
+<h2>B.3 Dependencia temporal y longitud de la ventana<a class="headerlink" href="#b-3-dependencia-temporal-y-longitud-de-la-ventana" title="Link to this heading">#</a></h2>
+<p><strong>ACF y PACF.</strong> En la serie nacional se calculan con bandas del 95 %. En los corredores se usa una
+ACF agrupada sobre la matriz corredor × semana: la serie de cada corredor es
+<code class="docutils literal notranslate"><span class="pre">log(1</span> <span class="pre">+</span> <span class="pre">tasa</span> <span class="pre">/</span> <span class="pre">media</span> <span class="pre">del</span> <span class="pre">corredor)</span></code> centrada por corredor, y la autocorrelación en el rezago k
+promedia todos los pares de semanas observadas a distancia k. La PACF agrupada se obtiene de esa
+ACF con la recursión de Durbin–Levinson. El periodograma de la serie nacional busca periodicidades.</p>
+<p><strong>Rezagos útiles para pronosticar.</strong> La ACF mide dependencia lineal en la serie, pero la pregunta
+de diseño es cuánta historia mejora el pronóstico de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>. Para responderla, se ajusta una
+regresión ridge (α = 1) que usa como entradas las últimas L semanas de cada corredor, normalizadas
+por la base de 8 semanas de la fila, y una máscara de dato presente. Se ajusta con 200.000 filas
+tomadas al azar entre las semanas objetivo hasta 60 semanas antes del final del entrenamiento, y se
+evalúa con el MAE de las últimas 52 semanas (un hueco de 8 semanas separa ambos bloques). Es una
+validación interna del entrenamiento y no reemplaza la validación de origen móvil de los modelos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.tsa.stattools</span><span class="w"> </span><span class="kn">import</span> <span class="n">acf</span><span class="p">,</span> <span class="n">pacf</span>
+
+<span class="n">a_n</span><span class="p">,</span> <span class="n">ci_n</span> <span class="o">=</span> <span class="n">acf</span><span class="p">(</span><span class="n">nac</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pa_nv</span><span class="p">,</span> <span class="n">cip_n</span> <span class="o">=</span> <span class="n">pacf</span><span class="p">(</span><span class="n">nac</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">Zr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">Zr</span> <span class="o">=</span> <span class="n">Zr</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">Zr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">acf_c</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">acf_agrupada</span><span class="p">(</span><span class="n">Zr</span><span class="p">,</span> <span class="mi">104</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">durbin_levinson</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">k_max</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""PACF a partir de una ACF (r[0] = 1)."""</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">k_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
+    <span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">k_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">phi</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">phi</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">phi</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">den</span>
+        <span class="n">phi</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">phi</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">phi</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phi</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+
+<span class="n">pacf_c</span> <span class="o">=</span> <span class="n">durbin_levinson</span><span class="p">(</span><span class="n">acf_c</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<span class="n">fr</span><span class="p">,</span> <span class="n">Pxx</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">periodogram</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">-</span> <span class="n">nac</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">Pxx</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">n_pares</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">Zr</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">banda_c</span> <span class="o">=</span> <span class="mf">1.96</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n_pares</span><span class="p">)</span>
+<span class="n">rez</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">104</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ACF nacional (rezagos 1, 2, 4, 13, 26, 52):"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">a_n</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">52</span><span class="p">]],</span> <span class="mi">3</span><span class="p">),</span>
+      <span class="s2">"| banda ±"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.96</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nac</span><span class="p">)),</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"PACF nacional (rezagos 1-6):"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">pa_nv</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ACF agrupada de los corredores:"</span><span class="p">,</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">acf_c</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">rez</span><span class="p">},</span> <span class="sa">f</span><span class="s2">"| banda ±</span><span class="si">{</span><span class="n">banda_c</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"PACF agrupada (rezagos 1-8, 13, 26, 52):"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">pacf_c</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">52</span><span class="p">]],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"periodos dominantes del periodograma nacional (semanas):"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">fr</span><span class="p">[</span><span class="n">top</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"dependencia"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"acf_nacional"</span><span class="p">:</span> <span class="n">a_n</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">"pacf_nacional"</span><span class="p">:</span> <span class="n">pa_nv</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">"acf_corredores"</span><span class="p">:</span> <span class="n">acf_c</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                    <span class="s2">"pacf_corredores"</span><span class="p">:</span> <span class="n">pacf_c</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">"banda_corredores"</span><span class="p">:</span> <span class="n">banda_c</span><span class="p">,</span>
+                    <span class="s2">"periodos_dominantes"</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">fr</span><span class="p">[</span><span class="n">top</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a_n</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">a_n</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">AZUL</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">ci_n</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">a_n</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">ci_n</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a_n</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">GRIS</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"ACF de la serie nacional"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pa_nv</span><span class="p">)),</span> <span class="n">pa_nv</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">AZUL</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pa_nv</span><span class="p">)),</span> <span class="n">cip_n</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">pa_nv</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">cip_n</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pa_nv</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">GRIS</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"PACF de la serie nacional"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">105</span><span class="p">),</span> <span class="n">acf_c</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">NARANJA</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"ACF agrupada de los corredores"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">61</span><span class="p">),</span> <span class="n">pacf_c</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">NARANJA</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"PACF agrupada de los corredores"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a_</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span>
+    <span class="n">a_</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"rezago (semanas)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">figura</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"series_acf_pacf"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ACF nacional (rezagos 1, 2, 4, 13, 26, 52): [ 0.366  0.094  0.034  0.018 -0.014  0.249] | banda ± 0.104
+PACF nacional (rezagos 1-6): [ 0.367 -0.047  0.041  0.005 -0.043 -0.032]
+ACF agrupada de los corredores: {1: 0.307, 2: 0.289, 3: 0.235, 4: 0.231, 8: 0.14, 13: 0.106, 26: 0.075, 39: 0.053, 52: 0.091, 53: 0.084, 78: -0.009, 104: 0.016} | banda ±0.0024
+PACF agrupada (rezagos 1-8, 13, 26, 52): [0.307 0.216 0.115 0.106 0.039 0.053 0.015 0.028 0.01  0.01  0.018]
+periodos dominantes del periodograma nacional (semanas): [25.1 17.6 13.5  5.8]
+</pre></div>
+</div>
+<img alt="../_images/42f2c0f4f100e58f4f9aa976f7481546443fcdd9d005a8da7d7303bdef035fb2.png" src="../_images/42f2c0f4f100e58f4f9aa976f7481546443fcdd9d005a8da7d7303bdef035fb2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ridge</span>
+
+<span class="n">c_idx</span> <span class="o">=</span> <span class="n">corredores</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_frame</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">]))</span>
+<span class="n">s_idx</span> <span class="o">=</span> <span class="n">semanas</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"semana"</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">base</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="s2">"base8"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">ultima</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="s2">"semana_t1"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">ajuste</span> <span class="o">=</span> <span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"semana_t1"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ultima</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="mi">52</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">HUECO</span><span class="p">))</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">evalua</span> <span class="o">=</span> <span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"semana_t1"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">ultima</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="mi">52</span><span class="p">))</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">sub</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">ajuste</span><span class="p">),</span> <span class="mi">200_000</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ventana</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">s_idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>   <span class="c1"># semanas t-L+1..t: nunca t+1</span>
+    <span class="n">valido</span> <span class="o">=</span> <span class="n">cols</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">c_idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
+    <span class="n">v</span><span class="p">[</span><span class="o">~</span><span class="n">valido</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">/</span> <span class="n">base</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]),</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">m</span>
+
+
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">ventana</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"ratio_t"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()))</span>  <span class="c1"># el último paso es t</span>
+<span class="n">filas_L</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">104</span><span class="p">]:</span>
+    <span class="n">V</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ventana</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)])</span>
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">sub</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">sub</span><span class="p">])</span>
+    <span class="n">filas_L</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"L"</span><span class="p">:</span> <span class="n">L</span><span class="p">,</span> <span class="s2">"mae_eval"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">evalua</span><span class="p">])</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">evalua</span><span class="p">]))),</span>
+                    <span class="s2">"frac_semanas_con_dato"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">evalua</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())})</span>
+<span class="n">tab_L</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas_L</span><span class="p">)</span>
+<span class="n">tab_L</span><span class="p">[</span><span class="s2">"mejora_vs_L_anterior"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">tab_L</span><span class="p">[</span><span class="s2">"mae_eval"</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"persistencia"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"ratio_t"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="n">evalua</span><span class="p">])</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">evalua</span><span class="p">]))),</span>
+       <span class="s2">"mediana_del_ajuste"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">ajuste</span><span class="p">])</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">evalua</span><span class="p">]))),</span>
+       <span class="s2">"sin_cambio_log2"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">evalua</span><span class="p">])))}</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"filas de ajuste: </span><span class="si">{</span><span class="n">ajuste</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (muestra de 200.000) | filas evaluadas: </span><span class="si">{</span><span class="n">evalua</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tab_L</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"referencias en el mismo bloque:"</span><span class="p">,</span> <span class="p">{</span><span class="n">k_</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">k_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ref</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"ventana"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"tabla"</span><span class="p">:</span> <span class="n">filas_L</span><span class="p">,</span> <span class="s2">"referencias_mae"</span><span class="p">:</span> <span class="n">ref</span><span class="p">,</span> <span class="s2">"filas_ajuste"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">ajuste</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                <span class="s2">"filas_evaluadas"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">evalua</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"muestra_ajuste"</span><span class="p">:</span> <span class="mi">200_000</span><span class="p">}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tab_L</span><span class="p">[</span><span class="s2">"L"</span><span class="p">],</span> <span class="n">tab_L</span><span class="p">[</span><span class="s2">"mae_eval"</span><span class="p">],</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">AZUL</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ref</span><span class="p">[</span><span class="s2">"mediana_del_ajuste"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">GRIS</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"mediana constante"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">tab_L</span><span class="p">[</span><span class="s2">"L"</span><span class="p">],</span> <span class="n">tab_L</span><span class="p">[</span><span class="s2">"L"</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"longitud de la ventana L (semanas)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"MAE en las últimas 52 semanas"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Ridge sobre la historia del corredor"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">figura</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"series_mae_por_ventana"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>filas de ajuste: 508,775 (muestra de 200.000) | filas evaluadas: 98,874
+  L  mae_eval  frac_semanas_con_dato  mejora_vs_L_anterior
+  1    0.3059                 1.0000                   NaN
+  2    0.3011                 0.9872                0.0048
+  4    0.2980                 0.9680                0.0032
+  8    0.2959                 0.9391                0.0021
+ 13    0.2946                 0.9160                0.0013
+ 26    0.2933                 0.8858                0.0014
+ 39    0.2926                 0.8686                0.0007
+ 52    0.2916                 0.8565                0.0010
+ 78    0.2915                 0.8336                0.0001
+104    0.2912                 0.8166                0.0003
+referencias en el mismo bloque: {'persistencia': 0.3457, 'mediana_del_ajuste': 0.3103, 'sin_cambio_log2': 0.3134}
+</pre></div>
+</div>
+<img alt="../_images/6f1f7ca211d317a06dab034d45ada6943121e1fe6e4397c7967bc0a616c8f8c8.png" src="../_images/6f1f7ca211d317a06dab034d45ada6943121e1fe6e4397c7967bc0a616c8f8c8.png" />
+</div>
+</div>
+<p>La serie nacional se comporta como un AR(1) con ciclo anual. La ACF vale 0,366 en el rezago 1 y
+queda casi siempre dentro de la banda de ±0,104 hasta el rezago 51. Las excepciones son el rezago
+8 (−0,204) y el 12 (0,123), y la ACF repunta a 0,249 y 0,216 en los rezagos 52 y 53. La PACF es
+0,367 en el rezago 1 y luego pequeña, salvo en los rezagos 8 (−0,181), 12 (0,127) y 13 (−0,104). El
+valor negativo en el rezago 8 es probablemente mecánico: un pico en la semana t+1 entra en la base
+de 8 semanas de las filas siguientes y deprime su <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> hasta que sale de la base. Los periodos
+dominantes del periodograma son 25,1, 17,6 y 13,5 semanas, cercanos a los armónicos semestral y
+trimestral del ciclo anual.</p>
+<p>En los corredores la memoria es más larga. La ACF agrupada vale 0,307 en el rezago 1, 0,140 en el
+8, 0,106 en el 13 y 0,075 en el 26. Sube de nuevo entre los rezagos 40 y 52 (de 0,060 a 0,091),
+vale 0,084 en el 53 y decrece después: entre los rezagos 54 y 104 queda entre −0,025 y 0,076, con
+−0,009 en el 78 y 0,016 en el 104. La PACF agrupada tiene cuatro rezagos de peso (0,307,
+0,216, 0,115 y 0,106) y luego valores menores que 0,06. Con más de 500.000 pares, la banda de
+±0,0024 vuelve significativo casi cualquier rezago; para decidir cuenta la magnitud.</p>
+<p>La regresión ridge responde directamente cuánta historia sirve. El MAE baja de 0,3059 con una semana
+a 0,2946 con 13, 0,2933 con 26 y 0,2916 con 52. Pasar de 52 a 104 semanas solo lo baja otros 0,0004
+y cuesta el 4 % de las semanas con dato. Dos referencias en el mismo bloque muestran que la
+historia sí importa: la persistencia (usar la razón de la semana t) tiene MAE 0,3457 y la mediana
+constante 0,3103. La última semana sola pronostica peor que una constante, porque una semana sin
+envíos o con un pico rara vez se repite en la siguiente.</p>
+<ul class="simple">
+<li><p><strong>Decisión: ventana de L = 52 semanas</strong> (t−51 a t). Cubre el decaimiento de la ACF y el rezago
+anual, y en la ridge recoge casi toda la ganancia disponible.</p></li>
+<li><p><strong>Arquitectura.</strong> Una secuencia de 52 pasos es manejable para una LSTM o GRU. Una CNN-1D necesita un
+campo receptivo de al menos 52 (con dilataciones o <em>pooling</em>), y un MLP recibe la ventana
+aplanada (52 pasos × canales). Que la persistencia pierda frente a la constante es un aviso: el
+modelo debe usar la ventana completa y no copiar la última semana.</p></li>
+<li><p><strong>Fuga.</strong> La matriz corredor × semana contiene <code class="docutils literal notranslate"><span class="pre">tasa_t1</span></code>, que es el objetivo de la fila. La
+ventana tiene que cortarse en la columna t; el cuaderno lo verifica con la aserción de que el
+último paso coincide con <code class="docutils literal notranslate"><span class="pre">ratio_t</span></code>. La comparación de longitudes se hizo dentro del
+entrenamiento, con un hueco de 8 semanas entre ajuste y evaluación.</p></li>
+</ul>
+</section>
+<section id="b-4-no-linealidad-y-heterocedasticidad">
+<h2>B.4 No linealidad y heterocedasticidad<a class="headerlink" href="#b-4-no-linealidad-y-heterocedasticidad" title="Link to this heading">#</a></h2>
+<p>Sobre los residuos de un AR(1) ajustado a la serie nacional se aplican la prueba ARCH de Engle con
+4 rezagos (H0: sin heterocedasticidad condicional) y la prueba BDS en dimensiones 2 y 3 (H0:
+residuos i.i.d.). En los 300 corredores de B.2 se repite la prueba ARCH sobre los residuos de un
+AR(1) propio y se cuenta la fracción que rechaza al 5 %, con y sin corrección de Holm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">het_arch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.multitest</span><span class="w"> </span><span class="kn">import</span> <span class="n">multipletests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.tsa.ar_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoReg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.tsa.stattools</span><span class="w"> </span><span class="kn">import</span> <span class="n">bds</span>
+
+<span class="n">ar1</span> <span class="o">=</span> <span class="n">AutoReg</span><span class="p">(</span><span class="n">nac</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">lags</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">lm</span><span class="p">,</span> <span class="n">p_arch</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">het_arch</span><span class="p">(</span><span class="n">ar1</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">b_est</span><span class="p">,</span> <span class="n">b_p</span> <span class="o">=</span> <span class="n">bds</span><span class="p">(</span><span class="n">ar1</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">max_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">p_c</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">clave</span> <span class="ow">in</span> <span class="n">muestra</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">grupos</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">clave</span><span class="p">))</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">p_c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">het_arch</span><span class="p">(</span><span class="n">AutoReg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">4</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">p_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p_c</span><span class="p">)</span>
+<span class="n">holm</span> <span class="o">=</span> <span class="n">multipletests</span><span class="p">(</span><span class="n">p_c</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"holm"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"serie nacional, AR(1): phi = </span><span class="si">{</span><span class="n">ar1</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | ARCH(4) LM = </span><span class="si">{</span><span class="n">lm</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">p_arch</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"BDS (dimensiones 2 y 3): estadístico"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">b_est</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"| p"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">b_p</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"corredores con ARCH(4) p &lt; 0,05: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">p_c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.05</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | tras Holm: </span><span class="si">{</span><span class="n">holm</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (n = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">p_c</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"no_linealidad"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"phi_ar1_nacional"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">ar1</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="s2">"arch_lm"</span><span class="p">:</span> <span class="n">lm</span><span class="p">,</span> <span class="s2">"arch_p"</span><span class="p">:</span> <span class="n">p_arch</span><span class="p">,</span>
+                      <span class="s2">"bds_estadistico"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">b_est</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">"bds_p"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">b_p</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                      <span class="s2">"frac_corredores_arch_005"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">p_c</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">)),</span> <span class="s2">"frac_corredores_arch_holm"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">holm</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+                      <span class="s2">"n_corredores"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p_c</span><span class="p">))}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>serie nacional, AR(1): phi = 0.366 | ARCH(4) LM = 42.66, p = 0.0000
+BDS (dimensiones 2 y 3): estadístico [5.38 5.25] | p [0. 0.]
+corredores con ARCH(4) p &lt; 0,05: 0.477 | tras Holm: 0.220 (n = 300)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Los residuos del AR(1) nacional (φ = 0,366) tienen heterocedasticidad condicional (ARCH(4):
+LM = 42,66, p &lt; 0,0001), y la prueba BDS rechaza que sean i.i.d. en las dimensiones 2 y 3
+(estadísticos 5,38 y 5,25, p &lt; 0,001). En los corredores, el 47,7 % rechaza la ausencia de efectos
+ARCH al 5 % y el 22,0 % la sigue rechazando tras la corrección de Holm. Una parte de la dependencia
+no es lineal y la varianza del error cambia en el tiempo.</p>
+<ul class="simple">
+<li><p><strong>Preprocesamiento.</strong> No se agrega otra transformación estabilizadora: <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> ya está en escala
+logarítmica. Se recomienda que el MAE sea la métrica primaria (así está en DECISIONES.md) y que la
+pérdida de entrenamiento sea L1 o Huber, robusta a los periodos de alta varianza.</p></li>
+<li><p><strong>Arquitectura.</strong> La no linealidad deja margen para que las redes superen a un AR lineal. Los
+residuos de los modelos deben volver a pasar por Ljung–Box y BDS (lo hace <code class="docutils literal notranslate"><span class="pre">estadistica/</span></code>).</p></li>
+<li><p><strong>Fuga.</strong> Ninguna.</p></li>
+</ul>
+</section>
+<section id="b-5-frecuencia-granularidad-y-datos-faltantes">
+<h2>B.5 Frecuencia, granularidad y datos faltantes<a class="headerlink" href="#b-5-frecuencia-granularidad-y-datos-faltantes" title="Link to this heading">#</a></h2>
+<p>El muestreo es semanal (lunes a domingo). El panel no es rectangular, y una semana sin fila de un
+corredor puede deberse a dos causas que tienen significados distintos:</p>
+<ol class="arabic simple">
+<li><p><strong>El mercado no se encuestó</strong> esa semana. El dato no existe para ningún corredor del mercado, y
+se trata como un faltante.</p></li>
+<li><p><strong>El corredor salió de la población en riesgo</strong>, porque tuvo envíos en menos de 4 de las 8
+semanas previas. El mercado sí se encuestó, y lo más probable es que el corredor no haya
+enviado nada.</p></li>
+</ol>
+<p>El panel permite separar ambas causas: un mercado se encuestó en la semana w si alguna fila del
+mercado tiene <code class="docutils literal notranslate"><span class="pre">semana</span> <span class="pre">=</span> <span class="pre">w</span></code> o <code class="docutils literal notranslate"><span class="pre">semana_t1</span> <span class="pre">=</span> <span class="pre">w</span></code>. Además, el valor de una semana puede venir de la
+propia fila (<code class="docutils literal notranslate"><span class="pre">tasa_t</span></code>) o de la fila de la semana anterior (<code class="docutils literal notranslate"><span class="pre">tasa_t1</span></code>). La reconstrucción solo usa
+semanas menores o iguales a t, así que no mira hacia adelante.</p>
+<p>El archivo de envíos de DANE (15,5 millones de registros) permite verificar qué hay en las
+semanas que el panel no cubre. El repositorio no descarga ese archivo. La comparación la hace el
+script auxiliar <code class="docutils literal notranslate"><span class="pre">eda/fuentes/aux_cobertura_envios.py</span></code> y este cuaderno solo lee su resultado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">enc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tr</span><span class="p">[[</span><span class="s2">"mercado"</span><span class="p">,</span> <span class="s2">"semana"</span><span class="p">]],</span> <span class="n">tr</span><span class="p">[[</span><span class="s2">"mercado"</span><span class="p">,</span> <span class="s2">"semana_t1"</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"semana_t1"</span><span class="p">:</span> <span class="s2">"semana"</span><span class="p">})])</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[</span><span class="n">enc</span><span class="p">[</span><span class="s2">"semana"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">C</span><span class="o">.</span><span class="n">FIN_TRAIN</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="n">enc_w</span> <span class="o">=</span> <span class="p">(</span><span class="n">enc</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"mercado"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"semana"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"v"</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">semanas</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">))</span>
+<span class="n">huecos_m</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">enc_w</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">fila</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+    <span class="n">huecos_m</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">fila</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="n">obs</span><span class="o">.</span><span class="n">min</span><span class="p">():</span><span class="n">obs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">huecos_m</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">huecos_m</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">m_idx</span> <span class="o">=</span> <span class="n">enc_w</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">(</span><span class="n">corredores</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">enc_w</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="n">m_idx</span><span class="p">]</span>                                        <span class="c1"># mercado encuestado (corredor x semana)</span>
+<span class="n">primera</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">iniciado</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">primera</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">con_dato</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">no_enc</span> <span class="o">=</span> <span class="n">iniciado</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">E</span>
+<span class="n">fuera</span> <span class="o">=</span> <span class="n">iniciado</span> <span class="o">&amp;</span> <span class="n">E</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">con_dato</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mercados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">huecos_m</span><span class="p">)</span><span class="si">}</span><span class="s2"> | con alguna semana sin encuesta dentro de su periodo: </span><span class="si">{</span><span class="p">(</span><span class="n">huecos_m</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"fracción de semanas sin encuesta por mercado: mediana </span><span class="si">{</span><span class="n">huecos_m</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, máximo </span><span class="si">{</span><span class="n">huecos_m</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">huecos_m</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"celdas corredor-semana desde la primera aparición del corredor: </span><span class="si">{</span><span class="n">iniciado</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  con dato en el panel: </span><span class="si">{</span><span class="n">con_dato</span><span class="p">[</span><span class="n">iniciado</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | mercado sin encuesta: </span><span class="si">{</span><span class="n">no_enc</span><span class="p">[</span><span class="n">iniciado</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | "</span>
+      <span class="sa">f</span><span class="s2">"corredor fuera de la población en riesgo: </span><span class="si">{</span><span class="n">fuera</span><span class="p">[</span><span class="n">iniciado</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">cero_panel</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">con_dato</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"semanas con dato en el panel que valen cero: </span><span class="si">{</span><span class="n">cero_panel</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Composición de una ventana de 52 semanas en las filas de entrenamiento</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">52</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">s_idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">valido</span> <span class="o">=</span> <span class="n">cols</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+<span class="n">cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">cd</span> <span class="o">=</span> <span class="n">con_dato</span><span class="p">[</span><span class="n">c_idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">cc</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">valido</span>
+<span class="n">ne</span> <span class="o">=</span> <span class="n">no_enc</span><span class="p">[</span><span class="n">c_idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">cc</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">valido</span>
+<span class="n">fu</span> <span class="o">=</span> <span class="n">fuera</span><span class="p">[</span><span class="n">c_idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">cc</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">valido</span>
+<span class="n">an</span> <span class="o">=</span> <span class="o">~</span><span class="n">iniciado</span><span class="p">[</span><span class="n">c_idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">cc</span><span class="p">]</span> <span class="o">|</span> <span class="o">~</span><span class="n">valido</span>
+<span class="n">comp</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"con_dato"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">cd</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="s2">"mercado_sin_encuesta"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">ne</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+        <span class="s2">"fuera_poblacion_riesgo"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">fu</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="s2">"antes_primera_aparicion"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">an</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+        <span class="s2">"filas_ventana_completa"</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">cd</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">L</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+        <span class="s2">"filas_con_menos_de_26_semanas"</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">cd</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"composición de la ventana de 52 semanas:"</span><span class="p">,</span> <span class="p">{</span><span class="n">k_</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">k_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"faltantes"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"huecos_encuesta_mercado"</span><span class="p">:</span> <span class="n">huecos_m</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">"celdas_desde_inicio"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">iniciado</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                  <span class="s2">"frac_con_dato"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">con_dato</span><span class="p">[</span><span class="n">iniciado</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="s2">"frac_mercado_sin_encuesta"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">no_enc</span><span class="p">[</span><span class="n">iniciado</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+                  <span class="s2">"frac_fuera_poblacion"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">fuera</span><span class="p">[</span><span class="n">iniciado</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="s2">"frac_cero_con_dato"</span><span class="p">:</span> <span class="n">cero_panel</span><span class="p">,</span>
+                  <span class="s2">"ventana_52"</span><span class="p">:</span> <span class="n">comp</span><span class="p">}</span>
+
+<span class="n">aux</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">"aux_cobertura_envios.json"</span>
+<span class="k">if</span> <span class="n">aux</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+    <span class="n">cob</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"verificación con los envíos de DANE (eda/resultados/aux_cobertura_envios.json):"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">({</span><span class="n">k_</span><span class="p">:</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cob</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)})</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"falta eda/resultados/aux_cobertura_envios.json (requiere el archivo de envíos de DANE)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mercados: 32 | con alguna semana sin encuesta dentro de su periodo: 5
+fracción de semanas sin encuesta por mercado: mediana 0.000, máximo 0.003 (Pasto, El Potrerillo)
+celdas corredor-semana desde la primera aparición del corredor: 1,211,292
+  con dato en el panel: 0.532 | mercado sin encuesta: 0.000 | corredor fuera de la población en riesgo: 0.468
+semanas con dato en el panel que valen cero: 0.170
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>composición de la ventana de 52 semanas: {'con_dato': 0.7936, 'mercado_sin_encuesta': 0.0003, 'fuera_poblacion_riesgo': 0.1034, 'antes_primera_aparicion': 0.1026, 'filas_ventana_completa': 0.5319, 'filas_con_menos_de_26_semanas': 0.1928}
+verificación con los envíos de DANE (eda/resultados/aux_cobertura_envios.json):
+{'archivo': 'sipsa_a_envios.parquet', 'registros_usados': 12675912, 'max_dif_relativa_panel_vs_envios': 0.0, 'celdas_con_dato_en_envios_y_no_en_panel': 750687, 'frac_cero_sin_panel': 0.8831, 'mediana_razon_sin_panel_positiva': 3.0609, 'frac_cero_con_panel': 0.1698, 'por_dias_encuestados_t1': [{'dias_t1': 1, 'filas': 145, 'y_media': 0.22193859065144553, 'y_de': 0.4460563438653547, 'frac_y_cero': 0.7310344827586207, 'frac_interrupcion': 0.8}, {'dias_t1': 2, 'filas': 1113, 'y_media': 0.5707304147131576, 'y_de': 0.5070518915642995, 'frac_y_cero': 0.302785265049416, 'frac_interrupcion': 0.3926325247079964}, {'dias_t1': 3, 'filas': 6679, 'y_media': 0.5840398813425052, 'y_de': 0.4696237863992235, 'frac_y_cero': 0.2638119478963917, 'frac_interrupcion': 0.34571043569396614}, {'dias_t1': 4, 'filas': 40602, 'y_media': 0.6020896183389761, 'y_de': 0.43364391155369264, 'frac_y_cero': 0.20358603024481553, 'frac_interrupcion': 0.30151224077631644}, {'dias_t1': 5, 'filas': 123381, 'y_media': 0.6044455670577875, 'y_de': 0.4343604148484864, 'frac_y_cero': 0.1980288699232459, 'frac_interrupcion': 0.30080806607176147}, {'dias_t1': 6, 'filas': 251810, 'y_media': 0.6068816333466038, 'y_de': 0.41915613797697754, 'frac_y_cero': 0.17937730828799492, 'frac_interrupcion': 0.2881061117509233}, {'dias_t1': 7, 'filas': 198514, 'y_media': 0.6239908866403291, 'y_de': 0.4004895775708787, 'frac_y_cero': 0.14734477165338464, 'frac_interrupcion': 0.25615825584089785}]}
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Mecanismo de la ausencia por salida de la población en riesgo.</strong> Si estas ausencias fueran MCAR,
+el abastecimiento de la semana previa a una ausencia no debería diferir del de las demás semanas.
+Se compara <code class="docutils literal notranslate"><span class="pre">ratio_t</span></code> en las filas cuya semana siguiente (t+1) es la última antes de que el
+corredor salga de la población en riesgo frente al resto de filas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orden</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"semana"</span><span class="p">])</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">orden</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)[</span><span class="s2">"semana"</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sale</span> <span class="o">=</span> <span class="p">(</span><span class="n">sig</span> <span class="o">-</span> <span class="n">orden</span><span class="p">[</span><span class="s2">"semana"</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">|</span> <span class="n">sig</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orden</span><span class="p">[</span><span class="s2">"semana_t1"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tr</span><span class="p">[</span><span class="s2">"semana_t1"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">comp_mnar</span> <span class="o">=</span> <span class="n">orden</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">sale</span><span class="o">=</span><span class="n">sale</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"sale"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">filas</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">),</span> <span class="n">y_reg_media</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span> <span class="n">y_reg_mediana</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="s2">"median"</span><span class="p">),</span>
+    <span class="n">frac_y_cero</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())),</span> <span class="n">ratio_t_mediana</span><span class="o">=</span><span class="p">(</span><span class="s2">"ratio_t"</span><span class="p">,</span> <span class="s2">"median"</span><span class="p">),</span>
+    <span class="n">activas8_media</span><span class="o">=</span><span class="p">(</span><span class="s2">"activas8"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">comp_mnar</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">mannwhitneyu</span>
+<span class="n">mw</span> <span class="o">=</span> <span class="n">mannwhitneyu</span><span class="p">(</span><span class="n">orden</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sale</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">],</span> <span class="n">orden</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">sale</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mann-Whitney sobre y_reg (sale vs resto): U = </span><span class="si">{</span><span class="n">mw</span><span class="o">.</span><span class="n">statistic</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">mw</span><span class="o">.</span><span class="n">pvalue</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"mecanismo_ausencia"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"tabla"</span><span class="p">:</span> <span class="n">comp_mnar</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s2">"records"</span><span class="p">),</span> <span class="s2">"mw_p"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">mw</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        filas  y_reg_media  y_reg_mediana  frac_y_cero  ratio_t_mediana  activas8_media
+sale                                                                                   
+False  602335        0.631          0.651        0.149            0.951           6.980
+True    19909        0.006          0.000        0.992            0.000           4.033
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mann-Whitney sobre y_reg (sale vs resto): U = 9.438e+08, p = 0.00e+00
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Heterogeneidad entre series.</strong> Se describe cuántas semanas en riesgo tiene cada corredor, su
+nivel típico de abastecimiento y la variabilidad de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> dentro de cada serie. La pregunta de
+diseño es si conviene un modelo local por serie, uno global o uno multivariado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">semanas</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">),</span> <span class="n">y_media</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span> <span class="n">y_de</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">),</span>
+                              <span class="n">frac_cero</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())),</span> <span class="n">base_mediana</span><span class="o">=</span><span class="p">(</span><span class="s2">"base8"</span><span class="p">,</span> <span class="s2">"median"</span><span class="p">))</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">het</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"corredores con menos de 52 semanas en riesgo: </span><span class="si">{</span><span class="p">(</span><span class="n">het</span><span class="p">[</span><span class="s1">'semanas'</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">52</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="p">(</span><span class="n">het</span><span class="p">[</span><span class="s1">'semanas'</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">52</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">); "</span>
+      <span class="sa">f</span><span class="s2">"con al menos 104: </span><span class="si">{</span><span class="p">(</span><span class="n">het</span><span class="p">[</span><span class="s1">'semanas'</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">104</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"filas de entrenamiento que pertenecen a corredores con menos de 52 semanas: "</span>
+      <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">'size'</span><span class="p">)</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="mi">52</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># Fracción de la varianza de y_reg entre corredores (correlación intraclase aproximada)</span>
+<span class="n">var_total</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="n">var_entre</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">)</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"varianza de y_reg explicada por la media de cada corredor: </span><span class="si">{</span><span class="n">var_entre</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">var_total</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"heterogeneidad"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"cuantiles"</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">"frac_corredores_menos_52"</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">het</span><span class="p">[</span><span class="s2">"semanas"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">52</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+                       <span class="s2">"frac_corredores_104_o_mas"</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">het</span><span class="p">[</span><span class="s2">"semanas"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">104</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+                       <span class="s2">"frac_filas_corredores_menos_52"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLAVE</span><span class="p">)[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">"size"</span><span class="p">)</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="mi">52</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+                       <span class="s2">"frac_varianza_entre_corredores"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_entre</span> <span class="o">/</span> <span class="n">var_total</span><span class="p">),</span> <span class="s2">"n_corredores"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">het</span><span class="p">))}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                  0.1       0.5       0.9
+semanas         5.000    85.000   352.000
+y_media         0.060     0.495     0.686
+y_de            0.117     0.468     0.592
+frac_cero       0.003     0.437     0.909
+base_mediana  342.964  1275.179  9567.960
+corredores con menos de 52 semanas en riesgo: 1,790 (0.416); con al menos 104: 0.461
+filas de entrenamiento que pertenecen a corredores con menos de 52 semanas: 0.048
+varianza de y_reg explicada por la media de cada corredor: 0.060
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Frecuencia y huecos de encuesta.</strong> El muestreo es semanal y regular. Los huecos de encuesta casi no
+existen: solo 5 de los 32 mercados tienen alguna semana sin encuesta dentro de su periodo, y el que
+más tiene (Pasto, El Potrerillo) pierde el 0,3 % de sus semanas. El faltante que importa es otro:
+desde la primera aparición de cada corredor, el 46,8 % de las corredor-semanas no tiene dato porque
+el corredor estaba fuera de la población en riesgo.</p>
+<p><strong>Mecanismo.</strong> Estas ausencias no son MCAR. Las filas cuya semana siguiente ya no está en el panel
+tienen <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> medio de 0,006 y un 99,2 % de ceros, frente a 0,631 y 14,9 % en el resto
+(Mann–Whitney, p &lt; 10⁻³⁰⁰). Es un mecanismo MNAR por construcción: la serie desaparece porque su
+propio valor cae, al tener envíos en menos de 4 de las 8 semanas previas. Los envíos de DANE lo
+confirman: el 88,3 % de las semanas fuera del panel son ceros, frente al 17,0 % de las semanas con
+dato. Sin embargo, no todas lo son: en las ventanas de 52 semanas, el 27,7 % de las semanas que
+solo están en los envíos tiene envíos positivos, con una mediana de 3,06 veces la media del
+corredor. El panel recupera el 86,0 % de las corredor-semanas que los envíos tienen dentro de una
+ventana de 52 semanas.</p>
+<p><strong>Composición de la ventana de 52 semanas.</strong> En promedio, el 79,4 % de las semanas tiene dato, el
+10,3 % cae fuera de la población en riesgo, el 10,3 % es anterior a la primera aparición del
+corredor y el 0,03 % corresponde a un mercado sin encuesta. El 53,2 % de las filas tiene la ventana
+completa y el 19,3 % tiene menos de 26 semanas con dato.</p>
+<p><strong>Heterogeneidad.</strong> Las semanas en riesgo por corredor van de 5 (p10) a 352 (p90), con mediana de
+85. El 41,6 % de los corredores tiene menos de 52 semanas, pero esos corredores solo aportan el
+4,8 % de las filas. La fracción de ceros va de 0,3 % a 90,9 % entre los percentiles 10 y 90, y la
+base mediana de 343 a 9.568 kg por día. Aun así, la media de cada corredor explica solo el 6,0 % de
+la varianza de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>: casi toda la variación ocurre dentro de cada serie.</p>
+<ul class="simple">
+<li><p><strong>Decisión sobre faltantes.</strong> Una semana sin dato en la ventana vale 0 en el canal de nivel y
+lleva dos máscaras: <code class="docutils literal notranslate"><span class="pre">observado</span></code> (hay dato en el panel) e <code class="docutils literal notranslate"><span class="pre">iniciado</span></code> (la semana es igual o
+posterior a la primera aparición del corredor). No se interpola ni se rellena hacia adelante: el
+relleno hacia adelante solo usa el pasado, pero convertiría una semana sin envíos en una semana
+normal. No se descartan filas por tener una ventana incompleta.</p></li>
+<li><p><strong>Decisión sobre el tipo de modelo.</strong> Un modelo global para los 4.305 corredores. Un modelo
+local no es viable para el 41,6 % de los corredores, que tiene menos de un año de historia. Como
+la media del corredor explica poco, la identidad del corredor no es la información principal; el
+mercado, el municipio de origen y la propia ventana pesan más.</p></li>
+<li><p><strong>Arquitectura.</strong> Las redes reciben la ventana con las dos máscaras como canales adicionales. Los
+<em>embeddings</em> de mercado y municipio de origen son opcionales y se justifican por el 6 % de
+varianza entre corredores.</p></li>
+<li><p><strong>Fuga.</strong> La máscara <code class="docutils literal notranslate"><span class="pre">observado</span></code> de la semana τ depende de que exista la fila de τ o la de τ−1. La
+existencia de esas filas depende de la encuesta en τ+1 ≤ t, así que en la semana t no se usa nada
+posterior a t. Ninguna imputación usa estadísticos calculados con semanas futuras.</p></li>
+</ul>
+</section>
+<section id="b-6-outliers-y-anomalias">
+<h2>B.6 Outliers y anomalías<a class="headerlink" href="#b-6-outliers-y-anomalias" title="Link to this heading">#</a></h2>
+<p>Un valor atípico de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> es un aumento muy grande frente a la base: <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> = 2,4 equivale a
+10 veces la base de 8 semanas. Se usa la regla de Tukey sobre <code class="docutils literal notranslate"><span class="pre">y_reg</span></code> y se revisan dos causas
+probables: una base pequeña (pocos kilos, donde cualquier envío multiplica la razón) y una semana
+de festivo. Para medir su impacto sobre el error, se calcula qué parte del MAE y del MSE de la
+mediana constante aporta el 1 % de filas con mayor error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">at</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">resumen_atipicos</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">,</span> <span class="s2">"ratio_t"</span><span class="p">,</span> <span class="s2">"base8"</span><span class="p">,</span> <span class="s2">"log_base8"</span><span class="p">,</span> <span class="s2">"dist_km"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">at</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="n">q1</span><span class="p">,</span> <span class="n">q3</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+<span class="n">lim</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span><span class="p">)</span>
+<span class="n">es_at</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lim</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"límite superior de Tukey para y_reg: </span><span class="si">{</span><span class="n">lim</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (razón </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">expm1</span><span class="p">(</span><span class="n">lim</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> veces la base); filas atípicas: </span><span class="si">{</span><span class="n">es_at</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">dec_base</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"base8"</span><span class="p">],</span> <span class="mi">10</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"fracción de atípicos por decil de base8 (1 = base más pequeña):"</span><span class="p">,</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">es_at</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">dec_base</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"fracción de atípicos según festivos en t+1:"</span><span class="p">,</span> <span class="n">es_at</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"festivos_t1"</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">upper</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span> <span class="o">-</span> <span class="n">tr</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+<span class="n">top</span> <span class="o">=</span> <span class="n">err</span> <span class="o">&gt;=</span> <span class="n">err</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.99</span><span class="p">)</span>
+<span class="n">imp</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"limite_tukey"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">lim</span><span class="p">),</span> <span class="s2">"frac_atipicos"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">es_at</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+       <span class="s2">"atipicos_por_decil_base8"</span><span class="p">:</span> <span class="n">es_at</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">dec_base</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+       <span class="s2">"frac_mae_top1"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">err</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">err</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"frac_mse_top1"</span><span class="p">:</span> <span class="nb">float</span><span class="p">((</span><span class="n">err</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">err</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())}</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"el 1 % de filas con mayor error aporta </span><span class="si">{</span><span class="n">imp</span><span class="p">[</span><span class="s1">'frac_mae_top1'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> del MAE y </span><span class="si">{</span><span class="n">imp</span><span class="p">[</span><span class="s1">'frac_mse_top1'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> del MSE"</span><span class="p">)</span>
+<span class="n">R</span><span class="p">[</span><span class="s2">"atipicos"</span><span class="p">]</span> <span class="o">=</span> <span class="n">imp</span> <span class="o">|</span> <span class="p">{</span><span class="s2">"tabla"</span><span class="p">:</span> <span class="n">at</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s2">"records"</span><span class="p">)}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">OBJ</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">AZUL</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">lim</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"y_reg (escala log en el eje y); línea: límite de Tukey"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">es_at</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">dec_base</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">NARANJA</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"decil de base8"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"fracción de atípicos por decil de la base"</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">figura</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"series_atipicos"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           asimetria  curtosis_exceso  frac_tukey  frac_z_robusta
+variable                                                         
+y_reg          0.549            1.461       0.021           0.008
+ratio_t        1.445            4.510       0.045           0.024
+base8          6.594           69.339       0.122           0.165
+log_base8      0.880            0.219       0.012           0.003
+dist_km        1.719            3.171       0.056           0.053
+límite superior de Tukey para y_reg: 1.577 (razón 3.84 veces la base); filas atípicas: 0.0208
+fracción de atípicos por decil de base8 (1 = base más pequeña): [0.0709 0.0452 0.0317 0.0223 0.0158 0.0106 0.0065 0.0033 0.0011 0.0001]
+fracción de atípicos según festivos en t+1: {0: 0.0205, 1: 0.021, 2: 0.0257}
+el 1 % de filas con mayor error aporta 0.046 del MAE y 0.130 del MSE
+</pre></div>
+</div>
+<img alt="../_images/a514b0c3137b457919b483372044dd12ca1d307c9e1e5c7b8165fbe84181a483.png" src="../_images/a514b0c3137b457919b483372044dd12ca1d307c9e1e5c7b8165fbe84181a483.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">y_reg</span></code> tiene asimetría de 0,549 y curtosis en exceso de 1,461, colas moderadas para una variable en
+escala logarítmica. El límite superior de Tukey es 1,577 (3,84 veces la base) y deja fuera al 2,08 %
+de las filas. Los atípicos se concentran en las bases pequeñas: son el 7,09 % del decil con menor
+<code class="docutils literal notranslate"><span class="pre">base8</span></code> y el 0,01 % del decil con mayor base. Con pocos kilos de referencia, un envío normal
+multiplica la razón. Los festivos no los explican: con 0, 1 y 2 festivos en t+1, la fracción de
+atípicos es 2,05 %, 2,10 % y 2,57 %. Su peso en el error depende de la métrica: el 1 % de filas con
+mayor error de la mediana constante aporta el 4,6 % del MAE y el 13,0 % del MSE.</p>
+<ul class="simple">
+<li><p><strong>Preprocesamiento.</strong> No se eliminan ni se recortan. Son envíos reales y el modelo debe
+pronosticarlos. <code class="docutils literal notranslate"><span class="pre">log_base8</span></code> se mantiene como covariable para que el modelo sepa cuándo la razón es
+ruidosa.</p></li>
+<li><p><strong>Arquitectura.</strong> El MAE como métrica primaria y una pérdida L1 o Huber evitan que este 2 % domine
+el ajuste, como pasaría con el MSE. El RMSE secundario mostrará su efecto.</p></li>
+<li><p><strong>Fuga.</strong> Ninguna: el criterio de Tukey solo se usa para describir.</p></li>
+</ul>
+</section>
+<section id="b-7-implicaciones-para-el-diseno">
+<h2>B.7 Implicaciones para el diseño<a class="headerlink" href="#b-7-implicaciones-para-el-diseno" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hallazgo</p></th>
+<th class="head"><p>Decisión</p></th>
+<th class="head"><p>Dónde se aplica</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Pronóstico de la semana siguiente</p></td>
+<td><p>Horizonte h = 1, una salida directa (sin estrategia multi-paso)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src/</span></code> (Lina)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ACF agrupada hasta el rezago 53; la ridge se estabiliza en 52</p></td>
+<td><p>Ventana L = 52 semanas, t−51 a t</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eda/decisiones_para_modelos.md</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>94,7 % de corredores estacionarios en <code class="docutils literal notranslate"><span class="pre">y_reg</span></code></p></td>
+<td><p>Sin diferenciar; escala de la ventana con <code class="docutils literal notranslate"><span class="pre">base8</span></code> de la fila</p></td>
+<td><p>ventanas</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ausencias MNAR, el 72 % de ellas son ceros</p></td>
+<td><p>Nivel 0 más máscaras <code class="docutils literal notranslate"><span class="pre">observado</span></code> e <code class="docutils literal notranslate"><span class="pre">iniciado</span></code>; sin interpolar</p></td>
+<td><p>ventanas</p></td>
+</tr>
+<tr class="row-even"><td><p>41,6 % de corredores con menos de 52 semanas; 6 % de varianza entre corredores</p></td>
+<td><p>Modelo global; <em>embeddings</em> opcionales</p></td>
+<td><p>modelos</p></td>
+</tr>
+<tr class="row-odd"><td><p>ARCH y BDS rechazan; atípicos en bases pequeñas</p></td>
+<td><p>MAE primaria; pérdida L1 o Huber</p></td>
+<td><p>entrenamiento</p></td>
+</tr>
+<tr class="row-even"><td><p>Sin quiebres en la serie nacional</p></td>
+<td><p>Validación de origen móvil con hueco de 8 semanas</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src/</span></code> (Lina)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Riesgo principal: fuga temporal.</strong> Hay cuatro puntos que verificar en el código de los modelos:
+(1) la ventana termina en t y nunca toma la columna t+1 de la matriz; (2) los escaladores y
+cualquier estadístico de normalización se ajustan solo con las filas de ajuste de cada origen;
+(3) entre el ajuste y la evaluación de cada origen queda el hueco de 8 semanas, porque <code class="docutils literal notranslate"><span class="pre">base8</span></code> y
+las variables de 26 semanas comparten semanas con las filas vecinas; (4) la parada temprana usa un
+bloque posterior al ajuste, no la prueba.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ruta</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">guardar</span><span class="p">(</span><span class="s2">"series_resultados"</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"resultados guardados en"</span><span class="p">,</span> <span class="n">ruta</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">RAIZ</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>resultados guardados en eda/resultados/series_resultados.json
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "dl-sipsa"
+        },
+        kernelOptions: {
+            name: "dl-sipsa",
+            path: "./eda"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'dl-sipsa'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_eda_general.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.1. EDA general</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="decisiones_para_modelos.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Decisiones del EDA para los modelos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-visualizacion-y-descomposicion">B.1 Visualización y descomposición</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-estacionariedad-adf-y-kpss-conjuntas">B.2 Estacionariedad: ADF y KPSS conjuntas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-dependencia-temporal-y-longitud-de-la-ventana">B.3 Dependencia temporal y longitud de la ventana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-4-no-linealidad-y-heterocedasticidad">B.4 No linealidad y heterocedasticidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-5-frecuencia-granularidad-y-datos-faltantes">B.5 Frecuencia, granularidad y datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-6-outliers-y-anomalias">B.6 Outliers y anomalías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-7-implicaciones-para-el-diseno">B.7 Implicaciones para el diseño</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

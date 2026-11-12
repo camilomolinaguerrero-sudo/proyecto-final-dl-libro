@@ -1,0 +1,951 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Protocolo de tamizaje (búsquedas S1 y A1) &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'anexos/protocolo_camilo';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Protocolo de tamizaje (búsquedas W1 e I1)" href="protocolo_lina.html" />
+    <link rel="prev" title="Reproducir el proyecto" href="reproducir.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/anexos/protocolo_camilo.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Protocolo de tamizaje (búsquedas S1 y A1)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-inteligencia-artificial">Uso de inteligencia artificial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-que-alimenta">Pregunta que alimenta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-inclusion">Criterios de inclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-exclusion">Criterios de exclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedimiento">Procedimiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-del-tamizaje-de-titulo-y-resumen-2026-11-07">Resultados del tamizaje de título y resumen (2026-11-07)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fallo-sobre-los-casos-dudosos-y-el-alcance-del-texto-completo-2026-11-07">Fallo sobre los casos dudosos y el alcance del texto completo (2026-11-07)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-en-texto-completo-2026-11-08">Extracción en texto completo (2026-11-08)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-con-el-detector-de-lina-2026-11-09">Comparación con el detector de Lina (2026-11-09)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-los-34-fallos-de-desacuerdo-2026-11-09">Revisión de los 34 fallos de desacuerdo (2026-11-09)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#textos-completos-adicionales-2026-11-09">Textos completos adicionales (2026-11-09)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="protocolo-de-tamizaje-busquedas-s1-y-a1">
+<h1>Protocolo de tamizaje (búsquedas S1 y A1)<a class="headerlink" href="#protocolo-de-tamizaje-busquedas-s1-y-a1" title="Link to this heading">#</a></h1>
+<p>Fijado el 2026-11-07, antes de leer los títulos. Aplica a <code class="docutils literal notranslate"><span class="pre">registros/scopus_2026-11-07_S1.csv</span></code> y
+<code class="docutils literal notranslate"><span class="pre">registros/arxiv_2026-11-07_A1.xml</span></code>. Las decisiones quedan en <code class="docutils literal notranslate"><span class="pre">tamizaje_camilo.csv</span></code>.</p>
+<section id="uso-de-inteligencia-artificial">
+<h2>Uso de inteligencia artificial<a class="headerlink" href="#uso-de-inteligencia-artificial" title="Link to this heading">#</a></h2>
+<p>Todo lo que describe este protocolo lo hizo una herramienta de IA a pedido de Camilo:
+Claude (Anthropic), usado en la aplicación Claude Code entre el 2026-11-07 y el 2026-11-09. La
+sesión del 2026-11-09 reporta el modelo Claude Opus 5.5; Camilo debe confirmar ese dato antes del
+informe. La herramienta hizo lo siguiente:</p>
+<ul class="simple">
+<li><p>redactó los criterios I1 a I4 y E1 a E6, las reglas de fallo y este texto;</p></li>
+<li><p>hizo las búsquedas en Scopus y arXiv desde el navegador de Camilo;</p></li>
+<li><p>leyó los títulos y los resúmenes y decidió cada registro;</p></li>
+<li><p>hizo las dos auditorías por muestra y falló los 79 dudosos;</p></li>
+<li><p>abrió los textos completos con la sesión institucional de Camilo en Uninorte, después de que él
+iniciara sesión y diera los permisos del navegador;</p></li>
+<li><p>escribió y corrió los scripts de extracción.</p></li>
+</ul>
+<p>Camilo pidió cada paso y recibió los resultados, pero no leyó los registros uno por uno ni revisó
+cada decisión. Donde el texto dice «se leyeron», «se excluyó» o «revisar uno por uno», quien lo hizo
+fue la herramienta. Los criterios se fijaron antes de leer los registros, y cada decisión quedó con
+su criterio y su nota en <code class="docutils literal notranslate"><span class="pre">tamizaje_camilo.csv</span></code>, de modo que cualquiera la puede auditar.</p>
+<p>Texto propuesto para el informe:</p>
+<blockquote>
+<div><p>El tamizaje de título y resumen de los registros de Scopus y arXiv, el fallo de los casos dudosos
+y la extracción de los modelos los realizó una herramienta de inteligencia artificial (Claude, de
+Anthropic) a pedido de Camilo Molina, con criterios escritos antes de leer los registros y dos
+auditorías por muestra de las exclusiones. Ninguna de esas decisiones se basa en la lectura humana
+de cada registro.</p>
+</div></blockquote>
+</section>
+<section id="pregunta-que-alimenta">
+<h2>Pregunta que alimenta<a class="headerlink" href="#pregunta-que-alimenta" title="Link to this heading">#</a></h2>
+<p>¿Qué modelos de redes neuronales se usan como referencia para pronosticar series de tiempo
+agroalimentarias de mercado (precio, demanda o abastecimiento)? El conteo de modelos se hace en la
+etapa de texto completo, sobre los estudios incluidos.</p>
+</section>
+<section id="criterios-de-inclusion">
+<h2>Criterios de inclusión<a class="headerlink" href="#criterios-de-inclusion" title="Link to this heading">#</a></h2>
+<p>Un registro pasa el tamizaje de título y resumen si cumple los cuatro:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Código</p></th>
+<th class="head"><p>Criterio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I1</p></td>
+<td><p>La variable pronosticada es una magnitud de mercado o de cadena de abastecimiento agroalimentaria: precio (mayorista, minorista, al productor, futuros de productos agrícolas), demanda, ventas o consumo, abastecimiento, llegadas, despachos o volumen comercializado, producción agregada tratada como serie de oferta, exportaciones o importaciones, inventarios o reservas de alimentos</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2</p></td>
+<td><p>Usa al menos una red neuronal (MLP o ANN, ELM, RNN, LSTM, GRU, CNN, TCN, Transformer, o un híbrido que contenga una de ellas)</p></td>
+</tr>
+<tr class="row-even"><td><p>I3</p></td>
+<td><p>Pronostica valores futuros en el tiempo (horizonte posterior a la información usada)</p></td>
+</tr>
+<tr class="row-odd"><td><p>I4</p></td>
+<td><p>Estudio empírico primario: artículo, ponencia o capítulo, con texto completo en inglés o español</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Que el estudio compare la red con al menos otro modelo, criterio I-1 de la respuesta a Lina, se
+verifica en el texto completo, porque muchos resúmenes no lo dicen.</p>
+</section>
+<section id="criterios-de-exclusion">
+<h2>Criterios de exclusión<a class="headerlink" href="#criterios-de-exclusion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Código</p></th>
+<th class="head"><p>Motivo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>E1</p></td>
+<td><p>Tipo de documento: revisión, revisión de congreso (actas completas), fe de erratas, editorial, carta, nota, libro completo, artículo de datos o retractado</p></td>
+</tr>
+<tr class="row-odd"><td><p>E2</p></td>
+<td><p>Idioma del texto completo distinto de inglés o español</p></td>
+</tr>
+<tr class="row-even"><td><p>E3</p></td>
+<td><p>La variable no es agroalimentaria de mercado: rendimiento o fenología de cultivos, enfermedades o plagas, calidad, inocuidad o frescura, clima, agua, suelo, energía, emisiones, productos no alimentarios (petróleo, metales, acciones, carbono), salud animal o humana, logística sin variable de mercado</p></td>
+</tr>
+<tr class="row-odd"><td><p>E4</p></td>
+<td><p>No es pronóstico temporal: clasificación, detección, segmentación, estimación del estado actual, optimización o simulación sin pronóstico</p></td>
+</tr>
+<tr class="row-even"><td><p>E5</p></td>
+<td><p>No usa redes neuronales</p></td>
+</tr>
+<tr class="row-odd"><td><p>E6</p></td>
+<td><p>Duplicado de otro registro (mismo DOI o mismo título normalizado)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Se registra el primer criterio que falla, en el orden E6, E1, E2, E3, E4, E5.</p>
+</section>
+<section id="procedimiento">
+<h2>Procedimiento<a class="headerlink" href="#procedimiento" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Duplicados.</strong> Mismo DOI o mismo título normalizado (minúsculas, solo letras y números). Se
+conserva el registro de Scopus. Las actas de congreso que comparten título pero son volúmenes
+distintos no son duplicados; salen por E1.</p></li>
+<li><p><strong>Metadatos.</strong> E1 y E2 se aplican con los campos <code class="docutils literal notranslate"><span class="pre">Document</span> <span class="pre">Type</span></code> y <code class="docutils literal notranslate"><span class="pre">Language</span> <span class="pre">of</span> <span class="pre">Original</span> <span class="pre">Document</span></code> de Scopus.</p></li>
+<li><p><strong>Títulos.</strong> Se leen todos los títulos restantes. Se excluye solo cuando el título muestra sin
+ambigüedad un motivo E3 a E5. Ante la duda, el registro pasa.</p></li>
+<li><p><strong>Resúmenes.</strong> Se leen título, resumen y palabras clave de los que pasaron, y se decide
+<code class="docutils literal notranslate"><span class="pre">incluir</span></code>, <code class="docutils literal notranslate"><span class="pre">excluir</span></code> o <code class="docutils literal notranslate"><span class="pre">dudoso</span></code>. Los dudosos pasan a texto completo.</p></li>
+<li><p><strong>Auditoría.</strong> Se relee el resumen de una muestra aleatoria (semilla 42) de los excluidos por
+título para estimar cuántos se habrían incluido. Si aparece alguno, se revisa la regla que lo
+excluyó y se repite el paso 3.</p></li>
+<li><p><strong>Revisiones.</strong> Las revisiones excluidas por E1 se listan aparte. Sirven para buscar estudios
+primarios por referencias (bola de nieve), que se registran como una búsqueda nueva.</p></li>
+</ol>
+</section>
+<section id="resultados-del-tamizaje-de-titulo-y-resumen-2026-11-07">
+<h2>Resultados del tamizaje de título y resumen (2026-11-07)<a class="headerlink" href="#resultados-del-tamizaje-de-titulo-y-resumen-2026-11-07" title="Link to this heading">#</a></h2>
+<p>Las cifras salen de <code class="docutils literal notranslate"><span class="pre">tamizaje_conteos.json</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paso</p></th>
+<th class="head"><p>Registros</p></th>
+<th class="head"><p>Salen</p></th>
+<th class="head"><p>Motivo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Identificados</p></td>
+<td><p>2.225 (Scopus 2.196, arXiv 29)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1. Duplicados</p></td>
+<td><p>2.225</p></td>
+<td><p>6</p></td>
+<td><p>E6 (los 6 son de arXiv y ya estaban en Scopus)</p></td>
+</tr>
+<tr class="row-even"><td><p>2. Metadatos</p></td>
+<td><p>2.219</p></td>
+<td><p>230</p></td>
+<td><p>E1: 113, E2: 117</p></td>
+</tr>
+<tr class="row-odd"><td><p>3. Títulos</p></td>
+<td><p>1.989</p></td>
+<td><p>1.418</p></td>
+<td><p>E3: 1.361, E1: 46, E4: 9, E5: 2</p></td>
+</tr>
+<tr class="row-even"><td><p>4. Resúmenes</p></td>
+<td><p>571</p></td>
+<td><p>46</p></td>
+<td><p>E3: 29, E4: 13, E5: 3, E1: 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pasan a texto completo</p></td>
+<td><p>525</p></td>
+<td><p></p></td>
+<td><p>446 incluidos y 79 dudosos</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Auditoría.</strong> En una muestra aleatoria de 100 exclusiones por título (semilla 42) apareció un falso
+negativo: S1-1351, cuyo título no menciona precios. Se revisó la regla y se buscaron en los resúmenes
+de todas las exclusiones por título las frases que unen <em>predict</em> o <em>forecast</em> con <em>price</em>, <em>demand</em>,
+<em>sales</em>, <em>consumption</em>, <em>arrivals</em>, <em>exports</em> o <em>imports</em>. Se leyeron los 154 casos encontrados:
+3 pasaron a incluidos y 13 a dudosos, casi todos plataformas cuyo título no menciona el pronóstico
+de precios. Una segunda muestra de 60 exclusiones (semilla 7) no encontró falsos negativos.</p>
+<p><strong>Coherencia.</strong> Cuatro registros que pronostican rendimiento (S1-0695, S1-0926, S1-1808, S1-1958) se
+habían marcado como dudosos en el resumen. Se excluyeron por E3, igual que los demás estudios de
+rendimiento. Los de «grain yield» de China siguen como dudosos porque esa expresión suele traducir
+producción total y no rendimiento por hectárea; el texto completo lo aclara.</p>
+</section>
+<section id="fallo-sobre-los-casos-dudosos-y-el-alcance-del-texto-completo-2026-11-07">
+<h2>Fallo sobre los casos dudosos y el alcance del texto completo (2026-11-07)<a class="headerlink" href="#fallo-sobre-los-casos-dudosos-y-el-alcance-del-texto-completo-2026-11-07" title="Link to this heading">#</a></h2>
+<p>Se fijaron reglas para los casos frontera y después se leyó el resumen completo de los 79 dudosos.</p>
+<p><strong>Reglas.</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Productos no alimentarios.</strong> El algodón y la resina se excluyen por E3, porque I1 exige una
+variable <em>agroalimentaria</em>. Un estudio que mezcla un producto alimentario con uno no alimentario
+(S1-0077: algodón y cúrcuma) se mantiene.</p></li>
+<li><p><strong>Servicios de comida.</strong> La demanda de restaurantes, domicilios, eventos y alimentos procesados se
+excluye por E3. Las ventas de productos frescos en mercados, supermercados o bodegas sí entran.</p></li>
+<li><p><strong>Producción.</strong> Entra la producción agregada (regional, provincial o nacional) tratada como serie.
+Se excluyen por E3 la producción de una sola finca y el rendimiento por hectárea, y por E4 la
+producción estimada con insumos del mismo período (no es pronóstico).</p></li>
+<li><p><strong>Plataformas.</strong> Una plataforma entra solo si el resumen dice que el precio o la demanda se
+pronostica con una red. Si no lo dice, sale por E5.</p></li>
+<li><p><strong>Red como referencia.</strong> Un estudio cuyo modelo propuesto no es una red entra si compara contra una
+red (por ejemplo, LightGBM frente a ANN), porque esa red es justamente una referencia.</p></li>
+</ol>
+<p><strong>Resultado.</strong> De los 79 dudosos, 33 entran, 45 salen (E3: 18, E4: 14, E5: 11, E1: 2) y 1 (S1-0416)
+pasa a texto completo porque el resumen no dice qué serie usa. Pasan 480 estudios.</p>
+<p><strong>Alcance del texto completo.</strong> Para cada estudio que pasa se contaron las familias de redes que
+nombran el título, el resumen y las palabras clave (columna <code class="docutils literal notranslate"><span class="pre">familias_resumen</span></code>).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Nivel</p></th>
+<th class="head"><p>Estudios</p></th>
+<th class="head"><p>Criterio</p></th>
+<th class="head"><p>Lectura</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>164</p></td>
+<td><p>Nombra dos o más familias de redes</p></td>
+<td><p>Texto completo: modelos, referencias, métricas y horizonte</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>268</p></td>
+<td><p>Nombra una familia</p></td>
+<td><p>Extracción desde el resumen; texto completo solo si el resumen no dice contra qué compara</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>48</p></td>
+<td><p>Dice «red neuronal» o «aprendizaje profundo» sin precisar</p></td>
+<td><p>Texto completo para identificar la arquitectura</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El conteo de los modelos de referencia más usados se hace dos veces: con el nivel A solo y con todos
+los niveles. Si los tres primeros coinciden, la selección es robusta; si no, se reporta la
+diferencia. Este criterio se fija antes de leer los textos completos.</p>
+</section>
+<section id="extraccion-en-texto-completo-2026-11-08">
+<h2>Extracción en texto completo (2026-11-08)<a class="headerlink" href="#extraccion-en-texto-completo-2026-11-08" title="Link to this heading">#</a></h2>
+<p><strong>Obtención de los textos.</strong> De los 212 estudios de los niveles A y C se consiguieron 90 textos
+completos que entraron a la extracción:</p>
+<ul class="simple">
+<li><p>acceso abierto descargado directamente (OpenAlex, Europe PMC, arXiv);</p></li>
+<li><p>Springer, Elsevier y Taylor &amp; Francis leídos con el acceso institucional de Uninorte.</p></li>
+</ul>
+<p>No fueron accesibles:</p>
+<ul class="simple">
+<li><p>IEEE (45 estudios), que responde con un control antibots;</p></li>
+<li><p>Wiley y algunos capítulos de libro, que no están suscritos;</p></li>
+<li><p>MDPI, cuya página bloquea la extracción automática.</p></li>
+</ul>
+<p>Esos estudios se extraen desde el resumen y quedan marcados en la columna <code class="docutils literal notranslate"><span class="pre">fuente_extraccion</span></code>. Los
+textos completos no se guardan en el repositorio por derechos de autor; solo se guardan los campos
+extraídos.</p>
+<p><strong>Método.</strong> Un script cuenta en cada texto las familias de redes, las referencias no neuronales, las
+métricas, la frecuencia de los datos y el horizonte. Para no contar los modelos que el artículo solo
+cita en su revisión de literatura, el conteo empieza en la sección de resultados o experimentos y
+exige al menos dos menciones. Ese ajuste salió de revisar uno por uno una muestra de 8 textos
+(semilla 42); la revisión la hizo la misma herramienta. Antes del ajuste, S1-1564 aparecía con MLP, ELM, RNN y CNN; después quedan sus referencias
+reales, TDNN y ARIMA. Persisten dos limitaciones:</p>
+<ul class="simple">
+<li><p>el script no distingue el modelo propuesto de las referencias: cuenta las familias que el estudio
+usa o compara;</p></li>
+<li><p>el horizonte no se detecta en 56 de los 90 textos.</p></li>
+</ul>
+<p><strong>Resultado</strong> (<code class="docutils literal notranslate"><span class="pre">conteo_modelos.json</span></code>, <code class="docutils literal notranslate"><span class="pre">extraccion_texto_completo.csv</span></code>). Las tres familias más usadas
+son las mismas en los tres conteos de sensibilidad:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Conteo</p></th>
+<th class="head"><p>1.º</p></th>
+<th class="head"><p>2.º</p></th>
+<th class="head"><p>3.º</p></th>
+<th class="head"><p>4.º</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Todos los niveles (480)</p></td>
+<td><p>LSTM (246)</p></td>
+<td><p>MLP/ANN (167)</p></td>
+<td><p>CNN (69)</p></td>
+<td><p>Transformer (59)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nivel A (164)</p></td>
+<td><p>LSTM (122)</p></td>
+<td><p>MLP/ANN (63)</p></td>
+<td><p>CNN (61)</p></td>
+<td><p>GRU (49)</p></td>
+</tr>
+<tr class="row-even"><td><p>Solo texto completo (90)</p></td>
+<td><p>LSTM (63)</p></td>
+<td><p>MLP/ANN (38)</p></td>
+<td><p>CNN (31)</p></td>
+<td><p>Transformer (27)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La selección LSTM, MLP y CNN es robusta según el criterio fijado. El cuarto puesto varía entre
+Transformer y GRU.</p>
+<p>En los 90 textos completos:</p>
+<ul class="simple">
+<li><p>la referencia no neuronal más usada es ARIMA/SARIMA (42), seguida de SVR/SVM (23);</p></li>
+<li><p>solo 13 incluyen una referencia ingenua o de persistencia;</p></li>
+<li><p>24 aplican la prueba de Diebold-Mariano;</p></li>
+<li><p>la mayoría usa datos diarios (49).</p></li>
+</ul>
+</section>
+<section id="comparacion-con-el-detector-de-lina-2026-11-09">
+<h2>Comparación con el detector de Lina (2026-11-09)<a class="headerlink" href="#comparacion-con-el-detector-de-lina-2026-11-09" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">scripts_camilo/comparar_detectores.py</span></code> aplica los dos detectores de familias al mismo texto: título,
+resumen y palabras clave de los 480 estudios. El de Lina se lee de <code class="docutils literal notranslate"><span class="pre">contar_modelos_conjunto.py</span></code> en
+su rama (commit 8035db1). Las cifras están en <code class="docutils literal notranslate"><span class="pre">comparacion_detectores.json</span></code> y el detalle por estudio
+en <code class="docutils literal notranslate"><span class="pre">comparacion_detectores.csv</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Resultado.</strong> Los dos dan el mismo orden: LSTM, MLP/ANN y CNN. LSTM (240), CNN (56), GRU (55) y
+Transformer (48) tienen el mismo conteo en ambos. Difieren 47 estudios, y el nivel coincide en el
+94,6 %.</p></li>
+<li><p><strong>RNN simple (32 frente a 50).</strong> La expresión de Lina incluye «recurrent neural», que también
+aparece al describir una LSTM o una GRU («gated recurrent neural network») y en las palabras clave
+de Scopus. De las 18 diferencias, unas 5 son RNN simples (S1-0251, S1-0670, S1-0736, S1-1357,
+S1-2015). Mi detector no halla ninguna de las cinco; en tres falla porque <code class="docutils literal notranslate"><span class="pre">\brnn\b</span></code> no acepta el
+plural «rnns».</p></li>
+<li><p><strong>MLP/ANN (145 frente a 154).</strong> Lina cuenta «deep neural network», que en 8 de los 9 casos es un
+término genérico o una palabra clave. El noveno, S1-1947, nombra una «bp network» que mi
+expresión no reconoce.</p></li>
+<li><p><strong>Familias que solo tiene Lina.</strong> Autoencoder/GAN (8), ANFIS (3), Reservorio (3) y DBN (2). Mi
+detector no las busca.</p></li>
+<li><p><strong>Otros casos.</strong> Lina cuenta DLinear como N-BEATS (2), aunque es un modelo lineal, y BERT como
+Transformer en S1-0631, donde se usa para identificar temas y no para pronosticar. Mi detector
+halla TFT en S1-0420 y una red NAR escrita «auto-regressive» en S1-1472, y el de ella no.</p></li>
+</ul>
+<p>Ninguna de estas diferencias toca las tres primeras familias, así que no se rehízo la extracción.
+Para el informe conviene una sola expresión por familia que tome lo correcto de cada lado:</p>
+<ul class="simple">
+<li><p>de Lina: «rnns», «bp network» y las cuatro familias que solo ella busca;</p></li>
+<li><p>de este protocolo: TFT, «auto-regressive» y quitar «recurrent neural» y «deep neural network»
+como sinónimos de RNN y MLP;</p></li>
+<li><p>de ninguno: DLinear, que no es una red de la familia N-BEATS.</p></li>
+</ul>
+</section>
+<section id="revision-de-los-34-fallos-de-desacuerdo-2026-11-09">
+<h2>Revisión de los 34 fallos de desacuerdo (2026-11-09)<a class="headerlink" href="#revision-de-los-34-fallos-de-desacuerdo-2026-11-09" title="Link to this heading">#</a></h2>
+<p>Lina dejó en <code class="docutils literal notranslate"><span class="pre">resolucion_desacuerdos.csv</span></code> el fallo de los 34 desacuerdos entre los dos tamizajes.
+A pedido de Camilo, la herramienta de la sección «Uso de inteligencia artificial» los revisó con el
+título, el resumen completo de Scopus, los criterios y las cinco reglas de fallo. El juicio de cada
+caso está en <code class="docutils literal notranslate"><span class="pre">revision_fallos_desacuerdos.csv</span></code>, y no se modificó el archivo de Lina.</p>
+<p><strong>Confirmación humana.</strong> El mismo 2026-11-09, Camilo leyó título y resumen de los 7 casos marcados
+(los dos con cambio y los cinco con reserva) y decidió cada uno. Sus decisiones están en la columna
+<code class="docutils literal notranslate"><span class="pre">decision_camilo</span></code> y coinciden con la revisión en los 7: incluir L0853, L0065, L0085 y L0109, y excluir
+L0869, L0364 y L0959. Camilo informó que también revisó los otros 27, en los que la revisión coincide
+con el fallo de Lina; para esos no quedó una decisión caso por caso.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Juicio</p></th>
+<th class="head"><p>Casos</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>De acuerdo</p></td>
+<td><p>27</p></td>
+</tr>
+<tr class="row-odd"><td><p>De acuerdo con reserva</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>Cambia el criterio</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>En desacuerdo</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>En desacuerdo: L0853 (S1-0144).</strong> El fallo lo excluye por E5 porque el precio lo pronostica un
+gradient boosting. Pero la red de grafos (GraphSAGE) pronostica la producción de 31 distritos con
+17 años de datos, y la regla 3 admite la producción regional como serie de oferta. Se propone
+incluirlo y confirmar en el texto completo que ese pronóstico es temporal.</p></li>
+<li><p><strong>Cambia el criterio: L0869 (S1-0858).</strong> Sale igual, pero por E4 y no por E3: estima la
+producción con clima y suelo del mismo período, que la regla 3 manda a E4.</p></li>
+<li><p><strong>Verificar en el texto completo.</strong> Tres incluidos dependen de un dato que el resumen no da:</p>
+<ul>
+<li><p>L0065: la CNN clasifica imágenes para elegir el modelo de pronóstico; entra solo si algún
+candidato es una red.</p></li>
+<li><p>L0085: «productivity» puede ser rendimiento por hectárea.</p></li>
+<li><p>L0109: el modelo usa el clima del mismo mes; sin horizonte posterior saldría por E4.</p></li>
+</ul>
+</li>
+<li><p><strong>Reservas sin cambio.</strong> En L0364 y L0959 el fallo se sostiene con las reglas, pero el resumen
+es ambiguo.</p></li>
+</ul>
+<p>Con esta revisión el conjunto pasaría de 490 a 491 estudios; L0853 aporta una GNN. No cambian las
+tres primeras familias.</p>
+</section>
+<section id="textos-completos-adicionales-2026-11-09">
+<h2>Textos completos adicionales (2026-11-09)<a class="headerlink" href="#textos-completos-adicionales-2026-11-09" title="Link to this heading">#</a></h2>
+<p>Se buscó el texto completo de los cuatro casos de la revisión que dependían de él (L0853, L0065,
+L0085 y L0109) y de los 30 estudios de niveles A y C que la extracción de Lina dejó desde el
+resumen. Se usó el mismo detector, ejecutado dentro de la página del artículo o sobre el PDF de
+acceso abierto; el texto no sale del navegador ni se guarda. Al patrón que marca el inicio de los
+resultados se le añadieron los numerales romanos de IEEE («IV. Results»). El resultado está en
+<code class="docutils literal notranslate"><span class="pre">texto_completo_adicional_camilo.csv</span></code>.</p>
+<p><strong>Obtenidos (6).</strong> L0065 (Scientific Reports), L0085 (Cogent Engineering), L0109 (IEEE Access, de
+acceso abierto), L0511 (copia en el repositorio de Göttingen), L0328 (Emerald) y L0286 (Current
+Science).</p>
+<p><strong>No accesibles (28).</strong></p>
+<ul class="simple">
+<li><p>26 de IEEE: por el proxy de Uninorte, IEEE respondió con una verificación contra bots («Max
+challenge attempts exceeded»), que no se intentó evitar. Entre ellos está L0853.</p></li>
+<li><p>L0029: su DOI no está registrado (doi.org responde 404).</p></li>
+<li><p>La página de Oxford de L0511 también pidió esa verificación, pero se encontró la copia abierta.</p></li>
+</ul>
+<p><strong>Verificaciones.</strong> Los tres incluidos que dependían del texto completo se mantienen:</p>
+<ul class="simple">
+<li><p>L0065: la CNN elige entre seis candidatos, y dos son redes (BPNN y ELM).</p></li>
+<li><p>L0085: la serie es la producción provincial en toneladas, no rendimiento por hectárea.</p></li>
+<li><p>L0109: el clima entra rezagado (t−1) y la validación respeta el orden temporal.</p></li>
+</ul>
+<p>L0853 queda incluido por la revisión, sin confirmar en el texto completo.</p>
+<p><strong>Efecto en el conteo.</strong> En el corte de texto completo del conteo conjunto, los 90 estudios pasan a
+96: LSTM 63 → 65, MLP/ANN 37 → 40 y CNN 32 → 33. El orden no cambia. Hay dos correcciones frente al
+resumen: L0286 no usa una MLP como modelo (la ANN solo aparece en la introducción) y L0511 no usa una
+RNN simple.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./anexos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="reproducir.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Reproducir el proyecto</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="protocolo_lina.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Protocolo de tamizaje (búsquedas W1 e I1)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-inteligencia-artificial">Uso de inteligencia artificial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-que-alimenta">Pregunta que alimenta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-inclusion">Criterios de inclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-exclusion">Criterios de exclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedimiento">Procedimiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-del-tamizaje-de-titulo-y-resumen-2026-11-07">Resultados del tamizaje de título y resumen (2026-11-07)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fallo-sobre-los-casos-dudosos-y-el-alcance-del-texto-completo-2026-11-07">Fallo sobre los casos dudosos y el alcance del texto completo (2026-11-07)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-en-texto-completo-2026-11-08">Extracción en texto completo (2026-11-08)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-con-el-detector-de-lina-2026-11-09">Comparación con el detector de Lina (2026-11-09)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-los-34-fallos-de-desacuerdo-2026-11-09">Revisión de los 34 fallos de desacuerdo (2026-11-09)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#textos-completos-adicionales-2026-11-09">Textos completos adicionales (2026-11-09)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

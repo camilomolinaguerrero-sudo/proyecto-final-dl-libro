@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Estadística (Camilo) &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'diseno/estadistica';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="5. Resultados" href="../resultados/resultados.html" />
+    <link rel="prev" title="Preregistro del Entregable 1: BORRADOR" href="preregistro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/diseno/estadistica.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Estadística (Camilo)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso">Uso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diseno-de-la-inferencia">Diseño de la inferencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-humo-2026-11-07">Prueba de humo (2026-11-07)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensayo-con-las-referencias-de-lina-2026-11-11">Ensayo con las referencias de Lina (2026-11-11)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estadistica-camilo">
+<h1>Estadística (Camilo)<a class="headerlink" href="#estadistica-camilo" title="Link to this heading">#</a></h1>
+<p>Secciones 5.1 a 5.4 y 7 del enunciado, para un problema de series de tiempo con MAE como métrica
+primaria.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Archivo</p></th>
+<th class="head"><p>Contenido</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">comparacion.py</span></code></p></td>
+<td><p>Funciones: métricas, IC (t y bootstrap de bloques de semanas), Diebold–Mariano con la corrección HLN, Ljung–Box, BDS, Friedman con Nemenyi, ANOVA de medidas repetidas, Holm, tamaños de efecto, TOST, ROPE, Nadeau–Bengio, potencia y MDE, tabla comparativa y definición del baseline</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ejecutar_comparacion.py</span></code></p></td>
+<td><p>Corre todo el análisis sobre una carpeta de predicciones y escribe <code class="docutils literal notranslate"><span class="pre">resultados/</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pruebas/test_comparacion.py</span></code></p></td>
+<td><p>14 pruebas contra referencias (scipy, statsmodels y tabla de Demšar)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="uso">
+<h2>Uso<a class="headerlink" href="#uso" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>estadistica/ejecutar_comparacion.py<span class="w"> </span>RUTA/resultados/predicciones<span class="w"> </span>--delta<span class="w"> </span>&lt;δ&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--referencias<span class="w"> </span>persistencia,ingenuo_estacional<span class="w"> </span>--costo<span class="w"> </span>resultados/costo.csv
+python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>estadistica/pruebas<span class="w"> </span>-q
+</pre></div>
+</div>
+<p>Las predicciones siguen el formato de DECISIONES.md: <code class="docutils literal notranslate"><span class="pre">&lt;modelo&gt;_s&lt;semilla&gt;.parquet</span></code> con <code class="docutils literal notranslate"><span class="pre">fila</span></code>,
+<code class="docutils literal notranslate"><span class="pre">semana_t1</span></code>, <code class="docutils literal notranslate"><span class="pre">y_real</span></code> y <code class="docutils literal notranslate"><span class="pre">y_pred</span></code>. Todas las corridas deben predecir las mismas filas, y el script lo
+verifica antes de calcular.</p>
+<p><strong>Escala del MASE.</strong> Por defecto es el MAE de la persistencia en todo el entrenamiento: 0,3463.
+Para la prueba final coincide con la de <code class="docutils literal notranslate"><span class="pre">src/correr.py</span></code>; el 2026-11-08 ambas dieron 0,346341 sobre
+las mismas 622.244 filas. En validación, <code class="docutils literal notranslate"><span class="pre">src/</span></code> usa una escala por pliegue, calculada con las filas
+que entrenan cada bloque. Para reproducir sus cifras, pásala con <code class="docutils literal notranslate"><span class="pre">--escala-mase</span> <span class="pre">&lt;valor&gt;</span></code>; está en
+el registro de cada corrida, en <code class="docutils literal notranslate"><span class="pre">resultados/corridas/</span></code>.</p>
+</section>
+<section id="diseno-de-la-inferencia">
+<h2>Diseño de la inferencia<a class="headerlink" href="#diseno-de-la-inferencia" title="Link to this heading">#</a></h2>
+<p><strong>Entre semillas.</strong> Cada semilla es un par para todos los modelos. Con esos pares se calculan:</p>
+<ul class="simple">
+<li><p>la media ± DE y el IC t;</p></li>
+<li><p>Shapiro–Wilk, t pareada y Wilcoxon exacto, con Holm;</p></li>
+<li><p>Friedman con Nemenyi, usando las semillas como bloques;</p></li>
+<li><p>TOST y ROPE con δ, y la MDE con la potencia del diseño.</p></li>
+</ul>
+<p>Con 5 semillas, el Wilcoxon bilateral no puede bajar de p = 0,0625 (sección 7). Se recomiendan 6 o
+más.</p>
+<p><strong>Dentro de la prueba.</strong> El análisis trabaja con la pérdida absoluta media por semana, coherente con
+el MAE. Agregar por semana absorbe la dependencia entre los corredores de una misma semana, que es el
+bloque según DECISIONES.md. Sobre esas pérdidas se calculan:</p>
+<ul class="simple">
+<li><p>Diebold–Mariano con la corrección HLN, con h = 1 y T − 1 grados de libertad;</p></li>
+<li><p>IC por bootstrap de bloques circulares de 4 semanas.</p></li>
+</ul>
+<p>Friedman con las semanas como bloques se reporta como complemento.</p>
+<p><strong>Residuos.</strong> Ljung–Box en los rezagos 1, 4, 8 y 13, y BDS en las dimensiones 2 y 3. Se aplican al
+residuo semanal medio de cada modelo, y Ljung–Box también por corredor, con Holm. A las redes se les
+asignan 0 grados de libertad del modelo, porque no ajustan coeficientes ARMA sobre los residuos.</p>
+</section>
+<section id="prueba-de-humo-2026-11-07">
+<h2>Prueba de humo (2026-11-07)<a class="headerlink" href="#prueba-de-humo-2026-11-07" title="Link to this heading">#</a></h2>
+<p>Todavía no están las referencias ingenuas de Lina. El flujo completo se probó con predicciones
+provisionales que no se guardan en el repositorio:</p>
+<ul class="simple">
+<li><p>referencias: persistencia, ingenuo estacional y mediana;</p></li>
+<li><p>tres ridge con 6 semillas cada una, en lugar de las redes;</p></li>
+<li><p>evaluación en las últimas 52 semanas del entrenamiento, sin tocar 2025.</p></li>
+</ul>
+<p>Corrió sin errores. Falta repetirlo con los archivos de Lina.</p>
+</section>
+<section id="ensayo-con-las-referencias-de-lina-2026-11-11">
+<h2>Ensayo con las referencias de Lina (2026-11-11)<a class="headerlink" href="#ensayo-con-las-referencias-de-lina-2026-11-11" title="Link to this heading">#</a></h2>
+<p>Se repitió con los archivos reales de las referencias. <code class="docutils literal notranslate"><span class="pre">src/referencias.py</span></code> (rama <code class="docutils literal notranslate"><span class="pre">lina/pipeline</span></code>,
+commit f6e260c) se corrió en local y escribió <code class="docutils literal notranslate"><span class="pre">persistencia_s0</span></code>, <code class="docutils literal notranslate"><span class="pre">ingenuo_estacional_s0</span></code> y
+<code class="docutils literal notranslate"><span class="pre">mediana_entrenamiento_s0</span></code>. Cubren 374.740 filas en 208 semanas de validación (k1 a k4), y sus MAE
+coinciden con <code class="docutils literal notranslate"><span class="pre">resultados/referencias_validacion.csv</span></code>.</p>
+<p>Las tres redes se reemplazaron por predicciones <strong>sintéticas</strong>: mezclas de la mediana y la
+persistencia con ruido, 6 semillas cada una. Sirven solo para probar el código, así que sus cifras no
+se informan ni se guardan. El comando fue:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>estadistica/ejecutar_comparacion.py<span class="w"> </span>RUTA/resultados/predicciones<span class="w"> </span>--delta<span class="w"> </span><span class="m">0</span>.0032<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--referencias<span class="w"> </span>persistencia,ingenuo_estacional,mediana_entrenamiento
+</pre></div>
+</div>
+<p>Corrió sin errores en 5 segundos (Apple M5) y escribió los ocho archivos de salida. El formato de
+<code class="docutils literal notranslate"><span class="pre">src/salidas.py</span></code> es el que lee este script, así que con el piloto solo hay que apuntarlo a la
+carpeta de predicciones de Drive. Hay que recordar dos cosas:</p>
+<ul class="simple">
+<li><p>La mediana del entrenamiento tiene el menor MAE de las tres referencias, así que debe ir en
+<code class="docutils literal notranslate"><span class="pre">--referencias</span></code>.</p></li>
+<li><p>En validación, el MASE comparable con <code class="docutils literal notranslate"><span class="pre">src/</span></code> necesita <code class="docutils literal notranslate"><span class="pre">--escala-mase</span></code> con la escala de cada
+pliegue.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./diseno"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="preregistro.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Preregistro del Entregable 1: BORRADOR</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../resultados/resultados.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">5. Resultados</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso">Uso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diseno-de-la-inferencia">Diseño de la inferencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-humo-2026-11-07">Prueba de humo (2026-11-07)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensayo-con-las-referencias-de-lina-2026-11-11">Ensayo con las referencias de Lina (2026-11-11)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
