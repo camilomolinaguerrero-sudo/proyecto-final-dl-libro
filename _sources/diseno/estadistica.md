@@ -85,5 +85,7 @@ carpeta de predicciones de Drive. Hay que recordar dos cosas:
 
 - La mediana del entrenamiento tiene el menor MAE de las tres referencias, así que debe ir en
   `--referencias`.
+- La referencia lineal de contexto (`literatura/modelos_seleccionados.md`, sección 4) también va en
+  `--referencias`, con el nombre que le dé `src/`. No se cuenta como modelo base.
 - En validación, el MASE comparable con `src/` necesita `--escala-mase` con la escala de cada
   pliegue.

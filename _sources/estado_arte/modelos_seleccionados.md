@@ -192,8 +192,34 @@ esa limitación y no de cómo lee la ventana. La capa oculta es fija y no entra 
 
 Búsqueda aleatoria con el mismo presupuesto para las tres: 20 configuraciones por modelo y una
 semilla. Cada configuración se elige con el bloque interno de parada temprana del pliegue k4. Ese
-pliegue ya se usó para elegir la ventana, así que el bloque externo queda limpio para el piloto. El
-número 20 queda pendiente hasta que Lina mida el tiempo por época de la LSTM en la GPU.
+pliegue ya se usó para elegir la ventana, así que el bloque externo queda limpio para el piloto.
+
+**Por qué 20.** El número quedó confirmado el 2026-11-11 con el tiempo por época medido en una GPU
+Tesla T4, con datos sintéticos del tamaño de k4 (`resultados/tiempos_por_epoca.csv`, de
+`src/medir_tiempo.py`). Una época tarda de 2,3 a 2,8 s en el MLP, de 3,1 a 9,1 s en la CNN y de 2,8
+a 22,6 s en la LSTM, según la configuración. En el peor caso, las 20 configuraciones con el tamaño
+de la más grande y las 100 épocas completas, la búsqueda de la LSTM tomaría 12,6 h, repartibles en
+varias sesiones gracias a los checkpoints. Ninguna red se entrenó con datos reales para fijar este
+número.
+
+### Implementación
+
+Las tres redes están en `src/modelos.py` (rama `lina/pipeline`, commit 7324194). Su cuerpo y su
+cabeza tienen exactamente los parámetros de la sección 5. El total de `tiempos_por_epoca.csv` es
+14.861 parámetros más el de la sección 5 en cada configuración medida: es el tamaño de los
+*embeddings* con los vocabularios de los datos sintéticos. Una prueba de `src/pruebas/test_modelos.py`
+comprueba que la CNN con relleno causal ve 5 o 7 semanas.
+
+### Referencia lineal de contexto
+
+Además de las tres redes, se entrena un modelo lineal con el mismo pipeline: una sola capa densa
+sobre la ventana aplanada, las 33 covariables y los *embeddings*, sin capas ocultas ni en el cuerpo
+ni en la cabeza y sin *dropout*. Con una sola salida, los *embeddings* seguidos de la capa densa
+equivalen a un peso por categoría, como en la codificación *one-hot*. Es la versión lineal de los
+tres modelos base, con la pérdida de la SVR lineal con ε = 0 y sin el término ‖**w**‖²
+(`sintesis_y_equivalencia_camilo.md`, sección 3). Solo se busca la tasa de aprendizaje, en el mismo
+conjunto y con el mismo bloque de k4. Es una referencia de contexto, como las ingenuas, no un cuarto
+modelo base.
 
 | Hiperparámetro | MLP | LSTM | CNN |
 | --- | --- | --- | --- |
@@ -241,9 +267,9 @@ de la ventaja puede venir del tamaño.
 
 ## 6. Pendiente
 
-1. Lina confirma las 20 configuraciones por modelo cuando mida el tiempo por época de la LSTM en la
-   GPU.
-2. Secciones del enunciado que faltan:
-   - Camilo: la tabla de síntesis con métricas y la equivalencia con el modelo logístico o la SVR
-     lineal.
-   - Lina: el análisis por modelo. La sección 5 ya da las fórmulas de los parámetros.
+1. Lina: la búsqueda de hiperparámetros, el piloto y el análisis por modelo. La sección 5 ya da las
+   fórmulas de los parámetros.
+2. Camilo: la comparación estadística sobre las predicciones del piloto (`estadistica/`).
+
+Cerrado el 2026-11-12: las 20 configuraciones, la implementación de las tres redes, la tabla de
+síntesis con la equivalencia (`sintesis_y_equivalencia_camilo.md`) y la referencia lineal de contexto.

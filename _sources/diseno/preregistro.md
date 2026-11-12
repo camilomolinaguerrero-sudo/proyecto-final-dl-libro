@@ -35,10 +35,13 @@
 
 ## 5. Modelos base
 
-PENDIENTE: los tres modelos de `literatura/modelos_seleccionados.md`, con su configuración y las referencias que la respaldan.
+Los tres modelos, su configuración y las referencias que la respaldan están en `literatura/modelos_seleccionados.md`, acordado el 2026-11-11. La implementación está en `src/modelos.py`, y su número de parámetros coincide con el de ese archivo.
 
-- **Espacio de búsqueda y presupuesto:** PENDIENTE; el mismo método y presupuesto para los tres.
-- **Pérdida, optimizador, tamaño de lote, épocas y paciencia:** PENDIENTE; deben venir de la literatura o de una configuración mínima justificada.
+- **Modelos:** LSTM, MLP y CNN 1D, con la misma entrada y una cabeza común con una capa oculta de 64 unidades. Los *embeddings* tienen el mismo tamaño en todos los pliegues (16, 16, 16 y 5), y la CNN usa relleno causal.
+- **Pérdida, optimizador, tamaño de lote, épocas y paciencia:** MAE; Adam sin planificador, sin decaimiento de pesos y sin recorte de gradiente; lote de 512; máximo de 100 épocas con paciencia 10.
+- **Espacio de búsqueda:** unidades o filtros en {32, 64, 128}; 2 o 3 capas en el MLP y la CNN y 1 o 2 en la LSTM; *dropout* en {0; 0,1; 0,3}; tasa de aprendizaje en {1e-4, 3e-4, 1e-3}; *kernel* de la CNN fijo en 3. Son 54 combinaciones por modelo.
+- **Método y presupuesto:** búsqueda aleatoria de 20 configuraciones por modelo, con una semilla. Cada configuración se elige con el bloque interno de parada temprana del pliegue k4.
+- **Por qué 20:** el 2026-11-11 se midió el tiempo por época en una GPU Tesla T4, con datos sintéticos del tamaño de k4 (`resultados/tiempos_por_epoca.csv`, de `src/medir_tiempo.py`). Una época tarda de 2,3 a 2,8 s en el MLP, de 3,1 a 9,1 s en la CNN y de 2,8 a 22,6 s en la LSTM, según la configuración. Si las 20 configuraciones tardaran lo que la más grande y llegaran a las 100 épocas, contando el guardado del checkpoint, la búsqueda tomaría 1,6 h en el MLP, 5,1 h en la CNN y 12,6 h en la LSTM. Los checkpoints permiten repartirla en varias sesiones de Colab.
 
 ## 6. Piloto
 
@@ -68,4 +71,5 @@ Según `estadistica/README.md`: comparaciones pareadas por semilla con correcci�
 - La herramienta del lado de Lina también propuso cómo resolver los 34 desacuerdos dentro del período y extrajo los modelos de los 61 estudios que faltaban. Lina confirmó esos 34 fallos el 2026-11-09 a partir del título y la razón de cada uno. Una segunda revisión con la herramienta de Camilo marcó 7 casos, que los dos autores leyeron con título y resumen; con su acuerdo, L0853 pasó a incluido y L0869 sigue excluido, pero por E4 en lugar de E3 (2026-11-10). El acuerdo entre los dos tamizajes (κ = 0,91) compara dos procedimientos hechos con la misma herramienta de IA, no dos revisores humanos. El detalle está en `literatura/protocolo_tamizaje_lina.md` y en `literatura/protocolo_tamizaje_camilo.md`.
 - El filtro 2018-2026 se acordó después de los dos tamizajes y de ver que no cambiaba las tres familias más nombradas en los resúmenes de los estudios de Camilo, cuya propuesta escrita inicial era no limitar los años. Se mantiene por dos razones. El período compara las familias en años en que todas se usaban: los 52 estudios que el filtro deja fuera nombran sobre todo MLP/ANN (40), y LSTM, CNN y GRU casi no aparecen (2, 2 y 1). Y no altera la selección: sin el filtro, las tres familias más usadas son las mismas y en el mismo orden, LSTM (274), MLP/ANN (182) y CNN (76) en 543 estudios (`literatura/conteo_modelos_conjunto.json`). Otros 5 estudios fuera del período los incluye solo uno de los dos tamizajes y no tienen fallo; con ellos el resultado tampoco cambia.
 - El 2026-11-09, antes de correr cualquier modelo, se vio que las 52 semanas de la prueba no alcanzan para detectar δ en una comparación por semanas entre referencias ingenuas (sección 4). δ se mantuvo en el 1 %.
+- El número de configuraciones de la búsqueda se fijó el 2026-11-11 con el tiempo por época medido sobre datos sintéticos, sin entrenar ningún modelo con datos reales.
 - El margen δ se ancló primero a la persistencia y se cambió a la mediana del entrenamiento después de ver los MAE de las referencias en validación, antes de correr cualquiera de los tres modelos.

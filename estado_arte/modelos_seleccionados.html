@@ -399,6 +399,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cabeza-comun">Cabeza común</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-comun-a-los-tres">Entrenamiento, común a los tres</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-de-hiperparametros">Búsqueda de hiperparámetros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia-lineal-de-contexto">Referencia lineal de contexto</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-de-parametros">5. Número de parámetros</a></li>
@@ -756,8 +758,33 @@ completos en la GPU, así que la razón es el tiempo por época y no la memoria.
 <h3>Búsqueda de hiperparámetros<a class="headerlink" href="#busqueda-de-hiperparametros" title="Link to this heading">#</a></h3>
 <p>Búsqueda aleatoria con el mismo presupuesto para las tres: 20 configuraciones por modelo y una
 semilla. Cada configuración se elige con el bloque interno de parada temprana del pliegue k4. Ese
-pliegue ya se usó para elegir la ventana, así que el bloque externo queda limpio para el piloto. El
-número 20 queda pendiente hasta que Lina mida el tiempo por época de la LSTM en la GPU.</p>
+pliegue ya se usó para elegir la ventana, así que el bloque externo queda limpio para el piloto.</p>
+<p><strong>Por qué 20.</strong> El número quedó confirmado el 2026-11-11 con el tiempo por época medido en una GPU
+Tesla T4, con datos sintéticos del tamaño de k4 (<code class="docutils literal notranslate"><span class="pre">resultados/tiempos_por_epoca.csv</span></code>, de
+<code class="docutils literal notranslate"><span class="pre">src/medir_tiempo.py</span></code>). Una época tarda de 2,3 a 2,8 s en el MLP, de 3,1 a 9,1 s en la CNN y de 2,8
+a 22,6 s en la LSTM, según la configuración. En el peor caso, las 20 configuraciones con el tamaño
+de la más grande y las 100 épocas completas, la búsqueda de la LSTM tomaría 12,6 h, repartibles en
+varias sesiones gracias a los checkpoints. Ninguna red se entrenó con datos reales para fijar este
+número.</p>
+</section>
+<section id="implementacion">
+<h3>Implementación<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h3>
+<p>Las tres redes están en <code class="docutils literal notranslate"><span class="pre">src/modelos.py</span></code> (rama <code class="docutils literal notranslate"><span class="pre">lina/pipeline</span></code>, commit 7324194). Su cuerpo y su
+cabeza tienen exactamente los parámetros de la sección 5. El total de <code class="docutils literal notranslate"><span class="pre">tiempos_por_epoca.csv</span></code> es
+14.861 parámetros más el de la sección 5 en cada configuración medida: es el tamaño de los
+<em>embeddings</em> con los vocabularios de los datos sintéticos. Una prueba de <code class="docutils literal notranslate"><span class="pre">src/pruebas/test_modelos.py</span></code>
+comprueba que la CNN con relleno causal ve 5 o 7 semanas.</p>
+</section>
+<section id="referencia-lineal-de-contexto">
+<h3>Referencia lineal de contexto<a class="headerlink" href="#referencia-lineal-de-contexto" title="Link to this heading">#</a></h3>
+<p>Además de las tres redes, se entrena un modelo lineal con el mismo pipeline: una sola capa densa
+sobre la ventana aplanada, las 33 covariables y los <em>embeddings</em>, sin capas ocultas ni en el cuerpo
+ni en la cabeza y sin <em>dropout</em>. Con una sola salida, los <em>embeddings</em> seguidos de la capa densa
+equivalen a un peso por categoría, como en la codificación <em>one-hot</em>. Es la versión lineal de los
+tres modelos base, con la pérdida de la SVR lineal con ε = 0 y sin el término ‖<strong>w</strong>‖²
+(<code class="docutils literal notranslate"><span class="pre">sintesis_y_equivalencia_camilo.md</span></code>, sección 3). Solo se busca la tasa de aprendizaje, en el mismo
+conjunto y con el mismo bloque de k4. Es una referencia de contexto, como las ingenuas, no un cuarto
+modelo base.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Hiperparámetro</p></th>
@@ -858,16 +885,12 @@ de la ventaja puede venir del tamaño.</p>
 <section id="pendiente">
 <h2>6. Pendiente<a class="headerlink" href="#pendiente" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Lina confirma las 20 configuraciones por modelo cuando mida el tiempo por época de la LSTM en la
-GPU.</p></li>
-<li><p>Secciones del enunciado que faltan:</p>
-<ul class="simple">
-<li><p>Camilo: la tabla de síntesis con métricas y la equivalencia con el modelo logístico o la SVR
-lineal.</p></li>
-<li><p>Lina: el análisis por modelo. La sección 5 ya da las fórmulas de los parámetros.</p></li>
-</ul>
-</li>
+<li><p>Lina: la búsqueda de hiperparámetros, el piloto y el análisis por modelo. La sección 5 ya da las
+fórmulas de los parámetros.</p></li>
+<li><p>Camilo: la comparación estadística sobre las predicciones del piloto (<code class="docutils literal notranslate"><span class="pre">estadistica/</span></code>).</p></li>
 </ol>
+<p>Cerrado el 2026-11-12: las 20 configuraciones, la implementación de las tres redes, la tabla de
+síntesis con la equivalencia (<code class="docutils literal notranslate"><span class="pre">sintesis_y_equivalencia_camilo.md</span></code>) y la referencia lineal de contexto.</p>
 </section>
 </section>
 
@@ -949,6 +972,8 @@ lineal.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cabeza-comun">Cabeza común</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-comun-a-los-tres">Entrenamiento, común a los tres</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-de-hiperparametros">Búsqueda de hiperparámetros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia-lineal-de-contexto">Referencia lineal de contexto</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-de-parametros">5. Número de parámetros</a></li>
