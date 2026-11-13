@@ -11,6 +11,11 @@ Los datos de la tabla están en `tabla_sintesis_camilo.csv`, transcritos del tex
 estudio. La columna `fuente_valores` dice de qué tabla o sección sale cada cifra. Los números de
 parámetros salen de `parametros_modelos.json`.
 
+**Uso de inteligencia artificial.** La lectura de los diez artículos, la transcripción de las cifras
+y el primer borrador de este documento los hizo Claude (Anthropic), en Claude Code, el 2026-11-11.
+Camilo no cotejó todavía las cifras contra los artículos, uno por uno; la columna `fuente_valores`
+permite hacerlo. Lina aceptó la corrección de la sección 1.
+
 ## 1. Tabla de síntesis
 
 Cubre los diez estudios con texto completo que la sección 2 de `modelos_seleccionados.md` citaba

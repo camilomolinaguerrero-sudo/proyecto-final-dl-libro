@@ -1,0 +1,972 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Análisis por modelo base &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'estado_arte/analisis_por_modelo';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Tabla de síntesis y equivalencia con los modelos clásicos" href="sintesis_y_equivalencia.html" />
+    <link rel="prev" title="Modelos seleccionados" href="modelos_seleccionados.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Análisis por modelo base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/estado_arte/analisis_por_modelo.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Análisis por modelo base</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estudios-que-los-respaldan">Estudios que los respaldan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrada-y-cabeza-comunes">Entrada y cabeza comunes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp">MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cnn-1d">CNN 1D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm">LSTM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-de-la-cabeza-y-de-los-embeddings">Parámetros de la cabeza y de los embeddings</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-por-modelo-base">
+<h1>Análisis por modelo base<a class="headerlink" href="#analisis-por-modelo-base" title="Link to this heading">#</a></h1>
+<p>Sección 3.3 del Entregable 1, a cargo de Lina. Describe los tres modelos base (MLP, CNN 1D y LSTM) tal
+como se implementaron en <code class="docutils literal notranslate"><span class="pre">src/modelos.py</span></code>, con lo que la literatura reporta de cada uno. La selección y
+la configuración están en <code class="docutils literal notranslate"><span class="pre">modelos_seleccionados.md</span></code>; la tabla de síntesis y la equivalencia con la SVR
+lineal, en <code class="docutils literal notranslate"><span class="pre">sintesis_y_equivalencia_camilo.md</span></code>.</p>
+<p>Fuentes de las cifras:</p>
+<ul class="simple">
+<li><p>Estudios, datos, métricas y valores: <code class="docutils literal notranslate"><span class="pre">tabla_sintesis_camilo.csv</span></code>, que Camilo extrajo del texto completo
+de los diez estudios de respaldo.</p></li>
+<li><p>Pérdida, optimizador y demás ajustes que usa la literatura: <code class="docutils literal notranslate"><span class="pre">configuraciones_texto_completo.json</span></code>, sobre
+los 90 textos completos de la extracción de Camilo.</p></li>
+<li><p>Número de parámetros: sección 5 de <code class="docutils literal notranslate"><span class="pre">modelos_seleccionados.md</span></code>, comprobada en <code class="docutils literal notranslate"><span class="pre">src/pruebas/test_modelos.py</span></code>.</p></li>
+<li><p>Tiempo por época: <code class="docutils literal notranslate"><span class="pre">resultados/tiempos_por_epoca.csv</span></code>, medido en una Tesla T4 con datos sintéticos del
+tamaño del pliegue k4 (364.214 ventanas de entrenamiento, lote de 512).</p></li>
+</ul>
+<section id="estudios-que-los-respaldan">
+<h2>Estudios que los respaldan<a class="headerlink" href="#estudios-que-los-respaldan" title="Link to this heading">#</a></h2>
+<p>Diez estudios con texto completo nombran las tres redes en sus resultados. Al leerlos, no todos entrenan
+cada red por separado: el MLP se entrena solo en 7, la LSTM en los 10 y la CNN en 8. Solo cinco entrenan
+las tres (S1-0718, S1-1151, S1-1181, A1-01 y A1-14).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Id</p></th>
+<th class="head"><p>Referencia</p></th>
+<th class="head"><p>MLP</p></th>
+<th class="head"><p>LSTM</p></th>
+<th class="head"><p>CNN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>S1-0101</p></td>
+<td><p>Javed, A. (2026). Benchmarking econometric, decomposable additive, and neural network methods for food inflation prediction featuring policy insights. <em>Scientific Reports</em>, 16(1), 5460. https://doi.org/10.1038/s41598-026-34993-w</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0610</p></td>
+<td><p>Chen, X., Horata, P. y Sunat, K. (2025). A Hybrid TCN-LSTM-Attention Model for Accurate Sales Forecasting. En <em>Proceedings of the 2025 4th International Conference on Cyber Security, Artificial Intelligence and the Digital Economy (CSAIDE 2025)</em> (pp. 254-258). https://doi.org/10.1145/3729706.3729746</p></td>
+<td><p>no</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0718</p></td>
+<td><p>Wu, B., Gao, R., Wang, X. y Zeng, H. (2025). Agricultural futures prices combination forecasting with whole-process interpretable method. <em>Applied Soft Computing</em>, 185, 114049. https://doi.org/10.1016/j.asoc.2025.114049</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0863</p></td>
+<td><p>Bulut, M. (2025). Forecasting prices of salad vegetables using statistical and artificial intelligence techniques. <em>Ciência Rural</em>, 55(11), e20240444. https://doi.org/10.1590/0103-8478cr20240444</p></td>
+<td><p>no</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0885</p></td>
+<td><p>Sun, K., Yao, Q. y Li, Y. (2025). A novel agricultural commodity price prediction model integrating deep learning and enhanced swarm intelligence algorithm. <em>PLOS One</em>, 20(12), e0337103. https://doi.org/10.1371/journal.pone.0337103</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1151</p></td>
+<td><p>Cesarini, L., Gonçalves, R., Martina, M., Romão, X., Monteleone, B., Lobo Pereira, F. y Figueiredo, R. (2024). Comparison of deep learning models for milk production forecasting at national scale. <em>Computers and Electronics in Agriculture</em>, 221, 108933. https://doi.org/10.1016/j.compag.2024.108933</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-1162</p></td>
+<td><p>Zhang, Q., Yang, W., Zhao, A., Wang, X., Wang, Z. y Zhang, L. (2024). Short-term forecasting of vegetable prices based on LSTM model—Evidence from Beijing’s vegetable data. <em>PLOS One</em>, 19(7), e0304881. https://doi.org/10.1371/journal.pone.0304881</p></td>
+<td><p>no</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1181</p></td>
+<td><p>Baswaraju, S., Maheswari, V. U., Chennam, K. K., Thirumalraj, A., Kantipudi, M. V. V. P. y Aluvalu, R. (2023). Future Food Production Prediction Using AROA Based Hybrid Deep Learning Model in Agri-Sector. <em>Human-Centric Intelligent Systems</em>, 3(4), 521-536. https://doi.org/10.1007/s44230-023-00046-y</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>A1-01</p></td>
+<td><p>Li, S. (2025). An Analysis of the Interdependence Between Peanut and Other Agricultural Commodities in China’s Futures Market. arXiv:2501.16697. https://doi.org/10.48550/arXiv.2501.16697</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>A1-14</p></td>
+<td><p>Budak, G., Gholamzadeh Gharehgheshlaghi, F., Barjesteh Vaezi, M. y Gholizadeh Lonbar, A. (2026). Integrating Deep Learning Demand Forecasting with Multi-Objective Optimization for Circular Coffee Supply Chains: A Data-Driven Framework for Cost, Emissions, and Freshness Management. arXiv:2606.08314. https://doi.org/10.48550/arXiv.2606.08314</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los autores, títulos, revistas y DOI salen del registro de Scopus (<code class="docutils literal notranslate"><span class="pre">registros/scopus_2026-11-07_S1.csv</span></code>) y
+del de arXiv (<code class="docutils literal notranslate"><span class="pre">registros/arxiv_2026-11-07_A1.xml</span></code>). S1-1181 tiene calidad dudosa: reporta métricas de
+clasificación para un problema de pronóstico y conserva frases de otro trabajo.</p>
+</section>
+<section id="entrada-y-cabeza-comunes">
+<h2>Entrada y cabeza comunes<a class="headerlink" href="#entrada-y-cabeza-comunes" title="Link to this heading">#</a></h2>
+<p>Las tres redes reciben la misma entrada y terminan en la misma cabeza, así que solo cambia la forma de leer
+la ventana.</p>
+<ul class="simple">
+<li><p><strong>Ventana</strong> <span class="math notranslate nohighlight">\(X \in \mathbb{R}^{52 \times 3}\)</span>: 52 semanas, la última es <span class="math notranslate nohighlight">\(t\)</span>, con los canales <code class="docutils literal notranslate"><span class="pre">nivel</span></code>,
+<code class="docutils literal notranslate"><span class="pre">observado</span></code> e <code class="docutils literal notranslate"><span class="pre">iniciado</span></code>.</p></li>
+<li><p><strong>Covariables</strong> <span class="math notranslate nohighlight">\(c \in \mathbb{R}^{33}\)</span>: 29 escaladas y 4 indicadores de ausencia.</p></li>
+<li><p><strong>Embeddings</strong> <span class="math notranslate nohighlight">\(e \in \mathbb{R}^{53}\)</span>: <code class="docutils literal notranslate"><span class="pre">mercado</span></code>, <code class="docutils literal notranslate"><span class="pre">depto_origen</span></code> y <code class="docutils literal notranslate"><span class="pre">cod_mpio</span></code> con 16 dimensiones cada uno
+y <code class="docutils literal notranslate"><span class="pre">grupo_dom</span></code> con 5, de tamaño fijo en todos los pliegues.</p></li>
+<li><p><strong>Cabeza:</strong> con la representación <span class="math notranslate nohighlight">\(r\)</span> que entrega cada cuerpo,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+z = [\,r;\ c;\ e\,], \qquad \hat{y} = w_2^\top\,\mathrm{Dropout}\big(\mathrm{ReLU}(W_1 z + b_1)\big) + b_2,
+\]</div>
+<p>con <span class="math notranslate nohighlight">\(W_1 \in \mathbb{R}^{64 \times \dim z}\)</span>. El <em>dropout</em> de la cabeza es el mismo del cuerpo.</p>
+<p><strong>Objetivo y pérdida.</strong> Las tres pronostican <span class="math notranslate nohighlight">\(y = \log\!\big(1 + \text{tasa}_{t+1}/\text{base8}_t\big)\)</span>, una semana
+adelante, y minimizan el error absoluto medio:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L} = \frac{1}{n}\sum_{i=1}^{n} \lvert y_i - \hat{y}_i \rvert .
+\]</div>
+<p>Se entrenan con Adam, lote de 512, hasta 100 épocas con paciencia 10, sin planificador, sin decaimiento
+de pesos y sin recorte de gradiente.</p>
+</section>
+<section id="mlp">
+<h2>MLP<a class="headerlink" href="#mlp" title="Link to this heading">#</a></h2>
+<p><strong>Tipo de arquitectura.</strong> Perceptrón multicapa con 2 o 3 capas densas de <span class="math notranslate nohighlight">\(u \in \{32, 64, 128\}\)</span> unidades.</p>
+<p><strong>Descripción técnica.</strong> Aplana la ventana en un vector de 156 valores y aplica capas densas:</p>
+<div class="math notranslate nohighlight">
+\[
+h^{(1)} = \mathrm{Dropout}\big(\mathrm{ReLU}(W^{(1)}\,\mathrm{vec}(X) + b^{(1)})\big), \qquad
+h^{(\ell)} = \mathrm{Dropout}\big(\mathrm{ReLU}(W^{(\ell)} h^{(\ell-1)} + b^{(\ell)})\big),
+\]</div>
+<p>con <span class="math notranslate nohighlight">\(W^{(1)} \in \mathbb{R}^{u \times 156}\)</span>. La representación es <span class="math notranslate nohighlight">\(r = h^{(L)}\)</span>, de dimensión <span class="math notranslate nohighlight">\(u\)</span>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ventana 52×3 ─ aplanar ─▶ 156 ─▶ [densa u, ReLU, dropout] × L ─▶ r (u) ─┐
+covariables (33) ───────────────────────────────────────────────────────┼─▶ concatenar ─▶ densa 64, ReLU, dropout ─▶ densa 1 ─▶ ŷ
+embeddings (53) ────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+<p><strong>Supuestos y sesgo inductivo.</strong> Ninguno temporal: cada semana de la ventana tiene su propio peso y el
+modelo no sabe que la semana 51 está junto a la 52. Supone que el pronóstico es una función no lineal
+suave del vector completo, sin estructura de orden. Sin capas ocultas sería la referencia lineal de
+contexto (<code class="docutils literal notranslate"><span class="pre">lineal</span></code>), la versión de red de la SVR lineal.</p>
+<p><strong>Pérdida y optimización en la literatura.</strong> De los 38 textos completos con MLP, 19 usan Adam y 6 SGD. Los
+que declaran la pérdida usan sobre todo MSE (8) y menos MAE (3). La moda es de 3 capas y 10 unidades, con
+tasa de 0,001 y lote de 32. Para elegir la configuración, 18 usan metaheurísticas y 9 búsqueda en rejilla.</p>
+<p><strong>Problema que aborda.</strong> Regresión de series agroalimentarias a partir de rezagos y variables externas. En
+los siete estudios donde se entrena solo, pronostica inflación de alimentos (S1-0101), futuros de soya,
+maíz, trigo o maní (S1-0718, S1-0885, A1-01), producción de leche (S1-1151) o de alimentos (S1-1181) y
+demanda de café (A1-14).</p>
+<p><strong>Datos de esos estudios.</strong> Series mensuales del índice de precios de Bangladés (S1-0101) y de Eurostat
+(S1-1151), diarias de futuros (S1-0718, S1-0885, A1-01), anuales de FAOSTAT de 1961 a 2017 (S1-1181) y
+1.062 registros de ventas de café (A1-14).</p>
+<p><strong>Métricas y valores reportados.</strong> Ninguno de los valores de la tabla de síntesis trae desviación estándar
+ni intervalo: son corridas únicas.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Estudio</p></th>
+<th class="head"><p>Valores del MLP</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>S1-0101</p></td>
+<td><p>Mejor ANN: RMSE 4,17, MAE 3,4</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0718</p></td>
+<td><p>Soya de China: MAPE 4,84 %, MAE 0,0186, RMSE 0,0252</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0885</p></td>
+<td><p>Maíz, con descomposición SVMD: MAPE 1,9051 %</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1151</p></td>
+<td><p>Italia (FCNN): RMSE 39,045, MAE 32,064, R² 0,772</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-1181</p></td>
+<td><p>Exactitud 80,54, F1 0,817 (calidad dudosa)</p></td>
+</tr>
+<tr class="row-odd"><td><p>A1-01</p></td>
+<td><p>Paso 1: MSE 111938,37, MAE 270,25</p></td>
+</tr>
+<tr class="row-even"><td><p>A1-14</p></td>
+<td><p>MAE 27,85, RMSE 39,73, MASE 0,67, R² 0,82</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fortalezas.</strong> Es la arquitectura más simple de reproducir. En nuestra medición, una época tarda de 2,3 a
+2,8 s casi sin depender del tamaño. Usa toda la ventana a la vez, así que puede combinar semanas lejanas
+sin recorrerlas en orden.</p>
+<p><strong>Limitaciones.</strong> Al no compartir pesos en el tiempo, necesita más datos para aprender un mismo patrón en
+distintas posiciones de la ventana, y un corrimiento de una semana cambia por completo su entrada. Es
+sensible a la escala de las entradas. En S1-1181 y A1-01 queda por detrás de la CNN y la LSTM.</p>
+<p><strong>Complejidad computacional.</strong> Con <span class="math notranslate nohighlight">\(u\)</span> unidades y <span class="math notranslate nohighlight">\(L\)</span> capas, el cuerpo tiene
+<span class="math notranslate nohighlight">\(157u + (L-1)(u+1)u\)</span> parámetros. El costo por observación es <span class="math notranslate nohighlight">\(O(156u + (L-1)u^2)\)</span> en el paso hacia adelante
+y del mismo orden en el de entrenamiento; todas las operaciones son productos de matrices paralelos.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Configuración</p></th>
+<th class="head"><p>Parámetros sin embeddings</p></th>
+<th class="head"><p>Segundos por época</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>32 unidades, 2 capas</p></td>
+<td><p>13.761</p></td>
+<td><p>2,66</p></td>
+</tr>
+<tr class="row-odd"><td><p>64 unidades, 2 capas</p></td>
+<td><p>23.937</p></td>
+<td><p>2,29</p></td>
+</tr>
+<tr class="row-even"><td><p>128 unidades, 3 capas</p></td>
+<td><p>66.945</p></td>
+<td><p>2,85</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="cnn-1d">
+<h2>CNN 1D<a class="headerlink" href="#cnn-1d" title="Link to this heading">#</a></h2>
+<p><strong>Tipo de arquitectura.</strong> Red convolucional en una dimensión, con 2 o 3 bloques de <span class="math notranslate nohighlight">\(u \in \{32, 64, 128\}\)</span>
+filtros de <em>kernel</em> 3.</p>
+<p><strong>Descripción técnica.</strong> Cada bloque aplica una convolución causal: rellena con dos ceros solo hacia el
+pasado, así que la salida en la semana <span class="math notranslate nohighlight">\(t\)</span> depende de <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(t-1\)</span> y <span class="math notranslate nohighlight">\(t-2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+a^{(\ell)}_{t,j} = \mathrm{Dropout}\Big(\mathrm{ReLU}\Big(b^{(\ell)}_j + \sum_{i} \sum_{s=0}^{2} K^{(\ell)}_{j,i,s}\; a^{(\ell-1)}_{t-2+s,\,i}\Big)\Big),
+\]</div>
+<p>con <span class="math notranslate nohighlight">\(a^{(0)} = X\)</span> y ceros antes de la primera semana. La representación concatena el promedio global y la
+salida en la última semana:</p>
+<div class="math notranslate nohighlight">
+\[
+r = \Big[\ \tfrac{1}{52}\textstyle\sum_{t=1}^{52} a^{(L)}_{t}\ ;\ a^{(L)}_{52}\ \Big] \in \mathbb{R}^{2u}.
+\]</div>
+<p>Con 2 bloques, <span class="math notranslate nohighlight">\(a^{(L)}_{52}\)</span> ve las últimas 5 semanas; con 3, las últimas 7.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ventana 52×3 ─▶ [relleno causal, conv k=3 u filtros, ReLU, dropout] × L ─▶ mapa 52×u ─┬─ promedio ─┐
+                                                                                       └─ semana 52 ─┴─▶ r (2u) ─┐
+covariables (33) ────────────────────────────────────────────────────────────────────────────────────────────────┼─▶ cabeza ─▶ ŷ
+embeddings (53) ─────────────────────────────────────────────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+<p><strong>Supuestos y sesgo inductivo.</strong> Localidad y equivariancia a traslaciones: un patrón de pocas semanas
+seguidas significa lo mismo en cualquier parte de la ventana, y los filtros lo detectan con los mismos
+pesos. El relleno causal impide que una semana use información posterior dentro de la ventana. El
+promedio resume el año y la salida final conserva la posición de lo más reciente.</p>
+<p><strong>Pérdida y optimización en la literatura.</strong> De los 31 textos completos con CNN, 25 usan Adam. Los que
+declaran la pérdida usan MSE (11), MAE (4) o Huber (4). La moda es de 2 capas y 64 filtros, con tasa de
+0,001 y lote de 32. Para elegir la configuración, 9 usan metaheurísticas y 7 búsqueda en rejilla.</p>
+<p><strong>Problema que aborda.</strong> Regresión de precios, producción y demanda. En los ocho estudios donde se entrena
+sola, pronostica el precio del aguacate (S1-0610), futuros de soya o maní (S1-0718, A1-01), precios de
+hortalizas (S1-0863, S1-1162), producción de leche (S1-1151) o de alimentos (S1-1181) y demanda de café
+(A1-14).</p>
+<p><strong>Datos de esos estudios.</strong> Series diarias de precios (S1-0610, S1-0718, S1-0863, S1-1162, A1-01), mensuales
+de Eurostat (S1-1151), anuales de FAOSTAT (S1-1181) y registros de ventas de café (A1-14).</p>
+<p><strong>Métricas y valores reportados.</strong> Ninguno trae medida de dispersión.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Estudio</p></th>
+<th class="head"><p>Valores de la CNN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>S1-0610</p></td>
+<td><p>RMSE 0,0810, MAE 0,0644, R² 0,6645</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0718</p></td>
+<td><p>Soya de China: MAPE 4,88 %, MAE 0,0279, RMSE 0,0367</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0863</p></td>
+<td><p>Horizonte de 10 días: MAE 0,107, RMSE 0,162</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1151</p></td>
+<td><p>Italia (CNN1D): RMSE 32,445, MAE 25,179, R² 0,843</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-1162</p></td>
+<td><p>La tabla comparativa está en imagen; sin valores en el texto</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1181</p></td>
+<td><p>Exactitud 97,29, F1 0,972 (calidad dudosa)</p></td>
+</tr>
+<tr class="row-even"><td><p>A1-01</p></td>
+<td><p>Paso 1: MSE 90663,54, MAE 235,77</p></td>
+</tr>
+<tr class="row-odd"><td><p>A1-14</p></td>
+<td><p>MAE 25,31, RMSE 36,12, MASE 0,61, R² 0,86</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En S1-0863 la CNN y la LSTM tienen errores de escalas muy distintas (MAE 0,107 frente a 10,109), y la tabla
+del artículo no dice a qué producto corresponden, así que esa comparación no es confiable.</p>
+<p><strong>Fortalezas.</strong> Comparte pesos en el tiempo: su primera capa tiene <span class="math notranslate nohighlight">\(10u\)</span> parámetros, frente a <span class="math notranslate nohighlight">\(157u\)</span> en la
+del MLP. Calcula todas las posiciones en paralelo. En S1-1151 y A1-14 tiene el menor error de las
+tres redes entrenadas por separado.</p>
+<p><strong>Limitaciones.</strong> Su campo de visión es corto: la salida final ve 5 o 7 semanas, y el resto de la ventana
+solo entra por el promedio, que pierde el orden. Un patrón de más de 7 semanas, como la estacionalidad
+anual, no lo capta un solo filtro.</p>
+<p><strong>Complejidad computacional.</strong> Con <span class="math notranslate nohighlight">\(u\)</span> filtros y <span class="math notranslate nohighlight">\(L\)</span> bloques, el cuerpo tiene <span class="math notranslate nohighlight">\(10u + (L-1)(3u^2 + u)\)</span>
+parámetros, y la cabeza recibe <span class="math notranslate nohighlight">\(2u\)</span> valores del cuerpo. El costo por observación es <span class="math notranslate nohighlight">\(O(52 \cdot 3\,(3u + (L-1)u^2))\)</span>,
+paralelo en las 52 posiciones.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Configuración</p></th>
+<th class="head"><p>Parámetros sin embeddings</p></th>
+<th class="head"><p>Segundos por época</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>32 filtros, 2 bloques</p></td>
+<td><p>13.153</p></td>
+<td><p>3,11</p></td>
+</tr>
+<tr class="row-odd"><td><p>64 filtros, 2 bloques</p></td>
+<td><p>26.817</p></td>
+<td><p>3,50</p></td>
+</tr>
+<tr class="row-even"><td><p>128 filtros, 3 bloques</p></td>
+<td><p>121.857</p></td>
+<td><p>9,06</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="lstm">
+<h2>LSTM<a class="headerlink" href="#lstm" title="Link to this heading">#</a></h2>
+<p><strong>Tipo de arquitectura.</strong> Red recurrente de memoria de corto y largo plazo, con 1 o 2 capas de
+<span class="math notranslate nohighlight">\(u \in \{32, 64, 128\}\)</span> unidades y <em>dropout</em> entre capas cuando hay dos.</p>
+<p><strong>Descripción técnica.</strong> Recorre la ventana semana a semana. En cada paso, con la entrada <span class="math notranslate nohighlight">\(x_t\)</span> y el estado
+anterior <span class="math notranslate nohighlight">\((h_{t-1}, c_{t-1})\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+i_t &amp;= \sigma(W_i x_t + U_i h_{t-1} + b_i), &amp; f_t &amp;= \sigma(W_f x_t + U_f h_{t-1} + b_f),\\
+o_t &amp;= \sigma(W_o x_t + U_o h_{t-1} + b_o), &amp; g_t &amp;= \tanh(W_g x_t + U_g h_{t-1} + b_g),\\
+c_t &amp;= f_t \odot c_{t-1} + i_t \odot g_t, &amp; h_t &amp;= o_t \odot \tanh(c_t).
+\end{aligned}
+\end{split}\]</div>
+<p>La segunda capa recibe la secuencia <span class="math notranslate nohighlight">\(h_t\)</span> de la primera. La representación es el último estado oculto de
+la última capa, <span class="math notranslate nohighlight">\(r = h^{(L)}_{52}\)</span>, de dimensión <span class="math notranslate nohighlight">\(u\)</span>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ventana 52×3 ─▶ semana 1 ─▶ semana 2 ─▶ … ─▶ semana 52 ─▶ r = h₅₂ (u) ─┐
+               (estado h, c que pasa de una semana a la siguiente)      │
+covariables (33) ───────────────────────────────────────────────────────┼─▶ cabeza ─▶ ŷ
+embeddings (53) ────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+<p><strong>Supuestos y sesgo inductivo.</strong> La historia se puede resumir en un estado que se actualiza en orden. Las
+compuertas deciden cuánto olvidar y cuánto incorporar en cada semana, así que la memoria depende de los
+datos y puede conservar información de muchas semanas atrás. Supone que el orden importa y que las mismas
+reglas de actualización valen en toda la ventana.</p>
+<p><strong>Pérdida y optimización en la literatura.</strong> Es la familia con más textos completos (63). De ellos, 47 usan
+Adam y 7 SGD. Los que declaran la pérdida usan MSE (17), MAE (5) o Huber (5). La moda es de 2 capas y 64
+unidades, con tasa de 0,001 y lote de 32; la mediana de épocas es 100. Para elegir la configuración, 24
+usan metaheurísticas, 16 búsqueda en rejilla y 16 búsqueda bayesiana.</p>
+<p><strong>Problema que aborda.</strong> Es la referencia más común: aparece entrenada sola en los diez estudios, sobre
+precios, producción y demanda, con series diarias, mensuales o anuales.</p>
+<p><strong>Datos de esos estudios.</strong> Los de las dos secciones anteriores, más el índice de precios de alimentos de
+Bangladés (S1-0101) y los precios de futuros de maíz y trigo de 1970 a 2021 (S1-0885).</p>
+<p><strong>Métricas y valores reportados.</strong> Ninguno trae medida de dispersión.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Estudio</p></th>
+<th class="head"><p>Valores de la LSTM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>S1-0101</p></td>
+<td><p>RMSE 4,23, MAE 3,47</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0610</p></td>
+<td><p>RMSE 0,1272, MAE 0,0971, R² 0,1725</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0718</p></td>
+<td><p>Soya de China: MAPE 4,79 %, MAE 0,0267, RMSE 0,0334</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-0863</p></td>
+<td><p>Horizonte de 10 días: MAE 10,109, RMSE 15,698</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-0885</p></td>
+<td><p>Maíz, con descomposición SVMD: MAPE 1,1969 %</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1151</p></td>
+<td><p>Italia: RMSE 41,274, MAE 33,206, R² 0,741</p></td>
+</tr>
+<tr class="row-even"><td><p>S1-1162</p></td>
+<td><p>R² 0,958, MAE 0,143</p></td>
+</tr>
+<tr class="row-odd"><td><p>S1-1181</p></td>
+<td><p>Exactitud 92,69, F1 0,963 (calidad dudosa)</p></td>
+</tr>
+<tr class="row-even"><td><p>A1-01</p></td>
+<td><p>Paso 1: MSE 26772,50, MAE 132,76</p></td>
+</tr>
+<tr class="row-odd"><td><p>A1-14</p></td>
+<td><p>MAE 25,94, RMSE 36,88, MASE 0,62, R² 0,85</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fortalezas.</strong> Puede usar toda la ventana conservando el orden y aprender cuánto pesa cada parte de la
+historia. Es la red con más respaldo en la literatura revisada, y en A1-01 tiene el menor error de las
+tres.</p>
+<p><strong>Limitaciones.</strong> Es la más costosa: el estado de cada semana depende del anterior, así que las 52 semanas
+se procesan en secuencia y no en paralelo. Cada capa tiene cuatro bloques de compuerta, cuatro veces los
+parámetros de una red recurrente simple del mismo ancho, lo que la hace más propensa al sobreajuste. En S1-0610 y S1-1151 queda por detrás de la CNN.</p>
+<p><strong>Complejidad computacional.</strong> Con <span class="math notranslate nohighlight">\(u\)</span> unidades, la primera capa tiene <span class="math notranslate nohighlight">\(4u(3+u) + 8u\)</span> parámetros y la
+segunda <span class="math notranslate nohighlight">\(4u(2u) + 8u\)</span>; PyTorch usa dos sesgos por compuerta. El costo por observación es
+<span class="math notranslate nohighlight">\(O(52\,L\,u^2)\)</span>, con 52 pasos secuenciales.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Configuración</p></th>
+<th class="head"><p>Parámetros sin embeddings</p></th>
+<th class="head"><p>Segundos por época</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>32 unidades, 1 capa</p></td>
+<td><p>12.417</p></td>
+<td><p>2,80</p></td>
+</tr>
+<tr class="row-odd"><td><p>64 unidades, 2 capas</p></td>
+<td><p>60.673</p></td>
+<td><p>5,98</p></td>
+</tr>
+<tr class="row-even"><td><p>128 unidades, 2 capas</p></td>
+<td><p>214.017</p></td>
+<td><p>22,61</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="parametros-de-la-cabeza-y-de-los-embeddings">
+<h2>Parámetros de la cabeza y de los embeddings<a class="headerlink" href="#parametros-de-la-cabeza-y-de-los-embeddings" title="Link to this heading">#</a></h2>
+<p>Los parámetros de las tablas incluyen la cabeza, que tiene <span class="math notranslate nohighlight">\((r + 33 + 53 + 1) \cdot 64 + 65\)</span>, con <span class="math notranslate nohighlight">\(r = u\)</span>
+en el MLP y la LSTM y <span class="math notranslate nohighlight">\(r = 2u\)</span> en la CNN. Los <em>embeddings</em> suman 15.677 parámetros más, iguales para las
+tres. Los segundos por época son la mediana sin la primera época y no incluyen el guardado del checkpoint.
+La extracción de los textos completos no registró tiempos de entrenamiento, así que no hay con qué
+compararlos.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./estado_arte"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modelos_seleccionados.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Modelos seleccionados</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sintesis_y_equivalencia.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Tabla de síntesis y equivalencia con los modelos clásicos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estudios-que-los-respaldan">Estudios que los respaldan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrada-y-cabeza-comunes">Entrada y cabeza comunes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp">MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cnn-1d">CNN 1D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm">LSTM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-de-la-cabeza-y-de-los-embeddings">Parámetros de la cabeza y de los embeddings</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

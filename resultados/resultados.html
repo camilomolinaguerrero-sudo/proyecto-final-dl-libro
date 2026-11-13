@@ -225,6 +225,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/analisis_por_modelo.html">Análisis por modelo base</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
@@ -388,6 +389,7 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estado">Estado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#piloto">Piloto</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-ingenuas-en-validacion">Referencias ingenuas en validación</a></li>
 </ul>
             </nav>
@@ -404,9 +406,81 @@
 <h1>5. Resultados<a class="headerlink" href="#resultados" title="Link to this heading">#</a></h1>
 <section id="estado">
 <h2>Estado<a class="headerlink" href="#estado" title="Link to this heading">#</a></h2>
-<p>Los tres modelos base todavía no se entrenan. Este capítulo se completará con el piloto y la
-comparación del capítulo 4: tabla comparativa con media ± desviación estándar e intervalos de
-confianza, tiempos y número de parámetros, definición del <em>baseline</em> e inferencia estadística.</p>
+<p>Ya corrieron la búsqueda de hiperparámetros y el piloto (5 semillas en el bloque externo de k4).
+Faltan las ejecuciones definitivas y la inferencia del capítulo 4. Las cifras del piloto sirven para
+fijar el número de ejecuciones; no son el resultado confirmatorio.</p>
+</section>
+<section id="piloto">
+<h2>Piloto<a class="headerlink" href="#piloto" title="Link to this heading">#</a></h2>
+<p>Configuraciones elegidas por la búsqueda (<code class="docutils literal notranslate"><span class="pre">resultados/busqueda_elegidas.csv</span></code>) y métricas de las
+5 semillas en el bloque externo de k4 (<code class="docutils literal notranslate"><span class="pre">resultados/piloto_metricas_por_corrida.csv</span></code>), media ± desviación
+estándar entre semillas. GPU Tesla T4.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Configuración</p></th>
+<th class="head"><p>Parámetros</p></th>
+<th class="head"><p>MAE</p></th>
+<th class="head"><p>RMSE</p></th>
+<th class="head"><p>MASE</p></th>
+<th class="head"><p>AUC</p></th>
+<th class="head"><p>Entrenamiento (s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>cnn</p></td>
+<td><p>128 unid., 3 capas, dropout 0,1, tasa 1e-4</p></td>
+<td><p>136.718</p></td>
+<td><p>0,2818 ± 0,0002</p></td>
+<td><p>0,4087 ± 0,0012</p></td>
+<td><p>0,8161 ± 0,0005</p></td>
+<td><p>0,7526 ± 0,0028</p></td>
+<td><p>442</p></td>
+</tr>
+<tr class="row-odd"><td><p>mlp</p></td>
+<td><p>128 unid., 3 capas, dropout 0,1, tasa 3e-4</p></td>
+<td><p>81.806</p></td>
+<td><p>0,2819 ± 0,0004</p></td>
+<td><p>0,4080 ± 0,0011</p></td>
+<td><p>0,8166 ± 0,0011</p></td>
+<td><p>0,7473 ± 0,0032</p></td>
+<td><p>78</p></td>
+</tr>
+<tr class="row-even"><td><p>lstm</p></td>
+<td><p>128 unid., 2 capas, dropout 0,3, tasa 3e-4</p></td>
+<td><p>228.878</p></td>
+<td><p>0,2835 ± 0,0011</p></td>
+<td><p>0,4067 ± 0,0022</p></td>
+<td><p>0,8210 ± 0,0031</p></td>
+<td><p>0,7479 ± 0,0023</p></td>
+<td><p>1170</p></td>
+</tr>
+<tr class="row-odd"><td><p>lineal</p></td>
+<td><p>tasa 3e-4</p></td>
+<td><p>15.104</p></td>
+<td><p>0,2879 ± 0,0002</p></td>
+<td><p>0,4070 ± 0,0011</p></td>
+<td><p>0,8339 ± 0,0005</p></td>
+<td><p>0,7517 ± 0,0035</p></td>
+<td><p>43</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En el mismo bloque, la mediana del entrenamiento tiene un MAE de 0,3103 y la
+persistencia de 0,3457 (<code class="docutils literal notranslate"><span class="pre">resultados/referencias_validacion.csv</span></code>, pliegue k4).</p>
+<p><strong>Lo que muestra el piloto.</strong></p>
+<ul class="simple">
+<li><p>Las tres redes quedan muy cerca entre sí: entre la mejor y la peor hay
+0,0017 de MAE, menos que el margen δ = 0,0032.</p></li>
+<li><p>Las tres superan a la referencia lineal, por 0,0044 a
+0,0061 de MAE, y a la mediana del entrenamiento por
+0,0269 a 0,0286.</p></li>
+<li><p>La ventaja no se repite en RMSE ni en AUC, donde la lineal queda a la par de las redes.</p></li>
+<li><p>La búsqueda eligió en las tres redes la configuración más grande del espacio (128 unidades o filtros y
+el máximo de capas). El espacio quedó corto por arriba, y así se declara como limitación; el
+Entregable 2 puede ampliarlo.</p></li>
+</ul>
 </section>
 <section id="referencias-ingenuas-en-validacion">
 <h2>Referencias ingenuas en validación<a class="headerlink" href="#referencias-ingenuas-en-validacion" title="Link to this heading">#</a></h2>
@@ -635,6 +709,7 @@ cada bloque tiene su propia mediana. En AUC, la referencia es la persistencia, c
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estado">Estado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#piloto">Piloto</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-ingenuas-en-validacion">Referencias ingenuas en validación</a></li>
 </ul>
   </nav></div>

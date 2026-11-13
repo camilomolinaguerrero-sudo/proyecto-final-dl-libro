@@ -1,6 +1,6 @@
 # Preregistro del Entregable 1: BORRADOR
 
-**Estado:** borrador. No tiene validez hasta que Lina y Camilo llenen lo marcado como PENDIENTE y lo fechen, antes de la corrida definitiva. No contiene ningún resultado del piloto ni de la prueba.
+**Estado:** borrador. No tiene validez hasta que Lina y Camilo llenen lo marcado como PENDIENTE y lo fechen, antes de la corrida definitiva. Contiene los resultados del piloto (sección 7), que solo usa el bloque externo de k4, y ninguno de la prueba.
 
 **Fecha de cierre:** PENDIENTE
 **Commit del código:** PENDIENTE
@@ -40,13 +40,14 @@ Los tres modelos, su configuración y las referencias que la respaldan están en
 - **Modelos:** LSTM, MLP y CNN 1D, con la misma entrada y una cabeza común con una capa oculta de 64 unidades. Los *embeddings* tienen el mismo tamaño en todos los pliegues (16, 16, 16 y 5), y la CNN usa relleno causal.
 - **Pérdida, optimizador, tamaño de lote, épocas y paciencia:** MAE; Adam sin planificador, sin decaimiento de pesos y sin recorte de gradiente; lote de 512; máximo de 100 épocas con paciencia 10.
 - **Espacio de búsqueda:** unidades o filtros en {32, 64, 128}; 2 o 3 capas en el MLP y la CNN y 1 o 2 en la LSTM; *dropout* en {0; 0,1; 0,3}; tasa de aprendizaje en {1e-4, 3e-4, 1e-3}; *kernel* de la CNN fijo en 3. Son 54 combinaciones por modelo.
-- **Método y presupuesto:** búsqueda aleatoria de 20 configuraciones por modelo, con una semilla. Cada configuración se elige con el bloque interno de parada temprana del pliegue k4.
+- **Método y presupuesto:** búsqueda aleatoria de 20 configuraciones por modelo, con una semilla. Cada configuración se elige con el bloque interno de parada temprana del pliegue k4. La lista sorteada (semilla 0, con `src/busqueda.py --sortear`) quedó fija en `resultados/busqueda_configuraciones.csv` el 2026-11-12, antes de entrenar. Gana la de menor MAE en ese bloque; un empate lo gana la de menos parámetros.
+- **Referencia lineal de contexto:** `lineal` en `src/modelos.py`, una sola capa densa sobre la ventana aplanada, las covariables y los *embeddings*, sin capas ocultas ni *dropout*. Solo se busca la tasa de aprendizaje, con sus 3 valores, en el mismo bloque. Entra en la comparación como referencia, igual que las ingenuas, no como cuarto modelo base.
 - **Por qué 20:** el 2026-11-11 se midió el tiempo por época en una GPU Tesla T4, con datos sintéticos del tamaño de k4 (`resultados/tiempos_por_epoca.csv`, de `src/medir_tiempo.py`). Una época tarda de 2,3 a 2,8 s en el MLP, de 3,1 a 9,1 s en la CNN y de 2,8 a 22,6 s en la LSTM, según la configuración. Si las 20 configuraciones tardaran lo que la más grande y llegaran a las 100 épocas, contando el guardado del checkpoint, la búsqueda tomaría 1,6 h en el MLP, 5,1 h en la CNN y 12,6 h en la LSTM. Los checkpoints permiten repartirla en varias sesiones de Colab.
 
 ## 6. Piloto
 
-- **Diseño:** al menos 5 semillas por modelo, las mismas para todos, en el bloque de validación PENDIENTE.
-- **Semillas:** PENDIENTE; se declaran antes de correr.
+- **Diseño:** los tres modelos base y la referencia lineal, cada uno con la configuración que eligió la búsqueda (`resultados/busqueda_elegidas.csv`), se entrenan con las mismas semillas y se evalúan en el bloque externo del pliegue k4, que la búsqueda no tocó. Se corre con `src/piloto.py correr`.
+- **Semillas:** 1, 2, 3, 4 y 5, distintas de la semilla 0 de la búsqueda. Declaradas el 2026-11-13, antes de correr el piloto.
 - **Reporte:** media, desviación estándar y coeficiente de variación del MAE; `σ_d` de cada par y `δ/σ_d`.
 - **Número de ejecuciones:** `R ≈ (z_{1-α/2} + z_{1-β})² σ_d² / δ²`, con `α = 0,05` y potencia 0,80. Nunca menos de 6, para que el Wilcoxon bilateral pueda llegar a `p < 0,05`.
 - **Supuesto:** normalidad de las diferencias pareadas, verificada con Shapiro-Wilk. Si no se cumple, se usa la alternativa no paramétrica.
@@ -54,7 +55,14 @@ Los tres modelos, su configuración y las referencias que la respaldan están en
 
 ## 7. Resultado del piloto
 
-PENDIENTE: se llena desde `resultados/piloto_por_modelo.csv` y `resultados/piloto_por_par.csv`. Número de ejecuciones definitivas: PENDIENTE.
+Corrido el 2026-11-13 en una Tesla T4 con el commit `9ae367b`, semillas 1 a 5, bloque externo de k4. Las configuraciones son las de `resultados/busqueda_elegidas.csv`: CNN c20, MLP c19, LSTM c20 y lineal c02. Las 20 corridas están en `resultados/piloto_metricas_por_corrida.csv`, y el resumen, con δ = 0,0032, en `resultados/piloto_por_modelo.csv` y `resultados/piloto_por_par.csv`.
+
+- **MAE por modelo (media ± desviación estándar, CV):** CNN 0,28175 ± 0,00016 (0,06 %); MLP 0,28194 ± 0,00038 (0,13 %); LSTM 0,28346 ± 0,00108 (0,38 %). La referencia lineal tiene 0,28790 ± 0,00019.
+- **Pares, diferencias emparejadas por semilla:** MLP − LSTM: −0,00151, `σ_d` = 0,00091, `δ/σ_d` = 3,53. MLP − CNN: 0,00019, `σ_d` = 0,00053, `δ/σ_d` = 6,05. LSTM − CNN: 0,00170, `σ_d` = 0,00122, `δ/σ_d` = 2,63.
+- **Número de ejecuciones:** la fórmula da 0,63, 0,21 y 1,14 ejecuciones, todas por debajo del mínimo, así que se toma el mínimo de 6. Con las 5 semillas del piloto, la diferencia mínima detectable ya es menor que δ en los tres pares (0,00113, 0,00066 y 0,00153).
+- **Supuesto:** Shapiro-Wilk da p = 0,027 en MLP − LSTM, 0,106 en MLP − CNN y 0,428 en LSTM − CNN. La normalidad no se sostiene en el primer par, así que en la comparación por semillas se usa la prueba no paramétrica en los tres pares.
+
+**Número de ejecuciones definitivas:** 6 por modelo, con las semillas 1 a 6.
 
 ## 8. Análisis confirmatorio
 

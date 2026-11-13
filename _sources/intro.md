@@ -29,10 +29,10 @@ Este libro se publica mientras el trabajo avanza. Cada capítulo dice qué está
 | 1-2. Problema, datos y EDA | Cerrada |
 | 3.1 Estrategia de búsqueda | Cerrada: 491 estudios incluidos y diagrama de flujo |
 | 3.2 Selección de los tres modelos | Acordada (LSTM, MLP, CNN 1D) |
-| 3.3 Análisis por modelo | Pendiente (Lina); las fórmulas de parámetros ya están en el capítulo 3 |
+| 3.3 Análisis por modelo | Escrito (Lina) |
 | 3.4 Tabla de síntesis y equivalencia | Acordada |
 | 4. Diseño experimental | Decisiones y espacio de búsqueda cerrados; el preregistro sigue en borrador hasta el piloto |
-| 5. Resultados e inferencia | Referencias ingenuas calculadas y redes implementadas; faltan la búsqueda y el piloto |
+| 5. Resultados e inferencia | Búsqueda y piloto corridos; faltan las ejecuciones definitivas y la inferencia |
 
 Ninguna cifra del libro se escribe a mano: cada una sale de un archivo de resultados del
 repositorio, y el texto dice cuál.
@@ -45,7 +45,7 @@ qué hizo la herramienta, qué revisó cada autor y qué se decidió de común a
 
 ## Procedencia de esta versión
 
-Construida desde la rama `camilo/libro` @ 2f92279.
+Construida desde la rama `camilo/libro` @ f0bbda1.
 
 | Archivo | Tomado de |
 | --- | --- |
@@ -55,10 +55,11 @@ Construida desde la rama `camilo/libro` @ 2f92279.
 | `eda/decisiones_para_modelos.md` | `camilo/libro` (árbol de trabajo) |
 | `literatura/modelos_seleccionados.md` | `camilo/libro` (árbol de trabajo) |
 | `literatura/sintesis_y_equivalencia_camilo.md` | `camilo/libro` (árbol de trabajo) |
-| `DECISIONES.md` | `lina/pipeline` @ 7806e4a |
-| `preregistro/borrador_preregistro.md` | `lina/pipeline` @ 7806e4a |
+| `literatura/analisis_por_modelo_lina.md` | `lina/pipeline` @ 27c8c36 |
+| `DECISIONES.md` | `lina/pipeline` @ 27c8c36 |
+| `preregistro/borrador_preregistro.md` | `lina/pipeline` @ 27c8c36 |
 | `estadistica/README.md` | `camilo/libro` (árbol de trabajo) |
 | `literatura/protocolo_tamizaje_camilo.md` | `camilo/libro` (árbol de trabajo) |
-| `literatura/protocolo_tamizaje_lina.md` | `lina/pipeline` @ 7806e4a |
+| `literatura/protocolo_tamizaje_lina.md` | `lina/pipeline` @ 27c8c36 |
 | `literatura/diagrama_prisma.png` | `camilo/libro` (árbol de trabajo) |
-| `resultados/referencias_validacion.csv` | `lina/pipeline` @ 7806e4a |
+| `resultados/referencias_validacion.csv` | `lina/pipeline` @ 27c8c36 |
