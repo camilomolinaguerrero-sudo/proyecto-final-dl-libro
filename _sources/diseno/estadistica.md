@@ -89,3 +89,39 @@ carpeta de predicciones de Drive. Hay que recordar dos cosas:
   `--referencias`, con el nombre que le dé `src/`. No se cuenta como modelo base.
 - En validación, el MASE comparable con `src/` necesita `--escala-mase` con la escala de cada
   pliegue.
+
+## Comparación sobre el piloto (2026-11-13)
+
+Primera corrida con predicciones reales de las redes: las 20 del piloto de Lina (CNN, MLP, LSTM y la
+referencia lineal, semillas 1 a 5, bloque externo de k4: 98.874 filas en 52 semanas). Las referencias
+ingenuas se recortaron a las mismas filas. Es exploratoria: sirve para revisar el diseño antes de las
+ejecuciones definitivas, no es el análisis confirmatorio. Las salidas están en `resultados_piloto/`.
+
+```bash
+python estadistica/ejecutar_comparacion.py RUTA/predicciones --delta 0.0032 --escala-mase 0.345243 \
+    --referencias persistencia,ingenuo_estacional,mediana_entrenamiento,lineal
+```
+
+La escala del MASE es la del pliegue k4 en `src/` (MAE/MASE de `piloto_metricas_por_corrida.csv`).
+Las métricas coinciden con las que registró Lina.
+
+Lo que dejó el piloto:
+
+- **Las tres redes son equivalentes dentro de δ.** El TOST por semillas da p = 0,026 (CNN-LSTM),
+  0,0001 (CNN-MLP) y 0,007 (LSTM-MLP), y la probabilidad dentro del ROPE va de 0,97 a 0,9998
+  (`comparaciones_pareadas.csv`).
+- **Aun así, la LSTM es algo peor.** El Diebold-Mariano sobre la pérdida semanal la separa de la CNN y
+  del MLP (p ajustado < 0,0001), con 0,0017 y 0,0015 de MAE, menos que δ. Entre la CNN y el MLP no hay
+  diferencia (p = 0,35).
+- **Por semillas, nada es significativo.** Con 5 semillas, el menor p ajustado posible del Wilcoxon es
+  0,1875, y es el que sale en los dos pares con la LSTM. Por eso se recomendaron 8 semillas para las
+  ejecuciones definitivas.
+- **Las tres redes superan a todas las referencias** (`frente_a_referencias.csv`): a la lineal por
+  1,5 % a 2,1 % de MAE, a la mediana del entrenamiento por 8,7 % a 9,2 % y a la persistencia por
+  18,0 % a 18,5 %, todas con p ajustado < 0,0001.
+- **Baseline provisional: CNN**, MAE 0,2818 con IC 95 % de 0,2816 a 0,2820 (`baseline.json`).
+- **Residuos.** Ljung-Box no rechaza en ningún rezago para las redes ni la lineal (`residuos.json`).
+  El residuo semanal medio es positivo, de 0,050 a 0,057. Con pérdida MAE, los modelos aprenden la
+  mediana condicional y no la media. En la CNN, semilla 1, el residuo por fila tiene mediana 0,005 y
+  media 0,061: el centro está bien ubicado y la cola derecha sube la media. Es esperable y no indica
+  una fuga ni un error de escala.

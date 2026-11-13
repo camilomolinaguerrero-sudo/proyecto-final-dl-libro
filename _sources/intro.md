@@ -45,7 +45,7 @@ qué hizo la herramienta, qué revisó cada autor y qué se decidió de común a
 
 ## Procedencia de esta versión
 
-Construida desde la rama `camilo/libro` @ f0bbda1.
+Construida desde la rama `camilo/libro` @ fc6fa7b.
 
 | Archivo | Tomado de |
 | --- | --- |

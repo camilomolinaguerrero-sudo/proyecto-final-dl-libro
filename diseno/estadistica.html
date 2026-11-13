@@ -392,6 +392,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diseno-de-la-inferencia">Diseño de la inferencia</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-humo-2026-11-07">Prueba de humo (2026-11-07)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensayo-con-las-referencias-de-lina-2026-11-11">Ensayo con las referencias de Lina (2026-11-11)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-sobre-el-piloto-2026-11-13">Comparación sobre el piloto (2026-11-13)</a></li>
 </ul>
             </nav>
         </div>
@@ -501,6 +502,40 @@ carpeta de predicciones de Drive. Hay que recordar dos cosas:</p>
 pliegue.</p></li>
 </ul>
 </section>
+<section id="comparacion-sobre-el-piloto-2026-11-13">
+<h2>Comparación sobre el piloto (2026-11-13)<a class="headerlink" href="#comparacion-sobre-el-piloto-2026-11-13" title="Link to this heading">#</a></h2>
+<p>Primera corrida con predicciones reales de las redes: las 20 del piloto de Lina (CNN, MLP, LSTM y la
+referencia lineal, semillas 1 a 5, bloque externo de k4: 98.874 filas en 52 semanas). Las referencias
+ingenuas se recortaron a las mismas filas. Es exploratoria: sirve para revisar el diseño antes de las
+ejecuciones definitivas, no es el análisis confirmatorio. Las salidas están en <code class="docutils literal notranslate"><span class="pre">resultados_piloto/</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>estadistica/ejecutar_comparacion.py<span class="w"> </span>RUTA/predicciones<span class="w"> </span>--delta<span class="w"> </span><span class="m">0</span>.0032<span class="w"> </span>--escala-mase<span class="w"> </span><span class="m">0</span>.345243<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--referencias<span class="w"> </span>persistencia,ingenuo_estacional,mediana_entrenamiento,lineal
+</pre></div>
+</div>
+<p>La escala del MASE es la del pliegue k4 en <code class="docutils literal notranslate"><span class="pre">src/</span></code> (MAE/MASE de <code class="docutils literal notranslate"><span class="pre">piloto_metricas_por_corrida.csv</span></code>).
+Las métricas coinciden con las que registró Lina.</p>
+<p>Lo que dejó el piloto:</p>
+<ul class="simple">
+<li><p><strong>Las tres redes son equivalentes dentro de δ.</strong> El TOST por semillas da p = 0,026 (CNN-LSTM),
+0,0001 (CNN-MLP) y 0,007 (LSTM-MLP), y la probabilidad dentro del ROPE va de 0,97 a 0,9998
+(<code class="docutils literal notranslate"><span class="pre">comparaciones_pareadas.csv</span></code>).</p></li>
+<li><p><strong>Aun así, la LSTM es algo peor.</strong> El Diebold-Mariano sobre la pérdida semanal la separa de la CNN y
+del MLP (p ajustado &lt; 0,0001), con 0,0017 y 0,0015 de MAE, menos que δ. Entre la CNN y el MLP no hay
+diferencia (p = 0,35).</p></li>
+<li><p><strong>Por semillas, nada es significativo.</strong> Con 5 semillas, el menor p ajustado posible del Wilcoxon es
+0,1875, y es el que sale en los dos pares con la LSTM. Por eso se recomendaron 8 semillas para las
+ejecuciones definitivas.</p></li>
+<li><p><strong>Las tres redes superan a todas las referencias</strong> (<code class="docutils literal notranslate"><span class="pre">frente_a_referencias.csv</span></code>): a la lineal por
+1,5 % a 2,1 % de MAE, a la mediana del entrenamiento por 8,7 % a 9,2 % y a la persistencia por
+18,0 % a 18,5 %, todas con p ajustado &lt; 0,0001.</p></li>
+<li><p><strong>Baseline provisional: CNN</strong>, MAE 0,2818 con IC 95 % de 0,2816 a 0,2820 (<code class="docutils literal notranslate"><span class="pre">baseline.json</span></code>).</p></li>
+<li><p><strong>Residuos.</strong> Ljung-Box no rechaza en ningún rezago para las redes ni la lineal (<code class="docutils literal notranslate"><span class="pre">residuos.json</span></code>).
+El residuo semanal medio es positivo, de 0,050 a 0,057. Con pérdida MAE, los modelos aprenden la
+mediana condicional y no la media. En la CNN, semilla 1, el residuo por fila tiene mediana 0,005 y
+media 0,061: el centro está bien ubicado y la cola derecha sube la media. Es esperable y no indica
+una fuga ni un error de escala.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -573,6 +608,7 @@ pliegue.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diseno-de-la-inferencia">Diseño de la inferencia</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-humo-2026-11-07">Prueba de humo (2026-11-07)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensayo-con-las-referencias-de-lina-2026-11-11">Ensayo con las referencias de Lina (2026-11-11)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-sobre-el-piloto-2026-11-13">Comparación sobre el piloto (2026-11-13)</a></li>
 </ul>
   </nav></div>
 
