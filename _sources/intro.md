@@ -46,7 +46,7 @@ qué hizo la herramienta, qué revisó cada autor y qué se decidió de común a
 
 ## Procedencia de esta versión
 
-Construida desde la rama `main` @ a77345e.
+Construida desde la rama `main` @ e0466d3.
 
 | Archivo | Tomado de |
 | --- | --- |
@@ -62,8 +62,8 @@ Construida desde la rama `main` @ a77345e.
 | `DECISIONES.md` | `main` @ fb3826a |
 | `preregistro/borrador_preregistro.md` | `main` @ e56750d |
 | `estadistica/README.md` | `main` @ 2128cce |
-| `literatura/protocolo_tamizaje_camilo.md` | `main` @ 53beb85 |
-| `literatura/protocolo_tamizaje_lina.md` | `main` @ 80a3914 |
+| `literatura/protocolo_tamizaje_camilo.md` | `main` @ 921178a |
+| `literatura/protocolo_tamizaje_lina.md` | `main` @ 7add5ad |
 | `literatura/diagrama_prisma.png` | `main` @ 9d45b50 |
 | `resultados/referencias_validacion.csv` | `main` @ bdf5ffe |
 | `resultados/piloto_metricas_por_corrida.csv` | `main` @ 27c8c36 |

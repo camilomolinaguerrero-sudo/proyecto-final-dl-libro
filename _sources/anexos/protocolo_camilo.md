@@ -7,8 +7,7 @@ Fijado el 2026-11-07, antes de leer los títulos. Aplica a `registros/scopus_202
 
 Todo lo que describe este protocolo lo hizo una herramienta de IA a pedido de Camilo:
 Claude (Anthropic), usado en la aplicación Claude Code entre el 2026-11-07 y el 2026-11-09. La
-sesión del 2026-11-09 reporta el modelo Claude Opus 5.5; Camilo debe confirmar ese dato antes del
-informe. La herramienta hizo lo siguiente:
+herramienta hizo lo siguiente:
 
 - redactó los criterios I1 a I4 y E1 a E6, las reglas de fallo y este texto;
 - hizo las búsquedas en Scopus y arXiv desde el navegador de Camilo;
