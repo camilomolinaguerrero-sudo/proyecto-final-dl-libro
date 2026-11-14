@@ -233,12 +233,14 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1: BORRADOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">5. Resultados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/capitulo5.html">5. Resultados confirmatorios en 2025</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/baseline.html">5.2-5.3 Ranking, baseline y margen de mejora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">Piloto y referencias en validación</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
 <ul class="nav bd-sidenav">
@@ -415,8 +417,10 @@ la configuración están en <code class="docutils literal notranslate"><span cla
 lineal, en <code class="docutils literal notranslate"><span class="pre">sintesis_y_equivalencia_camilo.md</span></code>.</p>
 <p>Fuentes de las cifras:</p>
 <ul class="simple">
-<li><p>Estudios, datos, métricas y valores: <code class="docutils literal notranslate"><span class="pre">tabla_sintesis_camilo.csv</span></code>, que Camilo extrajo del texto completo
-de los diez estudios de respaldo.</p></li>
+<li><p>Estudios, datos, métricas y valores: <code class="docutils literal notranslate"><span class="pre">tabla_sintesis_camilo.csv</span></code>, extraída del texto completo de los diez
+estudios de respaldo. La lectura y la transcripción las hizo Claude (Anthropic) a pedido de Camilo. El
+2026-11-14, Claude repitió el cotejo contra las versiones publicadas de siete de los diez artículos, y
+después Camilo leyó los artículos y cotejó personalmente las cifras (<code class="docutils literal notranslate"><span class="pre">sintesis_y_equivalencia_camilo.md</span></code>).</p></li>
 <li><p>Pérdida, optimizador y demás ajustes que usa la literatura: <code class="docutils literal notranslate"><span class="pre">configuraciones_texto_completo.json</span></code>, sobre
 los 90 textos completos de la extracción de Camilo.</p></li>
 <li><p>Número de parámetros: sección 5 de <code class="docutils literal notranslate"><span class="pre">modelos_seleccionados.md</span></code>, comprobada en <code class="docutils literal notranslate"><span class="pre">src/pruebas/test_modelos.py</span></code>.</p></li>
@@ -683,7 +687,7 @@ de Eurostat (S1-1151), anuales de FAOSTAT (S1-1181) y registros de ventas de caf
 <td><p>Italia (CNN1D): RMSE 32,445, MAE 25,179, R² 0,843</p></td>
 </tr>
 <tr class="row-even"><td><p>S1-1162</p></td>
-<td><p>La tabla comparativa está en imagen; sin valores en el texto</p></td>
+<td><p>Apio (Tabla 2): MAE 0,225, RMSE 0,370, R² 0,873</p></td>
 </tr>
 <tr class="row-odd"><td><p>S1-1181</p></td>
 <td><p>Exactitud 97,29, F1 0,972 (calidad dudosa)</p></td>
@@ -793,7 +797,7 @@ Bangladés (S1-0101) y los precios de futuros de maíz y trigo de 1970 a 2021 (S
 <td><p>Italia: RMSE 41,274, MAE 33,206, R² 0,741</p></td>
 </tr>
 <tr class="row-even"><td><p>S1-1162</p></td>
-<td><p>R² 0,958, MAE 0,143</p></td>
+<td><p>Apio (Tabla 2): MAE 0,131, RMSE 0,226, R² 0,953. En el resumen: R² 0,958, MAE 0,143</p></td>
 </tr>
 <tr class="row-odd"><td><p>S1-1181</p></td>
 <td><p>Exactitud 92,69, F1 0,963 (calidad dudosa)</p></td>

@@ -13,8 +13,13 @@ parámetros salen de `parametros_modelos.json`.
 
 **Uso de inteligencia artificial.** La lectura de los diez artículos, la transcripción de las cifras
 y el primer borrador de este documento los hizo Claude (Anthropic), en Claude Code, el 2026-11-11.
-Camilo no cotejó todavía las cifras contra los artículos, uno por uno; la columna `fuente_valores`
-permite hacerlo. Lina aceptó la corrección de la sección 1.
+El 2026-11-14, Claude repitió el cotejo contra las versiones publicadas de siete artículos, a
+pedido de Camilo. Las cifras de esos siete aparecen en sus artículos, y se revisó en el texto qué redes
+entrena cada uno. El cotejo agregó los valores de la Tabla 2 de
+S1-1162, que la primera lectura no tenía, y precisó la nota de S1-0885. No se pudieron volver a abrir
+S1-0610 (ACM, bloqueo anti-bots) ni S1-0718 y S1-1151 (Elsevier, requieren la sesión de la
+biblioteca). Después, Camilo leyó los artículos y cotejó personalmente las cifras de la tabla
+(2026-11-14). Lina aceptó la corrección de la sección 1.
 
 ## 1. Tabla de síntesis
 
@@ -28,9 +33,9 @@ nombra.
 | S1-0610 (doi:10.1145/3729706.3729746) | Precio del aguacate Hass | Diario, 2015-2023 | LSTM, CNN | MSE, RMSE, MAE, R² | LSTM: RMSE 0,1272, MAE 0,0971. CNN: 0,0810 y 0,0644 |
 | S1-0718 (doi:10.1016/j.asoc.2025.114049) | Futuros de soya y maíz | Diario, tres series | BPNN, LSTM, CNN, GRU, RNN, Transformer e híbridos | MAPE, MAE, RMSE | Soya: BPNN 4,84 %, LSTM 4,79 %, CNN 4,88 % (MAPE) |
 | S1-0863 (doi:10.1590/0103-8478cr20240444) | Hortalizas en Turquía | Diario, 2018-2022 | CNN, LSTM | MAE, RMSE | A 10 días: CNN MAE 0,107; LSTM 10,109 |
-| S1-0885 (doi:10.1371/journal.pone.0337103) | Futuros de maíz y trigo | Diario, 1970-2021 | BPNN, LSTM, BiLSTM | RMSE, MAPE, MAE, Dstat | Maíz, con SVMD: BPNN 1,9051 %, LSTM 1,1969 % (MAPE) |
+| S1-0885 (doi:10.1371/journal.pone.0337103) | Futuros de maíz y trigo | Diario, 1970-2021 | BPNN, LSTM, BiLSTM | RMSE, MAPE, MAE, Dstat | Maíz, con SVMD: BPNN MAE 9,4117; LSTM 4,6458 |
 | S1-1151 (doi:10.1016/j.compag.2024.108933) | Producción de leche en tres países | Mensual, Eurostat y clima | FCNN, LSTM, CNN1D y otras seis | R², RMSE, MAPE, MAE | Italia: FCNN MAE 32,064; LSTM 33,206; CNN1D 25,179 |
-| S1-1162 (doi:10.1371/journal.pone.0304881) | Hortalizas en Beijing | Diario, 2009-2023 | LSTM, CNN | R², MAE | LSTM: R² 0,958, MAE 0,143 |
+| S1-1162 (doi:10.1371/journal.pone.0304881) | Hortalizas en Beijing | Diario, 2009-2023 | LSTM, CNN | R², MAE, RMSE, MAPE | Apio: LSTM MAE 0,131; CNN 0,225 |
 | S1-1181 (doi:10.1007/s44230-023-00046-y) | Producción de alimentos en Irán | Anual, FAOSTAT, 1961-2017 | MLP, AE, DBN, CNN, RNN, LSTM | Exactitud, F1 | MLP 80,54; CNN 97,29; LSTM 92,69 (exactitud) |
 | A1-01 (arXiv:2501.16697) | Futuros de maní | Diario, desde 2021 | MLP, CNN, LSTM | MSE, MAE por paso | Paso 1: MLP MAE 270,25; CNN 235,77; LSTM 132,76 |
 | A1-14 (arXiv:2606.08314) | Demanda de café | 1.062 registros, 70/15/15 | ANN (MLP), LSTM, CNN | MAE, RMSE, MAPE, sMAPE, MASE, R² | MASE: MLP 0,67; LSTM 0,62; CNN 0,61; ingenuo 1,00 |
@@ -71,8 +76,8 @@ semanal.
 pronóstico, y su texto conserva frases de otro trabajo. Lo mantenemos en la tabla porque está
 incluido en el conjunto, pero no lo usamos para justificar ninguna decisión.
 
-**Valores que faltan.** S1-0885 y S1-1162 publican sus tablas comparativas como imagen. Para ellos
-la tabla solo trae las cifras que aparecen en el texto.
+**Valores que faltan.** S1-0885 describe BPNN, LSTM y BiLSTM solas como referencias, pero sus tablas
+solo reportan las variantes con descomposición SVMD; la tabla trae esas.
 
 ## 2. Equivalencia con la SVR lineal y el modelo logístico
 

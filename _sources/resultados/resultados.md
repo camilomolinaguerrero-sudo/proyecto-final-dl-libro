@@ -1,10 +1,8 @@
-# 5. Resultados
+# Piloto y referencias en validación
 
-## Estado
-
-Ya corrieron la búsqueda de hiperparámetros y el piloto (5 semillas en el bloque externo de k4).
-Faltan las ejecuciones definitivas y la inferencia del capítulo 4. Las cifras del piloto sirven para
-fijar el número de ejecuciones; no son el resultado confirmatorio.
+Estas cifras son anteriores a la corrida definitiva y no son confirmatorias. El piloto fijó el número
+de ejecuciones (8 semillas), y las referencias en validación fijaron el margen δ. Los resultados
+confirmatorios sobre 2025 están en las dos secciones anteriores.
 
 ## Piloto
 

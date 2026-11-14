@@ -7,8 +7,10 @@ lineal, en `sintesis_y_equivalencia_camilo.md`.
 
 Fuentes de las cifras:
 
-- Estudios, datos, métricas y valores: `tabla_sintesis_camilo.csv`, que Camilo extrajo del texto completo
-  de los diez estudios de respaldo.
+- Estudios, datos, métricas y valores: `tabla_sintesis_camilo.csv`, extraída del texto completo de los diez
+  estudios de respaldo. La lectura y la transcripción las hizo Claude (Anthropic) a pedido de Camilo. El
+  2026-11-14, Claude repitió el cotejo contra las versiones publicadas de siete de los diez artículos, y
+  después Camilo leyó los artículos y cotejó personalmente las cifras (`sintesis_y_equivalencia_camilo.md`).
 - Pérdida, optimizador y demás ajustes que usa la literatura: `configuraciones_texto_completo.json`, sobre
   los 90 textos completos de la extracción de Camilo.
 - Número de parámetros: sección 5 de `modelos_seleccionados.md`, comprobada en `src/pruebas/test_modelos.py`.
@@ -187,7 +189,7 @@ de Eurostat (S1-1151), anuales de FAOSTAT (S1-1181) y registros de ventas de caf
 | S1-0718 | Soya de China: MAPE 4,88 %, MAE 0,0279, RMSE 0,0367 |
 | S1-0863 | Horizonte de 10 días: MAE 0,107, RMSE 0,162 |
 | S1-1151 | Italia (CNN1D): RMSE 32,445, MAE 25,179, R² 0,843 |
-| S1-1162 | La tabla comparativa está en imagen; sin valores en el texto |
+| S1-1162 | Apio (Tabla 2): MAE 0,225, RMSE 0,370, R² 0,873 |
 | S1-1181 | Exactitud 97,29, F1 0,972 (calidad dudosa) |
 | A1-01 | Paso 1: MSE 90663,54, MAE 235,77 |
 | A1-14 | MAE 25,31, RMSE 36,12, MASE 0,61, R² 0,86 |
@@ -265,7 +267,7 @@ Bangladés (S1-0101) y los precios de futuros de maíz y trigo de 1970 a 2021 (S
 | S1-0863 | Horizonte de 10 días: MAE 10,109, RMSE 15,698 |
 | S1-0885 | Maíz, con descomposición SVMD: MAPE 1,1969 % |
 | S1-1151 | Italia: RMSE 41,274, MAE 33,206, R² 0,741 |
-| S1-1162 | R² 0,958, MAE 0,143 |
+| S1-1162 | Apio (Tabla 2): MAE 0,131, RMSE 0,226, R² 0,953. En el resumen: R² 0,958, MAE 0,143 |
 | S1-1181 | Exactitud 92,69, F1 0,963 (calidad dudosa) |
 | A1-01 | Paso 1: MSE 26772,50, MAE 132,76 |
 | A1-14 | MAE 25,94, RMSE 36,88, MASE 0,62, R² 0,85 |

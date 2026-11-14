@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5.2-5.3 Ranking, baseline y margen de mejora &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'resultados/baseline';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Piloto y referencias en validación" href="resultados.html" />
+    <link rel="prev" title="5. Resultados confirmatorios en 2025" href="capitulo5.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Entregable 1: estado del arte, EDA y tres modelos base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/analisis_por_modelo.html">Análisis por modelo base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="capitulo5.html">5. Resultados confirmatorios en 2025</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5.2-5.3 Ranking, baseline y margen de mejora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resultados.html">Piloto y referencias en validación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/resultados/baseline.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5.2-5.3 Ranking, baseline y margen de mejora</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ranking-de-los-tres-modelos-base">Ranking de los tres modelos base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline">Baseline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#umbral-de-mejora-para-modelos-avanzados">Umbral de mejora para modelos avanzados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-con-una-cota-de-referencia">Contraste con una cota de referencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ranking-baseline-y-margen-de-mejora">
+<h1>5.2-5.3 Ranking, baseline y margen de mejora<a class="headerlink" href="#ranking-baseline-y-margen-de-mejora" title="Link to this heading">#</a></h1>
+<p><em>Generado por <code class="docutils literal notranslate"><span class="pre">estadistica/seccion_baseline.py</span></code> desde <code class="docutils literal notranslate"><span class="pre">resultados/comparacion_definitiva/</span></code>; no se edita a
+mano. Cubre las secciones 5.2 y 5.3 del enunciado; las pruebas están en el capítulo anterior.</em></p>
+<section id="ranking-de-los-tres-modelos-base">
+<h2>Ranking de los tres modelos base<a class="headerlink" href="#ranking-de-los-tres-modelos-base" title="Link to this heading">#</a></h2>
+<p>Orden por la métrica primaria, el MAE medio de 2025 entre las 8 semillas. Las reducciones relativas son
+(ref − modelo)/ref × 100, frente al mejor y al peor de los tres; un valor negativo indica más error que la
+referencia. El tiempo es el de entrenar la segunda etapa en una Tesla T4.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Puesto</p></th>
+<th class="head"><p>Modelo</p></th>
+<th class="head"><p>MAE (media ± DE)</p></th>
+<th class="head"><p>IC 95 %</p></th>
+<th class="head"><p>ΔMAE vs. mejor</p></th>
+<th class="head"><p>ΔMAE vs. peor</p></th>
+<th class="head"><p>ΔRMSE vs. mejor</p></th>
+<th class="head"><p>ΔRMSE vs. peor</p></th>
+<th class="head"><p>Parámetros</p></th>
+<th class="head"><p>Entrenamiento (s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>CNN</p></td>
+<td><p>0,2739 ± 0,0004</p></td>
+<td><p>[0,2736; 0,2742]</p></td>
+<td><p>0,00 %</p></td>
+<td><p>0,13 %</p></td>
+<td><p>0,00 %</p></td>
+<td><p>-0,39 %</p></td>
+<td><p>137.534</p></td>
+<td><p>548</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>MLP</p></td>
+<td><p>0,2741 ± 0,0004</p></td>
+<td><p>[0,2738; 0,2745]</p></td>
+<td><p>-0,07 %</p></td>
+<td><p>0,06 %</p></td>
+<td><p>-0,10 %</p></td>
+<td><p>-0,48 %</p></td>
+<td><p>82.622</p></td>
+<td><p>71</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>LSTM</p></td>
+<td><p>0,2743 ± 0,0006</p></td>
+<td><p>[0,2738; 0,2748]</p></td>
+<td><p>-0,13 %</p></td>
+<td><p>0,00 %</p></td>
+<td><p>0,38 %</p></td>
+<td><p>0,00 %</p></td>
+<td><p>229.694</p></td>
+<td><p>1.754</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El orden no tiene respaldo estadístico. Entre la primera y la última red hay 0,13 % de
+MAE, y ninguna comparación es significativa (capítulo anterior). Los tamaños de efecto frente al mejor
+modelo son pequeños y van en sentidos que el Wilcoxon no distingue de cero:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Par</p></th>
+<th class="head"><p>Diferencia de MAE</p></th>
+<th class="head"><p>d de Cohen pareada</p></th>
+<th class="head"><p>r rango-biserial</p></th>
+<th class="head"><p>δ de Cliff</p></th>
+<th class="head"><p>Wilcoxon p (Holm)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CNN − MLP</p></td>
+<td><p>-0,0002</p></td>
+<td><p>-0,31</p></td>
+<td><p>-0,17</p></td>
+<td><p>-0,22</p></td>
+<td><p>1,00</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN − LSTM</p></td>
+<td><p>-0,0003</p></td>
+<td><p>-0,46</p></td>
+<td><p>-0,50</p></td>
+<td><p>-0,31</p></td>
+<td><p>0,75</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Precisión frente a costo y complejidad.</strong> El aumento de complejidad no compra precisión:</p>
+<ul class="simple">
+<li><p>La MLP queda a 0,07 % del MAE de la CNN, con 60 % de sus
+parámetros y 13 % de su tiempo de entrenamiento.</p></li>
+<li><p>La LSTM tiene 2,8 veces los parámetros de la MLP y entrena
+24,9 veces más lento, sin mejorar el MAE.</p></li>
+<li><p>En RMSE el orden se invierte: la LSTM tiene el menor RMSE. La diferencia también es menor que 1 %.</p></li>
+</ul>
+</section>
+<section id="baseline">
+<h2>Baseline<a class="headerlink" href="#baseline" title="Link to this heading">#</a></h2>
+<p><strong>El baseline es la CNN: MAE de 0,2739 ± 0,0004 en 2025, con IC 95 % de
+0,2736 a 0,2742</strong> (t entre 8 semillas). Es el mejor modelo base por la
+métrica primaria, como pide la sección 5.3 del enunciado.</p>
+<p>La MLP y la LSTM son equivalentes a la CNN dentro de δ (TOST), así que el nivel de error del baseline no
+depende de la arquitectura: cualquiera de las tres lo reproduce. Para un modelo de referencia barato en
+el Entregable 2, la MLP alcanza el mismo nivel con una fracción del costo. El umbral de abajo se mide
+siempre contra el MAE de la CNN.</p>
+</section>
+<section id="umbral-de-mejora-para-modelos-avanzados">
+<h2>Umbral de mejora para modelos avanzados<a class="headerlink" href="#umbral-de-mejora-para-modelos-avanzados" title="Link to this heading">#</a></h2>
+<p>Un modelo avanzado, evaluado con el mismo protocolo (8 semillas, misma partición y la misma prueba de
+2025), debe cumplir dos umbrales frente al baseline:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterio</p></th>
+<th class="head"><p>Diferencia de MAE</p></th>
+<th class="head"><p>MAE que debe alcanzar</p></th>
+<th class="head"><p>Reducción relativa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Estadísticamente distinguible</p></td>
+<td><p>0,0009</p></td>
+<td><p>≤ 0,2731</p></td>
+<td><p>0,32 %</p></td>
+</tr>
+<tr class="row-odd"><td><p>Prácticamente relevante (δ)</p></td>
+<td><p>0,0032</p></td>
+<td><p>≤ 0,2707</p></td>
+<td><p>1,17 %</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>Distinguible.</strong> 0,0009 es la diferencia mínima detectable con 8 semillas, con α = 0,05 y potencia
+0,80, a partir de la mayor desviación de las diferencias pareadas entre los modelos base
+(<code class="docutils literal notranslate"><span class="pre">baseline.json</span></code>). Por debajo, una mejora no se distinguiría del ruido entre semillas.</p></li>
+<li><p><strong>Relevante.</strong> δ = 0,0032 es el margen preregistrado: el 1 % del MAE de la mejor referencia ingenua en
+validación. El criterio que manda es este, porque es 3,7 veces mayor que el detectable.
+Un modelo avanzado es una contribución si su MAE en 2025 queda en 0,2707 o menos y la
+diferencia con la CNN es significativa con la misma inferencia del capítulo 4.</p></li>
+</ul>
+</section>
+<section id="contraste-con-una-cota-de-referencia">
+<h2>Contraste con una cota de referencia<a class="headerlink" href="#contraste-con-una-cota-de-referencia" title="Link to this heading">#</a></h2>
+<p>Para este panel no hay una estimación de ruido irreducible ni un pronóstico operativo con el que
+comparar. El contraste disponible son las referencias:</p>
+<ul class="simple">
+<li><p>Sin usar ninguna variable, la mediana del entrenamiento logra un MAE de 0,3060. El baseline baja
+0,0320 desde ahí.</p></li>
+<li><p>La referencia lineal, con las mismas entradas y sin capas ocultas, logra 0,2829. Ya recorre el
+72 % del camino entre la mediana y el baseline.</p></li>
+</ul>
+<p>Lo que queda por ganar con más capacidad sobre las mismas entradas parece pequeño frente a lo que ya
+ganó la no linealidad. Un modelo avanzado probablemente necesite información nueva (otras variables, otra
+escala espacial) más que una arquitectura más grande. Esto es una interpretación, no una prueba.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Significativo frente a relevante.</strong> Frente a las cuatro referencias, las tres redes mejoran de forma
+significativa y relevante (más que δ). Entre ellas no hay una diferencia significativa ni relevante, y el
+TOST las da por equivalentes.</p></li>
+<li><p><strong>Complejidad.</strong> Pasar de 82.622 a 229.694 parámetros y de 71 s a
+1.754 s de entrenamiento no reduce el error.</p></li>
+<li><p><strong>Baseline y margen.</strong> El baseline es la CNN, con un MAE de 0,2739 en 2025. Un modelo avanzado debe
+llegar a un MAE de 0,2707 o menos (1,17 % menos error) para representar una
+mejora relevante.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./resultados"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="capitulo5.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">5. Resultados confirmatorios en 2025</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="resultados.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Piloto y referencias en validación</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ranking-de-los-tres-modelos-base">Ranking de los tres modelos base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline">Baseline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#umbral-de-mejora-para-modelos-avanzados">Umbral de mejora para modelos avanzados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-con-una-cota-de-referencia">Contraste con una cota de referencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
