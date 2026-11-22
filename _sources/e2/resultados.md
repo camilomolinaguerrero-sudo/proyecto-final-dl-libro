@@ -98,7 +98,7 @@ Los tres intervalos quedan por encima de 1: la limitación es compartida por la 
 
 ## Paper guía: réplica parcial del TFT en Electricity
 
-Script `src/replica_electricity.py` (370 clientes, 53.650 ventanas de prueba, 1 semilla, 15 épocas, 1,4 h en una Tesla T4, `pytorch-forecasting` 1.4.0). Métrica: q-Risk normalizado del artículo.
+Script `src/replica_electricity.py` (370 clientes, 53.650 ventanas de prueba, 1 semilla, 15 épocas, unas 2,8 h en una Tesla T4, `pytorch-forecasting` 1.4.0). Métrica: q-Risk normalizado del artículo. El tiempo es estimado: el entrenamiento se hizo en 4 sesiones retomadas desde el último punto de control, y solo la última se midió con el script.
 
 | Cuantil | Obtenido | Publicado | Diferencia relativa |
 | --- | --- | --- | --- |
