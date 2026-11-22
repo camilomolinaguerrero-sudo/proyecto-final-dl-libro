@@ -66,7 +66,7 @@
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
     <link rel="next" title="Protocolo de tamizaje (búsquedas S1 y A1)" href="protocolo_camilo.html" />
-    <link rel="prev" title="Piloto y referencias en validación" href="../resultados/resultados.html" />
+    <link rel="prev" title="Reproducibilidad (Apéndice B)" href="../e2/reproducibilidad.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
   <meta name="docsearch:version" content="" />
@@ -154,6 +154,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -206,7 +210,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Entregable 1: estado del arte, EDA y tres modelos base
+                    Proyecto final: pronóstico del abastecimiento de alimentos con Deep Learning
                 </a>
             </li>
         </ul>
@@ -235,6 +239,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../resultados/capitulo5.html">5. Resultados confirmatorios en 2025</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../resultados/baseline.html">5.2-5.3 Ranking, baseline y margen de mejora</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">Piloto y referencias en validación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../e2/resumen.html">Entregable 2: benchmark del Top 10 de la literatura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/datos.html">Datos, EDA y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/trazabilidad.html">Tabla de trazabilidad hallazgo-decisión (Apéndice A.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/top10.html">Top 10 del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/metodos.html">Métodos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/preregistro.html">Preregistro del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/resultados.html">Resultados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/discusion.html">Discusión, conclusiones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/reproducibilidad.html">Reproducibilidad (Apéndice B)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
 <ul class="current nav bd-sidenav">
@@ -363,7 +379,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -379,6 +397,14 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entregable-2">Entregable 2</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -409,6 +435,24 @@ predicciones (capítulo 4).</p></li>
 <li><p><strong>Libro.</strong> <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">book/armar_libro.py</span></code> reúne las páginas y construye el HTML en
 <code class="docutils literal notranslate"><span class="pre">book/_build/html</span></code>.</p></li>
 </ol>
+<section id="entregable-2">
+<h2>Entregable 2<a class="headerlink" href="#entregable-2" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Auditoría de fuga.</strong> <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">auditoria/auditar_fuga.py</span></code> escribe <code class="docutils literal notranslate"><span class="pre">auditoria/resultados/</span></code>.</p></li>
+<li><p><strong>Top 10.</strong> <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">literatura/top10_e2.py</span></code> escribe <code class="docutils literal notranslate"><span class="pre">literatura/top10_e2.csv</span></code> y <code class="docutils literal notranslate"><span class="pre">.md</span></code>.</p></li>
+<li><p><strong>Búsqueda de arquitectura del MLP.</strong> <code class="docutils literal notranslate"><span class="pre">src/busqueda_arquitectura.py</span></code> (en Colab) escribe
+<code class="docutils literal notranslate"><span class="pre">resultados/arquitectura_mlp_*.csv</span></code>.</p></li>
+<li><p><strong>Corrida definitiva.</strong> <code class="docutils literal notranslate"><span class="pre">src/definitiva.py</span></code> no corre sin la etiqueta <code class="docutils literal notranslate"><span class="pre">preregistro-e2</span></code>; los cuadernos
+<code class="docutils literal notranslate"><span class="pre">src/colab_definitiva_e2_a.ipynb</span></code> y <code class="docutils literal notranslate"><span class="pre">_b.ipynb</span></code> la reparten en dos sesiones de Colab.</p></li>
+<li><p><strong>Análisis confirmatorio.</strong> <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">estadistica/ejecutar_e2.py</span> <span class="pre">&lt;carpeta</span> <span class="pre">de</span> <span class="pre">predicciones</span> <span class="pre">de</span> <span class="pre">prueba&gt;</span></code>
+escribe <code class="docutils literal notranslate"><span class="pre">estadistica/resultados_e2/</span></code>.</p></li>
+<li><p><strong>Piloto y exploratorios.</strong> <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">estadistica/piloto_limitacion.py</span></code>, <code class="docutils literal notranslate"><span class="pre">src/exploratorios_e2.py</span></code>,
+<code class="docutils literal notranslate"><span class="pre">src/robustez_interpretabilidad.py</span></code>, <code class="docutils literal notranslate"><span class="pre">src/sensibilidad_sin_nacional.py</span></code> y <code class="docutils literal notranslate"><span class="pre">src/replica_electricity.py</span></code>;
+cada script dice en su encabezado qué datos lee y dónde escribe. La réplica necesita además
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements-replica.txt</span></code> (agrega <code class="docutils literal notranslate"><span class="pre">pytorch-forecasting</span></code>).</p></li>
+<li><p><strong>Libro.</strong> <code class="docutils literal notranslate"><span class="pre">book/capitulo_e2.py</span></code> genera las páginas del Entregable 2 desde esos archivos.</p></li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -442,12 +486,12 @@ predicciones (capítulo 4).</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../resultados/resultados.html"
+       href="../e2/reproducibilidad.html"
        title="página anterior">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">anterior</p>
-        <p class="prev-next-title">Piloto y referencias en validación</p>
+        <p class="prev-next-title">Reproducibilidad (Apéndice B)</p>
       </div>
     </a>
     <a class="right-next"
@@ -465,6 +509,23 @@ predicciones (capítulo 4).</p></li>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entregable-2">Entregable 2</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

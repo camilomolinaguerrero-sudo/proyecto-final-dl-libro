@@ -1,0 +1,1409 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Resultados &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'e2/resultados';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Discusión, conclusiones y trabajo futuro" href="discusion.html" />
+    <link rel="prev" title="Preregistro del Entregable 2" href="preregistro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Proyecto final: pronóstico del abastecimiento de alimentos con Deep Learning
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/analisis_por_modelo.html">Análisis por modelo base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/capitulo5.html">5. Resultados confirmatorios en 2025</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/baseline.html">5.2-5.3 Ranking, baseline y margen de mejora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">Piloto y referencias en validación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resumen.html">Entregable 2: benchmark del Top 10 de la literatura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datos.html">Datos, EDA y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trazabilidad.html">Tabla de trazabilidad hallazgo-decisión (Apéndice A.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="top10.html">Top 10 del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metodos.html">Métodos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preregistro.html">Preregistro del Entregable 2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Resultados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="discusion.html">Discusión, conclusiones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reproducibilidad.html">Reproducibilidad (Apéndice B)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/e2/resultados.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Resultados</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-principal-del-benchmark-a-2">Tabla principal del benchmark (A.2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastes-confirmatorios-a-3">Contrastes confirmatorios (A.3)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-frente-a-la-cnn-del-entregable-1">F1: frente a la CNN del Entregable 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f2-frente-a-la-mediana-del-entrenamiento">F2: frente a la mediana del entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#procedimiento-global">Procedimiento global</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adecuacion-y-calibracion">Adecuación y calibración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paper-guia-limitacion-en-semanas-de-interrupcion-piloto">Paper guía: limitación en semanas de interrupción (piloto)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paper-guia-replica-parcial-del-tft-en-electricity">Paper guía: réplica parcial del TFT en Electricity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-sin-frac-caida-nacional-t-exploratoria">Sensibilidad sin <code class="docutils literal notranslate"><span class="pre">frac_caida_nacional_t</span></code> (exploratoria)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-por-segmento-exploratorio">Error por segmento (exploratorio)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incertidumbre-conforme-por-bloques-semanales-exploratoria">Incertidumbre conforme por bloques semanales (exploratoria)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-interpretabilidad-y-ablacion-exploratorias">Robustez, interpretabilidad y ablación (exploratorias)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="resultados">
+<h1>Resultados<a class="headerlink" href="#resultados" title="Link to this heading">#</a></h1>
+<p>Todo sale de <code class="docutils literal notranslate"><span class="pre">estadistica/resultados_e2/</span></code> (análisis confirmatorio, <code class="docutils literal notranslate"><span class="pre">estadistica/ejecutar_e2.py</span></code>), de <code class="docutils literal notranslate"><span class="pre">resultados/exploratorios_e2/</span></code> y <code class="docutils literal notranslate"><span class="pre">resultados/robustez_e2/</span></code> (exploratorios, <code class="docutils literal notranslate"><span class="pre">src/exploratorios_e2.py</span></code> y <code class="docutils literal notranslate"><span class="pre">src/robustez_interpretabilidad.py</span></code>) y de <code class="docutils literal notranslate"><span class="pre">resultados/piloto_limitacion_e2.json</span></code>.</p>
+<section id="tabla-principal-del-benchmark-a-2">
+<h2>Tabla principal del benchmark (A.2)<a class="headerlink" href="#tabla-principal-del-benchmark-a-2" title="Link to this heading">#</a></h2>
+<p>MAE de 2025, 8 semillas por modelo. MZ b es la pendiente de Mincer–Zarnowitz sobre la serie semanal (1 = calibrado). La robustez es el aumento medio del MAE con la severidad más alta de ruido, en el bloque de parada (solo los tres modelos analizados). El rango medio es el de Friedman entre las redes.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>MAE (media ± DE)</p></th>
+<th class="head"><p>IC 95 % (semillas)</p></th>
+<th class="head"><p>MZ b</p></th>
+<th class="head"><p>Robustez (ΔMAE alta)</p></th>
+<th class="head"><p>Parámetros</p></th>
+<th class="head"><p>Inferencia (s)</p></th>
+<th class="head"><p>Rango medio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mediana del entrenamiento</p></td>
+<td><p>0,3060</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>Persistencia</p></td>
+<td><p>0,3450</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>Ingenuo estacional</p></td>
+<td><p>0,3764</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>Referencia lineal</p></td>
+<td><p>0,2829 ± 0,0009</p></td>
+<td><p>0,2821 a 0,2836</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>15.920</p></td>
+<td><p>0,01</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>MLP (E1)</p></td>
+<td><p>0,2741 ± 0,0004</p></td>
+<td><p>0,2738 a 0,2745</p></td>
+<td><p>0,65</p></td>
+<td><p>—</p></td>
+<td><p>82.622</p></td>
+<td><p>0,02</p></td>
+<td><p>5,25</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN (E1)</p></td>
+<td><p>0,2739 ± 0,0004</p></td>
+<td><p>0,2736 a 0,2742</p></td>
+<td><p>0,67</p></td>
+<td><p>+0,0077</p></td>
+<td><p>137.534</p></td>
+<td><p>0,59</p></td>
+<td><p>4,25</p></td>
+</tr>
+<tr class="row-even"><td><p>LSTM (E1)</p></td>
+<td><p>0,2743 ± 0,0006</p></td>
+<td><p>0,2738 a 0,2748</p></td>
+<td><p>0,65</p></td>
+<td><p>—</p></td>
+<td><p>229.694</p></td>
+<td><p>1,98</p></td>
+<td><p>5,75</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLP (E2)</p></td>
+<td><p>0,2748 ± 0,0005</p></td>
+<td><p>0,2744 a 0,2752</p></td>
+<td><p>0,66</p></td>
+<td><p>—</p></td>
+<td><p>32.574</p></td>
+<td><p>0,01</p></td>
+<td><p>8,38</p></td>
+</tr>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>0,2729 ± 0,0011</p></td>
+<td><p>0,2720 a 0,2739</p></td>
+<td><p>0,64</p></td>
+<td><p>+0,0067</p></td>
+<td><p>6.741.870</p></td>
+<td><p>12,89</p></td>
+<td><p>2,50</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>0,2737 ± 0,0008</p></td>
+<td><p>0,2730 a 0,2744</p></td>
+<td><p>0,71</p></td>
+<td><p>+0,0069</p></td>
+<td><p>178.942</p></td>
+<td><p>2,25</p></td>
+<td><p>4,12</p></td>
+</tr>
+<tr class="row-even"><td><p>PatchTST</p></td>
+<td><p>0,2741 ± 0,0011</p></td>
+<td><p>0,2731 a 0,2750</p></td>
+<td><p>0,59</p></td>
+<td><p>—</p></td>
+<td><p>422.655</p></td>
+<td><p>2,05</p></td>
+<td><p>5,00</p></td>
+</tr>
+<tr class="row-odd"><td><p>RNN simple</p></td>
+<td><p>0,2743 ± 0,0006</p></td>
+<td><p>0,2739 a 0,2748</p></td>
+<td><p>0,61</p></td>
+<td><p>—</p></td>
+<td><p>46.462</p></td>
+<td><p>0,23</p></td>
+<td><p>6,25</p></td>
+</tr>
+<tr class="row-even"><td><p>GRU</p></td>
+<td><p>0,2747 ± 0,0008</p></td>
+<td><p>0,2740 a 0,2753</p></td>
+<td><p>0,63</p></td>
+<td><p>—</p></td>
+<td><p>88.574</p></td>
+<td><p>0,69</p></td>
+<td><p>7,88</p></td>
+</tr>
+<tr class="row-odd"><td><p>DLinear</p></td>
+<td><p>0,2751 ± 0,0003</p></td>
+<td><p>0,2748 a 0,2753</p></td>
+<td><p>0,62</p></td>
+<td><p>—</p></td>
+<td><p>21.608</p></td>
+<td><p>0,02</p></td>
+<td><p>9,75</p></td>
+</tr>
+<tr class="row-even"><td><p>N-BEATS</p></td>
+<td><p>0,2753 ± 0,0003</p></td>
+<td><p>0,2750 a 0,2756</p></td>
+<td><p>0,66</p></td>
+<td><p>—</p></td>
+<td><p>28.488.164</p></td>
+<td><p>1,98</p></td>
+<td><p>11,00</p></td>
+</tr>
+<tr class="row-odd"><td><p>TCN</p></td>
+<td><p>0,2756 ± 0,0007</p></td>
+<td><p>0,2750 a 0,2762</p></td>
+<td><p>0,52</p></td>
+<td><p>—</p></td>
+<td><p>88.446</p></td>
+<td><p>0,56</p></td>
+<td><p>11,75</p></td>
+</tr>
+<tr class="row-even"><td><p>N-HiTS</p></td>
+<td><p>0,2757 ± 0,0015</p></td>
+<td><p>0,2745 a 0,2770</p></td>
+<td><p>0,60</p></td>
+<td><p>—</p></td>
+<td><p>1.163.093</p></td>
+<td><p>0,09</p></td>
+<td><p>10,50</p></td>
+</tr>
+<tr class="row-odd"><td><p>iTransformer</p></td>
+<td><p>0,2758 ± 0,0006</p></td>
+<td><p>0,2753 a 0,2763</p></td>
+<td><p>0,58</p></td>
+<td><p>—</p></td>
+<td><p>826.879</p></td>
+<td><p>0,26</p></td>
+<td><p>12,62</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="contrastes-confirmatorios-a-3">
+<h2>Contrastes confirmatorios (A.3)<a class="headerlink" href="#contrastes-confirmatorios-a-3" title="Link to this heading">#</a></h2>
+<section id="f1-frente-a-la-cnn-del-entregable-1">
+<h3>F1: frente a la CNN del Entregable 1<a class="headerlink" href="#f1-frente-a-la-cnn-del-entregable-1" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Contraste</p></th>
+<th class="head"><p>Diferencia e IC 95 %</p></th>
+<th class="head"><p>dz</p></th>
+<th class="head"><p>δ de Cliff</p></th>
+<th class="head"><p>p DM-HLN</p></th>
+<th class="head"><p>p Holm (DM)</p></th>
+<th class="head"><p>p Wilcoxon semanas (Holm)</p></th>
+<th class="head"><p>Decisión (preregistro)</p></th>
+<th class="head"><p>Lectura A.3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>-0,00099 (-0,00151 a -0,00050)</p></td>
+<td><p>-0,58</p></td>
+<td><p>-0,07</p></td>
+<td><p>0,00012</p></td>
+<td><p>0,00055</p></td>
+<td><p>0,0014</p></td>
+<td><p>no concluyente</p></td>
+<td><p>significativa sin relevancia (mejor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>-0,00025 (-0,00056 a +0,00007)</p></td>
+<td><p>-0,20</p></td>
+<td><p>-0,03</p></td>
+<td><p>0,161</p></td>
+<td><p>0,322</p></td>
+<td><p>0,350</p></td>
+<td><p>equivalente</p></td>
+<td><p>equivalente</p></td>
+</tr>
+<tr class="row-even"><td><p>PatchTST</p></td>
+<td><p>+0,00011 (-0,00014 a +0,00037)</p></td>
+<td><p>0,11</p></td>
+<td><p>0,00</p></td>
+<td><p>0,449</p></td>
+<td><p>0,449</p></td>
+<td><p>0,736</p></td>
+<td><p>equivalente</p></td>
+<td><p>equivalente</p></td>
+</tr>
+<tr class="row-odd"><td><p>RNN simple</p></td>
+<td><p>+0,00038 (+0,00011 a +0,00063)</p></td>
+<td><p>0,40</p></td>
+<td><p>0,04</p></td>
+<td><p>0,0061</p></td>
+<td><p>0,018</p></td>
+<td><p>0,023</p></td>
+<td><p>no concluyente</p></td>
+<td><p>significativa sin relevancia (peor)</p></td>
+</tr>
+<tr class="row-even"><td><p>GRU</p></td>
+<td><p>+0,00074 (+0,00045 a +0,00102)</p></td>
+<td><p>0,58</p></td>
+<td><p>0,05</p></td>
+<td><p>0,00011</p></td>
+<td><p>0,00055</p></td>
+<td><p>0,00052</p></td>
+<td><p>no concluyente</p></td>
+<td><p>significativa sin relevancia (peor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>DLinear</p></td>
+<td><p>+0,00113 (+0,00081 a +0,00143)</p></td>
+<td><p>1,05</p></td>
+<td><p>0,07</p></td>
+<td><p>7,4e-10</p></td>
+<td><p>5,2e-9</p></td>
+<td><p>4,4e-7</p></td>
+<td><p>no concluyente</p></td>
+<td><p>significativa sin relevancia (peor)</p></td>
+</tr>
+<tr class="row-even"><td><p>N-BEATS</p></td>
+<td><p>+0,00134 (+0,00093 a +0,00176)</p></td>
+<td><p>1,16</p></td>
+<td><p>0,11</p></td>
+<td><p>3,7e-11</p></td>
+<td><p>2,9e-10</p></td>
+<td><p>1,4e-7</p></td>
+<td><p>no concluyente</p></td>
+<td><p>significativa sin relevancia (peor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>TCN</p></td>
+<td><p>+0,00167 (+0,00129 a +0,00205)</p></td>
+<td><p>1,24</p></td>
+<td><p>0,11</p></td>
+<td><p>5,6e-12</p></td>
+<td><p>5,0e-11</p></td>
+<td><p>2,7e-8</p></td>
+<td><p>no concluyente</p></td>
+<td><p>significativa sin relevancia (peor)</p></td>
+</tr>
+<tr class="row-even"><td><p>N-HiTS</p></td>
+<td><p>+0,00177 (+0,00138 a +0,00217)</p></td>
+<td><p>1,38</p></td>
+<td><p>0,11</p></td>
+<td><p>1,5e-13</p></td>
+<td><p>1,5e-12</p></td>
+<td><p>1,7e-8</p></td>
+<td><p>no concluyente</p></td>
+<td><p>significativa sin relevancia (peor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>iTransformer</p></td>
+<td><p>+0,00180 (+0,00131 a +0,00230)</p></td>
+<td><p>0,92</p></td>
+<td><p>0,12</p></td>
+<td><p>2,2e-8</p></td>
+<td><p>1,3e-7</p></td>
+<td><p>4,0e-6</p></td>
+<td><p>no concluyente</p></td>
+<td><p>significativa sin relevancia (peor)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="f2-frente-a-la-mediana-del-entrenamiento">
+<h3>F2: frente a la mediana del entrenamiento<a class="headerlink" href="#f2-frente-a-la-mediana-del-entrenamiento" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Contraste</p></th>
+<th class="head"><p>Diferencia e IC 95 %</p></th>
+<th class="head"><p>dz</p></th>
+<th class="head"><p>δ de Cliff</p></th>
+<th class="head"><p>p DM-HLN</p></th>
+<th class="head"><p>p Holm (DM)</p></th>
+<th class="head"><p>p Wilcoxon semanas (Holm)</p></th>
+<th class="head"><p>Decisión (preregistro)</p></th>
+<th class="head"><p>Lectura A.3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>-0,03298 (-0,03511 a -0,03072)</p></td>
+<td><p>-4,54</p></td>
+<td><p>-0,94</p></td>
+<td><p>6,9e-36</p></td>
+<td><p>8,6e-36</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>-0,03224 (-0,03421 a -0,03008)</p></td>
+<td><p>-4,78</p></td>
+<td><p>-0,93</p></td>
+<td><p>5,5e-37</p></td>
+<td><p>3,3e-36</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-even"><td><p>PatchTST</p></td>
+<td><p>-0,03188 (-0,03367 a -0,02995)</p></td>
+<td><p>-5,10</p></td>
+<td><p>-0,92</p></td>
+<td><p>2,3e-38</p></td>
+<td><p>2,1e-37</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>RNN simple</p></td>
+<td><p>-0,03161 (-0,03356 a -0,02953)</p></td>
+<td><p>-4,83</p></td>
+<td><p>-0,92</p></td>
+<td><p>3,2e-37</p></td>
+<td><p>2,3e-36</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-even"><td><p>GRU</p></td>
+<td><p>-0,03125 (-0,03315 a -0,02924)</p></td>
+<td><p>-4,62</p></td>
+<td><p>-0,93</p></td>
+<td><p>2,9e-36</p></td>
+<td><p>8,6e-36</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>DLinear</p></td>
+<td><p>-0,03086 (-0,03282 a -0,02881)</p></td>
+<td><p>-4,77</p></td>
+<td><p>-0,92</p></td>
+<td><p>5,8e-37</p></td>
+<td><p>3,3e-36</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-even"><td><p>N-BEATS</p></td>
+<td><p>-0,03065 (-0,03265 a -0,02850)</p></td>
+<td><p>-4,74</p></td>
+<td><p>-0,92</p></td>
+<td><p>8,4e-37</p></td>
+<td><p>3,4e-36</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>TCN</p></td>
+<td><p>-0,03032 (-0,03221 a -0,02830)</p></td>
+<td><p>-4,60</p></td>
+<td><p>-0,91</p></td>
+<td><p>3,4e-36</p></td>
+<td><p>8,6e-36</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-even"><td><p>N-HiTS</p></td>
+<td><p>-0,03022 (-0,03213 a -0,02816)</p></td>
+<td><p>-4,96</p></td>
+<td><p>-0,92</p></td>
+<td><p>8,6e-38</p></td>
+<td><p>6,8e-37</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+<tr class="row-odd"><td><p>iTransformer</p></td>
+<td><p>-0,03019 (-0,03193 a -0,02840)</p></td>
+<td><p>-5,38</p></td>
+<td><p>-0,92</p></td>
+<td><p>1,6e-39</p></td>
+<td><p>1,6e-38</p></td>
+<td><p>3,5e-9</p></td>
+<td><p>supera</p></td>
+<td><p>significativa y relevante (mejor)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="procedimiento-global">
+<h3>Procedimiento global<a class="headerlink" href="#procedimiento-global" title="Link to this heading">#</a></h3>
+<p>Friedman con las semillas como bloques (14 modelos, 8 semillas): χ² = 61,46, p = 2,9e-8; W de Kendall = 0,59. Diferencia crítica de Nemenyi: 7,01 rangos. Model Confidence Set (α = 0,10): TFT.</p>
+</section>
+</section>
+<section id="adecuacion-y-calibracion">
+<h2>Adecuación y calibración<a class="headerlink" href="#adecuacion-y-calibracion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>MZ a</p></th>
+<th class="head"><p>MZ b</p></th>
+<th class="head"><p>p MZ</p></th>
+<th class="head"><p>p Ljung–Box (4)</p></th>
+<th class="head"><p>p ARCH-LM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MLP (E1)</p></td>
+<td><p>0,249</p></td>
+<td><p>0,653</p></td>
+<td><p>1,1e-25</p></td>
+<td><p>0,86</p></td>
+<td><p>0,98</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN (E1)</p></td>
+<td><p>0,241</p></td>
+<td><p>0,671</p></td>
+<td><p>8,2e-29</p></td>
+<td><p>0,83</p></td>
+<td><p>0,98</p></td>
+</tr>
+<tr class="row-even"><td><p>LSTM (E1)</p></td>
+<td><p>0,247</p></td>
+<td><p>0,652</p></td>
+<td><p>1,3e-24</p></td>
+<td><p>0,86</p></td>
+<td><p>0,99</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLP (E2)</p></td>
+<td><p>0,245</p></td>
+<td><p>0,663</p></td>
+<td><p>2,6e-28</p></td>
+<td><p>0,83</p></td>
+<td><p>0,96</p></td>
+</tr>
+<tr class="row-even"><td><p>PatchTST</p></td>
+<td><p>0,285</p></td>
+<td><p>0,591</p></td>
+<td><p>8,0e-27</p></td>
+<td><p>0,90</p></td>
+<td><p>1,00</p></td>
+</tr>
+<tr class="row-odd"><td><p>TFT</p></td>
+<td><p>0,259</p></td>
+<td><p>0,641</p></td>
+<td><p>8,3e-27</p></td>
+<td><p>0,90</p></td>
+<td><p>0,98</p></td>
+</tr>
+<tr class="row-even"><td><p>iTransformer</p></td>
+<td><p>0,282</p></td>
+<td><p>0,578</p></td>
+<td><p>5,1e-17</p></td>
+<td><p>0,81</p></td>
+<td><p>0,99</p></td>
+</tr>
+<tr class="row-odd"><td><p>DLinear</p></td>
+<td><p>0,269</p></td>
+<td><p>0,620</p></td>
+<td><p>6,1e-26</p></td>
+<td><p>0,79</p></td>
+<td><p>0,97</p></td>
+</tr>
+<tr class="row-even"><td><p>N-BEATS</p></td>
+<td><p>0,246</p></td>
+<td><p>0,661</p></td>
+<td><p>4,5e-28</p></td>
+<td><p>0,84</p></td>
+<td><p>0,96</p></td>
+</tr>
+<tr class="row-odd"><td><p>N-HiTS</p></td>
+<td><p>0,277</p></td>
+<td><p>0,601</p></td>
+<td><p>8,3e-25</p></td>
+<td><p>0,85</p></td>
+<td><p>0,97</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>0,222</p></td>
+<td><p>0,710</p></td>
+<td><p>2,4e-29</p></td>
+<td><p>0,83</p></td>
+<td><p>0,98</p></td>
+</tr>
+<tr class="row-odd"><td><p>TCN</p></td>
+<td><p>0,328</p></td>
+<td><p>0,521</p></td>
+<td><p>4,2e-25</p></td>
+<td><p>0,75</p></td>
+<td><p>0,97</p></td>
+</tr>
+<tr class="row-even"><td><p>GRU</p></td>
+<td><p>0,266</p></td>
+<td><p>0,625</p></td>
+<td><p>1,9e-27</p></td>
+<td><p>0,88</p></td>
+<td><p>0,99</p></td>
+</tr>
+<tr class="row-odd"><td><p>RNN simple</p></td>
+<td><p>0,275</p></td>
+<td><p>0,609</p></td>
+<td><p>8,0e-26</p></td>
+<td><p>0,83</p></td>
+<td><p>0,98</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Mincer–Zarnowitz rechaza en todos: las pendientes van de 0,52 a 0,71, así que los pronósticos semanales están comprimidos hacia la media. Los residuos no muestran autocorrelación ni efectos ARCH.</p>
+</section>
+<section id="paper-guia-limitacion-en-semanas-de-interrupcion-piloto">
+<h2>Paper guía: limitación en semanas de interrupción (piloto)<a class="headerlink" href="#paper-guia-limitacion-en-semanas-de-interrupcion-piloto" title="Link to this heading">#</a></h2>
+<p>Criterio preregistrado: IC 95 % (bootstrap por corredor, B = 2000) de la razón por encima de 1 en los tres modelos. Validación de k4.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>MAE interrupción</p></th>
+<th class="head"><p>MAE resto</p></th>
+<th class="head"><p>Razón</p></th>
+<th class="head"><p>IC 95 %</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>0,3294</p></td>
+<td><p>0,2616</p></td>
+<td><p>1,259</p></td>
+<td><p>1,216 a 1,305</p></td>
+</tr>
+<tr class="row-odd"><td><p>PatchTST</p></td>
+<td><p>0,3317</p></td>
+<td><p>0,2635</p></td>
+<td><p>1,259</p></td>
+<td><p>1,218 a 1,298</p></td>
+</tr>
+<tr class="row-even"><td><p>N-BEATS</p></td>
+<td><p>0,3220</p></td>
+<td><p>0,2688</p></td>
+<td><p>1,198</p></td>
+<td><p>1,158 a 1,238</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los tres intervalos quedan por encima de 1: la limitación es compartida por la familia y no propia del TFT.</p>
+</section>
+<section id="paper-guia-replica-parcial-del-tft-en-electricity">
+<h2>Paper guía: réplica parcial del TFT en Electricity<a class="headerlink" href="#paper-guia-replica-parcial-del-tft-en-electricity" title="Link to this heading">#</a></h2>
+<p>Script <code class="docutils literal notranslate"><span class="pre">src/replica_electricity.py</span></code> (370 clientes, 53.650 ventanas de prueba, 1 semilla, 15 épocas, 1,4 h en una Tesla T4, <code class="docutils literal notranslate"><span class="pre">pytorch-forecasting</span></code> 1.4.0). Métrica: q-Risk normalizado del artículo.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Cuantil</p></th>
+<th class="head"><p>Obtenido</p></th>
+<th class="head"><p>Publicado</p></th>
+<th class="head"><p>Diferencia relativa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>P50</p></td>
+<td><p>0,0640</p></td>
+<td><p>0,055</p></td>
+<td><p>+16 %</p></td>
+</tr>
+<tr class="row-odd"><td><p>P90</p></td>
+<td><p>0,0382</p></td>
+<td><p>0,027</p></td>
+<td><p>+41 %</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La réplica no cumple el criterio preregistrado (diferencia relativa menor del 10 %); con una sola semilla no se puede aplicar el del intervalo de confianza. Es una réplica reducida, con estos desvíos frente al artículo: otra implementación (<code class="docutils literal notranslate"><span class="pre">pytorch-forecasting</span></code> en lugar del código original), una semilla con tope de 3 horas de entrenamiento frente a unas 6 del artículo, una validación de 50.000 ventanas con parada temprana y agregación horaria por media.</p>
+</section>
+<section id="sensibilidad-sin-frac-caida-nacional-t-exploratoria">
+<h2>Sensibilidad sin <code class="docutils literal notranslate"><span class="pre">frac_caida_nacional_t</span></code> (exploratoria)<a class="headerlink" href="#sensibilidad-sin-frac-caida-nacional-t-exploratoria" title="Link to this heading">#</a></h2>
+<p>Mismas configuraciones y tasas de la corrida definitiva, semillas 1 a 3; la referencia son esas mismas semillas en la definitiva.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>MAE con la variable</p></th>
+<th class="head"><p>MAE sin la variable</p></th>
+<th class="head"><p>Diferencia</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PatchTST</p></td>
+<td><p>0,2742</p></td>
+<td><p>0,2748</p></td>
+<td><p>+0,0006</p></td>
+</tr>
+<tr class="row-odd"><td><p>TFT</p></td>
+<td><p>0,2727</p></td>
+<td><p>0,2725</p></td>
+<td><p>-0,0002</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>0,2735</p></td>
+<td><p>0,2744</p></td>
+<td><p>+0,0009</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La mayor diferencia en valor absoluto es 0,0009, menor que δ = 0,0032: quitar la variable que señaló la auditoría no cambia la lectura del análisis confirmatorio.</p>
+</section>
+<section id="error-por-segmento-exploratorio">
+<h2>Error por segmento (exploratorio)<a class="headerlink" href="#error-por-segmento-exploratorio" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Semanas de interrupción (IC 95 %)</p></th>
+<th class="head"><p>Semanas normales (IC 95 %)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>0,3145 (0,2964 a 0,3326)</p></td>
+<td><p>0,2583 (0,2524 a 0,2642)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>0,3170 (0,2972 a 0,3368)</p></td>
+<td><p>0,2584 (0,2508 a 0,2661)</p></td>
+</tr>
+<tr class="row-even"><td><p>CNN (E1)</p></td>
+<td><p>0,3249 (0,3139 a 0,3360)</p></td>
+<td><p>0,2560 (0,2519 a 0,2601)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mediana del entrenamiento</p></td>
+<td><p>0,5392</p></td>
+<td><p>0,2238</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El TFT gana en las semanas de interrupción y pierde un poco en las normales; los intervalos entre semillas se solapan, así que es una descripción. La mediana trivial es la mejor en las semanas normales, lo que concuerda con los pronósticos comprimidos hacia la media. El detalle por historia, mercado y semestre está en <code class="docutils literal notranslate"><span class="pre">segmentos.csv</span></code>.</p>
+</section>
+<section id="incertidumbre-conforme-por-bloques-semanales-exploratoria">
+<h2>Incertidumbre conforme por bloques semanales (exploratoria)<a class="headerlink" href="#incertidumbre-conforme-por-bloques-semanales-exploratoria" title="Link to this heading">#</a></h2>
+<p>El cuantil de cada semana se calibra con los residuos de las semanas anteriores de la misma corrida.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Nominal</p></th>
+<th class="head"><p>Marginal</p></th>
+<th class="head"><p>Tercil bajo de ŷ</p></th>
+<th class="head"><p>Interrupción</p></th>
+<th class="head"><p>Ancho medio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CNN (E1)</p></td>
+<td><p>0,80</p></td>
+<td><p>0,802</p></td>
+<td><p>0,689</p></td>
+<td><p>0,722</p></td>
+<td><p>0,894</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN (E1)</p></td>
+<td><p>0,90</p></td>
+<td><p>0,903</p></td>
+<td><p>0,833</p></td>
+<td><p>0,915</p></td>
+<td><p>1,287</p></td>
+</tr>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>0,80</p></td>
+<td><p>0,803</p></td>
+<td><p>0,691</p></td>
+<td><p>0,702</p></td>
+<td><p>0,920</p></td>
+</tr>
+<tr class="row-odd"><td><p>TFT</p></td>
+<td><p>0,90</p></td>
+<td><p>0,902</p></td>
+<td><p>0,834</p></td>
+<td><p>0,908</p></td>
+<td><p>1,328</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>0,80</p></td>
+<td><p>0,803</p></td>
+<td><p>0,690</p></td>
+<td><p>0,716</p></td>
+<td><p>0,909</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>0,90</p></td>
+<td><p>0,903</p></td>
+<td><p>0,831</p></td>
+<td><p>0,914</p></td>
+<td><p>1,307</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La cobertura marginal es la nominal, pero la condicional falla en el tercil bajo de la predicción y, al 80 %, en las semanas de interrupción.</p>
+</section>
+<section id="robustez-interpretabilidad-y-ablacion-exploratorias">
+<h2>Robustez, interpretabilidad y ablación (exploratorias)<a class="headerlink" href="#robustez-interpretabilidad-y-ablacion-exploratorias" title="Link to this heading">#</a></h2>
+<p>Modelos de la etapa 1 (semillas 1 a 3) evaluados en el bloque de parada 2023-2024; no se consulta 2025.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Perturbación</p></th>
+<th class="head"><p>Severidad</p></th>
+<th class="head"><p>ΔMAE medio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CNN (E1)</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,10</p></td>
+<td><p>+0,0015</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN (E1)</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,25</p></td>
+<td><p>+0,0043</p></td>
+</tr>
+<tr class="row-even"><td><p>CNN (E1)</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,50</p></td>
+<td><p>+0,0096</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN (E1)</p></td>
+<td><p>ruido</p></td>
+<td><p>0,10</p></td>
+<td><p>+0,0003</p></td>
+</tr>
+<tr class="row-even"><td><p>CNN (E1)</p></td>
+<td><p>ruido</p></td>
+<td><p>0,25</p></td>
+<td><p>+0,0018</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN (E1)</p></td>
+<td><p>ruido</p></td>
+<td><p>0,50</p></td>
+<td><p>+0,0077</p></td>
+</tr>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,10</p></td>
+<td><p>+0,0013</p></td>
+</tr>
+<tr class="row-odd"><td><p>TFT</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,25</p></td>
+<td><p>+0,0032</p></td>
+</tr>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,50</p></td>
+<td><p>+0,0087</p></td>
+</tr>
+<tr class="row-odd"><td><p>TFT</p></td>
+<td><p>ruido</p></td>
+<td><p>0,10</p></td>
+<td><p>+0,0005</p></td>
+</tr>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>ruido</p></td>
+<td><p>0,25</p></td>
+<td><p>+0,0017</p></td>
+</tr>
+<tr class="row-odd"><td><p>TFT</p></td>
+<td><p>ruido</p></td>
+<td><p>0,50</p></td>
+<td><p>+0,0067</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,10</p></td>
+<td><p>+0,0010</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,25</p></td>
+<td><p>+0,0030</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>faltantes</p></td>
+<td><p>0,50</p></td>
+<td><p>+0,0067</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>ruido</p></td>
+<td><p>0,10</p></td>
+<td><p>+0,0003</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>ruido</p></td>
+<td><p>0,25</p></td>
+<td><p>+0,0016</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>ruido</p></td>
+<td><p>0,50</p></td>
+<td><p>+0,0069</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Importancia por permutación</strong> (las tres primeras, promedio de semillas):</p>
+<ul class="simple">
+<li><p>CNN (E1): <code class="docutils literal notranslate"><span class="pre">ventana_nivel</span></code>, <code class="docutils literal notranslate"><span class="pre">ratio_t</span></code>, <code class="docutils literal notranslate"><span class="pre">pend8_rel</span></code>; <code class="docutils literal notranslate"><span class="pre">frac_caida_nacional_t</span></code> en el puesto 30 de 40.</p></li>
+<li><p>TFT: <code class="docutils literal notranslate"><span class="pre">ventana_nivel</span></code>, <code class="docutils literal notranslate"><span class="pre">pend8_rel</span></code>, <code class="docutils literal notranslate"><span class="pre">ratio_t</span></code>; <code class="docutils literal notranslate"><span class="pre">frac_caida_nacional_t</span></code> en el puesto 21 de 40.</p></li>
+<li><p>Transformer: <code class="docutils literal notranslate"><span class="pre">ventana_nivel</span></code>, <code class="docutils literal notranslate"><span class="pre">ratio_t</span></code>, <code class="docutils literal notranslate"><span class="pre">pend8_rel</span></code>; <code class="docutils literal notranslate"><span class="pre">frac_caida_nacional_t</span></code> en el puesto 33 de 40.</p></li>
+</ul>
+<p><strong>Fidelidad:</strong> permutar las 5 entradas más importantes sube el MAE en 0,046 (CNN (E1)), 0,046 (TFT), 0,057 (Transformer); permutar 5 al azar, en 0,006, 0,006, 0,008.</p>
+<p><strong>Estabilidad entre semillas</strong> (Spearman de las importancias): CNN (E1) 0,91 a 0,94; TFT 0,75 a 0,81; Transformer 0,89 a 0,91.</p>
+<p><strong>Ablación del TFT en inferencia</strong> (sin reentrenar, permutando cada grupo): covariables +0,030, ventana +0,021, categóricas +0,004.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./e2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="preregistro.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Preregistro del Entregable 2</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="discusion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Discusión, conclusiones y trabajo futuro</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-principal-del-benchmark-a-2">Tabla principal del benchmark (A.2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastes-confirmatorios-a-3">Contrastes confirmatorios (A.3)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-frente-a-la-cnn-del-entregable-1">F1: frente a la CNN del Entregable 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f2-frente-a-la-mediana-del-entrenamiento">F2: frente a la mediana del entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#procedimiento-global">Procedimiento global</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adecuacion-y-calibracion">Adecuación y calibración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paper-guia-limitacion-en-semanas-de-interrupcion-piloto">Paper guía: limitación en semanas de interrupción (piloto)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paper-guia-replica-parcial-del-tft-en-electricity">Paper guía: réplica parcial del TFT en Electricity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-sin-frac-caida-nacional-t-exploratoria">Sensibilidad sin <code class="docutils literal notranslate"><span class="pre">frac_caida_nacional_t</span></code> (exploratoria)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-por-segmento-exploratorio">Error por segmento (exploratorio)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incertidumbre-conforme-por-bloques-semanales-exploratoria">Incertidumbre conforme por bloques semanales (exploratoria)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-interpretabilidad-y-ablacion-exploratorias">Robustez, interpretabilidad y ablación (exploratorias)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
