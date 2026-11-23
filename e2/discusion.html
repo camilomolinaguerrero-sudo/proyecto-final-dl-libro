@@ -65,7 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="Reproducibilidad (Apéndice B)" href="reproducibilidad.html" />
+    <link rel="next" title="Complementos: sobreajuste, efectos mixtos y espacio de arquitecturas" href="complementos.html" />
     <link rel="prev" title="Resultados" href="resultados.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
@@ -250,6 +250,8 @@
 <li class="toctree-l1"><a class="reference internal" href="preregistro.html">Preregistro del Entregable 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resultados.html">Resultados</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Discusión, conclusiones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complementos.html">Complementos: sobreajuste, efectos mixtos y espacio de arquitecturas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fichas.html">Fichas de modelo (sección 11.3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reproducibilidad.html">Reproducibilidad (Apéndice B)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
@@ -425,7 +427,7 @@
 <section id="respuesta-a-cada-pregunta">
 <h2>Respuesta a cada pregunta<a class="headerlink" href="#respuesta-a-cada-pregunta" title="Link to this heading">#</a></h2>
 <p><strong>RQ1.</strong> 0 de 10 modelos superan a la CNN por más de δ, así que no se rechaza H0 en ninguno. El mejor, TFT, cambia el MAE en -0,00099 (IC -0,00151 a -0,00050). La diferencia es significativa, pero la cota superior del intervalo queda lejos de −δ = -0,0032. La CNN del E1 sigue siendo un baseline suficiente, con muchos menos parámetros.</p>
-<p><strong>RQ2.</strong> 10 de 10 superan a la mediana del entrenamiento con diferencias de unas diez veces δ. Esa es la condición (i) de adecuación. La condición (iii) falla en todos: Mincer–Zarnowitz rechaza, con pendientes menores que 1.</p>
+<p><strong>RQ2.</strong> 10 de 10 superan a la mediana del entrenamiento con diferencias de unas diez veces δ. Esa es la condición (i) de adecuación. La condición (ii) se cumple en 10 de 10: la brecha entre validación y entrenamiento no pasa de 0,0033, muy por debajo de δg = 0,032. La condición (iv) no se cumple en el sentido literal: el MAE de 2025 es menor que el de validación en todos, entre 0,0067 y 0,0085, lo que apunta a un año de prueba más fácil (cambio de distribución, como mostró la validación adversarial) y no a sobreajuste a la validación. La condición (iii) falla en todos: Mincer–Zarnowitz rechaza, con pendientes menores que 1. Por eso ningún modelo es adecuado en el sentido estricto de la sección 7.2.</p>
 <p><strong>RQ3.</strong> La razón de error en semanas de interrupción es mayor que 1 en TFT, PatchTST y N-BEATS, con intervalos que no se tocan con 1. La limitación es de la familia de modelos con estos datos.</p>
 </section>
 <section id="techo-de-desempeno">
@@ -505,11 +507,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="reproducibilidad.html"
+       href="complementos.html"
        title="siguiente página">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">siguiente</p>
-        <p class="prev-next-title">Reproducibilidad (Apéndice B)</p>
+        <p class="prev-next-title">Complementos: sobreajuste, efectos mixtos y espacio de arquitecturas</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -33,4 +33,6 @@ exactos; este anexo resume el orden.
    `src/robustez_interpretabilidad.py`, `src/sensibilidad_sin_nacional.py` y `src/replica_electricity.py`;
    cada script dice en su encabezado qué datos lee y dónde escribe. La réplica necesita además
    `pip install -r requirements-replica.txt` (agrega `pytorch-forecasting`).
-7. **Libro.** `book/capitulo_e2.py` genera las páginas del Entregable 2 desde esos archivos.
+7. **Complementos.** `python estadistica/complementos_e2.py --predicciones <carpeta> --corridas <carpetas de corridas>`
+   escribe `estadistica/resultados_e2_complementos/` (tabla B, efectos mixtos, sección 14.6 y registro por corrida).
+8. **Libro.** `book/capitulo_e2.py` genera las páginas del Entregable 2 desde esos archivos.

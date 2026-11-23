@@ -1,0 +1,1144 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Complementos: sobreajuste, efectos mixtos y espacio de arquitecturas &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'e2/complementos';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Fichas de modelo (sección 11.3)" href="fichas.html" />
+    <link rel="prev" title="Discusión, conclusiones y trabajo futuro" href="discusion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: Entregable 1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Proyecto final: pronóstico del abastecimiento de alimentos con Deep Learning
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/analisis_por_modelo.html">Análisis por modelo base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/capitulo5.html">5. Resultados confirmatorios en 2025</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/baseline.html">5.2-5.3 Ranking, baseline y margen de mejora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">Piloto y referencias en validación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resumen.html">Entregable 2: benchmark del Top 10 de la literatura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datos.html">Datos, EDA y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trazabilidad.html">Tabla de trazabilidad hallazgo-decisión (Apéndice A.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="top10.html">Top 10 del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metodos.html">Métodos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preregistro.html">Preregistro del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resultados.html">Resultados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="discusion.html">Discusión, conclusiones y trabajo futuro</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Complementos: sobreajuste, efectos mixtos y espacio de arquitecturas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fichas.html">Fichas de modelo (sección 11.3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reproducibilidad.html">Reproducibilidad (Apéndice B)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/e2/complementos.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Complementos: sobreajuste, efectos mixtos y espacio de arquitecturas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brecha-entre-entrenamiento-y-validacion-tabla-b-condicion-ii">Brecha entre entrenamiento y validación (tabla B, condición ii)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-frente-a-prueba-tabla-b-condicion-iv">Validación frente a prueba (tabla B, condición iv)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-a-la-semilla-tabla-b">Sensibilidad a la semilla (tabla B)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efectos-mixtos-y-descomposicion-de-la-varianza-seccion-13-2">Efectos mixtos y descomposición de la varianza (sección 13.2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espacio-de-arquitecturas-del-mlp-seccion-14-6">Espacio de arquitecturas del MLP (sección 14.6)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="complementos-sobreajuste-efectos-mixtos-y-espacio-de-arquitecturas">
+<h1>Complementos: sobreajuste, efectos mixtos y espacio de arquitecturas<a class="headerlink" href="#complementos-sobreajuste-efectos-mixtos-y-espacio-de-arquitecturas" title="Link to this heading">#</a></h1>
+<p>Generados por <code class="docutils literal notranslate"><span class="pre">estadistica/complementos_e2.py</span></code> (salidas en <code class="docutils literal notranslate"><span class="pre">estadistica/resultados_e2_complementos/</span></code>) después del análisis confirmatorio. No cambian ninguna decisión preregistrada.</p>
+<section id="brecha-entre-entrenamiento-y-validacion-tabla-b-condicion-ii">
+<h2>Brecha entre entrenamiento y validación (tabla B, condición ii)<a class="headerlink" href="#brecha-entre-entrenamiento-y-validacion-tabla-b-condicion-ii" title="Link to this heading">#</a></h2>
+<p>g = MAE de validación − MAE de entrenamiento en la mejor época de la etapa 1, por semilla. H0: g ≥ δg = 0,032; Wilcoxon unilateral sobre g − δg, como fija el preregistro. Con 8 semillas el p exacto mínimo es 1/256 = 0,0039, que no alcanza el primer umbral de Holm con 15 modelos; el p de Holm se informa como dato. La pérdida de entrenamiento es la media de la época con abandono activo, como la registra el entrenamiento, por eso algunas brechas son negativas.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Brecha mediana</p></th>
+<th class="head"><p>Brecha máxima</p></th>
+<th class="head"><p>p Wilcoxon</p></th>
+<th class="head"><p>p Holm</p></th>
+<th class="head"><p>Cumple</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Referencia lineal</p></td>
+<td><p>-0,0045</p></td>
+<td><p>-0,0040</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>LSTM (E1)</p></td>
+<td><p>-0,0020</p></td>
+<td><p>+0,0005</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>CNN (E1)</p></td>
+<td><p>-0,0017</p></td>
+<td><p>-0,0007</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLP (E1)</p></td>
+<td><p>-0,0011</p></td>
+<td><p>+0,0001</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>-0,0009</p></td>
+<td><p>+0,0004</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>N-HiTS</p></td>
+<td><p>-0,0005</p></td>
+<td><p>+0,0024</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>TCN</p></td>
+<td><p>-0,0001</p></td>
+<td><p>+0,0011</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>TFT</p></td>
+<td><p>-0,0001</p></td>
+<td><p>+0,0033</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>MLP (E2)</p></td>
+<td><p>+0,0001</p></td>
+<td><p>+0,0014</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>DLinear</p></td>
+<td><p>+0,0003</p></td>
+<td><p>+0,0023</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>GRU</p></td>
+<td><p>+0,0004</p></td>
+<td><p>+0,0010</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>PatchTST</p></td>
+<td><p>+0,0007</p></td>
+<td><p>+0,0019</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>N-BEATS</p></td>
+<td><p>+0,0008</p></td>
+<td><p>+0,0017</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>RNN simple</p></td>
+<td><p>+0,0009</p></td>
+<td><p>+0,0020</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+<tr class="row-even"><td><p>iTransformer</p></td>
+<td><p>+0,0010</p></td>
+<td><p>+0,0032</p></td>
+<td><p>0,0039</p></td>
+<td><p>0,059</p></td>
+<td><p>sí</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="validacion-frente-a-prueba-tabla-b-condicion-iv">
+<h2>Validación frente a prueba (tabla B, condición iv)<a class="headerlink" href="#validacion-frente-a-prueba-tabla-b-condicion-iv" title="Link to this heading">#</a></h2>
+<p>Diferencia por semilla entre el MAE de validación (bloque de parada, 2023-2024) y el de 2025. Positiva: la prueba tiene menos error que la validación.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>MAE validación</p></th>
+<th class="head"><p>MAE prueba</p></th>
+<th class="head"><p>Diferencia (IC 95 %)</p></th>
+<th class="head"><p>p t</p></th>
+<th class="head"><p>p Wilcoxon</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Referencia lineal</p></td>
+<td><p>0,2881</p></td>
+<td><p>0,2829</p></td>
+<td><p>+0,0053 (+0,0046 a +0,0060)</p></td>
+<td><p>3,6e-7</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-odd"><td><p>N-HiTS</p></td>
+<td><p>0,2824</p></td>
+<td><p>0,2757</p></td>
+<td><p>+0,0067 (+0,0053 a +0,0081)</p></td>
+<td><p>1,1e-5</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-even"><td><p>iTransformer</p></td>
+<td><p>0,2826</p></td>
+<td><p>0,2758</p></td>
+<td><p>+0,0068 (+0,0063 a +0,0074)</p></td>
+<td><p>1,2e-8</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-odd"><td><p>TFT</p></td>
+<td><p>0,2800</p></td>
+<td><p>0,2729</p></td>
+<td><p>+0,0071 (+0,0062 a +0,0079)</p></td>
+<td><p>2,1e-7</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>0,2808</p></td>
+<td><p>0,2737</p></td>
+<td><p>+0,0072 (+0,0064 a +0,0079)</p></td>
+<td><p>5,7e-8</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLP (E1)</p></td>
+<td><p>0,2814</p></td>
+<td><p>0,2741</p></td>
+<td><p>+0,0072 (+0,0068 a +0,0077)</p></td>
+<td><p>3,0e-9</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-even"><td><p>N-BEATS</p></td>
+<td><p>0,2826</p></td>
+<td><p>0,2753</p></td>
+<td><p>+0,0073 (+0,0070 a +0,0076)</p></td>
+<td><p>2,0e-10</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-odd"><td><p>TCN</p></td>
+<td><p>0,2829</p></td>
+<td><p>0,2756</p></td>
+<td><p>+0,0073 (+0,0068 a +0,0078)</p></td>
+<td><p>5,6e-9</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-even"><td><p>GRU</p></td>
+<td><p>0,2820</p></td>
+<td><p>0,2747</p></td>
+<td><p>+0,0074 (+0,0065 a +0,0082)</p></td>
+<td><p>1,9e-7</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN (E1)</p></td>
+<td><p>0,2814</p></td>
+<td><p>0,2739</p></td>
+<td><p>+0,0075 (+0,0071 a +0,0079)</p></td>
+<td><p>7,4e-10</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-even"><td><p>MLP (E2)</p></td>
+<td><p>0,2823</p></td>
+<td><p>0,2748</p></td>
+<td><p>+0,0076 (+0,0071 a +0,0080)</p></td>
+<td><p>1,7e-9</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-odd"><td><p>PatchTST</p></td>
+<td><p>0,2819</p></td>
+<td><p>0,2741</p></td>
+<td><p>+0,0079 (+0,0069 a +0,0089)</p></td>
+<td><p>2,9e-7</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-even"><td><p>LSTM (E1)</p></td>
+<td><p>0,2822</p></td>
+<td><p>0,2743</p></td>
+<td><p>+0,0079 (+0,0070 a +0,0088)</p></td>
+<td><p>1,3e-7</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-odd"><td><p>DLinear</p></td>
+<td><p>0,2830</p></td>
+<td><p>0,2751</p></td>
+<td><p>+0,0080 (+0,0076 a +0,0083)</p></td>
+<td><p>2,1e-10</p></td>
+<td><p>0,0078</p></td>
+</tr>
+<tr class="row-even"><td><p>RNN simple</p></td>
+<td><p>0,2829</p></td>
+<td><p>0,2743</p></td>
+<td><p>+0,0085 (+0,0081 a +0,0090)</p></td>
+<td><p>1,3e-9</p></td>
+<td><p>0,0078</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Todos los modelos, incluida la referencia lineal, tienen menos error en 2025 que en validación, y por cantidades parecidas. Un sobreajuste a la validación daría la diferencia opuesta; esto es un cambio de dificultad entre años. El p mínimo del Wilcoxon bilateral con 8 semillas es 0,0078.</p>
+</section>
+<section id="sensibilidad-a-la-semilla-tabla-b">
+<h2>Sensibilidad a la semilla (tabla B)<a class="headerlink" href="#sensibilidad-a-la-semilla-tabla-b" title="Link to this heading">#</a></h2>
+<p>Coeficiente de variación del MAE entre las 8 semillas y Friedman de las semillas con las 52 semanas como bloques (las semillas comparten semanas, así que la prueba es pareada).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>CV del MAE</p></th>
+<th class="head"><p>DE del MAE</p></th>
+<th class="head"><p>χ² Friedman</p></th>
+<th class="head"><p>p Holm</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DLinear</p></td>
+<td><p>0,10 %</p></td>
+<td><p>0,00028</p></td>
+<td><p>25,3</p></td>
+<td><p>0,0013</p></td>
+</tr>
+<tr class="row-odd"><td><p>N-BEATS</p></td>
+<td><p>0,12 %</p></td>
+<td><p>0,00033</p></td>
+<td><p>18,0</p></td>
+<td><p>0,012</p></td>
+</tr>
+<tr class="row-even"><td><p>CNN (E1)</p></td>
+<td><p>0,13 %</p></td>
+<td><p>0,00036</p></td>
+<td><p>45,2</p></td>
+<td><p>7,6e-7</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLP (E1)</p></td>
+<td><p>0,14 %</p></td>
+<td><p>0,00040</p></td>
+<td><p>39,0</p></td>
+<td><p>7,9e-6</p></td>
+</tr>
+<tr class="row-even"><td><p>MLP (E2)</p></td>
+<td><p>0,19 %</p></td>
+<td><p>0,00052</p></td>
+<td><p>43,4</p></td>
+<td><p>1,4e-6</p></td>
+</tr>
+<tr class="row-odd"><td><p>RNN simple</p></td>
+<td><p>0,20 %</p></td>
+<td><p>0,00056</p></td>
+<td><p>51,9</p></td>
+<td><p>4,3e-8</p></td>
+</tr>
+<tr class="row-even"><td><p>iTransformer</p></td>
+<td><p>0,22 %</p></td>
+<td><p>0,00060</p></td>
+<td><p>37,8</p></td>
+<td><p>9,9e-6</p></td>
+</tr>
+<tr class="row-odd"><td><p>LSTM (E1)</p></td>
+<td><p>0,23 %</p></td>
+<td><p>0,00064</p></td>
+<td><p>101,5</p></td>
+<td><p>6,8e-18</p></td>
+</tr>
+<tr class="row-even"><td><p>TCN</p></td>
+<td><p>0,25 %</p></td>
+<td><p>0,00069</p></td>
+<td><p>86,0</p></td>
+<td><p>8,3e-15</p></td>
+</tr>
+<tr class="row-odd"><td><p>GRU</p></td>
+<td><p>0,29 %</p></td>
+<td><p>0,00079</p></td>
+<td><p>93,1</p></td>
+<td><p>3,4e-16</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer</p></td>
+<td><p>0,29 %</p></td>
+<td><p>0,00079</p></td>
+<td><p>77,1</p></td>
+<td><p>4,9e-13</p></td>
+</tr>
+<tr class="row-odd"><td><p>Referencia lineal</p></td>
+<td><p>0,31 %</p></td>
+<td><p>0,00089</p></td>
+<td><p>90,7</p></td>
+<td><p>9,8e-16</p></td>
+</tr>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>0,40 %</p></td>
+<td><p>0,00109</p></td>
+<td><p>72,3</p></td>
+<td><p>4,0e-12</p></td>
+</tr>
+<tr class="row-odd"><td><p>PatchTST</p></td>
+<td><p>0,42 %</p></td>
+<td><p>0,00115</p></td>
+<td><p>132,6</p></td>
+<td><p>2,6e-24</p></td>
+</tr>
+<tr class="row-even"><td><p>N-HiTS</p></td>
+<td><p>0,53 %</p></td>
+<td><p>0,00147</p></td>
+<td><p>136,8</p></td>
+<td><p>3,6e-25</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Las semillas difieren de forma significativa en 15 de 15 modelos, pero el CV no pasa de 0,53 %: la DE entre semillas es menor que δ = 0,0032 en todos. Las 8 semillas preregistradas alcanzan.</p>
+</section>
+<section id="efectos-mixtos-y-descomposicion-de-la-varianza-seccion-13-2">
+<h2>Efectos mixtos y descomposición de la varianza (sección 13.2)<a class="headerlink" href="#efectos-mixtos-y-descomposicion-de-la-varianza-seccion-13-2" title="Link to this heading">#</a></h2>
+<p>Modelo lineal de efectos mixtos sobre el MAE semanal de 2025 (5.824 observaciones: 14 redes × 8 semillas × 52 semanas), con efecto fijo del modelo y efectos aleatorios cruzados de la semana (la unidad) y de la semilla. REML con statsmodels.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Componente</p></th>
+<th class="head"><p>Varianza</p></th>
+<th class="head"><p>Proporción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>modelo</p></td>
+<td><p>6.41e-07</p></td>
+<td><p>0,42 %</p></td>
+</tr>
+<tr class="row-odd"><td><p>semana</p></td>
+<td><p>1.49e-04</p></td>
+<td><p>97,38 %</p></td>
+</tr>
+<tr class="row-even"><td><p>semilla</p></td>
+<td><p>2.34e-08</p></td>
+<td><p>0,02 %</p></td>
+</tr>
+<tr class="row-odd"><td><p>residuo</p></td>
+<td><p>3.35e-06</p></td>
+<td><p>2,19 %</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo − CNN</p></th>
+<th class="head"><p>Diferencia (IC 95 %)</p></th>
+<th class="head"><p>Efecto estandarizado</p></th>
+<th class="head"><p>p Holm</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>-0,00099 (-0,00124 a -0,00074)</p></td>
+<td><p>-0,54</p></td>
+<td><p>4,9e-14</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>-0,00025 (-0,00049 a +0,00000)</p></td>
+<td><p>-0,13</p></td>
+<td><p>0,157</p></td>
+</tr>
+<tr class="row-even"><td><p>PatchTST</p></td>
+<td><p>+0,00011 (-0,00014 a +0,00036)</p></td>
+<td><p>0,06</p></td>
+<td><p>0,381</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLP (E1)</p></td>
+<td><p>+0,00018 (-0,00007 a +0,00043)</p></td>
+<td><p>0,10</p></td>
+<td><p>0,306</p></td>
+</tr>
+<tr class="row-even"><td><p>LSTM (E1)</p></td>
+<td><p>+0,00035 (+0,00010 a +0,00059)</p></td>
+<td><p>0,19</p></td>
+<td><p>0,026</p></td>
+</tr>
+<tr class="row-odd"><td><p>RNN simple</p></td>
+<td><p>+0,00038 (+0,00013 a +0,00063)</p></td>
+<td><p>0,21</p></td>
+<td><p>0,015</p></td>
+</tr>
+<tr class="row-even"><td><p>GRU</p></td>
+<td><p>+0,00074 (+0,00049 a +0,00099)</p></td>
+<td><p>0,41</p></td>
+<td><p>3,1e-8</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLP (E2)</p></td>
+<td><p>+0,00085 (+0,00060 a +0,00109)</p></td>
+<td><p>0,46</p></td>
+<td><p>1,9e-10</p></td>
+</tr>
+<tr class="row-even"><td><p>DLinear</p></td>
+<td><p>+0,00113 (+0,00088 a +0,00138)</p></td>
+<td><p>0,62</p></td>
+<td><p>5,2e-18</p></td>
+</tr>
+<tr class="row-odd"><td><p>N-BEATS</p></td>
+<td><p>+0,00134 (+0,00109 a +0,00159)</p></td>
+<td><p>0,73</p></td>
+<td><p>3,8e-25</p></td>
+</tr>
+<tr class="row-even"><td><p>TCN</p></td>
+<td><p>+0,00167 (+0,00142 a +0,00192)</p></td>
+<td><p>0,91</p></td>
+<td><p>1,3e-38</p></td>
+</tr>
+<tr class="row-odd"><td><p>N-HiTS</p></td>
+<td><p>+0,00177 (+0,00152 a +0,00202)</p></td>
+<td><p>0,97</p></td>
+<td><p>2,9e-43</p></td>
+</tr>
+<tr class="row-even"><td><p>iTransformer</p></td>
+<td><p>+0,00180 (+0,00155 a +0,00205)</p></td>
+<td><p>0,98</p></td>
+<td><p>1,4e-44</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La semana explica el 97,4 % de la varianza; el modelo, el 0,42 %, y la semilla, el 0,015 %. La varianza por semilla es mucho menor que la diferencia entre modelos, así que las conclusiones son estables. Los contrastes coinciden en signo y tamaño con los de la familia F1.</p>
+</section>
+<section id="espacio-de-arquitecturas-del-mlp-seccion-14-6">
+<h2>Espacio de arquitecturas del MLP (sección 14.6)<a class="headerlink" href="#espacio-de-arquitecturas-del-mlp-seccion-14-6" title="Link to this heading">#</a></h2>
+<p>Modelo de efectos principales e interacciones sobre las 1.000 arquitecturas de la fase 1 (R² = 0,37). ANOVA de tipo II con Holm sobre los factores.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Factor</p></th>
+<th class="head"><p>F</p></th>
+<th class="head"><p>η²</p></th>
+<th class="head"><p>p Holm</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ancho capa 1</p></td>
+<td><p>16,7</p></td>
+<td><p>0,043</p></td>
+<td><p>1,5e-12</p></td>
+</tr>
+<tr class="row-odd"><td><p>ancho capa 2</p></td>
+<td><p>5,9</p></td>
+<td><p>0,015</p></td>
+<td><p>0,00044</p></td>
+</tr>
+<tr class="row-even"><td><p>ancho capa 3</p></td>
+<td><p>40,1</p></td>
+<td><p>0,103</p></td>
+<td><p>3,4e-30</p></td>
+</tr>
+<tr class="row-odd"><td><p>b1</p></td>
+<td><p>124,1</p></td>
+<td><p>0,080</p></td>
+<td><p>2,5e-26</p></td>
+</tr>
+<tr class="row-even"><td><p>b2</p></td>
+<td><p>86,0</p></td>
+<td><p>0,055</p></td>
+<td><p>6,6e-19</p></td>
+</tr>
+<tr class="row-odd"><td><p>b3</p></td>
+<td><p>94,2</p></td>
+<td><p>0,061</p></td>
+<td><p>1,8e-20</p></td>
+</tr>
+<tr class="row-even"><td><p>b1:b2</p></td>
+<td><p>7,1</p></td>
+<td><p>0,005</p></td>
+<td><p>0,024</p></td>
+</tr>
+<tr class="row-odd"><td><p>b1:b3</p></td>
+<td><p>3,9</p></td>
+<td><p>0,003</p></td>
+<td><p>0,048</p></td>
+</tr>
+<tr class="row-even"><td><p>b2:b3</p></td>
+<td><p>5,2</p></td>
+<td><p>0,003</p></td>
+<td><p>0,045</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Tendencia sobre log2 del ancho</strong> (cambio del MAE de parada al duplicar el ancho de la capa):</p>
+<ul class="simple">
+<li><p>Capa 1: -0,00005 (IC -0,00007 a -0,00004).</p></li>
+<li><p>Capa 2: -0,00003 (IC -0,00004 a -0,00001).</p></li>
+<li><p>Capa 3: -0,00008 (IC -0,00010 a -0,00007).</p></li>
+</ul>
+<p><strong>Abandono por posición</strong> (efecto en MAE con IC):</p>
+<ul class="simple">
+<li><p>b1: +0,00031 (+0,00024 a +0,00038).</p></li>
+<li><p>b2: +0,00028 (+0,00021 a +0,00035).</p></li>
+<li><p>b3: +0,00027 (+0,00021 a +0,00034).</p></li>
+<li><p>b1:b2: -0,00010 (-0,00018 a -0,00003).</p></li>
+<li><p>b1:b3: -0,00008 (-0,00015 a -0,00000).</p></li>
+<li><p>b2:b3: -0,00009 (-0,00017 a -0,00001).</p></li>
+</ul>
+<p><strong>Sin abandono frente a con abandono</strong>, pareado por las 125 combinaciones de anchos: el abandono sube el MAE en +0,00043 (mediana); Wilcoxon p = 4,4e-22, correlación rango-biserial 1,00. Solo en el 1,6 % de los anchos ayuda.</p>
+<p><strong>Ancho × abandono:</strong> la interacción es -0,00010 por cada duplicación del ancho total (IC -0,00017 a -0,00002): el costo del abandono baja un poco en las redes anchas, sin llegar a compensarse.</p>
+<p><strong>Sensibilidad:</strong> la DE entre arquitecturas en la fase 1 es 0,00039 y la DE entre semillas de una misma arquitectura en la fase 2 es 0,00031 (razón 1,24). El rango completo del espacio es 0,0022, menor que δ. Como pide la sección 14.6, se concluye que la arquitectura del MLP es casi irrelevante para este problema.</p>
+<p><strong>Frontera de Pareto:</strong> 8 arquitecturas no dominadas en MAE frente a parámetros y 4 frente a segundos de entrenamiento (listas en <code class="docutils literal notranslate"><span class="pre">busqueda_resumen.json</span></code>).</p>
+<p><strong>Brecha entrenamiento-validación por patrón de abandono y tercil de ancho total</strong> (fase 1):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Patrón</p></th>
+<th class="head"><p>Ancho bajo</p></th>
+<th class="head"><p>Medio</p></th>
+<th class="head"><p>Alto</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>b000</p></td>
+<td><p>0,0046</p></td>
+<td><p>0,0042</p></td>
+<td><p>0,0045</p></td>
+</tr>
+<tr class="row-odd"><td><p>b001</p></td>
+<td><p>0,0053</p></td>
+<td><p>0,0047</p></td>
+<td><p>0,0047</p></td>
+</tr>
+<tr class="row-even"><td><p>b010</p></td>
+<td><p>0,0054</p></td>
+<td><p>0,0049</p></td>
+<td><p>0,0046</p></td>
+</tr>
+<tr class="row-odd"><td><p>b011</p></td>
+<td><p>0,0049</p></td>
+<td><p>0,0053</p></td>
+<td><p>0,0052</p></td>
+</tr>
+<tr class="row-even"><td><p>b100</p></td>
+<td><p>0,0051</p></td>
+<td><p>0,0048</p></td>
+<td><p>0,0049</p></td>
+</tr>
+<tr class="row-odd"><td><p>b101</p></td>
+<td><p>0,0051</p></td>
+<td><p>0,0054</p></td>
+<td><p>0,0049</p></td>
+</tr>
+<tr class="row-even"><td><p>b110</p></td>
+<td><p>0,0052</p></td>
+<td><p>0,0049</p></td>
+<td><p>0,0042</p></td>
+</tr>
+<tr class="row-odd"><td><p>b111</p></td>
+<td><p>0,0053</p></td>
+<td><p>0,0052</p></td>
+<td><p>0,0046</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Todas las brechas quedan lejos de δg. En la ganadora (<code class="docutils literal notranslate"><span class="pre">w032-064-032_b000</span></code>), la prueba de la tabla B con sus 5 semillas de la fase 2 da brecha mediana 0,0039 y p = 0,031 (el mínimo posible con 5 semillas): cumple.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./e2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="discusion.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Discusión, conclusiones y trabajo futuro</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fichas.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Fichas de modelo (sección 11.3)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brecha-entre-entrenamiento-y-validacion-tabla-b-condicion-ii">Brecha entre entrenamiento y validación (tabla B, condición ii)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-frente-a-prueba-tabla-b-condicion-iv">Validación frente a prueba (tabla B, condición iv)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-a-la-semilla-tabla-b">Sensibilidad a la semilla (tabla B)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efectos-mixtos-y-descomposicion-de-la-varianza-seccion-13-2">Efectos mixtos y descomposición de la varianza (sección 13.2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espacio-de-arquitecturas-del-mlp-seccion-14-6">Espacio de arquitecturas del MLP (sección 14.6)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

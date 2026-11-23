@@ -16,6 +16,9 @@
 | Robustez con tres severidades; fidelidad y estabilidad | sí | `resultados/robustez_e2/` |
 | Incertidumbre en los tres mejores con cobertura | sí | `resultados/exploratorios_e2/` |
 | Un solo acceso a la prueba por ejecución | sí | `resultados/definitiva_e2` en Drive, 88 evaluaciones |
+| Reproducción independiente de la tabla principal | parcial: recálculo desde las predicciones con código separado, no por otro equipo; discrepancia máxima 6e-17 | `estadistica/resultados_e2_complementos/reproduccion.json` |
+| Entorno limpio y pruebas | sí; 215 pruebas pasan y 13 se omiten por falta del panel | `estadistica/resultados_e2_complementos/entorno_limpio.json` |
+| Brecha entrenamiento-validación (tabla B) y fichas de modelo | sí | páginas «Complementos» y «Fichas de modelo» |
 | Replicación parcial del paper guía y limitación | sí; no cumple el criterio | `resultados/replica_electricity/`, `resultados/piloto_limitacion_e2.json` |
 
 Para regenerar las tablas confirmatorias desde las predicciones en Drive:
