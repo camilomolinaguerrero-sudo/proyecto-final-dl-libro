@@ -49,7 +49,7 @@ qué hizo la herramienta, qué revisó cada autor y qué se decidió de común a
 
 ## Procedencia de esta versión
 
-Construida desde la rama `main` @ 7627fc9.
+Construida desde la rama `main` @ c1f2eb2.
 
 | Archivo | Tomado de |
 | --- | --- |

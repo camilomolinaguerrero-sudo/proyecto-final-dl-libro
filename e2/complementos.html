@@ -668,7 +668,7 @@
 </tbody>
 </table>
 </div>
-<p>Todos los modelos, incluida la referencia lineal, tienen menos error en 2025 que en validación, y por cantidades parecidas. Un sobreajuste a la validación daría la diferencia opuesta; esto es un cambio de dificultad entre años. El p mínimo del Wilcoxon bilateral con 8 semillas es 0,0078.</p>
+<p>Todos los modelos, incluida la referencia lineal, tienen menos error en 2025 que en validación, y por cantidades parecidas. Un sobreajuste a la validación daría la diferencia opuesta. Pero los dos MAE son de modelos distintos: el de validación es del modelo de la etapa 1, y 2025 lo evalúa el de la etapa 2, reentrenado con todo el entrenamiento, incluido el bloque 2023-2024. La diferencia puede venir de ese reentrenamiento con datos más cercanos a 2025 y no solo de un año más fácil; con este diseño no se separan. El p mínimo del Wilcoxon bilateral con 8 semillas es 0,0078.</p>
 </section>
 <section id="sensibilidad-a-la-semilla-tabla-b">
 <h2>Sensibilidad a la semilla (tabla B)<a class="headerlink" href="#sensibilidad-a-la-semilla-tabla-b" title="Link to this heading">#</a></h2>
@@ -780,7 +780,7 @@
 </section>
 <section id="efectos-mixtos-y-descomposicion-de-la-varianza-seccion-13-2">
 <h2>Efectos mixtos y descomposición de la varianza (sección 13.2)<a class="headerlink" href="#efectos-mixtos-y-descomposicion-de-la-varianza-seccion-13-2" title="Link to this heading">#</a></h2>
-<p>Modelo lineal de efectos mixtos sobre el MAE semanal de 2025 (5.824 observaciones: 14 redes × 8 semillas × 52 semanas), con efecto fijo del modelo y efectos aleatorios cruzados de la semana (la unidad) y de la semilla. REML con statsmodels.</p>
+<p>Modelo lineal de efectos mixtos sobre el MAE semanal de 2025 (5.824 observaciones: 14 redes × 8 semillas × 52 semanas), con efecto fijo del modelo, efecto aleatorio de la semana (la unidad) y efecto aleatorio de la semilla anidada en el modelo. REML con statsmodels. Es descriptivo: no corrige la autocorrelación entre semanas; las decisiones son las de Diebold–Mariano con HLN de la familia F1.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Componente</p></th>
@@ -795,15 +795,15 @@
 </tr>
 <tr class="row-odd"><td><p>semana</p></td>
 <td><p>1.49e-04</p></td>
-<td><p>97,38 %</p></td>
+<td><p>97,34 %</p></td>
 </tr>
 <tr class="row-even"><td><p>semilla</p></td>
-<td><p>2.34e-08</p></td>
-<td><p>0,02 %</p></td>
+<td><p>5.33e-07</p></td>
+<td><p>0,35 %</p></td>
 </tr>
 <tr class="row-odd"><td><p>residuo</p></td>
-<td><p>3.35e-06</p></td>
-<td><p>2,19 %</p></td>
+<td><p>2.90e-06</p></td>
+<td><p>1,89 %</p></td>
 </tr>
 </tbody>
 </table>
@@ -818,74 +818,74 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TFT</p></td>
-<td><p>-0,00099 (-0,00124 a -0,00074)</p></td>
-<td><p>-0,54</p></td>
-<td><p>4,9e-14</p></td>
+<td><p>-0,00099 (-0,00174 a -0,00024)</p></td>
+<td><p>-0,58</p></td>
+<td><p>0,079</p></td>
 </tr>
 <tr class="row-odd"><td><p>Transformer</p></td>
-<td><p>-0,00025 (-0,00049 a +0,00000)</p></td>
-<td><p>-0,13</p></td>
-<td><p>0,157</p></td>
+<td><p>-0,00025 (-0,00100 a +0,00051)</p></td>
+<td><p>-0,14</p></td>
+<td><p>1,000</p></td>
 </tr>
 <tr class="row-even"><td><p>PatchTST</p></td>
-<td><p>+0,00011 (-0,00014 a +0,00036)</p></td>
-<td><p>0,06</p></td>
-<td><p>0,381</p></td>
+<td><p>+0,00011 (-0,00064 a +0,00086)</p></td>
+<td><p>0,07</p></td>
+<td><p>1,000</p></td>
 </tr>
 <tr class="row-odd"><td><p>MLP (E1)</p></td>
-<td><p>+0,00018 (-0,00007 a +0,00043)</p></td>
-<td><p>0,10</p></td>
-<td><p>0,306</p></td>
+<td><p>+0,00018 (-0,00057 a +0,00093)</p></td>
+<td><p>0,11</p></td>
+<td><p>1,000</p></td>
 </tr>
 <tr class="row-even"><td><p>LSTM (E1)</p></td>
-<td><p>+0,00035 (+0,00010 a +0,00059)</p></td>
-<td><p>0,19</p></td>
-<td><p>0,026</p></td>
+<td><p>+0,00035 (-0,00041 a +0,00110)</p></td>
+<td><p>0,20</p></td>
+<td><p>1,000</p></td>
 </tr>
 <tr class="row-odd"><td><p>RNN simple</p></td>
-<td><p>+0,00038 (+0,00013 a +0,00063)</p></td>
-<td><p>0,21</p></td>
-<td><p>0,015</p></td>
+<td><p>+0,00038 (-0,00037 a +0,00113)</p></td>
+<td><p>0,22</p></td>
+<td><p>1,000</p></td>
 </tr>
 <tr class="row-even"><td><p>GRU</p></td>
-<td><p>+0,00074 (+0,00049 a +0,00099)</p></td>
-<td><p>0,41</p></td>
-<td><p>3,1e-8</p></td>
+<td><p>+0,00074 (-0,00001 a +0,00149)</p></td>
+<td><p>0,44</p></td>
+<td><p>0,320</p></td>
 </tr>
 <tr class="row-odd"><td><p>MLP (E2)</p></td>
-<td><p>+0,00085 (+0,00060 a +0,00109)</p></td>
-<td><p>0,46</p></td>
-<td><p>1,9e-10</p></td>
+<td><p>+0,00085 (+0,00009 a +0,00160)</p></td>
+<td><p>0,50</p></td>
+<td><p>0,192</p></td>
 </tr>
 <tr class="row-even"><td><p>DLinear</p></td>
-<td><p>+0,00113 (+0,00088 a +0,00138)</p></td>
-<td><p>0,62</p></td>
-<td><p>5,2e-18</p></td>
+<td><p>+0,00113 (+0,00038 a +0,00188)</p></td>
+<td><p>0,66</p></td>
+<td><p>0,029</p></td>
 </tr>
 <tr class="row-odd"><td><p>N-BEATS</p></td>
-<td><p>+0,00134 (+0,00109 a +0,00159)</p></td>
-<td><p>0,73</p></td>
-<td><p>3,8e-25</p></td>
+<td><p>+0,00134 (+0,00059 a +0,00209)</p></td>
+<td><p>0,79</p></td>
+<td><p>0,0047</p></td>
 </tr>
 <tr class="row-even"><td><p>TCN</p></td>
-<td><p>+0,00167 (+0,00142 a +0,00192)</p></td>
-<td><p>0,91</p></td>
-<td><p>1,3e-38</p></td>
+<td><p>+0,00167 (+0,00092 a +0,00242)</p></td>
+<td><p>0,98</p></td>
+<td><p>0,00014</p></td>
 </tr>
 <tr class="row-odd"><td><p>N-HiTS</p></td>
-<td><p>+0,00177 (+0,00152 a +0,00202)</p></td>
-<td><p>0,97</p></td>
-<td><p>2,9e-43</p></td>
+<td><p>+0,00177 (+0,00102 a +0,00252)</p></td>
+<td><p>1,04</p></td>
+<td><p>4,6e-5</p></td>
 </tr>
 <tr class="row-even"><td><p>iTransformer</p></td>
-<td><p>+0,00180 (+0,00155 a +0,00205)</p></td>
-<td><p>0,98</p></td>
-<td><p>1,4e-44</p></td>
+<td><p>+0,00180 (+0,00105 a +0,00255)</p></td>
+<td><p>1,06</p></td>
+<td><p>3,5e-5</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>La semana explica el 97,4 % de la varianza; el modelo, el 0,42 %, y la semilla, el 0,015 %. La varianza por semilla es mucho menor que la diferencia entre modelos, así que las conclusiones son estables. Los contrastes coinciden en signo y tamaño con los de la familia F1.</p>
+<p>La semana explica el 97,3 % de la varianza; el modelo, el 0,42 %, y la semilla dentro de cada modelo, el 0,35 %. La varianza por semilla es comparable a la que separa a los modelos, así que, como advierte la sección 13.2, las diferencias pequeñas no son estables frente a la semilla. Las diferencias estimadas son las mismas de F1, pero aquí solo quedan significativas tras Holm las de DLinear, N-BEATS, TCN, N-HiTS, iTransformer, todas peores que la CNN. La ventaja de TFT (-0,00099) tiene p de Holm 0,079: depende de tratar las 8 semillas como fijas, como hace el contraste de F1 al promediarlas. Ninguna de estas diferencias llega a δ.</p>
 </section>
 <section id="espacio-de-arquitecturas-del-mlp-seccion-14-6">
 <h2>Espacio de arquitecturas del MLP (sección 14.6)<a class="headerlink" href="#espacio-de-arquitecturas-del-mlp-seccion-14-6" title="Link to this heading">#</a></h2>

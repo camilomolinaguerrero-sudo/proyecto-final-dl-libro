@@ -46,7 +46,7 @@ Diferencia por semilla entre el MAE de validación (bloque de parada, 2023-2024)
 | DLinear | 0,2830 | 0,2751 | +0,0080 (+0,0076 a +0,0083) | 2,1e-10 | 0,0078 |
 | RNN simple | 0,2829 | 0,2743 | +0,0085 (+0,0081 a +0,0090) | 1,3e-9 | 0,0078 |
 
-Todos los modelos, incluida la referencia lineal, tienen menos error en 2025 que en validación, y por cantidades parecidas. Un sobreajuste a la validación daría la diferencia opuesta; esto es un cambio de dificultad entre años. El p mínimo del Wilcoxon bilateral con 8 semillas es 0,0078.
+Todos los modelos, incluida la referencia lineal, tienen menos error en 2025 que en validación, y por cantidades parecidas. Un sobreajuste a la validación daría la diferencia opuesta. Pero los dos MAE son de modelos distintos: el de validación es del modelo de la etapa 1, y 2025 lo evalúa el de la etapa 2, reentrenado con todo el entrenamiento, incluido el bloque 2023-2024. La diferencia puede venir de ese reentrenamiento con datos más cercanos a 2025 y no solo de un año más fácil; con este diseño no se separan. El p mínimo del Wilcoxon bilateral con 8 semillas es 0,0078.
 
 ## Sensibilidad a la semilla (tabla B)
 
@@ -74,32 +74,32 @@ Las semillas difieren de forma significativa en 15 de 15 modelos, pero el CV no 
 
 ## Efectos mixtos y descomposición de la varianza (sección 13.2)
 
-Modelo lineal de efectos mixtos sobre el MAE semanal de 2025 (5.824 observaciones: 14 redes × 8 semillas × 52 semanas), con efecto fijo del modelo y efectos aleatorios cruzados de la semana (la unidad) y de la semilla. REML con statsmodels.
+Modelo lineal de efectos mixtos sobre el MAE semanal de 2025 (5.824 observaciones: 14 redes × 8 semillas × 52 semanas), con efecto fijo del modelo, efecto aleatorio de la semana (la unidad) y efecto aleatorio de la semilla anidada en el modelo. REML con statsmodels. Es descriptivo: no corrige la autocorrelación entre semanas; las decisiones son las de Diebold–Mariano con HLN de la familia F1.
 
 | Componente | Varianza | Proporción |
 | --- | --- | --- |
 | modelo | 6.41e-07 | 0,42 % |
-| semana | 1.49e-04 | 97,38 % |
-| semilla | 2.34e-08 | 0,02 % |
-| residuo | 3.35e-06 | 2,19 % |
+| semana | 1.49e-04 | 97,34 % |
+| semilla | 5.33e-07 | 0,35 % |
+| residuo | 2.90e-06 | 1,89 % |
 
 | Modelo − CNN | Diferencia (IC 95 %) | Efecto estandarizado | p Holm |
 | --- | --- | --- | --- |
-| TFT | -0,00099 (-0,00124 a -0,00074) | -0,54 | 4,9e-14 |
-| Transformer | -0,00025 (-0,00049 a +0,00000) | -0,13 | 0,157 |
-| PatchTST | +0,00011 (-0,00014 a +0,00036) | 0,06 | 0,381 |
-| MLP (E1) | +0,00018 (-0,00007 a +0,00043) | 0,10 | 0,306 |
-| LSTM (E1) | +0,00035 (+0,00010 a +0,00059) | 0,19 | 0,026 |
-| RNN simple | +0,00038 (+0,00013 a +0,00063) | 0,21 | 0,015 |
-| GRU | +0,00074 (+0,00049 a +0,00099) | 0,41 | 3,1e-8 |
-| MLP (E2) | +0,00085 (+0,00060 a +0,00109) | 0,46 | 1,9e-10 |
-| DLinear | +0,00113 (+0,00088 a +0,00138) | 0,62 | 5,2e-18 |
-| N-BEATS | +0,00134 (+0,00109 a +0,00159) | 0,73 | 3,8e-25 |
-| TCN | +0,00167 (+0,00142 a +0,00192) | 0,91 | 1,3e-38 |
-| N-HiTS | +0,00177 (+0,00152 a +0,00202) | 0,97 | 2,9e-43 |
-| iTransformer | +0,00180 (+0,00155 a +0,00205) | 0,98 | 1,4e-44 |
+| TFT | -0,00099 (-0,00174 a -0,00024) | -0,58 | 0,079 |
+| Transformer | -0,00025 (-0,00100 a +0,00051) | -0,14 | 1,000 |
+| PatchTST | +0,00011 (-0,00064 a +0,00086) | 0,07 | 1,000 |
+| MLP (E1) | +0,00018 (-0,00057 a +0,00093) | 0,11 | 1,000 |
+| LSTM (E1) | +0,00035 (-0,00041 a +0,00110) | 0,20 | 1,000 |
+| RNN simple | +0,00038 (-0,00037 a +0,00113) | 0,22 | 1,000 |
+| GRU | +0,00074 (-0,00001 a +0,00149) | 0,44 | 0,320 |
+| MLP (E2) | +0,00085 (+0,00009 a +0,00160) | 0,50 | 0,192 |
+| DLinear | +0,00113 (+0,00038 a +0,00188) | 0,66 | 0,029 |
+| N-BEATS | +0,00134 (+0,00059 a +0,00209) | 0,79 | 0,0047 |
+| TCN | +0,00167 (+0,00092 a +0,00242) | 0,98 | 0,00014 |
+| N-HiTS | +0,00177 (+0,00102 a +0,00252) | 1,04 | 4,6e-5 |
+| iTransformer | +0,00180 (+0,00105 a +0,00255) | 1,06 | 3,5e-5 |
 
-La semana explica el 97,4 % de la varianza; el modelo, el 0,42 %, y la semilla, el 0,015 %. La varianza por semilla es mucho menor que la diferencia entre modelos, así que las conclusiones son estables. Los contrastes coinciden en signo y tamaño con los de la familia F1.
+La semana explica el 97,3 % de la varianza; el modelo, el 0,42 %, y la semilla dentro de cada modelo, el 0,35 %. La varianza por semilla es comparable a la que separa a los modelos, así que, como advierte la sección 13.2, las diferencias pequeñas no son estables frente a la semilla. Las diferencias estimadas son las mismas de F1, pero aquí solo quedan significativas tras Holm las de DLinear, N-BEATS, TCN, N-HiTS, iTransformer, todas peores que la CNN. La ventaja de TFT (-0,00099) tiene p de Holm 0,079: depende de tratar las 8 semillas como fijas, como hace el contraste de F1 al promediarlas. Ninguna de estas diferencias llega a δ.
 
 ## Espacio de arquitecturas del MLP (sección 14.6)
 
