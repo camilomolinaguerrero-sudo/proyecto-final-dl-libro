@@ -125,3 +125,28 @@ Lo que dejó el piloto:
   mediana condicional y no la media. En la CNN, semilla 1, el residuo por fila tiene mediana 0,005 y
   media 0,061: el centro está bien ubicado y la cola derecha sube la media. Es esperable y no indica
   una fuga ni un error de escala.
+
+## Incertidumbre, calibración y costo (E3)
+
+`incertidumbre_e3.py` resume las predicciones de 2025 que ya estaban registradas, sin reentrenar ni
+elegir modelos. Escribe en `resultados_e3_incertidumbre/`:
+
+- `conformal_por_corrida.csv` y `conformal_resumen.csv`: intervalos conformales en línea al 90 %.
+  Son causales: la semana w solo usa los residuos de las semanas anteriores de 2025, y las 8 primeras
+  solo calibran. Hay dos variantes, partición (Angelopoulos y Bates, 2022) y adaptativa (Gibbs y
+  Candès, 2021), con cobertura y ancho en total y por régimen;
+- `calibracion_intervalos.csv`: la cobertura empírica frente a la nominal (50, 80, 90 y 95 %);
+- `pareto.csv`: MAE medio frente a ms de inferencia por 1000 observaciones, parámetros y segundos de
+  entrenamiento, con la marca de qué modelos están en el frente. Todos los tiempos son en Tesla T4 y
+  salen de los registros de cada corrida.
+
+`ece`, `brier`, `tabla_fiabilidad` y `ajustar_temperatura` quedan listos para la compuerta del modelo
+original, que es la única salida probabilística. Se calibran en el bloque de parada, no en 2025.
+
+```bash
+python estadistica/incertidumbre_e3.py --drive "$DRIVE/proyecto_final_dl"
+```
+
+Referencias: Angelopoulos, A. N. y Bates, S. (2022). *A Gentle Introduction to Conformal Prediction
+and Distribution-Free Uncertainty Quantification*. arXiv:2107.07511. Gibbs, I. y Candès, E. (2021).
+*Adaptive Conformal Inference Under Distribution Shift*. arXiv:2106.00170.

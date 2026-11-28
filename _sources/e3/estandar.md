@@ -1,0 +1,11 @@
+# Declaración del estándar del Entregable 3
+
+**Borrador de Camilo del 2026-11-24, pendiente de aprobación de Lina.** Al aprobarlo se fecha y se
+etiqueta (`estandar-e3`) antes de congelar el protocolo. Después no se puede relajar.
+
+| Campo | Contenido |
+| --- | --- |
+| Estándar | Profundidad teórica, el único que admite el enunciado: demostración formal de una propiedad del modelo original, familia completa de contrastes, tres conjuntos de datos adicionales, al menos tres pruebas por contraste y potencia por contraste de al menos 0,90. |
+| Justificación | Con los tiempos medidos en el E2, la CNN entrena en unos 9 minutos por corrida en una T4, y el modelo original se monta sobre ella, así que su costo es del mismo orden. Las semillas salen del análisis de potencia (`experiments/potencia_e3.py`): con la mayor desviación de las diferencias pareadas por semilla observada en el E2 (σd = 0,0020, PatchTST frente a TFT), δ = 0,0032 y 15 contrastes, 10 semillas dan una potencia por contraste de 0,81 y 12 semillas dan 0,93. Con las diez semillas por modelo (2026-11-25) el máximo baja a σd = 0,00192 (N-HiTS frente a TFT): 10 semillas dan 0,85 y 12 dan 0,95, así que el compromiso de 12 se mantiene. Por eso el compromiso es de 12 semillas para todos los modelos de la familia, o más si el piloto del modelo original da un σd mayor. |
+| Compromisos | **Familia de contrastes (m = 15):** los diez del Top 10 (PatchTST, TFT, iTransformer, DLinear, N-BEATS, N-HiTS, Transformer, TCN, GRU y RNN simple), los tres modelos base del E1 (MLP, CNN y LSTM), el MLP del E2 y la referencia lineal. **Conjuntos adicionales:** M4 semanal, Dominick e ILINet por estado, propuestos por Lina el 2026-11-25 antes de correr ningún modelo (`preregistro/conjuntos_adicionales.md`), con los ajustes pendientes de la sección 4 del protocolo. **Propiedad a demostrar:** cota de Lipschitz del modelo original respecto de sus entradas. Supuestos previstos: activaciones 1-Lipschitz (ReLU), compuerta sigmoide y normas espectrales de los pesos acotadas; la normalización de las entradas se trata como una transformación afín fija. |
+| Fecha y tag | *Se completa al aprobarlo:* fecha y etiqueta `estandar-e3`, anteriores a la etiqueta `protocolo-e3`. |

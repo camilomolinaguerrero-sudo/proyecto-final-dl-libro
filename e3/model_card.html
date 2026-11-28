@@ -1,0 +1,801 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ficha del modelo original: CNN con mezcla por régimen &#8212; Pronóstico del abastecimiento semanal de corredores de alimentos: proyecto final (entregables 1, 2 y 3)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'e3/model_card';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Declaración de datos: panel de corredores SIPSA-A 2018-2025" href="data_statement.html" />
+    <link rel="prev" title="Artefactos del modelo original" href="artefactos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico del abastecimiento semanal de corredores de alimentos: proyecto final (entregables 1, 2 y 3)</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Proyecto final: pronóstico del abastecimiento de alimentos con Deep Learning
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1-2. Problema, datos y EDA</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eda/01_problema_dataset.html">1. Definición del problema y del dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/02_eda_general.html">2.1. EDA general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/03_eda_series.html">2.2-B. EDA específico de series de tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eda/decisiones_para_modelos.html">Decisiones del EDA para los modelos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Estado del arte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/busqueda.html">3.1 Estrategia de búsqueda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/modelos_seleccionados.html">Modelos seleccionados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/analisis_por_modelo.html">Análisis por modelo base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../estado_arte/sintesis_y_equivalencia.html">Tabla de síntesis y equivalencia con los modelos clásicos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Diseño experimental</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../diseno/decisiones.html">Decisiones del proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/preregistro.html">Preregistro del Entregable 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diseno/estadistica.html">Estadística (Camilo)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resultados/capitulo5.html">5. Resultados confirmatorios en 2025</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/baseline.html">5.2-5.3 Ranking, baseline y margen de mejora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resultados/resultados.html">Piloto y referencias en validación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../e2/resumen.html">Entregable 2: benchmark del Top 10 de la literatura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/datos.html">Datos, EDA y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/trazabilidad.html">Tabla de trazabilidad hallazgo-decisión (Apéndice A.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/top10.html">Top 10 del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/metodos.html">Métodos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/preregistro.html">Preregistro del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/resultados.html">Resultados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/discusion.html">Discusión, conclusiones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/complementos.html">Complementos: sobreajuste, efectos mixtos y espacio de arquitecturas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/fichas.html">Fichas de modelo (sección 11.3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../e2/reproducibilidad.html">Reproducibilidad (Apéndice B)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: resumen, correcciones y selección</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resumen.html">Entregable 3: resumen y estado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="correcciones.html">Bloque A: correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="semillas_10.html">Análisis confirmatorio del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seleccion.html">Bloque B: selección de las mejores configuraciones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: modelo original</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="diseno.html">Modelo original: diseño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="novedad.html">Revisión de literatura y matriz de novedad del modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lipschitz.html">Propiedad demostrada: cota de Lipschitz del modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_log.html">Bitácora de diseño del modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementacion.html">Modelo original: implementación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="procedencia.html">Procedencia del modelo original</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: validación y evaluación ampliada</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="estandar.html">Declaración del estándar del Entregable 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocolo.html">Protocolo experimental del Entregable 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validacion.html">Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conjuntos_adicionales.html">Preregistro de los conjuntos adicionales (Entregable 3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluacion.html">Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incertidumbre.html">Incertidumbre, calibración y costo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: producción y reproducibilidad</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="artefactos.html">Artefactos del modelo original</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Ficha del modelo original: CNN con mezcla por régimen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_statement.html">Declaración de datos: panel de corredores SIPSA-A 2018-2025</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dashboard.html">Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="determinismo.html">Determinismo y semillas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tabla_maestra.html">Tabla maestra de experimentos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="declaracion.html">Declaración de autoría, contribuciones y uso de herramientas (Entregable 3)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../anexos/reproducir.html">Reproducir el proyecto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_camilo.html">Protocolo de tamizaje (búsquedas S1 y A1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anexos/protocolo_lina.html">Protocolo de tamizaje (búsquedas W1 e I1)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/e3/model_card.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ficha del modelo original: CNN con mezcla por régimen</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detalles-del-modelo">1. Detalles del modelo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-previsto">2. Uso previsto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factores">3. Factores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas">4. Métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos">5. Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados">6. Resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-eticas">7. Consideraciones éticas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advertencias">8. Advertencias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">Referencias</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ficha-del-modelo-original-cnn-con-mezcla-por-regimen">
+<h1>Ficha del modelo original: CNN con mezcla por régimen<a class="headerlink" href="#ficha-del-modelo-original-cnn-con-mezcla-por-regimen" title="Link to this heading">#</a></h1>
+<p>Sigue las secciones de Mitchell et al. (2019). Lo que todavía no tiene corridas dice <strong>pendiente</strong> y se
+llena con los archivos de resultados cuando existan, no a mano.</p>
+<section id="detalles-del-modelo">
+<h2>1. Detalles del modelo<a class="headerlink" href="#detalles-del-modelo" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Autores:</strong> Lina Margarita Buelvas y Camilo Molina Guerrero, Entregable 3 del curso de Deep
+Learning del doctorado en ingeniería, 2026.</p></li>
+<li><p><strong>Código:</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/modelo_original.py</span></code>, con la clase <code class="docutils literal notranslate"><span class="pre">CNNMezcla</span></code> y la fábrica <code class="docutils literal notranslate"><span class="pre">construir_original</span></code>;</p></li>
+<li><p>la demostración de la cota de Lipschitz está en <code class="docutils literal notranslate"><span class="pre">experiments/lipschitz.md</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Arquitectura:</strong></p>
+<ul>
+<li><p>el cuerpo es la CNN causal del E1: 3 bloques de convolución con kernel 3, 128 canales, ReLU y
+<em>dropout</em> 0,1;</p></li>
+<li><p>z = [promedio global, última semana, covariables, embeddings de mercado, departamento, municipio
+y grupo dominante];</p></li>
+<li><p>sobre z hay una compuerta g(z) = σ(uᵀz + c) y dos expertos, h_int y h_norm, cada uno con una capa
+oculta de 64 unidades;</p></li>
+<li><p>la salida es ŷ = g·h_int + (1 − g)·h_norm.</p></li>
+</ul>
+</li>
+<li><p><strong>Tamaño:</strong> 159.894 parámetros, frente a 137.534 de la CNN del E1 (+16,3 %).</p></li>
+<li><p><strong>Fuente:</strong> la mezcla de expertos de Jacobs, Jordan, Nowlan y Hinton (1991). La modificación es que
+la compuerta se supervisa con el régimen observado: a la pérdida de pronóstico se le suma
+λ·BCE(g, 1[y &lt; ln 1,5]).</p></li>
+<li><p><strong>Entrenamiento:</strong></p>
+<ul>
+<li><p>optimizador Adam, pérdida MAE + λ·BCE, lote de 512, hasta 100 épocas, paciencia de 10 en el MAE
+del bloque de parada;</p></li>
+<li><p>la tasa se elige entre {1e-4, 3e-4, 1e-3} con la semilla 0 en k4;</p></li>
+<li><p>la corrida definitiva tiene dos etapas: la primera fija la mejor época E y la segunda reentrena
+E épocas con todo el entrenamiento hasta 2024-10-21;</p></li>
+<li><p>va con 12 semillas.</p></li>
+</ul>
+</li>
+<li><p><strong>λ:</strong> 0,5 provisional. Se fija con el desarrollo en k1 a k3 (<code class="docutils literal notranslate"><span class="pre">experiments/design_log.md</span></code>):
+<strong>pendiente</strong>.</p></li>
+<li><p><strong>Desviación declarada:</strong> el desarrollo (k1 a k3, semillas 1 a 5) corrió en la GPU de un Apple M5
+(MPS), cuyas operaciones no son reproducibles bit a bit. Solo decide λ y las variantes; la corrida
+definitiva va en CUDA.</p></li>
+<li><p><strong>Artefactos:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/original_s&lt;semilla&gt;/</span></code> (pesos, transformador y <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code>), escritos
+por <code class="docutils literal notranslate"><span class="pre">src/exportar.py</span></code>: <strong>pendiente</strong>, a la espera de la corrida definitiva.</p></li>
+<li><p><strong>Licencia:</strong> MIT para el código.</p></li>
+</ul>
+</section>
+<section id="uso-previsto">
+<h2>2. Uso previsto<a class="headerlink" href="#uso-previsto" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Para qué:</strong> pronosticar, con una semana de anticipación, la razón entre el abastecimiento de un
+corredor (municipio de origen → central mayorista) y su promedio de las 8 semanas previas, y marcar
+las semanas en que esa razón caería por debajo de 0,5.</p></li>
+<li><p><strong>Usuarios:</strong> investigación y análisis del abastecimiento con datos públicos de SIPSA-A. Es un
+trabajo de curso, no un sistema operativo.</p></li>
+<li><p><strong>Fuera de alcance:</strong></p>
+<ul>
+<li><p>corredores que no cumplen la regla de 4 de 8 semanas;</p></li>
+<li><p>horizontes de más de una semana;</p></li>
+<li><p>mercados que no están en SIPSA-A;</p></li>
+<li><p>decisiones de política o de mercado sin validación aparte.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="factores">
+<h2>3. Factores<a class="headerlink" href="#factores" title="Link to this heading">#</a></h2>
+<p>Los factores por los que se desagrega el error son:</p>
+<ul class="simple">
+<li><p>el régimen (semanas de interrupción frente al resto);</p></li>
+<li><p>el mercado;</p></li>
+<li><p>los corredores nuevos en 2025;</p></li>
+<li><p>el número de días encuestados.</p></li>
+</ul>
+<p>La motivación del modelo es el régimen. En el E2, el MAE en semanas de interrupción fue 1,20 a 1,26
+veces el del resto en los tres mejores modelos publicados (<code class="docutils literal notranslate"><span class="pre">resultados/piloto_limitacion_e2.json</span></code>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Razón</p></th>
+<th class="head"><p>IC 95 %</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>1,259</p></td>
+<td><p>1,217 a 1,305</p></td>
+</tr>
+<tr class="row-odd"><td><p>PatchTST</p></td>
+<td><p>1,259</p></td>
+<td><p>1,218 a 1,298</p></td>
+</tr>
+<tr class="row-even"><td><p>N-BEATS</p></td>
+<td><p>1,198</p></td>
+<td><p>1,158 a 1,238</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los IC salen de un bootstrap por corredor con B = 2000.</p>
+</section>
+<section id="metricas">
+<h2>4. Métricas<a class="headerlink" href="#metricas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Primaria:</strong> MAE de <code class="docutils literal notranslate"><span class="pre">y_reg</span></code>.</p></li>
+<li><p><strong>Secundarias:</strong> RMSE, MASE y AUC de interrupción.</p></li>
+<li><p><strong>Margen de equivalencia práctica:</strong> δ = 0,0032.</p></li>
+<li><p><strong>Decisión:</strong> la regla R3 de <code class="docutils literal notranslate"><span class="pre">experiments/protocolo.md</span></code>, con estas condiciones:</p>
+<ul>
+<li><p>pruebas t pareada, Diebold-Mariano con la corrección HLN y bootstrap por bloques, con corrección
+de Holm;</p></li>
+<li><p>el extremo superior del IC 95 % por debajo de −δ;</p></li>
+<li><p>tamaño de efecto suficiente;</p></li>
+<li><p>Wilcoxon, Nadeau-Bengio y las semillas 1 a 8 deben llegar a la misma conclusión.</p></li>
+</ul>
+</li>
+<li><p><strong>Implementación:</strong> <code class="docutils literal notranslate"><span class="pre">estadistica/ejecutar_e3.py</span></code>.</p></li>
+</ul>
+</section>
+<section id="datos">
+<h2>5. Datos<a class="headerlink" href="#datos" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Entrenamiento:</strong> el panel SIPSA-A hasta la semana objetivo 2024-10-21, con 622.244 filas y 4.305
+corredores.</p></li>
+<li><p><strong>Prueba:</strong> 2025, con 103.466 filas y 3.009 corredores, congelada con su hash.</p></li>
+<li><p><strong>Detalle:</strong> la fuente, la curaduría y los sesgos conocidos están en
+<span class="xref myst">DATA_STATEMENT.md</span>.</p></li>
+<li><p><strong>Conjuntos adicionales:</strong> M4, ILINet y Dominick, en <code class="docutils literal notranslate"><span class="pre">resultados/conjuntos_adicionales/</span></code>: <strong>pendiente</strong>.</p></li>
+</ul>
+</section>
+<section id="resultados">
+<h2>6. Resultados<a class="headerlink" href="#resultados" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Análisis</p></th>
+<th class="head"><p>Estado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Desarrollo k1 a k3 (3 variantes × 5 semillas)</p></td>
+<td><p>en curso</p></td>
+</tr>
+<tr class="row-odd"><td><p>Elección de la tasa en k4</p></td>
+<td><p>pendiente</p></td>
+</tr>
+<tr class="row-even"><td><p>2025, 12 semillas, frente a los 15 rivales (tabla A.4)</p></td>
+<td><p>pendiente</p></td>
+</tr>
+<tr class="row-odd"><td><p>Error por régimen y por mercado</p></td>
+<td><p>pendiente</p></td>
+</tr>
+<tr class="row-even"><td><p>Conjuntos adicionales</p></td>
+<td><p>pendiente</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cota de Lipschitz con los pesos finales</p></td>
+<td><p>pendiente</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Como referencia, en 2025 (8 semillas, <code class="docutils literal notranslate"><span class="pre">estadistica/resultados_e2/tabla_por_modelo.csv</span></code>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>MAE medio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TFT</p></td>
+<td><p>0,2729</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>0,2737</p></td>
+</tr>
+<tr class="row-even"><td><p>CNN del E1</p></td>
+<td><p>0,2739</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="consideraciones-eticas">
+<h2>7. Consideraciones éticas<a class="headerlink" href="#consideraciones-eticas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Los datos son agregados por corredor y semana y no identifican personas (<code class="docutils literal notranslate"><span class="pre">DATA_STATEMENT.md</span></code>, §6).</p></li>
+<li><p>El error pesa más en los mercados con más filas: Corabastos aporta el 14,8 %. Un buen MAE global
+puede esconder un mal desempeño en mercados pequeños, y por eso el error se reporta por mercado.</p></li>
+<li><p>Una alerta falsa de interrupción, o una que falte, puede inducir decisiones de compra o de logística
+equivocadas si el modelo se usa fuera del alcance de la §2.</p></li>
+</ul>
+</section>
+<section id="advertencias">
+<h2>8. Advertencias<a class="headerlink" href="#advertencias" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>2025 ya se usó como prueba en el curso de Machine Learning (<code class="docutils literal notranslate"><span class="pre">DECISIONES.md</span></code>).</p></li>
+<li><p>La cota de Lipschitz es un producto de normas espectrales por capa, y ese tipo de cota suele quedar
+muy por encima del cociente empírico. Garantiza continuidad, no robustez práctica. Su valor con los
+pesos finales, junto al cociente empírico, queda en la tabla de la §6.</p></li>
+<li><p>El modelo depende de la regularidad del reporte del DANE. Con pocos días encuestados, la medición
+es ruidosa, y con 1 día el 80 % de las filas son interrupciones.</p></li>
+</ul>
+</section>
+<section id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Jacobs, R. A., Jordan, M. I., Nowlan, S. J. y Hinton, G. E. (1991). Adaptive Mixtures of Local
+Experts. <em>Neural Computation</em>, 3(1), 79-87. <a class="reference external" href="https://doi.org/10.1162/neco.1991.3.1.79">https://doi.org/10.1162/neco.1991.3.1.79</a></p></li>
+<li><p>Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji,
+I. D. y Gebru, T. (2019). Model Cards for Model Reporting. <em>Proceedings of the Conference on
+Fairness, Accountability, and Transparency</em>, 220-229. <a class="reference external" href="https://doi.org/10.1145/3287560.3287596">https://doi.org/10.1145/3287560.3287596</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./e3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="artefactos.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Artefactos del modelo original</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="data_statement.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Declaración de datos: panel de corredores SIPSA-A 2018-2025</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detalles-del-modelo">1. Detalles del modelo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-previsto">2. Uso previsto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factores">3. Factores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas">4. Métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos">5. Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados">6. Resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-eticas">7. Consideraciones éticas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advertencias">8. Advertencias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">Referencias</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Margarita Buelvas y Camilo Molina Guerrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
