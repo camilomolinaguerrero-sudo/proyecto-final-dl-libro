@@ -52,7 +52,7 @@ qué hizo la herramienta, qué revisó cada autor y qué se decidió de común a
 
 ## Procedencia de esta versión
 
-Construida desde la rama `camilo/libro-completo` @ 5cdc613.
+Construida desde la rama `camilo/libro-completo` @ 7bf4368.
 
 | Archivo | Tomado de |
 | --- | --- |

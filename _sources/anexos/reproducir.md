@@ -71,4 +71,4 @@ exactos; este anexo resume el orden.
 
 La prueba de humo pide las tres páginas y la lista de callbacks, y hace una predicción en vivo por
 HTTP. El 2026-11-28 pasó contra la app local: las páginas respondieron 200 y la predicción de la CNN
-tardó 27 ms. Falta correrla contra la URL de Render cuando se despliegue.
+tardó 27 ms. El mismo día se desplegó en Render (https://abastecimiento-sipsa-dl.onrender.com, rama `camilo/render`) y la prueba pasó contra la URL pública con CNN, TFT y N-BEATS en INT8: `resultados/humo_dashboard.json`.

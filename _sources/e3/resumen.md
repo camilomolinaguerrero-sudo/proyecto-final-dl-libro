@@ -19,7 +19,7 @@ El resumen ejecutivo, con sus cifras, se escribe cuando estén las corridas conf
 | Artefactos ONNX de los rivales y tabla de costo | listo |
 | Ficha del modelo y declaración de datos | listo |
 | Dashboard en Dash | listo |
-| Dashboard desplegado en Render (URL pública) | pendiente |
+| Dashboard desplegado en Render (URL pública) | listo |
 | CI, Docker, licencia y CITATION | listo |
 | DOI de Zenodo | pendiente |
 | Declaración de autoría firmada | pendiente |

@@ -440,6 +440,7 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-que-usa">Datos que usa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue">Despliegue</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendiente-de-acordar">Pendiente de acordar</a></li>
 </ul>
             </nav>
@@ -506,6 +507,13 @@ conformal al 90 % de los residuos de las semanas anteriores (semilla 1).</p></li
 <li><p><strong>Resto:</strong> las cifras de <code class="docutils literal notranslate"><span class="pre">eda/resultados/</span></code>, <code class="docutils literal notranslate"><span class="pre">estadistica/resultados_e2/</span></code> (o la tabla de 10 o 12 semillas
 si está en la rama), <code class="docutils literal notranslate"><span class="pre">resultados/exploratorios_e2/</span></code> y <code class="docutils literal notranslate"><span class="pre">resultados/costo_inferencia.csv</span></code>.</p></li>
 </ul>
+</section>
+<section id="despliegue">
+<h2>Despliegue<a class="headerlink" href="#despliegue" title="Link to this heading">#</a></h2>
+<p>El dashboard está en https://abastecimiento-sipsa-dl.onrender.com. Se despliega desde la rama <code class="docutils literal notranslate"><span class="pre">camilo/render</span></code>, que trae solo la app, los
+ONNX (N-BEATS en INT8), <code class="docutils literal notranslate"><span class="pre">data/dashboard/</span></code> y los archivos de resultados que lee. La prueba de humo
+pasó contra esa URL (<code class="docutils literal notranslate"><span class="pre">resultados/humo_dashboard.json</span></code>). En la prueba local con gunicorn, el pico de
+memoria fue de 364 MB con TFT y una sola sesión ONNX (<code class="docutils literal notranslate"><span class="pre">MAX_SESIONES=1</span></code>).</p>
 </section>
 <section id="pendiente-de-acordar">
 <h2>Pendiente de acordar<a class="headerlink" href="#pendiente-de-acordar" title="Link to this heading">#</a></h2>
@@ -587,6 +595,7 @@ para no mover los archivos de <code class="docutils literal notranslate"><span c
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-que-usa">Datos que usa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue">Despliegue</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendiente-de-acordar">Pendiente de acordar</a></li>
 </ul>
   </nav></div>

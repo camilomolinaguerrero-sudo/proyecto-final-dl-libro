@@ -31,6 +31,13 @@ python app.py                                                           # http:/
 - **Resto:** las cifras de `eda/resultados/`, `estadistica/resultados_e2/` (o la tabla de 10 o 12 semillas
   si está en la rama), `resultados/exploratorios_e2/` y `resultados/costo_inferencia.csv`.
 
+## Despliegue
+
+El dashboard está en https://abastecimiento-sipsa-dl.onrender.com. Se despliega desde la rama `camilo/render`, que trae solo la app, los
+ONNX (N-BEATS en INT8), `data/dashboard/` y los archivos de resultados que lee. La prueba de humo
+pasó contra esa URL (`resultados/humo_dashboard.json`). En la prueba local con gunicorn, el pico de
+memoria fue de 364 MB con TFT y una sola sesión ONNX (`MAX_SESIONES=1`).
+
 ## Pendiente de acordar
 
 - **Artefactos:** qué binarios ONNX entran al repositorio (ver `artifacts/README.md`). Mientras no estén,
